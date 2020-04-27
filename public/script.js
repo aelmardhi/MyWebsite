@@ -46,7 +46,7 @@ function login(){
 });
                   console.log(res.data.profileImage)
     avatar.setAttribute('src',host+'/'+res.data.profileImage);
-               setInterval(getMessage,1200);  
+               setInterval(getMessage,2500);  
                  })
     .catch(err => console.log(err));
     
@@ -60,7 +60,7 @@ function getUsername(id){
 }
 
 function getMessage(){
-    console.log(token);
+//    console.log(token);
     myApi.get('/messages/text')
     .then(res => {
         if(res.data._id){
@@ -85,14 +85,11 @@ ${new Date(res.data.date).toDateString()}
         
     })
     .catch(err => {
-        if (err.response.data){
-            notification.innerHTML = err.response.data
-        }
-        });
+        notification.innerHTML = err.response.data});
 } ;
 
 function send() {
-    myApi.post('messages/send/'+sendTo.value+'/text',{
+    myApi.post('messages/send/aelmardhi/text',{
         text : sendArea.value,
         ref : 'none'
     }).then(res => {
