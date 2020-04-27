@@ -37,7 +37,7 @@ function login(){
     .then(res => {token = res.data['auth-token'];
                  myApi = axios.create({
     baseURL: host+'/api',
-    timeout:1000,
+    timeout:10000,
      headers:{
             'Content-Type':'application/json',
             'auth-token': token
