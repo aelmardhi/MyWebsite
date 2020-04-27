@@ -1,4 +1,4 @@
-const host = 'http://localhost:3000';
+const host = 'https://dardasha.herokuapp.com';
 
 let token 
 let usernameInput;
@@ -46,12 +46,12 @@ function login(){
 });
                   console.log(res.data.profileImage)
     avatar.setAttribute('src',host+'/'+res.data.profileImage);
-                 
+               setInterval(getMessage,1200);  
                  })
     .catch(err => console.log(err));
     
 } ;
-setInterval(getMessage,600);
+
 function getUsername(id){
     if (users[id]){
         return users[id];
