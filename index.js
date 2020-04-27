@@ -20,7 +20,7 @@ mongoose.connect(process.env.DB_CONNECT,
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(express.static('public'));
-app.use('/uploads/profile_images',express.static('uploads/profile_images'))
+app.use('/uploads/profile_images',express.static('uploads/profile_images'));
 //app.get('/',(res,req)=>{
 //    res.send('hello');
 //})
