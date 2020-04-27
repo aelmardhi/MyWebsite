@@ -13,7 +13,7 @@ router.post('/send/:username/text', verify,async (req,res) => {
       const fromUser = await User.findById(req.user._id);
         
     if (!fromUser) return res.status(400).send('login'); 
-    const toUser = await User.findOne({username: req.params.username});
+    const toUser = await User.findOne({username: req.params.username.toLowerCase()});
     if (!toUser) return res.status(400).send('no such user to send to');  
    
     
