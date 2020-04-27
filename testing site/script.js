@@ -46,7 +46,7 @@ function login(){
 });
                   console.log(res.data.profileImage)
     avatar.setAttribute('src',host+'/'+res.data.profileImage);
-               setInterval(getMessage,1200);  
+               setInterval(getMessage,1000);  
                  })
     .catch(err => console.log(err));
     
