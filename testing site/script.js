@@ -103,13 +103,14 @@ ${new Date(res.data.date).toDateString()}
 </span></h2>
         <p>${res.data.text}</p><br>`;
         messagesDisplay.appendChild(ele); 
-                messages.push(res.data._id)
+                messages.push(res.data._id);
+        sendArea.value='';
     })
     .catch(err => {console.log(err.response)
                   if(err.response.data.status !== 200){
             notification.innerHTML = err.response.data
         }
                   });
-    sendArea.value='';
+    
 }
 
