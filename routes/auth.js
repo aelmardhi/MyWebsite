@@ -25,8 +25,7 @@ const storage = cloudinaryStorage({
   allowedFormats: ['jpg', 'png'],
     transformation: function (req, file, cb) {
     let t = [
-      {width: 800, height: 800, gravity: "face", radius: "max", crop: "crop"},
-      {width: 800}
+      {width: 800, height: 800, crop: "crop"}
     ];
     cb(undefined, t);
   },
