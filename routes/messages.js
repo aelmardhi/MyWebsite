@@ -64,7 +64,7 @@ router.get('/text', verify,async (req,res) => {
     }catch(err){
         return res.status(400).send(err+'jjj');
     }
-    if((msg.ref==='none')|| !(req.body.text === 'sent' ||req.body.text === 'delevered' ||req.body.text === 'seen' )){
+    if((msg.ref==='none')|| !(msg.text === 'sent' ||msg.text === 'delevered' ||msg.text === 'seen' )){
         const delivered = new Message(msg.from)({
         from: msg.from,
         text: "delevered",
