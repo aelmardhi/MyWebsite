@@ -33,7 +33,7 @@ router.post('/send/:username/text', verify,async (req,res) => {
     }catch(err){
         res.status(400).send(err);
     }
-    if (req.body.ref ==='none'|| !req.body.ref){
+    if (req.body.ref ==='none'|| !req.body.ref || !(req.body.text === 'sent' ||req.body.text === 'delevered' ||req.body.text === 'seen' )){
         const sent = new Message(fromUser.username)({
         from: toUser.username,
         text: "sent",
@@ -64,7 +64,7 @@ router.get('/text', verify,async (req,res) => {
     }catch(err){
         return res.status(400).send(err+'jjj');
     }
-    if((msg.ref==='none')){
+    if((msg.ref==='none')|| !(req.body.text === 'sent' ||req.body.text === 'delevered' ||req.body.text === 'seen' )){
         const delivered = new Message(msg.from)({
         from: msg.from,
         text: "delevered",

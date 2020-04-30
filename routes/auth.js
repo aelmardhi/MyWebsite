@@ -5,15 +5,31 @@ const jwt = require('jsonwebtoken');
 const verify = require('./verifyToken');
 const bcrypt= require('bcryptjs');
 const multer = require('multer');
+const cloudinary = require('cloudinary').v2;
+const cloudinaryStorage = require('multer-storage-cloudinary');
 const {rigisterValidation, loginValidation, userUpdateValidation} = require('../validation');
 
-const storage = multer.diskStorage({
-   destination: function(req,file,cb){
-       cb(null,'uploads/profile_images' );
-    } ,
-    filename: function (req,file,cb){
-        cb(null,req.user._id+file.originalname.substring(file.originalname.lastIndexOf('.')));
-    }
+cloudinary.config({ 
+  cloud_name: process.env.CLOUD_NAME, 
+  api_key: process.env.API_KEY, 
+  api_secret: process.env.API_SECRET
+});
+
+//const storage = multer.diskStorage({
+//   destination: function(req,file,cb){
+//       cb(null,'uploads/profile_images' );
+//    } ,
+//    filename: function (req,file,cb){
+//        cb(null,req.user._id+file.originalname.substring(file.originalname.lastIndexOf('.')));
+//    }
+//});
+const storage = cloudinaryStorage({
+  cloudinary: cloudinary,
+  folder: 'profile_images',
+  allowedFormats: ['jpg', 'png'],
+  filename: function (req, file, cb) {
+    cb(undefined, req.user._id+file.originalname.substring(file.originalname.lastIndexOf('.')));
+  }
 });
 const fileFilter = (req,file,cb) => {
     if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){

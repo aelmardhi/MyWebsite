@@ -13,7 +13,7 @@ const rigisterValidation = data => {
 
 const loginValidation = (data) => {
     const schema = joi.object({
-    username: joi.string().min(4).required(),
+    username: joi.string().alphanum().min(4).required(),
     password: joi.string().min(6).required()
 });
     return schema.validate(data);
