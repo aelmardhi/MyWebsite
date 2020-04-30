@@ -124,7 +124,7 @@ router.post('/update',verify,upload.single('profileImage'),async (req,res) => {
     if (req.body.about){
         user.about = req.body.about;
     }
-    if(req.file.path){
+    if(req.file.secure_url){
         user.profileImage = req.file.secure_url;
     }
     try{
