@@ -99,7 +99,8 @@ router.post('/login', async (req,res) => {
         username: user.username,
         about: user.about,
         lastseen: user.lastseen,
-        profileImage : user.profileImage                            
+        profileImage : user.profileImage,
+        __v : user.__v+1
                                          });
 //    res.send(user);
 })
@@ -113,7 +114,8 @@ router.get('/:username', verify,async (req,res) => {
         username: user.username,
         about: user.about,
         lastseen: user.lastseen,
-        profileImage : user.profileImage
+        profileImage : user.profileImage,
+        __v : user.__v+1
     });
 });
 router.post('/update',verify,upload.single('profileImage'),async (req,res) => {
@@ -134,6 +136,7 @@ router.post('/update',verify,upload.single('profileImage'),async (req,res) => {
         user.profileImage = req.file.secure_url;
     }
     try{
+        user.__v = user.__v+1;
         await updateDate(user);
         const savedUser = await user.save();
         res.json({
@@ -142,7 +145,8 @@ router.post('/update',verify,upload.single('profileImage'),async (req,res) => {
         username: user.username,
         about: user.about,
         lastseen: user.lastseen,
-        profileImage : user.profileImage
+        profileImage : user.profileImage,
+        __v : user.__v+1
     });
     }catch(err){
         res.status(400).send(err);
