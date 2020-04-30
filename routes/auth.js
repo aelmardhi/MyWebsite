@@ -23,6 +23,13 @@ const storage = cloudinaryStorage({
   cloudinary: cloudinary,
   folder: 'profile_images',
   allowedFormats: ['jpg', 'png'],
+    transformation: function (req, file, cb) {
+    let t = [
+      {width: 800, height: 800, gravity: "face", radius: "max", crop: "crop"},
+      {width: 800}
+    ];
+    cb(undefined, t);
+  },
   filename: function (req, file, cb) {
     cb(undefined, req.user._id);
   }
@@ -111,7 +118,7 @@ router.get('/:username', verify,async (req,res) => {
     });
 });
 router.post('/update',verify,upload.single('profileImage'),async (req,res) => {
-    console.log(req.file);
+//    console.log(req.file);
    const {error} = userUpdateValidation(req.body);
     if(error) return res.status(400).send(error.details[0].message); 
     
