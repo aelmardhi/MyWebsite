@@ -100,7 +100,7 @@ router.post('/login', async (req,res) => {
         about: user.about,
         lastseen: user.lastseen,
         profileImage : user.profileImage,
-        __v : user.__v+1
+        __v : user.__v
                                          });
 //    res.send(user);
 })
@@ -115,7 +115,7 @@ router.get('/:username', verify,async (req,res) => {
         about: user.about,
         lastseen: user.lastseen,
         profileImage : user.profileImage,
-        __v : user.__v+1
+        __v : user.__
     });
 });
 router.post('/update',verify,upload.single('profileImage'),async (req,res) => {
@@ -146,7 +146,7 @@ router.post('/update',verify,upload.single('profileImage'),async (req,res) => {
         about: user.about,
         lastseen: user.lastseen,
         profileImage : user.profileImage,
-        __v : user.__v+1
+        __v : user.__v
     });
     }catch(err){
         res.status(400).send(err);
