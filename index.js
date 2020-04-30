@@ -6,6 +6,8 @@ const bodyParser = require('body-parser')
 const authRoute = require('./routes/auth');
 const messageRoute = require('./routes/messages');
 
+const cloudinary = require('cloudinary');
+
 dotenv.config();
 
 
@@ -14,6 +16,12 @@ mongoose.connect(process.env.DB_CONNECT,
                  (err) =>{
     if(err)console.log(err);
     else console.log('connected to db');
+});
+
+cloudinary.config({ 
+  cloud_name: process.env.CLOUD_NAME, 
+  api_key: process.env.API_KEY, 
+  api_secret: process.env.API_SECRET
 });
 
 

@@ -5,15 +5,11 @@ const jwt = require('jsonwebtoken');
 const verify = require('./verifyToken');
 const bcrypt= require('bcryptjs');
 const multer = require('multer');
-const cloudinary = require('cloudinary').v2;
+const cloudinary = require('cloudinary');
 const cloudinaryStorage = require('multer-storage-cloudinary');
 const {rigisterValidation, loginValidation, userUpdateValidation} = require('../validation');
 
-cloudinary.config({ 
-  cloud_name: process.env.CLOUD_NAME, 
-  api_key: process.env.API_KEY, 
-  api_secret: process.env.API_SECRET
-});
+
 
 //const storage = multer.diskStorage({
 //   destination: function(req,file,cb){
@@ -28,7 +24,7 @@ const storage = cloudinaryStorage({
   folder: 'profile_images',
   allowedFormats: ['jpg', 'png'],
   filename: function (req, file, cb) {
-    cb(undefined, req.user._id+file.originalname.substring(file.originalname.lastIndexOf('.')));
+    cb(undefined, req.user._id);
   }
 });
 const fileFilter = (req,file,cb) => {
@@ -129,7 +125,7 @@ router.post('/update',verify,upload.single('profileImage'),async (req,res) => {
         user.about = req.body.about;
     }
     if(req.file.path){
-        user.profileImage = req.file.path;
+        user.profileImage = req.file.secure_url;
     }
     try{
         await updateDate(user);
