@@ -60,7 +60,7 @@ router.get('/text', verify,async (req,res) => {
         updateDate(fromUser);
         msg = await Message(fromUser.username).findOne();
         
-        if(!msg)return res.status(404).send("no messages");
+        if(!msg)return res.send("no messages");
     }catch(err){
         return res.status(400).send(err+'jjj');
     }
