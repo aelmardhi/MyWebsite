@@ -125,7 +125,7 @@ router.get('/:username', verify,async (req,res) => {
         about: user.about,
         lastseen: user.lastseen,
         profileImage : user.profileImage,
-        __v : user.__
+        __v : user.__v
     });
 });
 router.post('/update',verify,upload.single('profileImage'),async (req,res) => {
