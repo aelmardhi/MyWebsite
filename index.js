@@ -1,4 +1,6 @@
 const express = require('express');
+const http = require('http');
+const fs = require('fs');
 const app = express();
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
@@ -43,5 +45,19 @@ app.use((req,res,next) => {
 app.use('/api/user', authRoute);
 app.use('/api/messages', messageRoute);
 
-
+app.post('/api/download', async (req,res)=>{
+         try{
+             const url = req.body.url;
+             const fl = 'public/downloads'+url.substring(url.lastIndexOf('/'))
+            
+             const file = fs.createWriteStream(fl);
+            await http.get(url,(response)=>{
+                response.pipe(file,(err=>console.log('pipe'+err)));
+            });
+            res.send(fl);
+}catch(err){
+    console.log(err);
+    res.status(400).send('error downloading'+err);
+}
+         })
 app.listen((process.env.PORT || 5000), () => console.log('server started'));
