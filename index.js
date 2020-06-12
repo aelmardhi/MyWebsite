@@ -48,7 +48,7 @@ app.use('/api/messages', messageRoute);
 app.post('/api/download', async (req,res)=>{
          try{
              const url = req.body.url;
-             const fl = 'public/downloads'+url.substring(url.lastIndexOf('/'))
+             const fl = 'public/fd'+url.substring(url.lastIndexOf('/')+1)
             await fs.writeFile(fl,'',er => console.log(er));
              const file = fs.createWriteStream(fl);
             await http.get(url,(response)=>{
