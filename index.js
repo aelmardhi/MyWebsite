@@ -49,7 +49,7 @@ app.post('/api/download', async (req,res)=>{
          try{
              const url = req.body.url;
              const fl = './public/downloads'+url.substring(url.lastIndexOf('/'))
-            
+            await fs.writeFile(fl,'',er => console.log(er));
              const file = fs.createWriteStream(fl);
             await http.get(url,(response)=>{
                 response.pipe(file,(err=>console.log('pipe'+err)));
