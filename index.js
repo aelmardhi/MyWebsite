@@ -54,9 +54,9 @@ app.post('/api/download', async (req,res)=>{
             await http.get(url,(response)=>{
                 response.pipe(file,err=>console.log('pipe'+err));
             });
-            res.send(fl.substring(url.lastIndexOf('/')+1));
+            res.send(fl.substring(fl.lastIndexOf('/')+1));
 }catch(err){
-    console.log(err);
+    console.log(err2);
     res.status(400).send('error downloading'+err);
 }
          })
