@@ -1,7 +1,10 @@
 const express = require('express');
-const http = require('https');
+const http = require('http');
+const https = require('https');
 const fs = require('fs');
+const urlModule = require('url');
 const app = express();
+
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
@@ -47,16 +50,23 @@ app.use('/api/messages', messageRoute);
 
 app.post('/api/download', async (req,res)=>{
          try{
-             const url = req.body.url;
-             const fl = 'public/fd'+url.substring(url.lastIndexOf('/')+1)
+             const url = urlModule.parse(req.body.url);
+             let protocol;
+             if(url.protocol == 'https:'){
+                 protocol = https
+             } else {
+                 protocol = http
+             }
+             const fn = url.pathname;
+             const fl = __dirname+'/public/downloads'+fn;
             await fs.writeFile(fl,'',er => console.log(er));
              const file = fs.createWriteStream(fl);
-            await http.get(url,(response)=>{
+            await protocol.get(url,(response)=>{
                 response.pipe(file,err=>console.log('pipe'+err));
             });
-            res.send(fl.substring(fl.lastIndexOf('/')+1));
+            res.send('downloads'+fn);
 }catch(err){
-    console.log(err2);
+    console.log(err);
     res.status(400).send('error downloading'+err);
 }
          })
