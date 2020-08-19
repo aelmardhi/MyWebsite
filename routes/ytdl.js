@@ -27,11 +27,17 @@ router.post('/info', async (req,res)=> {
 });
 
 router.post('/download', async(req, res) => {
+    try{
     const fn = req.body.title + '.'+req.body.container;
-    const fl = __dirname+'/public/downloads/'+fn;
+    const fl = __dirname+'/../public/downloads/'+fn;
+    await fs.writeFile(fl,'',er => console.log(er));
     ytdl(req.body.id,{"quality": req.body.itag})
   .pipe(fs.createWriteStream(fl));
     res.send('downloads/'+fn);
+    }catch(err){
+        res.status(401).send(err);
+    }
+    
 });
 
 module.exports = router;
