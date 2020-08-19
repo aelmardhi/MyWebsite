@@ -7,13 +7,9 @@
     <style>
         body{
             background-color: #fff1f0;
-            display: flex;
-            flex-direction: column;
-            align-content: center;
-            justify-content: center
         }
         .center{
-            
+            margin: auto;
         }
         .info{
             display: flex;
@@ -227,17 +223,17 @@
                     '<td>'+i.resolution+'</td>'+
                     '<td>'+i.container+'</td>'+
                     '<td>'+i.encoding+'</td>'+
-                    '<td>'+'<button onclick="download('+i+')">Download</button></td>'+
+                    '<td>'+'<button onclick="download('+i.itag+','+i.container+')">Download</button></td>'+
                     '</tr>');
         }
-            function download(i){
+            function download(itag, container){
                 messagesDisplay.classList.add('showMessages');
                 loader.classList.add('showLoader');
                 axios.post(host+'/api/ytdl/download', {
                     id : info.id,
                     title: info.title,
-                    container : i.container,
-                    itag : i.itag
+                    container : container,
+                    itag : itag
         } ).then(res => {
                 loader.classList.remove('showLoader');
                 resultDisplay.innerHTML = '<a href="'+host+'/'+res.data+'">press here to download</a>'
