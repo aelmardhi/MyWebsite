@@ -227,7 +227,7 @@
                     '</tr>');
         }
             function download(itag, container){
-                messagesDisplay.classList.add('showMessages');
+                messagesDisplay.classList.remove('showMessages');
                 loader.classList.add('showLoader');
                 axios.post(host+'/api/ytdl/download', {
                     id : info.id,
