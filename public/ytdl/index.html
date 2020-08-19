@@ -229,7 +229,7 @@
                     '<td>'+'<button onclick="download('+i+')">Download</button></td>'+
                     '</tr>');
         }
-            function download(){
+            function download(i){
                 messagesDisplay.classList.add('showMessages');
                 loader.classList.add('showLoader');
                 axios.post(host+'/api/ytdl/download', {
