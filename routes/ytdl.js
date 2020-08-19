@@ -26,7 +26,7 @@ router.post('/info', async (req,res)=> {
     res.status(200).json(retInfo);
 });
 
-router.post('/downlpad', async(req, res) => {
+router.post('/download', async(req, res) => {
     const fn = req.body.title + '.'+req.body.container;
     const fl = __dirname+'/public/downloads/'+fn;
     ytdl(req.body.id,{"quality": req.body.itag})
