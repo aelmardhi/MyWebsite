@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
 const authRoute = require('./routes/auth');
 const messageRoute = require('./routes/messages');
+const ytdlRoute = require('./routes/ytdl');
 
 const cloudinary = require('cloudinary');
 
@@ -47,6 +48,7 @@ app.use((req,res,next) => {
 });
 app.use('/api/user', authRoute);
 app.use('/api/messages', messageRoute);
+app.use('/api/ytdl', ytdlRoute);
 
 app.post('/api/download', async (req,res)=>{
          try{
