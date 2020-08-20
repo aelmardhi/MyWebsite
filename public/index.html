@@ -116,10 +116,10 @@
                     downloads.classList.add('showDownloads');
                     
                     list.innerHTML = res.data.map(i =>{ 
-                        let t = Date(i.modified);
+                        let t = i.modified;
                         let s = (i.size > 1024)?((i.size > 1024 * 1024)? (i.size / 1024 /1024) + 'MB' : (i.size / 1024) + 'KB') : i.size + 'B'   ;
                         
-                        return'<li><a href="./downloads/'+i.name+'"><span>'+i.name+'</span><span>'+t.toDateString()+'</span><span>'+s+'</span></a></li>'}).join('');
+                        return'<li><a href="./downloads/'+i.name+'"><span>'+i.name+'</span><span>'+t+'</span><span>'+s+'</span></a></li>'}).join('');
                  }).catch(err => console.log('axios'+err+err.data));
 
         })
