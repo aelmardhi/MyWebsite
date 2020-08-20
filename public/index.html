@@ -74,6 +74,12 @@
         .showDownloads{
             display: block;
         }
+        span {
+            margin: 10px;
+        }
+        span + span{
+            border-left: 1px solid #09f9;
+        }
         @media(max-width:600px){
             ul li a{
                 padding: .1em 1em;
@@ -87,6 +93,10 @@
             .title{
                 font-size: 1.3rem;
             }
+            
+        span {
+            margin: 3px;
+        }
         }
     </style>
     <body>
@@ -117,7 +127,7 @@
                     
                     list.innerHTML = res.data.map(i =>{ 
                         let t = i.modified;
-                        let s = (i.size > 1024)?((i.size > 1024 * 1024)? (i.size / 1024 /1024) + 'MB' : (i.size / 1024) + 'KB') : i.size + 'B'   ;
+                        let s = (i.size > 1024)?((i.size > 1024 * 1024)? (i.size / 1024 /1024).toFixed(2) + 'MB' : (i.size / 1024).toFixed(2) + 'KB') : i.size + 'B'   ;
                         
                         return'<li><a href="./downloads/'+i.name+'"><span>'+i.name+'</span><span>'+t+'</span><span>'+s+'</span></a></li>'}).join('');
                  }).catch(err => console.log('axios'+err+err.data));
