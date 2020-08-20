@@ -79,7 +79,7 @@ app.get('/api/download/files' ,async (req , res) => {
         await fs.stat(__dirname+'/public/downloads/'+dirent['name'],(err,stats) => {
             data.push( {"name":dirent.name,
                        "size":stats.size,
-                       "modified":Date(stats.mtimeMs).toDateString(),
+                       "modified":new Date(stats.mtimeMs).toDateString(),
                       });
         })
         
