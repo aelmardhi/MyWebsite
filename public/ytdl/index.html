@@ -241,7 +241,7 @@
             id.textContent = info.id;
             title.textContent = info.title;
             author.textContent = info.author;
-            img.setAttribute('img',info.thumbnail)
+            img.setAttribute('src',info.thumbnail)
             table.innerHTML = info.formats.map(i =>'<tr>'+
                     '<td>'+i.quality+'</td>'+
                     '<td>'+i.resolution+'</td>'+
