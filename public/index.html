@@ -1,34 +1,116 @@
 <html>
-<head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css">
-    <script src="axios.min.js"></script>
-<!--    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
-<!--        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>-->
-    <script src="script.js"></script>
-
+    <head>
+        <meta charset="utf-8">
+        <script src="../axios.min.js"></script>
+        <title>Home</title>
     </head >
+    <style>
+        *, *:after, *:before{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            width: 100vw;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+        }
+         article{
+             border-radius: 1em;
+             overflow: hidden;
+             text-align: center;
+             box-shadow: 2px 2px 20px #00f1,
+                 5px 5px 30px #00f2
+        }
+        .title{
+            color: white;
+            padding: .5em;
+            font-size: 3rem;
+            font-weight: bolder;
+            background: #39f
+        }
+        .data{
+             background: #e1ecfc;
+             padding: 1em 0em;
+        }
+        ul{
+            
+        }
+        ul li{
+            list-style: none;
+        }
+        li + li {
+            border-top: 1px solid #39f9;
+        }
+        ul li a{
+            color: #06e;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            font-size: 2rem;
+            font-weight: bold;
+            padding: .4em 3em;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            transition: all .3s ease;
+        }
+        ul li:nth-child(odd){
+            
+        }
+        ul li a:hover{
+            background: #3af;
+            color: white;
+            font-size: 3rem;
+        }
+        ul li a:active{
+            background: #3ff;
+            color: white;
+            font-size: 2rem;
+        }
+        .downloads{
+            display: none;
+        }
+        .showDownloads{
+            display: block;
+        }
+    </style>
     <body>
-    <div class="info">
-       <h2 id="notification"></h2>
-    <form >
-    <label>username</label>
-    <input type="text" id="username">
-    <label>password</label>
-    <input type="password" id="password">
-        
-</form>
-    <img id="avatar" width="90px" height="90" >
-    <button  onclick="login()">login</button>
-    <button onclick="getMessage()">messages</button> 
-        
-    <textarea id="sendArea"></textarea>
-    <button onclick="send()">send</button>
-        </div>
-    
-    <div id="messages"><hr></div>  
-    
-    
+        <article class="main">
+            <div class="title">Main Routes</div>
+            <div class="data">
+                <ul>
+                    <li><a href="download.html">Http Downloader</a></li>
+                    <li><a href="ytdl/">Youtube Downloader</a></li>
+                    <li><a href="chato_1.0.0.apk">chato apk</a></li>
+                </ul>
+            </div>
+        </article>
+        <article class="downloads" id="downloads">
+            <div class="title">Downloads</div>
+            <div class="data">
+                <ul id="downloads-list"></ul>
+            </div>
+        </article>
     </body>
-</html>
+    <script>
+        const host = 'https://dardasha.herokuapp.com';
+        document.addEventListener('DOMContentLoaded',function(){
+            const list = document.getElementById('downloads-list');
+            const downloads = document.getElementById('downloads');
+            axios.get(host+'/api/download/files').then(res => {
+                    downloads.classList.add('showDownloads');
+                    
+                    list.innerHTML = res.data.map(i =>{ 
+                        let t = Date(i.modified);
+                        let s = (i.size > 1024)?(i.size > 1024 * 1024)? i.size + 'MB' : i.size + 'KB' : i.size + 'B'   ;
+                        
+                        return'<li><a href="./downloads/'+i.name+'">+<span>'+i.name+'</span><span>'+t+'</span><span>'+s+'</span></a></li>'}).join('');
+                 }).catch(err => console.log('axios'+err+err.data));
 
+        })
+    </script>
+</html>

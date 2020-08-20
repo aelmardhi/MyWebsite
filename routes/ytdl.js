@@ -14,6 +14,7 @@ router.post('/info', async (req,res)=> {
         'id': info.videoDetails.videoId,
         'title': info.videoDetails.title,
         'author': info.videoDetails.author.name,
+        'thumbnail': info.videoDetails.thumbnail.thumbnails[1].url,
         'formats': info.formats.map( i => ({
             "itag" : i.itag,
             "container": i.container,

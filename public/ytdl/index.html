@@ -57,6 +57,12 @@
             color: #dd3399;
             text-align: center;
         }
+        .info img{
+            margin: auto;
+            box-shadow: 0 0 15px #f004;
+            width: 196px;
+            height: 110px;
+        }
         .messages{
             display: none;
             color: #e87;
@@ -193,6 +199,7 @@
             <h3 id="title"></h3>
             <h4 id="author"></h4>
             <h6 id="id"></h6>
+            <img id="thumbnail">
             <table id="table"></table>
             </div>  
     </div>
@@ -230,9 +237,11 @@
             const author = document.getElementById('author');
             const title = document.getElementById('title');
             const table = document.getElementById('table');
+            const img = document.getElementById('thumbnail');
             id.textContent = info.id;
             title.textContent = info.title;
             author.textContent = info.author;
+            img.setAttribute('img',info.thumbnail)
             table.innerHTML = info.formats.map(i =>'<tr>'+
                     '<td>'+i.quality+'</td>'+
                     '<td>'+i.resolution+'</td>'+
