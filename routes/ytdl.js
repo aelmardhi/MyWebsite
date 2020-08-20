@@ -9,7 +9,6 @@ router.post('/info', async (req,res)=> {
     if(!(req && req.body && req.body.id)){
         res.status(400).send('request should have body with id');
     }
-    console.log(req.body);
     let info = await ytdl.getInfo(req.body.id);
     let retInfo = {
         'id': info.videoDetails.videoId,
@@ -28,13 +27,14 @@ router.post('/info', async (req,res)=> {
 
 router.post('/download', async(req, res) => {
     try{
-    const fn = (req.body.title.replace(/\//,'').replace(/\\/,'')) + '.'+req.body.container;
+    const fn = (req.body.title.replace(/\//,'').replace(/\\/,'').replace(/\'/,'').replace(/\"/,'')) + '.'+req.body.container;
     const fl = __dirname+'/../public/downloads/'+fn;
     await fs.writeFile(fl,'',er => console.log(er));
     ytdl(req.body.id,{"quality": req.body.itag})
   .pipe(fs.createWriteStream(fl));
     res.send('downloads/'+fn);
     }catch(err){
+        console.log(req.body,err);
         res.status(401).send(err);
     }
     
