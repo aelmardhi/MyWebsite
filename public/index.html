@@ -48,11 +48,9 @@
         ul li a{
             color: #06e;
             display: block;
-/*
             display: flex;
             align-items: center;
             justify-content: space-around;
-*/
             font-size: 2rem;
             font-weight: bold;
             padding: 20px 30px;
@@ -83,9 +81,13 @@
         span + span{
             border-left: 1px solid #09f9;
         }
+        .downloads ul li a{
+                font-size: 1.2rem;
+            }
         @media(max-width:600px){
             ul li a{
                 padding: 2px 15px;
+                font-size: 1rem;
             }
             ul li a:active{
             font-size: 1rem;
@@ -93,6 +95,9 @@
             ul li a:hover{
             font-size: .8rem;
         }
+        .downloads ul li a{
+                font-size: .65rem;
+            }
             .title{
                 font-size: 1.3rem;
             }
