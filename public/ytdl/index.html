@@ -36,10 +36,12 @@
             font-weight: 900;
             font-size: 1.5em;
         }
-        .ingo h1{
+        .info h1{
+            text-align: center;
             font-size: 2.7;
             font-family: sans-serif;
-            color: #c32
+            color: #c32;
+            margin: 7px;
         }
         .info a{
             text-decoration: none;
@@ -181,9 +183,9 @@
     </div>
     <div id="result" class="result"></div>
     <div id="messages" class="messages">
-            <h3 id="title">tobu</h3>
-            <h4 id="author">aelmardhi</h4>
-            <h6 id="id">66efefji</h6>
+            <h3 id="title"></h3>
+            <h4 id="author"></h4>
+            <h6 id="id"></h6>
             <table id="table"></table>
             </div>  
     </div>
@@ -242,7 +244,7 @@
                     itag : itag
         } ).then(res => {
                 loader.classList.remove('showLoader');
-                resultDisplay.innerHTML = '<a href="'+host+'/'+res.data+'">press here to download</a><p>'+res.data+'</p>'
+                resultDisplay.innerHTML = '<a href="'+host+'/'+res.data+'">press here to download</a>';
                 }).catch(err => {console.log('axios'+err+err.data)
                     loader.classList.remove('showLoader');            });
             }
