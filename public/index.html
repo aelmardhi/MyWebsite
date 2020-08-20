@@ -58,9 +58,6 @@
             text-decoration: none;
             transition: all .3s ease;
         }
-        ul li:nth-child(odd){
-            
-        }
         ul li a:hover{
             background: #3af;
             color: white;
@@ -76,6 +73,20 @@
         }
         .showDownloads{
             display: block;
+        }
+        @media(max-width:600px){
+            ul li a{
+                padding: .1em 1em;
+            }
+            ul li a:active{
+            font-size: 1rem;
+        }
+            ul li a:hover{
+            font-size: .8rem;
+        }
+            .title{
+                font-size: 1.3rem;
+            }
         }
     </style>
     <body>
