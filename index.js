@@ -71,5 +71,20 @@ app.post('/api/download', async (req,res)=>{
     console.log(err);
     res.status(400).send('error downloading'+err);
 }
-         })
+         });
+app.get('/api/download/files' ,async (req , res) => {
+    let data = [];
+    const dir = await fs.promises.opendir(__dirname+'/public/downloads');
+    for await (const dirent of dir) {
+        await fs.stat(__dirname+'/public/downloads/'+dirent['name'],(err,stats) => {
+            data.push( {"name":dirent.name,
+                       "size":stats.size,
+                       "modified":stats.mtimeMs,
+                      });
+        })
+        
+  }
+  res.json(data);
+});
+
 app.listen((process.env.PORT || 5000), () => console.log('server started'));
