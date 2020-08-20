@@ -74,7 +74,8 @@ app.post('/api/download', async (req,res)=>{
          });
 app.get('/api/download/files' ,async (req , res) => {
     let data = [];
-    const dir = await fs.promises.opendir(__dirname+'/public/downloads');
+    const dir = await fs.opendir(__dirname+'/public/downloads',async (err,dir)=>{
+        
     for await (const dirent of dir) {
         await fs.stat(__dirname+'/public/downloads/'+dirent['name'],(err,stats) => {
             data.push( {"name":dirent.name,
@@ -85,6 +86,7 @@ app.get('/api/download/files' ,async (req , res) => {
         
   }
   res.json(data);
+    });
 });
 
 app.listen((process.env.PORT || 5000), () => console.log('server started'));
