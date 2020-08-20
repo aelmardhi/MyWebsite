@@ -224,7 +224,7 @@
                     '<td>'+i.container+'</td>'+
                     '<td>'+i.encoding+'</td>'+
                     '<td>'+'<button onclick="download('+i.itag+',\''+i.container+'\')">Download</button></td>'+
-                    '</tr>');
+                    '</tr>').join('');
         }
             function download(itag, container){
                 messagesDisplay.classList.remove('showMessages');
@@ -236,7 +236,7 @@
                     itag : itag
         } ).then(res => {
                 loader.classList.remove('showLoader');
-                resultDisplay.innerHTML = '<a href="'+host+'/'+res.data+'">press here to download</a>'
+                resultDisplay.innerHTML = '<a href="'+host+'/'+res.data+'">press here to download</a><p>'+res.data+'</p>'
                 }).catch(err => {console.log('axios'+err+err.data)
                     loader.classList.remove('showLoader');            });
             }
