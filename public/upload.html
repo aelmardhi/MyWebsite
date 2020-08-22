@@ -1,0 +1,60 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>File Uploader</title>
+    </head >
+    <style>
+        body{
+            
+        }
+        .center{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        section form{
+            background-color: #def;
+            padding: 4em;
+            border-radius: .25em;
+            border: 1px solid #cde;
+            box-shadow: 5px 5px 20px 10px #cde6;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: center;
+        }
+        input {
+            font-size: 1.75rem;
+            margin: .5em;
+            padding: 5px;
+        }
+        input{
+            border: none;
+            background: #dddd40;
+            padding:  5px 30px;
+            color: azure;
+            font-weight: 900;
+            font-size: 1.5em;
+        }
+        h1{
+            font-size: 2.5rem;
+            margin: .5em;
+            text-align: center;
+            color: #126;
+        }
+        input[type="file" ]{
+            border: none;
+            background: #3df;
+        }
+    </style>
+    <body>
+        <section class="center">
+            <form action="./api/upload" method="post" enctype="multipart/form-data">
+                <h1>File Uploader</h1>
+                <input type="file" id="file" name="file">
+                <input type="submit">
+            </form>
+        </section>
+    </body>
+</html>

@@ -12,6 +12,20 @@ const authRoute = require('./routes/auth');
 const messageRoute = require('./routes/messages');
 const ytdlRoute = require('./routes/ytdl');
 
+
+const multer = require('multer');
+//upload = multer({ dest: './public/downloads/' })
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/downloads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname )
+  }
+})
+
+var upload = multer({ storage: storage })
+
 const cloudinary = require('cloudinary');
 
 dotenv.config();
@@ -85,6 +99,14 @@ app.get('/api/download/files' ,async (req , res) => {
         
   }
   res.json(data);
+});
+
+
+app.post('/api/upload',upload.single('file') ,async (req , res) => {
+    if(!(req.file)){
+        res.status(400).send('no file uploaded')
+    }
+    res.status(200).send('file uploaded successfuly')
 });
 
 app.listen((process.env.PORT || 5000), () => console.log('server started'));
