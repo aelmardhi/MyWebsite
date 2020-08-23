@@ -13,7 +13,8 @@ const download = async (req,res)=>{
              } else {
                  protocol = http
              }
-             let fn = url.pathname.replace(/\//gi,' ');
+             let fn = url.pathname;
+                fn = fn.indexOf('/')>=0?fn.substring(fn.lastIndexOf('/')):fn;
             await protocol.get(url, async(response)=>{
                 if(response.headers.location){
                     req.body.url = response.headers.location;
