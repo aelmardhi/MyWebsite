@@ -16,12 +16,16 @@ router.post('/', async (req,res)=>{
              let fn = url.pathname.replace(/\//gi,' ');
             await protocol.get(url, async(response)=>{
                 let resfl = response.headers['content-disposition'];
+                if(resfl && resfl.indexOf('filename=') >= 0){
+                  
                 resfl = resfl.substring(resfl.indexOf('filename=')+9);
                 resfl.substring(0,resfl.indexOf(';'));
              
                 if(resfl){
                     fn = resfl;
+                }  
                 }
+                
              const fl = __dirname+'/../public/downloads/'+fn;
             await fs.writeFile(fl,'',er => console.log(er));
              const file = await fs.createWriteStream(fl);
