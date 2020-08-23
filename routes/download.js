@@ -17,17 +17,15 @@ router.post('/', async (req,res)=>{
             await protocol.get(url, async(response)=>{
                 let resfl = response.headers['content-disposition'];
                 resfl = resfl.substring(resfl.indexOf('filename=')+9);
-                resfl.substring(0,resfl.indexOf(' '))
-                console.log(resfl);
-                
+                resfl.substring(0,resfl.indexOf(' '));
              
                 if(resfl){
                     fn = resfl;
                 }
              const fl = __dirname+'/../public/downloads/'+fn;
             await fs.writeFile(fl,'',er => console.log(er));
-             const file = fs.createWriteStream(fl);
-//                response.pipe(file,err=>console.log('pipe'+err));
+             const file = await fs.createWriteStream(fl);
+                response.pipe(file,err=>console.log('pipe'+err));
             });
             res.send('downloads/'+fn);
 }catch(err){
