@@ -37,22 +37,46 @@
             font-weight: 900;
             font-size: 1.5em;
         }
+        input:hover{
+            box-shadow: 0 0 10px #55f5;
+        }
         h1{
             font-size: 2.5rem;
             margin: .5em;
             text-align: center;
             color: #126;
         }
-        input[type="file" ]{
-            border: none;
+        .f{
+            height: 200px;
+            cursor: pointer;
+            border: 2px dashed #025;
             background: #3df;
+        }
+        .f::-webkit-file-upload-button{
+            visibility: hidden;
+        }
+        .f::before{
+            content: 'choose file or drag';
+            background: linear-gradient(to left,#036, #249);
+            font-size: 12pt;
+            display: inline-block;
+            padding: 5px 8px;
+            border: 1px solid #0ff;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            border-radius: 3px;
+            white-space: nowrap;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px #0f09;
         }
     </style>
     <body>
         <section class="center">
             <form action="./api/upload" method="post" enctype="multipart/form-data">
                 <h1>File Uploader</h1>
-                <input type="file" id="file" name="file">
+                <input class="f" type="file" id="file" name="file">
                 <input type="submit">
             </form>
         </section>

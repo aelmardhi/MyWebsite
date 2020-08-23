@@ -1,6 +1,4 @@
 const express = require('express');
-const http = require('http');
-const https = require('https');
 const fs = require('fs');
 const urlModule = require('url');
 const app = express();
@@ -11,20 +9,10 @@ const bodyParser = require('body-parser')
 const authRoute = require('./routes/auth');
 const messageRoute = require('./routes/messages');
 const ytdlRoute = require('./routes/ytdl');
+const uploadRoute = require('./routes/upload');
+const downloadRoute = require('./routes/download');
 
 
-const multer = require('multer');
-//upload = multer({ dest: './public/downloads/' })
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './public/downloads/')
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname )
-  }
-})
-
-var upload = multer({ storage: storage })
 
 const cloudinary = require('cloudinary');
 
@@ -63,50 +51,10 @@ app.use((req,res,next) => {
 app.use('/api/user', authRoute);
 app.use('/api/messages', messageRoute);
 app.use('/api/ytdl', ytdlRoute);
-
-app.post('/api/download', async (req,res)=>{
-         try{
-             const url = urlModule.parse(req.body.url);
-             let protocol;
-             if(url.protocol == 'https:'){
-                 protocol = https
-             } else {
-                 protocol = http
-             }
-             const fn = url.pathname;
-             const fl = __dirname+'/public/downloads'+fn;
-            await fs.writeFile(fl,'',er => console.log(er));
-             const file = fs.createWriteStream(fl);
-            await protocol.get(url,(response)=>{
-                response.pipe(file,err=>console.log('pipe'+err));
-            });
-            res.send('downloads'+fn);
-}catch(err){
-    console.log(err);
-    res.status(400).send('error downloading'+err);
-}
-         });
-app.get('/api/download/files' ,async (req , res) => {
-    let data = [];
-    const dir = await fs.promises.opendir(__dirname+'/public/downloads');
-    for await (const dirent of dir) {
-        await fs.stat(__dirname+'/public/downloads/'+dirent['name'],(err,stats) => {
-            data.push( {"name":dirent.name,
-                       "size":stats.size,
-                       "modified":new Date(stats.mtimeMs).toDateString(),
-                      });
-        })
-        
-  }
-  res.json(data);
-});
+app.use('/api/download', downloadRoute);
+app.use('/api/upload', uploadRoute);
 
 
-app.post('/api/upload',upload.single('file') ,async (req , res) => {
-    if(!(req.file)){
-        res.status(400).send('no file uploaded')
-    }
-    res.status(200).send('file uploaded successfuly')
-});
 
-app.listen((process.env.PORT || 5000), () => console.log('server started'));
+const portNumber = (process.env.PORT || 5000);
+app.listen(portNumber, () => console.log('server started'));
