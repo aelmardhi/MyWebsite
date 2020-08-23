@@ -19,7 +19,7 @@ router.post('/', async (req,res)=>{
                 resfl.substring(0,resfl.indexOf(' '))
                 console.log(resfl);
                 
-             const fn = url.pathname.replace(/\//gi,' ');
+             let fn = url.pathname.replace(/\//gi,' ');
                 if(resfl){
                     fn = resfl;
                 }
