@@ -17,7 +17,6 @@ router.post('/', async (req,res)=>{
             await protocol.get(url, async(response)=>{
                 let resfl = response.headers['content-disposition'];
                 resfl = resfl.substring(resfl.indexOf('filename=')+9);
-                resfl.substring(0,resfl.indexOf(' '));
                 resfl.substring(0,resfl.indexOf(';'));
              
                 if(resfl){
