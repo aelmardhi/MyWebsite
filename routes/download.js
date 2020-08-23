@@ -13,13 +13,14 @@ router.post('/', async (req,res)=>{
              } else {
                  protocol = http
              }
+             let fn = url.pathname.replace(/\//gi,' ');
             await protocol.get(url, async(response)=>{
                 let resfl = response.headers['content-disposition'];
                 resfl = resfl.substring(resfl.indexOf('filename=')+9);
                 resfl.substring(0,resfl.indexOf(' '))
                 console.log(resfl);
                 
-             let fn = url.pathname.replace(/\//gi,' ');
+             
                 if(resfl){
                     fn = resfl;
                 }
