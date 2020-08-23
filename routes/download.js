@@ -4,8 +4,8 @@ const urlModule = require('url');
 const http = require('http');
 const https = require('https');
 
-router.post('/', async (req,res)=>{
-         try{
+const download = await (req,res)=>{
+            try{
              const url = urlModule.parse(req.body.url);
              let protocol;
              if(url.protocol == 'https:'){
@@ -15,7 +15,12 @@ router.post('/', async (req,res)=>{
              }
              let fn = url.pathname.replace(/\//gi,' ');
             await protocol.get(url, async(response)=>{
-                console.log(response.headers);
+                if(response.headers.location){
+                    req.body.url = response.headers.location;
+                    download(req,res);
+                    return;
+                }
+                
                 let resfl = response.headers['content-disposition'];
                 if(resfl && resfl.indexOf('filename=') >= 0){
                   
@@ -38,6 +43,10 @@ router.post('/', async (req,res)=>{
     console.log(err);
     res.status(400).send('error downloading'+err);
 }
+}
+
+router.post('/', async (req,res)=>{
+    await download(req,res);
          });
 
 
