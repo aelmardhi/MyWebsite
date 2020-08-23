@@ -15,6 +15,7 @@ router.post('/', async (req,res)=>{
              }
              let fn = url.pathname.replace(/\//gi,' ');
             await protocol.get(url, async(response)=>{
+                console.log(response.headers);
                 let resfl = response.headers['content-disposition'];
                 if(resfl && resfl.indexOf('filename=') >= 0){
                   
