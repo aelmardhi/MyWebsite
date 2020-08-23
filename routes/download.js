@@ -4,7 +4,7 @@ const urlModule = require('url');
 const http = require('http');
 const https = require('https');
 
-const download = await (req,res)=>{
+const download = async (req,res)=>{
             try{
              const url = urlModule.parse(req.body.url);
              let protocol;
