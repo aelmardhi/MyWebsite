@@ -26,8 +26,9 @@ router.post('/', async (req,res)=>{
             await fs.writeFile(fl,'',er => console.log(er));
              const file = await fs.createWriteStream(fl);
                 response.pipe(file,err=>console.log('pipe'+err));
-            });
+                
             res.send('downloads/'+fn);
+            });
 }catch(err){
     console.log(err);
     res.status(400).send('error downloading'+err);
