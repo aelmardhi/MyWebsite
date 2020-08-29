@@ -7,9 +7,9 @@
     <style>
         body{
             background-color: #fff1f0;
-        }
-        .center{
-            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .info{
             display: flex;
@@ -19,7 +19,8 @@
             width: 60%;
             min-width: 400px;
             align-items: stretch;
-            justify-content: ;
+            box-shadow: 0 0 15px #d004;
+            transition: all .3s ease;
         }
         .info input{
             border: 1px solid #f004;
@@ -60,8 +61,8 @@
         .info img{
             margin: auto;
             box-shadow: 0 0 35px #f004;
-            width: 392px;
-            height: 220px;
+            width: 100%;
+            height: auto;
         }
         .messages{
             display: none;
@@ -179,7 +180,7 @@
         }
     </style>
     <body>
-        <div class="info center">
+        <div class="info">
         <h1>Youtube Downloader</h1>
        <h2 id="notification"></h2>
         <form >

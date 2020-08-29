@@ -27,6 +27,7 @@ const download = async (req,res)=>{
                   
                 resfl = resfl.substring(resfl.indexOf('filename=')+9);
                 resfl.substring(0,resfl.indexOf(';'));
+                resfl = resfl.replace(/\//gi,'').replace(/\\/gi,'').replace(/\'/gi,'').replace(/\"/gi,'');
              
                 if(resfl){
                     fn = resfl;
