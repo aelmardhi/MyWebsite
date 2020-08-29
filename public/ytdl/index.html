@@ -10,6 +10,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-wrap: wrap;
         }
         .info{
             display: flex;
@@ -20,7 +21,6 @@
             min-width: 400px;
             align-items: stretch;
             box-shadow: 0 0 15px #d004;
-            transition: all .3s ease;
         }
         .info input{
             border: 1px solid #f004;
@@ -68,9 +68,12 @@
             display: none;
             color: #e87;
             text-align: center;
+            transform: scaleY(0);
+            transition: transform .4s ease;
         }
         .showMessages{
             display: block;
+            transform: scaleY(1);
         }
         .messages h3{
             font-size: 2.5rem;
@@ -126,9 +129,12 @@
             width: 100px;
             margin:  20px auto;
             animation: animate 1.5s ease infinite;
+            transform: scaleY(0);
+            transition: transform .3s ease;
         }
         .showLoader{
             display: block;
+            transform: scaleY(1);
         }
         .loader span{
             height: 10px;
