@@ -102,9 +102,9 @@
             width: 100%
         }
         .messages table tr{
+            font-size: .8em;
+            width: 100%;
             margin: 5px;
-            display: grid;
-            grid-template-columns: repeat(5, minmax(4em, 1fr));
             background-color: #ffffe5;
             text-align: center;
         }
@@ -250,10 +250,10 @@
             author.textContent = info.author;
             img.setAttribute('src',info.thumbnail)
             table.innerHTML = info.formats.map(i =>'<tr>'+
-                    '<td>'+i.quality+'</td>'+
-                    '<td>'+i.resolution+'</td>'+
-                    '<td>'+i.container+'</td>'+
-                    '<td>'+i.encoding+'</td>'+
+                    '<td>'+(i.quality?i.quality:'-')+'</td>'+
+                    '<td>'+(i.resolution?i.resolution:'-')+'</td>'+
+                    '<td>'+(i.container?i.container:'-')+'</td>'+
+                    '<td>'+(i.encoding?i.encoding:'-')+'</td>'+
                     '<td>'+'<button onclick="download('+i.itag+',\''+i.container+'\')">Download</button></td>'+
                     '</tr>').join('');
         }
