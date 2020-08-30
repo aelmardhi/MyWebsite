@@ -104,8 +104,10 @@
         .messages table tr{
             margin: 5px;
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(5, minmax(1fr, 14em));
             background-color: #ffffe5;
+            color: #fff;
+            text-align: center;
         }
         .messages table tr:nth-child(even){
             background-color: #ffedea;
