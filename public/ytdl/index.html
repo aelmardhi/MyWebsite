@@ -98,14 +98,13 @@
             background: #f64;
         }
         .messages table{
-            margin: 0 auto;
-            width: 90%
+            margin: 0;
+            width: 100%
         }
         .messages table tr{
             margin: 5px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
             background-color: #ffffe5;
         }
         .messages table tr:nth-child(even){
