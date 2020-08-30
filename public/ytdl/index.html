@@ -107,14 +107,18 @@
             font-weight: 600;
             font-family: arial;
             grid-template-columns: repeat(5, 1fr);
-            margin: 5px;
+            margin: 5px 0;
             background-color: #ffffe5;
             text-align: center;
+            padding: 0;
         }
         .messages table tr td{
             height: 100%;
-            margin: 5px;
+            margin: 5px ;
             line-height: 100%;
+        }
+        .messages table tr td:last-child{
+            margin: 0;
         }
         .messages table tr:nth-child(even){
             background-color: #ffedea;
