@@ -68,7 +68,9 @@
         function send(){
             const url = linkInput.value;
             messagesDisplay.innerHTML = '<a href="'+url+'">downloading...'+url+'</a>';
-            fetch(host+'/api/download',{ body: {
+            fetch(host+'/api/download',{
+                method: 'POST',
+                body: {
         url : url
     }} ).then(r => r.json())
     .then(res => {
