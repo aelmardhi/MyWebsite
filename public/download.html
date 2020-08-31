@@ -68,11 +68,11 @@
         function send(){
             const url = linkInput.value;
             messagesDisplay.innerHTML = '<a href="'+url+'">downloading...'+url+'</a>';
-            axios.post(host+'/api/download', {
+            fetch(host+'/api/download',{ body: {
         url : url
-    } )
+    }} ).then(r => r.json())
     .then(res => {
-                            messagesDisplay.innerHTML ='<a href="'+host+'/'+res.data+'">'+ url+'&&&'+res.data+'</a>';
+                            messagesDisplay.innerHTML ='<a href="'+host+'/'+res+'">'+ url+'&&&'+res+'</a>';
                  })
     .catch(err => console.log('axios'+err+err.data));
 
