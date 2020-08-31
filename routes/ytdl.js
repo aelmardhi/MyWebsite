@@ -33,7 +33,7 @@ router.post('/download', async(req, res) => {
     await fs.writeFile(fl,'',er => console.log(er));
     ytdl(req.body.id,{"quality": req.body.itag})
   .pipe(fs.createWriteStream(fl));
-    res.send('downloads/'+fn);
+    res.json({'url':'downloads/'+fn});
     }catch(err){
         console.log(req.body,err);
         res.status(401).send(err);

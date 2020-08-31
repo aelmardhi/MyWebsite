@@ -279,9 +279,9 @@
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: {
+                body: JSON.stringify({
                     id: url
-                },
+                }),
             }).then(r => r.json()).then(res => {
                 info = res;
                 resolve()
@@ -321,15 +321,15 @@
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body:{
+                body: JSON.stringify({
                     id: info.id,
                     title: info.title,
                     container: container,
                     itag: itag
-                },
+                }),
             }).then(r=>r.json()).then(res => {
                 loader.classList.remove('showLoader');
-                resultDisplay.innerHTML = '<a href="' + host + '/' + res + '">press here to download</a>';
+                resultDisplay.innerHTML = '<a href="' + host + '/' + res.url + '">press here to download</a>';
             }).catch(err => {
                 console.log('fetch ' + err + err.data)
                 loader.classList.remove('showLoader');
