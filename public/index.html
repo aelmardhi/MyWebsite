@@ -155,12 +155,12 @@
             fetch(host+'/api/download/files').then(r => r.json()).then(res => {
                     downloads.classList.add('showDownloads');
                     
-                    list.innerHTML = data.map(i =>{ 
+                    list.innerHTML = res.map(i =>{ 
                         let t = i.modified;
                         let s = (i.size > 1024)?((i.size > 1024 * 1024)? (i.size / 1024 /1024).toFixed(2) + ' MB' : (i.size / 1024).toFixed(2) + ' KB') : i.size + ' B'   ;
                         
                         return'<li><a href="./downloads/'+i.name+'"><span>'+i.name+'</span><span>'+t+'</span><span>'+s+'</span></a></li>'}).join('');
-                 }).catch(err => console.log('axios'+err+err.data));
+                 }).catch(err => console.log('fetch'+err+err.data));
 
         })
     </script>
