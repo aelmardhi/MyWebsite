@@ -85,7 +85,7 @@
                     body: JSON.stringify({
                         url: url
                     }),
-                }).then(r => r.json()).then(res => {
+                }).then(res => {
                     console.log(res);
                     messagesDisplay.innerHTML = '<a href="' + host + '/' + res + '">' + url + '&&&' + res + '</a>';
                 })
