@@ -3,6 +3,7 @@ const fs = require('fs');
 const urlModule = require('url');
 const app = express();
 
+const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
@@ -32,7 +33,7 @@ cloudinary.config({
   api_secret: process.env.API_SECRET
 });
 
-
+app.use(cors);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(express.static('public'));
