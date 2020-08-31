@@ -1,61 +1,69 @@
 <html>
-    <style>
-        .center{
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%,-50%);
-        }
-        .info{
-            display: flex;
-            flex-direction: column;
-            background: #def;
-            padding: 10px;
-            width: 60%;
-            min-width: 400px;
-            align-items: stretch;
-            justify-content: center;
-        }
-        .info input{
-            border: none;
-            width: 100%;
-            padding: 10px 5px;
-            box-shadow: 0 0 5px #0002;
-            font-size: 1.5em;
-        }
-        .info button{
-            border: none;
-            background: #dddd40;
-            padding:  5px 30px;
-            color: azure;
-            font-weight: 900;
-            font-size: 1.5em;
-        }
-        .info a{
-            text-decoration: none;
-            padding: 8px;
-            font-size: 1.6rem;
-            color: #dd3399;
-            text-align: center;
-        }
-    </style>
+<style>
+    .center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        background: #def;
+        padding: 10px;
+        width: 60%;
+        min-width: 400px;
+        align-items: stretch;
+        justify-content: center;
+    }
+
+    .info input {
+        border: none;
+        width: 100%;
+        padding: 10px 5px;
+        box-shadow: 0 0 5px #0002;
+        font-size: 1.5em;
+    }
+
+    .info button {
+        border: none;
+        background: #dddd40;
+        padding: 5px 30px;
+        color: azure;
+        font-weight: 900;
+        font-size: 1.5em;
+    }
+
+    .info a {
+        text-decoration: none;
+        padding: 8px;
+        font-size: 1.6rem;
+        color: #dd3399;
+        text-align: center;
+    }
+
+</style>
+
 <head>
     <meta charset="utf-8">
-    <script src="axios.min.js"></script>
     <title>downloader</title>
-    </head >
-    <body>
+</head>
+
+<body>
     <div class="info center">
-       <h2 id="notification"></h2>
-    <form >
-    <input type="text" id="link">
-        
-</form>
-    
-    <button onclick="send()">Download</button>
-        
-    
-    <div id="messages"><hr></div>  
+        <h2 id="notification"></h2>
+        <form>
+            <input type="text" id="link">
+
+        </form>
+
+        <button onclick="send()">Download</button>
+
+
+        <div id="messages">
+            <hr>
+        </div>
     </div>
     <script>
         const host = 'https://dardasha.herokuapp.com';
@@ -65,21 +73,26 @@
             messagesDisplay = document.getElementById('messages');
             linkInput = document.getElementById('link');
         });
-        function send(){
+
+        function send() {
             const url = linkInput.value;
-            messagesDisplay.innerHTML = '<a href="'+url+'">downloading...'+url+'</a>';
-            fetch(host+'/api/download',{
-                method: 'POST',
-                body: JSON.stringify({
-        url : url
-    })} ).then(r => r.json())
-    .then(res => {
-                            messagesDisplay.innerHTML ='<a href="'+host+'/'+res+'">'+ url+'&&&'+res+'</a>';
-                 })
-    .catch(err => console.log('fetch'+err+err.data));
+            messagesDisplay.innerHTML = '<a href="' + url + '">downloading...' + url + '</a>';
+            fetch(host + '/api/download', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        url: url
+                    })
+                }).then(r => r.json()).then(res => {
+                    messagesDisplay.innerHTML = '<a href="' + host + '/' + res + '">' + url + '&&&' + res + '</a>';
+                })
+                .catch(err => console.log('fetch' + err + err.data));
 
         }
-    </script>
-    </body>
-</html>
 
+    </script>
+</body>
+
+</html>
