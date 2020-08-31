@@ -39,7 +39,7 @@ const download = async (req,res)=>{
              const file = await fs.createWriteStream(fl);
                 response.pipe(file,err=>console.log('pipe'+err));
                 
-            res.send('downloads/'+fn);
+            res.json({'url':'downloads/'+fn});
             });
 }catch(err){
     console.log(err);
