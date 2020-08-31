@@ -1,7 +1,6 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <script src="../axios.min.js"></script>
         <title>Home</title>
     </head >
     <style>
@@ -153,10 +152,10 @@
         document.addEventListener('DOMContentLoaded',function(){
             const list = document.getElementById('downloads-list');
             const downloads = document.getElementById('downloads');
-            axios.get(host+'/api/download/files').then(res => {
+            fetch(host+'/api/download/files').then(r => r.json()).then(res => {
                     downloads.classList.add('showDownloads');
                     
-                    list.innerHTML = res.data.map(i =>{ 
+                    list.innerHTML = data.map(i =>{ 
                         let t = i.modified;
                         let s = (i.size > 1024)?((i.size > 1024 * 1024)? (i.size / 1024 /1024).toFixed(2) + ' MB' : (i.size / 1024).toFixed(2) + ' KB') : i.size + ' B'   ;
                         
