@@ -1,227 +1,261 @@
 <html>
+
 <head>
     <meta charset="utf-8">
-    <script src="../axios.min.js"></script>
     <title>Youtube Downloader</title>
-    </head >
-    <style>
-        body{
-            background-color: #fff1f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
+</head>
+<style>
+    body {
+        background-color: #fff1f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+        padding: 10px;
+        width: 60%;
+        min-width: 400px;
+        align-items: stretch;
+        box-shadow: 0 0 15px #d004;
+    }
+
+    .info input {
+        border: 1px solid #f004;
+        width: 100%;
+        padding: 10px 5px;
+        box-shadow: 0 0 15px #f004;
+        font-size: 1.5em;
+    }
+
+    .info button {
+        border: none;
+        background: #f10;
+        padding: 5px 30px;
+        color: azure;
+        font-weight: 900;
+        font-size: 1.5em;
+        transition: background .2s ease;
+    }
+
+    .info button:hover {
+        background: #f50;
+    }
+
+    .info button:active {
+        background: #f38;
+    }
+
+    .info h1 {
+        text-align: center;
+        font-size: 2.7rem;
+        font-family: sans-serif;
+        color: #f00;
+        margin: 0;
+    }
+
+    .info a {
+        text-decoration: none;
+        padding: 8px;
+        font-size: 1.6rem;
+        color: #dd3399;
+        text-align: center;
+    }
+
+    .info img {
+        margin: auto;
+        box-shadow: 0 0 35px #f004;
+        width: 100%;
+        height: auto;
+    }
+
+    .messages {
+        display: none;
+        color: #e87;
+        transform: scaleY(0);
+        transition: transform .4s ease;
+    }
+
+    .showMessages {
+        display: block;
+        transform: scaleY(1);
+    }
+
+    .messages h3 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin: 0;
+        margin-top: 10px;
+    }
+
+    .messages h4 {
+        font-size: 1.75rem;
+        font-weight: 600;
+        margin: 0;
+        color: #eaa;
+    }
+
+    .messages h6 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 0;
+        margin-bottom: 10px;
+        color: #caa;
+    }
+
+    .messages button {
+        background: #f64;
+    }
+
+    .messages table {
+        margin: 0;
+        width: 100%
+    }
+
+    .messages table tr {
+        width: 100%;
+        display: grid;
+        font-family: arial;
+        font-weight: 600;
+        font-size: 1.25rem;
+        grid-template-columns: repeat(5, 1fr);
+        margin: 5px 0;
+        background-color: #ffffe5;
+        text-align: center;
+        padding: 0;
+    }
+
+    .messages table tr td {
+        align-self: center;
+        margin: 5px;
+    }
+
+    .messages table tr td:last-child {
+        margin: 0;
+    }
+
+    .messages table tr:nth-child(even) {
+        background-color: #ffedea;
+    }
+
+    .result {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .result a {
+        font-size: 2rem;
+        color: #3d5;
+        margin: 20px;
+        border: 2px solid;
+    }
+
+    .loader {
+        display: none;
+        height: 100px;
+        width: 100px;
+        margin: 20px auto;
+        animation: animate 1.5s ease infinite;
+        transform: scaleY(0);
+        transition: transform .3s ease;
+    }
+
+    .showLoader {
+        display: block;
+        transform: scaleY(1);
+    }
+
+    .loader span {
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        background-color: #f32;
+        position: absolute;
+        top: 0;
+        left: 0;
+        animation: animate2 2s ease infinite;
+    }
+
+    .loader span:nth-child(2) {
+        animation-delay: .5s;
+        opacity: 0.8;
+    }
+
+    .loader span:nth-child(3) {
+        animation-delay: 1s;
+        opacity: 0.6;
+    }
+
+    .loader span:nth-child(4) {
+        animation-delay: 1.5s;
+        opacity: 0.4;
+    }
+
+    @keyframes animate {
+        0% {
+            transform: rotate(0deg);
         }
-        .info{
-            display: flex;
-            flex-direction: column;
-            background: #fff;
-            padding: 10px;
-            width: 60%;
-            min-width: 400px;
-            align-items: stretch;
-            box-shadow: 0 0 15px #d004;
+
+        100% {
+            transform: rotate(360deg);
         }
-        .info input{
-            border: 1px solid #f004;
-            width: 100%;
-            padding: 10px 5px;
-            box-shadow: 0 0 15px #f004;
-            font-size: 1.5em;
+    }
+
+    @keyframes animate2 {
+        0% {
+            left: 50%;
+            top: 0%;
         }
-        .info button{
-            border: none;
-            background: #f10;
-            padding:  5px 30px;
-            color: azure;
-            font-weight: 900;
-            font-size: 1.5em;
-            transition: background .2s ease;
+
+        25% {
+            left: 100%;
+            top: 50%;
         }
-        .info button:hover{
-            background: #f50;
+
+        50% {
+            left: 50%;
+            top: 100%;
         }
-        .info button:active{
-            background: #f38;
+
+        75% {
+            left: 0%;
+            top: 50%;
         }
-        .info h1{
-            text-align: center;
-            font-size: 2.7rem;
-            font-family: sans-serif;
-            color: #f00;
-            margin: 0;
-        }
-        .info a{
-            text-decoration: none;
-            padding: 8px;
-            font-size: 1.6rem;
-            color: #dd3399;
-            text-align: center;
-        }
-        .info img{
-            margin: auto;
-            box-shadow: 0 0 35px #f004;
-            width: 100%;
-            height: auto;
-        }
-        .messages{
-            display: none;
-            color: #e87;
-            transform: scaleY(0);
-            transition: transform .4s ease;
-        }
-        .showMessages{
-            display: block;
-            transform: scaleY(1);
-        }
-        .messages h3{
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin: 0;
-            margin-top: 10px;
-        }
-        .messages h4{
-            font-size: 1.75rem;
-            font-weight: 600;
-            margin: 0;
-            color: #eaa;
-        }
-        .messages h6{
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin: 0;
-            margin-bottom: 10px;
-            color: #caa;
-        }
-        .messages button{
-            background: #f64;
-        }
-        .messages table{
-            margin: 0;
-            width: 100%
-        }
-        .messages table tr{
-            width: 100%;
-            display: grid;
-            font-family: arial;
-            font-weight: 600;
-            font-size: 1.25rem;
-            grid-template-columns: repeat(5, 1fr);
-            margin: 5px 0;
-            background-color: #ffffe5;
-            text-align: center;
-            padding: 0;
-        }
-        .messages table tr td{
-            align-self: center;
-            margin: 5px ;
-        }
-        .messages table tr td:last-child{
-            margin: 0;
-        }
-        .messages table tr:nth-child(even){
-            background-color: #ffedea;
-        }
-        .result{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .result a{
-            font-size: 2rem;
-            color: #3d5;
-            margin:  20px;
-            border: 2px solid;
-        }
-        
-        .loader{
-            display: none;
-            height: 100px;
-            width: 100px;
-            margin:  20px auto;
-            animation: animate 1.5s ease infinite;
-            transform: scaleY(0);
-            transition: transform .3s ease;
-        }
-        .showLoader{
-            display: block;
-            transform: scaleY(1);
-        }
-        .loader span{
-            height: 10px;
-            width: 10px;
-            border-radius: 50%;
-            background-color: #f32;
-            position: absolute;
-            top: 0;
-            left: 0;
-            animation: animate2 2s ease infinite;
-        }
-        .loader span:nth-child(2){
-            animation-delay: .5s;
-            opacity: 0.8;
-        }
-        .loader span:nth-child(3){
-            animation-delay: 1s;
-            opacity: 0.6;
-        }
-        .loader span:nth-child(4){
-            animation-delay: 1.5s;
-            opacity: 0.4;
-        }
-        @keyframes animate{
-            0%{
-                transform: rotate(0deg);
-            }
-            100%{
-                transform: rotate(360deg);
-            }
-        }
-        @keyframes animate2{
-            0%{
-                left: 50%;
-                top: 0%;
-            }
-            25%{
-                left: 100%;
-                top: 50%;
-            }
-            50%{
-                left: 50%;
-                top: 100%;
-            }
-            75%{
-                left: 0%;
-                top: 50%;
-            }
-        }
-    </style>
-    <body>
-        <div class="info">
+    }
+
+</style>
+
+<body>
+    <div class="info">
         <h1>Youtube Downloader</h1>
-       <h2 id="notification"></h2>
-        <form >
-        <input type="text" id="link" placeholder="enter yotube url or video id ...">
+        <h2 id="notification"></h2>
+        <form>
+            <input type="text" id="link" placeholder="enter yotube url or video id ...">
         </form>
-    
-    <button >Download</button>
-        
-    <div class="loader">
-        <span></span>        
-        <span></span>        
-        <span></span>        
-        <span></span>        
-    </div>
-    <div id="result" class="result"></div>
-    <div id="messages" class="messages">
+
+        <button>Download</button>
+
+        <div class="loader">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div id="result" class="result"></div>
+        <div id="messages" class="messages">
             <h3 id="title"></h3>
             <h4 id="author"></h4>
             <h6 id="id"></h6>
             <img id="thumbnail">
             <table id="table"></table>
-            </div>  
+        </div>
     </div>
-        <script>
+    <script>
         const host = 'https://dardasha.herokuapp.com';
         const loader = document.querySelector('.loader');
         const btn = document.querySelector('button');
@@ -235,22 +269,32 @@
             messagesDisplay = document.getElementById('messages');
             linkInput = document.getElementById('link');
         });
-        function send(){
+
+        function send() {
             console.log(loader)
             const url = linkInput.value;
             loader.classList.add('showLoader');
-            axios.post(host+'/api/ytdl/info', {
-        id : url
-        } ).then(res => {
-                info = res.data;
+            fetch(host + '/api/ytdl/info', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: {
+                    id: url
+                },
+            }).then(r => r.json()).then(res => {
+                info = res;
                 resolve()
                 loader.classList.remove('showLoader');
                 messagesDisplay.classList.add('showMessages');
-                }).catch(err => {console.log('axios'+err+err.data)
-                    loader.classList.remove('showLoader');            });
+            }).catch(err => {
+                console.log('fetch' + err + err.data)
+                loader.classList.remove('showLoader');
+            });
 
         }
-        function resolve(){
+
+        function resolve() {
             const id = document.getElementById('id');
             const author = document.getElementById('author');
             const title = document.getElementById('title');
@@ -259,30 +303,40 @@
             id.textContent = info.id;
             title.textContent = info.title;
             author.textContent = info.author;
-            img.setAttribute('src',info.thumbnail)
-            table.innerHTML = info.formats.map(i =>'<tr>'+
-                    '<td>'+(i.quality?i.quality:'-')+'</td>'+
-                    '<td>'+(i.resolution?i.resolution:'-')+'</td>'+
-                    '<td>'+(i.container?i.container:'-')+'</td>'+
-                    '<td>'+(i.encoding?i.encoding:'-')+'</td>'+
-                    '<td>'+'<button onclick="download('+i.itag+',\''+i.container+'\')">Download</button></td>'+
-                    '</tr>').join('');
+            img.setAttribute('src', info.thumbnail)
+            table.innerHTML = info.formats.map(i => '<tr>' +
+                '<td>' + (i.quality ? i.quality : '-') + '</td>' +
+                '<td>' + (i.resolution ? i.resolution : '-') + '</td>' +
+                '<td>' + (i.container ? i.container : '-') + '</td>' +
+                '<td>' + (i.encoding ? i.encoding : '-') + '</td>' +
+                '<td>' + '<button onclick="download(' + i.itag + ',\'' + i.container + '\')">Download</button></td>' +
+                '</tr>').join('');
         }
-            function download(itag, container){
-                messagesDisplay.classList.remove('showMessages');
-                loader.classList.add('showLoader');
-                axios.post(host+'/api/ytdl/download', {
-                    id : info.id,
-                    title: info.title,
-                    container : container,
-                    itag : itag
-        } ).then(res => {
-                loader.classList.remove('showLoader');
-                resultDisplay.innerHTML = '<a href="'+host+'/'+res.data+'">press here to download</a>';
-                }).catch(err => {console.log('axios'+err+err.data)
-                    loader.classList.remove('showLoader');            });
-            }
-        </script>
-    </body>
-</html>
 
+        function download(itag, container) {
+            messagesDisplay.classList.remove('showMessages');
+            loader.classList.add('showLoader');
+            fetch(host + '/api/ytdl/download', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                {
+                    id: info.id,
+                    title: info.title,
+                    container: container,
+                    itag: itag
+                },
+            }).then(r=>r.json()).then(res => {
+                loader.classList.remove('showLoader');
+                resultDisplay.innerHTML = '<a href="' + host + '/' + res + '">press here to download</a>';
+            }).catch(err => {
+                console.log('fetch ' + err + err.data)
+                loader.classList.remove('showLoader');
+            });
+        }
+
+    </script>
+</body>
+
+</html>
