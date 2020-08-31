@@ -33,7 +33,7 @@ cloudinary.config({
   api_secret: process.env.API_SECRET
 });
 
-app.use(cors);
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(express.static('public'));
