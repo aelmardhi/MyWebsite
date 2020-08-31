@@ -87,7 +87,7 @@
                     }),
                 }).then(r => r.json()).then(res => {
                     console.log(res);
-                    messagesDisplay.innerHTML = '<a href="' + host + '/' + res.url + '">' + url + '@@@' + res.url + '</a>';
+                    messagesDisplay.innerHTML = '<a href="' + host + '/' + res.url + '">' + url + '@@' + res.url + '</a>';
                 })
                 .catch(err => console.log('fetch' + err + err.data));
 
