@@ -2,7 +2,6 @@ const express = require('express');
 const fs = require('fs');
 const urlModule = require('url');
 const app = express();
-const proxyChain = require('proxy-chain')
 
 const cors = require('cors');
 const dotenv = require('dotenv');
@@ -61,9 +60,6 @@ app.use('/api/upload', uploadRoute);
 
 const portNumber = (process.env.PORT || 5000);
 
-const proyServer = new proxyChain.Server({port:portNumber});
-proyServer.listen(()=>{
-    console.log('proxy server started on'+portNumber)
-});
+
 
 app.listen(portNumber, () => console.log('server started'));
