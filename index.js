@@ -2,11 +2,13 @@ const express = require('express');
 const fs = require('fs');
 const urlModule = require('url');
 const app = express();
+const proxyChain = require('proxy-chain')
 
 const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+
 const authRoute = require('./routes/auth');
 const messageRoute = require('./routes/messages');
 const ytdlRoute = require('./routes/ytdl');
@@ -58,4 +60,10 @@ app.use('/api/upload', uploadRoute);
 
 
 const portNumber = (process.env.PORT || 5000);
+
+const proyServer = new proxyChain.Server({port:portNumber});
+proyServer.listen(()=>{
+    console.log('proxy server started on'+portNumber)
+});
+
 app.listen(portNumber, () => console.log('server started'));
