@@ -20,7 +20,8 @@ router.post('/info', async (req,res)=> {
             "itag" : i.itag,
             "container": i.container,
             "quality": i.quality,
-            "resolution": i.resolution,
+            "resolution": i.qualityLabel,
+//            "resolution": i.resolution,
             "encoding": i.encoding,
         }))
     }
