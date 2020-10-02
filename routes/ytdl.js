@@ -22,7 +22,7 @@ router.post('/info', async (req,res)=> {
             "quality": i.quality,
             "resolution": i.qualityLabel,
 //            "resolution": i.resolution,
-            "encoding": i.codecs,
+            "encoding": (i.hasVideo?'v':'')+(i.hasAudio?'a':''),
 //            "encoding": i.encoding,
         }))
     }
