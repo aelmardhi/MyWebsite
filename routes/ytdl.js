@@ -22,7 +22,8 @@ router.post('/info', async (req,res)=> {
             "quality": i.quality,
             "resolution": i.qualityLabel,
 //            "resolution": i.resolution,
-            "encoding": i.encoding,
+            "encoding": i.codecs,
+//            "encoding": i.encoding,
         }))
     }
     res.status(200).json(retInfo);
