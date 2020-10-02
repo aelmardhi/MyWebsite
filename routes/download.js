@@ -57,7 +57,7 @@ router.get('/files' ,async (req , res) => {
     const dir = await fs.promises.opendir(__dirname+'/../public/downloads');
     for await (const dirent of dir) {
         await fs.stat(__dirname+'/../public/downloads/'+dirent['name'],(err,stats) => {
-            data.push( {"name":encodeURI(dirent.name),
+            data.push( {"name":dirent.name,
                        "size":stats.size,
                        "modified":new Date(stats.mtimeMs).toDateString(),
                       });
