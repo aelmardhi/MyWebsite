@@ -27,7 +27,7 @@ const download = async (req,res)=>{
                   
                 resfl = resfl.substring(resfl.indexOf('filename=')+9);
                 resfl.substring(0,resfl.indexOf(';'));
-                resfl = resfl.replace(/\//gi,'').replace(/\\/gi,'').replace(/\'/gi,'').replace(/\"/gi,'');
+//                resfl = resfl.replace(/\//gi,'').replace(/\\/gi,'').replace(/\'/gi,'').replace(/\"/gi,'');
              
                 if(resfl){
                     fn = resfl;
@@ -39,7 +39,7 @@ const download = async (req,res)=>{
              const file = await fs.createWriteStream(fl);
                 response.pipe(file,err=>console.log('pipe'+err));
                 
-            res.json({'url':'downloads/'+fn});
+            res.json({'url':encodeURI('downloads/'+fn)});
             });
 }catch(err){
     console.log(err);
@@ -57,7 +57,7 @@ router.get('/files' ,async (req , res) => {
     const dir = await fs.promises.opendir(__dirname+'/../public/downloads');
     for await (const dirent of dir) {
         await fs.stat(__dirname+'/../public/downloads/'+dirent['name'],(err,stats) => {
-            data.push( {"name":dirent.name,
+            data.push( {"name":encodeURI(dirent.name),
                        "size":stats.size,
                        "modified":new Date(stats.mtimeMs).toDateString(),
                       });
