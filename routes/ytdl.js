@@ -10,6 +10,7 @@ router.post('/info', async (req,res)=> {
         res.status(400).send('request should have body with id');
     }
     let info = await ytdl.getInfo(req.body.id);
+    console.log(info);
     let retInfo = {
         'id': info.videoDetails.videoId,
         'title': info.videoDetails.title,
@@ -28,7 +29,8 @@ router.post('/info', async (req,res)=> {
 
 router.post('/download', async(req, res) => {
     try{
-    const fn = (req.body.title.replace(/\//gi,'').replace(/\\/gi,'').replace(/\'/gi,'').replace(/\"/gi,'')) + '.'+req.body.container;
+    const fn =  encodeURI(req.body.title) + '.'+req.body.container;
+//        const fn = (req.body.title.replace(/\//gi,'').replace(/\\/gi,'').replace(/\'/gi,'').replace(/\"/gi,'')) + '.'+req.body.container;
     const fl = __dirname+'/../public/downloads/'+fn;
     await fs.writeFile(fl,'',er => console.log(er));
     ytdl(req.body.id,{"quality": req.body.itag})
