@@ -13,7 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@hapi/joi": "^17.1.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cloudinary": "^1.21.0",
@@ -26,6 +26,6 @@
     "multer-storage-cloudinary": "^2.2.1",
     "proxy-chain": "^0.4.5",
     "url": "^0.11.0",
-    "ytdl-core": "^3.2.1"
+    "ytdl-core": "^4.4.3"
   }
 }
