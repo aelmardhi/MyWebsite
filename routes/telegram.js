@@ -11,7 +11,7 @@ router.post('/update',async (req,res)=>{
         res.send('ok');
         return;
     }
-    https.post('../../download/',{'url':req.body.message.text});
+    https.request({'path':'../../download/','body':{'url':req.body.message.text}});
     res.json({
         'method':'sendMessage',
         'chat_id':req.body.message.chat.id,
