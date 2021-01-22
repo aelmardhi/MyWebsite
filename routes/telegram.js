@@ -8,6 +8,14 @@ const download = async (req,res)=>{
     try{
      const url = urlModule.parse(req.body.message.text);
      let protocol;
+     if(!url.pathname){
+        res.json({
+            'method':'sendMessage',
+            'chat_id':req.body.message.chat.id,
+            'text':'error downloading: not url',
+        });
+        return;
+     }
      if(url.protocol == 'https:'){
          protocol = https
      } else {
@@ -15,7 +23,15 @@ const download = async (req,res)=>{
      }
      let fn = url.pathname;
         fn = fn.indexOf('/')>=0?fn.substring(fn.lastIndexOf('/')+1):fn;
-    await protocol.get(url, async(response)=>{
+    await protocol.get(url, async(err,response)=>{
+        if(err){
+            res.json({
+                'method':'sendDocument',
+                'chat_id':req.body.message.chat.id,
+                'document':'https://dardasha.herokuapp.com/'+encodeURI('downloads/'+fn)
+            });
+            return;
+        }
         if(response.headers.location){
             req.body.message.text = response.headers.location;
             download(req,res);
