@@ -59,6 +59,7 @@ res.json({
 
 router.post('/update',async (req,res)=>{
     await download(req,res);
+    console.log(req.body)
   /*  const url = urlModule.parse(req.body.message.text);
     if(!url.pathname){
         res.send('ok');
