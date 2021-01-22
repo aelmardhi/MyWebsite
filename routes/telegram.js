@@ -8,7 +8,7 @@ const download = async (req,res)=>{
     try{
      const url = urlModule.parse(req.body.message.text);
      let protocol;
-     if(!url.pathname){
+     if(!url.pathname || url.hostname == '127.0.0.1'){
         res.json({
             'method':'sendMessage',
             'chat_id':req.body.message.chat.id,
@@ -75,7 +75,7 @@ res.json({
 
 router.post('/update',async (req,res)=>{
     await download(req,res);
-    console.log(req.body)
+    //console.log(req.body)
   /*  const url = urlModule.parse(req.body.message.text);
     if(!url.pathname){
         res.send('ok');
