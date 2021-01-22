@@ -16,7 +16,11 @@ const download = async (req,res)=>{
      let fn = url.pathname;
         fn = fn.indexOf('/')>=0?fn.substring(fn.lastIndexOf('/')+1):fn;
     await protocol.get(url, async(response)=>{
-       
+        if(response.headers.location){
+            req.body.message.text = response.headers.location;
+            download(req,res);
+            return;
+        }
         
         let resfl = response.headers['content-disposition'];
         if(resfl && resfl.indexOf('filename=') >= 0){
