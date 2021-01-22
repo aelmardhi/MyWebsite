@@ -42,7 +42,7 @@ const download = async (req,res)=>{
         res.json({
             'method':'sendDocument',
             'chat_id':req.body.message.chat.id,
-            'text':'https://dardasha.herokuapp.com/'+encodeURI('downloads/'+fn)
+            'document':'https://dardasha.herokuapp.com/'+encodeURI('downloads/'+fn)
         });
     
     });
