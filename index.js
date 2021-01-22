@@ -55,9 +55,7 @@ app.use('/api/messages', messageRoute);
 app.use('/api/ytdl', ytdlRoute);
 app.use('/api/download', downloadRoute);
 app.use('/api/upload', uploadRoute);
-app.use('/api/telegram',telegramRoute);
-
-
+app.use('/api/telegram/'+process.env.TELEGRAM_TOKEN,telegramRoute);
 
 const portNumber = (process.env.PORT || 5000);
 
