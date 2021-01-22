@@ -12,6 +12,7 @@ const messageRoute = require('./routes/messages');
 const ytdlRoute = require('./routes/ytdl');
 const uploadRoute = require('./routes/upload');
 const downloadRoute = require('./routes/download');
+const telegramRoute = require('./routes/telegram');
 
 
 
@@ -54,6 +55,7 @@ app.use('/api/messages', messageRoute);
 app.use('/api/ytdl', ytdlRoute);
 app.use('/api/download', downloadRoute);
 app.use('/api/upload', uploadRoute);
+app.use('/api/telegram',telegramRoute);
 
 
 
