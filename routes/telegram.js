@@ -26,9 +26,9 @@ const download = async (req,res)=>{
     await protocol.get(url, async(err,response)=>{
         if(err){
             res.json({
-                'method':'sendDocument',
+                'method':'sendMessage',
                 'chat_id':req.body.message.chat.id,
-                'document':'https://dardasha.herokuapp.com/'+encodeURI('downloads/'+fn)
+                'text':'error downloading'+err,
             });
             return;
         }
