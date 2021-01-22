@@ -39,11 +39,11 @@ const download = async (req,res)=>{
      const file = await fs.createWriteStream(fl);
         response.pipe(file,err=>console.log('pipe'+err));
         
-        res.json({
+      /*  res.json({
             'method':'sendDocument',
             'chat_id':req.body.message.chat.id,
             'document':'https://dardasha.herokuapp.com/'+encodeURI('downloads/'+fn)
-        });
+        });*/
     
     });
 }catch(err){
