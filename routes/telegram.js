@@ -8,7 +8,7 @@ const download = async (req,res)=>{
     try{
      const url = urlModule.parse(req.body.message.text);
      let protocol;
-     if(!url.pathname || url.hostname == '127.0.0.1'){
+     if(!url.hostname || url.hostname == '127.0.0.1'){
         res.json({
             'method':'sendMessage',
             'chat_id':req.body.message.chat.id,
