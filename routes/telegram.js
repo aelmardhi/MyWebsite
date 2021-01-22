@@ -40,9 +40,9 @@ const download = async (req,res)=>{
         response.pipe(file,err=>console.log('pipe'+err));
         
         res.json({
-            'method':'sendMessage',
+            'method':'sendDocument',
             'chat_id':req.body.message.chat.id,
-            'text':'https://dardasha.herokuapp.com/'+encodeURI('downloads/'+fn)
+            'document':'https://dardasha.herokuapp.com/'+encodeURI('downloads/'+fn)
         });
     
     });
