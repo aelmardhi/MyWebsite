@@ -74,7 +74,7 @@ res.json({
 }
 }
 
-let count = 0;
+
 router.post('/update',async (req,res)=>{
    // await download(req,res);
     try{
@@ -86,7 +86,7 @@ router.post('/update',async (req,res)=>{
                 'text':'not youtube url',
             });
         }
-        const fn =  info.videoDetails.videoId+ (count++)+'.'+'mp4';
+        const fn =  info.videoDetails.videoId+'.'+'mp4';
     //        const fn = (req.body.title.replace(/\//gi,'').replace(/\\/gi,'').replace(/\'/gi,'').replace(/\"/gi,'')) + '.'+req.body.container;
         const fl = __dirname+'/../public/downloads/'+fn;
         await fs.writeFile(fl,'',er => console.log(req.body,er));
