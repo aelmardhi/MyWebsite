@@ -23,19 +23,18 @@ const download = async (req,res)=>{
      }
      let fn = url.pathname;
         fn = fn.indexOf('/')>=0?fn.substring(fn.lastIndexOf('/')+1):fn;
-    await protocol.get(url, async(err,response)=>{
-        
-        if(response.headers.location){
-            req.body.message.text = response.headers.location;
-            download(req,res);
-            return;
-        }
-        else if(err){
+    await protocol.get(url, async(response)=>{
+        response.on('error',() =>{
             res.json({
                 'method':'sendMessage',
                 'chat_id':req.body.message.chat.id,
-                'text':'error downloading'+err,
+                'text':'error downloading'+err.message,
             });
+            return;
+        });
+        if(response.headers.location){
+            req.body.message.text = response.headers.location;
+            download(req,res);
             return;
         }
         
