@@ -26,6 +26,6 @@
     "multer-storage-cloudinary": "^2.2.1",
     "proxy-chain": "^0.4.5",
     "url": "^0.11.0",
-    "ytdl-core": "^4.4.3"
+    "ytdl-core": "latest"
   }
 }
