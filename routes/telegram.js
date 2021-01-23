@@ -91,13 +91,14 @@ router.post('/update',async (req,res)=>{
         const fl = __dirname+'/../public/downloads/'+fn;
         await fs.writeFile(fl,'',er => console.log(req.body,er));
         await ytdl(req.body.message.text,{"quality": 18})
-      .pipe(fs.createWriteStream(fl)).on('end',()=>{
-        res.json({
-            'method':'sendVideo',
-            'chat_id':req.body.message.chat.id,
-            'video':'https://dardasha.herokuapp.com/'+encodeURI('downloads/'+fn)
-        });
-      });
+        .on('end',()=>{
+            res.json({
+                'method':'sendVideo',
+                'chat_id':req.body.message.chat.id,
+                'video':'https://dardasha.herokuapp.com/'+encodeURI('downloads/'+fn)
+            });
+          })
+      .pipe(fs.createWriteStream(fl));
         
         }catch(err){
             console.log(req.body,err);
