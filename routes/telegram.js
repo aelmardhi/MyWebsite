@@ -85,9 +85,9 @@ router.post('/update',async (req,res)=>{
         ytdl(req.body.message.text,{"quality": 18})
       .pipe(fs.createWriteStream(fl));
         res.json({
-            'method':'sendDocument',
+            'method':'sendVideo',
             'chat_id':req.body.message.chat.id,
-            'document':'https://dardasha.herokuapp.com/'+encodeURI('downloads/'+fn)
+            'video':'https://dardasha.herokuapp.com/'+encodeURI('downloads/'+fn)
         });
         }catch(err){
             console.log(req.body,err);
