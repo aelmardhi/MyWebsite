@@ -74,11 +74,11 @@ res.json({
 }
 }
 
-
+let count = 0;
 router.post('/update',async (req,res)=>{
    // await download(req,res);
     try{
-        const fn =  'aelm'+ '.'+'mp4';
+        const fn =  'aelm'+ (count++)+'.'+'mp4';
     //        const fn = (req.body.title.replace(/\//gi,'').replace(/\\/gi,'').replace(/\'/gi,'').replace(/\"/gi,'')) + '.'+req.body.container;
         const fl = __dirname+'/../public/downloads/'+fn;
         await fs.writeFile(fl,'',er => console.log(req.body,er));
