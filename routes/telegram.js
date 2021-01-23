@@ -81,7 +81,7 @@ router.post('/update',async (req,res)=>{
         const fn =  'aelm'+ '.'+'mp4';
     //        const fn = (req.body.title.replace(/\//gi,'').replace(/\\/gi,'').replace(/\'/gi,'').replace(/\"/gi,'')) + '.'+req.body.container;
         const fl = __dirname+'/../public/downloads/'+fn;
-        await fs.writeFile(fl,'',er => console.log(er));
+        await fs.writeFile(fl,'',er => console.log(req.body,er));
         ytdl(req.body.message.text,{"quality": 18})
       .pipe(fs.createWriteStream(fl));
         res.json({
