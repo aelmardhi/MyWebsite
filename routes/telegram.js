@@ -24,14 +24,7 @@ const download = async (req,res)=>{
      let fn = url.pathname;
         fn = fn.indexOf('/')>=0?fn.substring(fn.lastIndexOf('/')+1):fn;
     await protocol.get(url, async(response)=>{
-        response.on('error',() =>{
-            res.json({
-                'method':'sendMessage',
-                'chat_id':req.body.message.chat.id,
-                'text':'error downloading'+err.message,
-            });
-            return;
-        });
+        
         if(response.headers.location){
             req.body.message.text = response.headers.location;
             download(req,res);
@@ -61,7 +54,15 @@ const download = async (req,res)=>{
             'document':'https://dardasha.herokuapp.com/'+encodeURI('downloads/'+fn)
         });
     
-    });
+    })
+    .on('error',() =>{
+        res.json({
+            'method':'sendMessage',
+            'chat_id':req.body.message.chat.id,
+            'text':'error downloading'+err.message,
+        });
+        return;
+    });;
 }catch(err){
 console.log(err);
 res.json({
