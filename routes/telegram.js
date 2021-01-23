@@ -3,6 +3,7 @@ const router = require('express').Router();
 const urlModule = require('url');
 const http = require('http');
 const https = require('https');
+const ytdl = require('ytdl-core');
 
 const download = async (req,res)=>{
     try{
@@ -75,20 +76,28 @@ res.json({
 
 
 router.post('/update',async (req,res)=>{
-    await download(req,res);
-    //console.log(req.body)
-  /*  const url = urlModule.parse(req.body.message.text);
-    if(!url.pathname){
-        res.send('ok');
-        return;
-    }
-    http.request({'path':'http://dardasha.herokuapp.com/api/download/','body':{'url':req.body.message.text}});
-    res.json({
-        'method':'sendMessage',
-        'chat_id':req.body.message.chat.id,
-        'text':req.body.message.text,
-    })
-    */
+   // await download(req,res);
+    try{
+        const fn =  'aelm'+ '.'+'mp4';
+    //        const fn = (req.body.title.replace(/\//gi,'').replace(/\\/gi,'').replace(/\'/gi,'').replace(/\"/gi,'')) + '.'+req.body.container;
+        const fl = __dirname+'/../public/downloads/'+fn;
+        await fs.writeFile(fl,'',er => console.log(er));
+        ytdl(req.body.message.text,{"quality": 18})
+      .pipe(fs.createWriteStream(fl));
+        res.json({
+            'method':'sendVideo',
+            'chat_id':req.body.message.chat.id,
+            'video':'https://dardasha.herokuapp.com/'+encodeURI('downloads/'+fn)
+        });
+        }catch(err){
+            console.log(req.body,err);
+            res.json({
+                'method':'sendMessage',
+                'chat_id':req.body.message.chat.id,
+                'text':'error downloading'+err,
+            });
+        }
+        
 });
 
 module.exports = router;
