@@ -8,16 +8,22 @@
     canvas{
       height: 100%;
       width: 100%;
+      display: block;
     }
     input {
       height: 30px;
     }
+    #canvas2 {
+    }
   </style>
-  <title>Test</title>
+  <title>Dithering Demo</title>
 </head>
 <body>
   <input type="file" onchange="draw()" accept="image/*">
   <canvas id="canvas" width="1920" height="1080"></canvas>
+  <h3 id="ordered-label" style="display: none;">you'll find full sized ordered dithering images bellow  </h3>
+  <canvas id="canvas2" width="1920" height="1080"></canvas>
+  <canvas id="canvas3" width="1920" height="1080"></canvas>
   <script src="script.js">
   </script>
 </body>

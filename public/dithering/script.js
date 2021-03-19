@@ -2,11 +2,22 @@
 //img.src = '/home/aelmardhi/Pictures/Screenshot from [EgyBest].Young.Sheldon.S02E12.WEB-DL.1080p.x264.mp4.png'; // Set source path
 const width = 480;
 const height = 270;
+const margin = 50;
+const fontsize = 32;
+
+var canvas = document.getElementById('canvas');
+  var ctx = canvas.getContext('2d');
+  var canvas2 = document.getElementById('canvas2');
+  var ctx2 = canvas2.getContext('2d');
+  var canvas3 = document.getElementById('canvas3');
+  var ctx3 = canvas3.getContext('2d');
+  
 //const input = document.querySelector('input');
 function draw(e) {
   event.preventDefault()
-    var canvas = document.getElementById('canvas');
-    var ctx = canvas.getContext('2d');
+    document.getElementById('ordered-label').style.display = 'block';
+    ctx.font = fontsize+'px serif';
+    ctx.strokeStyle = 'red';
     //var img = new Image(event.target.files[0]);
     //console.log(img)
   //  img.src = '///home/aelmardhi/Pictures/Screenshot from [EgyBest].Young.Sheldon.S02E12.WEB-DL.1080p.x264.mp4.png'; // Set source path
@@ -61,7 +72,34 @@ function draw(e) {
           data[i + 1] = avg; // green
           data[i + 2] = avg; // blue
         }
-        ctx.putImageData(imageData, 0, height);
+        ctx.putImageData(imageData, 0, height + margin);
+      };
+      var ordered = function(g) {
+        const M = [[ 0*16, 8*16,   2*16, 10*16],
+                   [ 12*16, 4*16, 14*16,  6*16],
+                   [ 3*16, 11*16,  1*16,  9*16],
+                   [ 15*16, 7*16, 13*16,  5*16]];
+        var imageData = ctx.getImageData(0,0,width,height);
+        var data = imageData.data;
+        var newImageData = ctx2.createImageData( 4*width, 4*height);
+        var newData = newImageData.data;
+        for (var i = 0; i < data.length; i += 4) {
+          var avg = Math.floor((data[i] + data[i + 1] + data[i + 2]) / 3 );
+          var y = Math.floor(i/4/width)*16  *4*width;
+          for (var j = 0; j < 4; j += 1) {
+            var x = ((i/4)%width)*4*4;
+            for (var k = 0; k < 4; k += 1) {
+              //console.log(avg,M[j][k]);
+              newData[x+y]     = (avg > M[j][k])? 255: 0; // red
+              newData[x+y + 1] = (avg > M[j][k])? 255: 0; // green
+              newData[x+y + 2] = (avg > M[j][k])? 255: 0; // blue
+              newData[x+y+3] = 255;
+              x+=4;
+            }  
+            y += width*16;
+          }
+        }
+        ctx2.putImageData(newImageData, 0, 0);
       };
       var random = function(g) {
         var imageData = ctx.getImageData(0,0,width,height);
@@ -73,7 +111,7 @@ function draw(e) {
           data[i + 1] = avg; // green
           data[i + 2] = avg; // blue
         }
-        ctx.putImageData(imageData, width, height);
+        ctx.putImageData(imageData, width, height + margin);
       };
 
       var floydStienbergDithering = function(g) {
@@ -96,8 +134,10 @@ function draw(e) {
           data[i+2+4+width]  = data [i+1+4+width] = data[i+4+width] = data[i+4+width] +  Math.floor(quantError * 1 / 16); // pixel [x+1][y+1]
           
         }
-        ctx.putImageData(imageData, width * 3, height );
+        ctx.putImageData(imageData, width * 3, (height  + margin ) );
       };
+
+
 
       var numColors = function(g) {
         var imageData = ctx.getImageData(0,0,width, height);
@@ -107,9 +147,34 @@ function draw(e) {
           data[i + 1] = Math.floor(data[i+1]*g/ 255)/(g-1)*255; // green
           data[i + 2] = Math.floor(data[i+2]*g/ 255)/(g-1)*255; // blue
         }
-        ctx.putImageData(imageData, 0, height *2);
+        ctx.putImageData(imageData, 0, (height  + margin )*2);
       };
-
+      var orderedColors = function(g) {
+        const M = [[ 0*16, 8*16,   2*16, 10*16],
+                   [ 12*16, 4*16, 14*16,  6*16],
+                   [ 3*16, 11*16,  1*16,  9*16],
+                   [ 15*16, 7*16, 13*16,  5*16]];
+        var imageData = ctx.getImageData(0,0,width,height);
+        var data = imageData.data;
+        var newImageData = ctx3.createImageData( 4*width, 4*height);
+        var newData = newImageData.data;
+        for (var i = 0; i < data.length; i += 4) {
+          var y = Math.floor(i/4/width)*16  *4*width;
+          for (var j = 0; j < 4; j += 1) {
+            var x = ((i/4)%width)*4*4;
+            for (var k = 0; k < 4; k += 1) {
+              //console.log(avg,M[j][k]);
+              newData[x+y]     = (data[i] > M[j][k])? 255: 0; // red
+              newData[x+y + 1] = (data[i+1] > M[j][k])? 255: 0; // green
+              newData[x+y + 2] = (data[i+2] > M[j][k])? 255: 0; // blue
+              newData[x+y+3] = 255;
+              x+=4;
+            }  
+            y += width*16;
+          }
+        }
+        ctx3.putImageData(newImageData, 0, 0);
+      };
       var randomColors = function(g) {
         var imageData = ctx.getImageData(0,0,width, height);
         var data = imageData.data;
@@ -121,7 +186,7 @@ function draw(e) {
           data[i + 1] = Math.floor((data[i+1]+rand2)*g/ 255)/(g-1)*255; // green
           data[i + 2] = Math.floor((data[i+2]+rand3)*g/ 255)/(g-1)*255; // blue
         }
-        ctx.putImageData(imageData, width, height *2);
+        ctx.putImageData(imageData, width, (height  + margin )*2);
       };
 
       var floydStienbergDitheringColors = function(g) {
@@ -160,18 +225,57 @@ function draw(e) {
           data[i+2+4+width]  = data[i+2+4+width] +  Math.floor(quantErrorB * 1 / 16);
           
         }
-        ctx.putImageData(imageData, width * 3, height * 2 );
+        ctx.putImageData(imageData, width * 3, (height  + margin )*2);
       };
       const g = 2;
+      ctx.fillText('ORIGINAL',0,height+fontsize);
       redChannel(g);
+      ctx.fillText('RED',width,height+fontsize);
       greenChannel(g);
+      ctx.fillText('GREEN',width *2,height+fontsize);
       blueChannel(g);
+      ctx.fillText('BLUE',width*3,height+fontsize);
       grayscale(g);
+      ctx.fillText('GRAY',0,2*height+margin+fontsize);
       random(g);
-      numColors(g);
+      ctx.fillText('RANDOM',width,2*height+margin+fontsize);
+      ordered(g);
+      ctx.fillText('ORDERED',2*width,2*height+margin+fontsize);
       floydStienbergDithering(g);
+      ctx.fillText('FLOYD-STIENBERG',width*3,2*height+margin+fontsize);
+      numColors(g);
+      ctx.fillText('COLORS',0,3*height+2*margin+fontsize);
       randomColors(g);
+      ctx.fillText('RANDOM COLORS',width,3*height+2*margin+fontsize);
+      orderedColors(g);
+      ctx.fillText('ORDERED COLORS',2*width,3*height+2*margin+fontsize);
       floydStienbergDitheringColors(g);
+      ctx.fillText('FLOYD COLORS',width*3,3*height+2*margin+fontsize);
+
+
+      ctx.drawImage(canvas2,2*width,height+margin,width,height);
+      ctx.drawImage(canvas3,2*width,2*(height+margin),width,height);
+
+      //dra don hape
+      ctx.beginPath();
+      ctx.moveTo(2.5*width, 2*height  +50);
+      ctx.lineTo(2.5*width+100, 2*height -50);
+      ctx.lineTo(2.5*width+50, 2*height -50);
+      ctx.lineTo(2.5*width+50, 2*height -150);
+      ctx.lineTo(2.5*width-50, 2*height -150);
+      ctx.lineTo(2.5*width-50, 2*height -50);
+      ctx.lineTo(2.5*width-100, 2*height -50);
+      ctx.fill(); 
+
+      ctx.beginPath();
+      ctx.moveTo(2.5*width, 3*height + margin +50);
+      ctx.lineTo(2.5*width+100, 3*height + margin-50);
+      ctx.lineTo(2.5*width+50, 3*height + margin-50);
+      ctx.lineTo(2.5*width+50, 3*height + margin-150);
+      ctx.lineTo(2.5*width-50, 3*height + margin-150);
+      ctx.lineTo(2.5*width-50, 3*height + margin-50);
+      ctx.lineTo(2.5*width-100, 3*height + margin-50);
+      ctx.fill(); 
     })
   }
   //sdraw()
