@@ -27,10 +27,10 @@ function draw(quality) {
     //console.log(quality);
     data = encode(originalImageData,quality);
     //console.log(data);
+    const src =  'data:image/jpeg;base64,' + btoa(data.data.reduce((a,i)=>a+String.fromCharCode(i),''));
     downloadLink.download = name.split('.')[0]+'('+quality+').jpg';
-    downloadLink.href = 'data:image/jpeg;base64,' + btoa(String.fromCharCode(...data.data));
-    imagEle.src= 'data:image/jpeg;base64,' + btoa(String.fromCharCode(...data.data));
-    //imageData = decode(data.data,{useTArray:true});
+    downloadLink.href = src
+    imagEle.src= src;
     //console.log(imageData)
 
 }
