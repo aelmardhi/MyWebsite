@@ -18,8 +18,8 @@ function fileChange(){
 })*/
     event.target.files[0].arrayBuffer().then(buffer => {
         originalImageData = imageData = decode(buffer,{useTArray:true});
-        draw(50)
-        rangeInput.value = 50;
+        draw(10)
+        rangeInput.value = 10;
     })
 }
 function draw(quality) {
