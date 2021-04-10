@@ -58,7 +58,7 @@ article{
     width: 90%;
     height: 70%;
     margin: 4em auto 1em auto;
-    background: linear-gradient(#0001 0%,#fff 3%,#fff 97%, #0001 100%);
+    background-color: var(--clr-accent);
     box-shadow: var(--bs);
 }
 .file,img {
