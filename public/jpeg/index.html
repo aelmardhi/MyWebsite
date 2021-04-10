@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>JPEG</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <script src="encoder.js"></script>
+        <script src="decoder.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <main>
+            <article>
+                <img class="hide" id="img"> 
+                <h2 class="addFile" id="addFile">Press here or drag a file (only JPEG)</h2>
+                <input id="file" class="file hide" type="file" onchange="fileChange()" accept="image/JPEG" autofocus>
+            </article>
+            <h2>quality selector</h2>
+            <div class="range">
+                <span>min</span>
+                <input id="rangeInput" type="range" min="1" max="100" value="50" oninput="draw()">
+                <span>max</span>
+            </div>
+            <a class="downloadLink hide" id="downloadLink" download>Download</a>
+        </main>
+       
+        <script src="main.js" async defer></script>
+    </body>
+</html>

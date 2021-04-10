@@ -1,0 +1,111 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+:root{
+    --ff-primary: 'source sans pro',sans-serif;
+    --ff-secondary: monospace;
+        
+    --fw-reg:300;
+    --fw-bold:900;
+    --clr-light:#fff;
+    --clr-dark:#303030;
+    --clr-accent:#2b2ee6;
+    
+    --fs-h1: 3rem;
+    --fs-h2: 2.25rem;
+    --fs-h3: 1.25rem;
+    --fs-body: 1rem;
+    --fs-small: .5rem;
+    
+    --bs: 0.25em .25em .75em rgba(0,0,0,.25),0.125em .125em .25em rgba(0,0,0,.15);
+}
+
+
+@media (min-width: 800px) {
+    :root {
+        --fs-h1: 4.5rem;
+        --fs-h2: 2.75rem;
+        --fs-h3: 1.5rem;
+        --fs-body: 1.125rem;
+        --fs-small: .8rem;
+    }
+}
+
+body{
+    background-color: #eef;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80vw;
+    height: 90vh;
+    margin: 5vh 10vw;
+    background-color: var(--clr-light);
+    border-radius: 2em;
+    border-top: .5em solid var(--clr-accent);
+    box-shadow: var(--bs);
+}
+article{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 70%;
+    margin: 4em auto 1em auto;
+    background-color: var(--clr-accent);
+    box-shadow: var(--bs);
+}
+.file,img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.file{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hide{
+    opacity: 0;
+}
+
+.addFile{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    color: var(--clr-light);
+}
+.range{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    font-size: large;
+    margin: .75em;
+}
+.range input{
+    width: 80%;
+}
+.downloadLink {
+    background-color: var(--clr-accent);
+    padding: .5em 1em;
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-bold);
+    color: var(--clr-light);
+    margin: 1em;
+    text-decoration: none ;
+    transition: all 200ms ease;
+    box-shadow: inset 0 0 20px 2px #0003;
+    border-radius: 5px;
+}
+.downloadLink:hover{
+    box-shadow: inset 0 0 20px 2px #ccf5;
+}
