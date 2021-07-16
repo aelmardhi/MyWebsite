@@ -70,7 +70,7 @@ app.use("/peerjs", peerServer);
 io.on("connection", (socket) => {
   socket.on("join-room", (roomId, userId) => {
     socket.join(roomId);
-    console.log('connected to ws'+userID);
+    
     socket.to(roomId).broadcast.emit("user-connected", userId);
   });
 });
@@ -79,4 +79,4 @@ const portNumber = (process.env.PORT || 5000);
 
 
 
-server.listen(portNumber, () => console.log('server started'));
+server.listen(portNumber, () => console.log('server started on port'+portNumber));
