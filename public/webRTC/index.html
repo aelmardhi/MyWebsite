@@ -8,7 +8,9 @@
     <script src="./socket.io.js"></script>
     <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
     <script>
-      const ROOM_ID = location.search.substr(9);
+        const params = new URLSearchParams(location.search)
+      const ROOM_ID = params.get('room-id');
+      const portNumber = params.get('port');
     </script>
   </head>
   <body>
