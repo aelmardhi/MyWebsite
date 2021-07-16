@@ -6,6 +6,12 @@ const app = express();
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const server = require("http").Server(app);
+const io = require("socket.io")(server);
+const { ExpressPeerServer } = require("peer");
+
+const peerServer = ExpressPeerServer(server, {debug: true,});
+
 
 const authRoute = require('./routes/auth');
 const messageRoute = require('./routes/messages');
@@ -13,6 +19,8 @@ const ytdlRoute = require('./routes/ytdl');
 const uploadRoute = require('./routes/upload');
 const downloadRoute = require('./routes/download');
 const telegramRoute = require('./routes/telegram');
+const rtcRoute = require('./routes/rtc');
+
 
 
 
@@ -56,9 +64,18 @@ app.use('/api/ytdl', ytdlRoute);
 app.use('/api/download', downloadRoute);
 app.use('/api/upload', uploadRoute);
 app.use('/api/telegram/'+process.env.TELEGRAM_TOKEN,telegramRoute);
+app.use('/api/rtc',rtcRoute);
+app.use("/peerjs", peerServer);
+
+io.on("connection", (socket) => {
+  socket.on("join-room", (roomId, userId) => {
+    socket.join(roomId);
+    socket.to(roomId).broadcast.emit("user-connected", userId);
+  });
+});
 
 const portNumber = (process.env.PORT || 5000);
 
 
 
-app.listen(portNumber, () => console.log('server started'));
+server.listen(portNumber, () => console.log('server started'));

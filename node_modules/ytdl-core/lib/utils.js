@@ -72,16 +72,24 @@ exports.cutAfterJSON = mixedJson => {
   // States if the loop is currently in a string
   let isString = false;
 
+  // States if the current character is treated as escaped or not
+  let isEscaped = false;
+
   // Current open brackets to be closed
   let counter = 0;
 
   let i;
   for (i = 0; i < mixedJson.length; i++) {
     // Toggle the isString boolean when leaving/entering string
-    if (mixedJson[i] === '"' && mixedJson[i - 1] !== '\\') {
+    if (mixedJson[i] === '"' && !isEscaped) {
       isString = !isString;
       continue;
     }
+
+    // Toggle the isEscaped boolean for every backslash
+    // Reset for every regular character
+    isEscaped = mixedJson[i] === '\\' && !isEscaped;
+
     if (isString) continue;
 
     if (mixedJson[i] === open) {
@@ -118,6 +126,19 @@ exports.playError = (player_response, statuses, ErrorType = Error) => {
   return null;
 };
 
+/**
+ * Does a miniget request and calls options.requestCallback if present
+ *
+ * @param {string} url the request url
+ * @param {Object} options an object with optional requestOptions and requestCallback parameters
+ * @param {Object} requestOptionsOverwrite overwrite of options.requestOptions
+ * @returns {miniget.Stream}
+ */
+exports.exposedMiniget = (url, options = {}, requestOptionsOverwrite) => {
+  const req = miniget(url, requestOptionsOverwrite || options.requestOptions);
+  if (typeof options.requestCallback === 'function') options.requestCallback(req);
+  return req;
+};
 
 /**
  * Temporary helper to help deprecating a few properties.

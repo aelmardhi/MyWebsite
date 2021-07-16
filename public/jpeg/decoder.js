@@ -799,7 +799,6 @@ var JpegImage = (function jpegImage() {
             }
             else if (fileMarker === 0xE0 || fileMarker == 0xE1) {
               // Recover from malformed APP1 markers popular in some phone models.
-              // See https://github.com/eugeneware/jpeg-js/issues/82
               if (malformedDataOffset !== -1) {
                 throw new Error(`first unknown JPEG marker at offset ${malformedDataOffset.toString(16)}, second unknown JPEG marker ${fileMarker.toString(16)} at offset ${(offset - 1).toString(16)}`);
               }
