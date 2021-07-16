@@ -2,7 +2,7 @@ const socket = io("/");
 const videoGrid = document.getElementById("video-grid");
 const myVideo = document.createElement("video");
 myVideo.muted = true;
-var peer = new Peer(undefined, {path: "/peerjs",host: "/",port: portNumber,});
+var peer = new Peer(undefined, {path: "/peerjs",host: "/",});
 let myVideoStream;
 navigator.mediaDevices.getUserMedia({audio: true,video: true,})
     .then((stream) => {
