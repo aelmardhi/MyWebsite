@@ -36,4 +36,6 @@ navigator.mediaDevices.getUserMedia({audio: true,video: true,})
             videoGrid.append(video);
         });
     };
-
+socket.on('log',(id, msg)=>{
+    console.log('msg:'+msg);
+})
