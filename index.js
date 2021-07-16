@@ -70,6 +70,7 @@ app.use("/peerjs", peerServer);
 io.on("connection", (socket) => {
   socket.on("join-room", (roomId, userId) => {
     socket.join(roomId);
+    console.log('connected to ws'+userID);
     socket.to(roomId).broadcast.emit("user-connected", userId);
   });
 });
