@@ -68,6 +68,10 @@ app.use('/api/rtc',rtcRoute);
 app.use("/peerjs", peerServer);
 
 io.on("connection", (socket) => {
+  socket.on('log',(id, msg)=>{
+    console.log('msg:'+msg);
+    socket.broadcast(msg);
+})
   socket.on("join-room", (roomId, userId) => {
     socket.join(roomId);
     
