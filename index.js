@@ -6,11 +6,12 @@ const app = express();
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const server = require("http").Server(app);
-const io = require("socket.io")(server);
+
+
+
+
 const { ExpressPeerServer } = require("peer");
 
-const peerServer = ExpressPeerServer(server, {debug: true,});
 
 
 const authRoute = require('./routes/auth');
@@ -28,6 +29,18 @@ const cloudinary = require('cloudinary');
 
 dotenv.config();
 
+var server;
+if (process.env.USE_LOCALHOST_HTTPS){
+  const key = fs.readFileSync('./localhost/localhost.decrypted.key');
+  const cert = fs.readFileSync('./localhost/localhost.crt');
+  server = require("https").Server({ key, cert },app);
+} else {
+  
+  server = require("http").Server(app);
+}
+
+const io = require("socket.io")(server);
+const peerServer = ExpressPeerServer(server, {debug: true,});
 
 mongoose.connect(process.env.DB_CONNECT,
                  {useNewUrlParser: true, useUnifiedTopology: true },
@@ -74,6 +87,10 @@ io.on("connection", (socket) => {
     
     socket.to(roomId).emit("user-connected", userId);
   });
+  socket.on('msg',(msg)=>{
+    console.log(msg);
+    socket.broadcast.emit('msg',msg);
+  })
 });
 io.on('log',(id, msg)=>{
   console.log('msg:'+msg);
