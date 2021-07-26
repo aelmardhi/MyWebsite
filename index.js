@@ -88,12 +88,10 @@ io.on("connection", (socket) => {
     socket.to(roomId).emit("user-connected", userId);
   });
   socket.on('msg',(msg)=>{
-    console.log(msg);
     socket.broadcast.emit('msg',msg);
   })
 });
 io.on('log',(id, msg)=>{
-  console.log('msg:'+msg);
   io.broadcast(msg);
 })
 const portNumber = (process.env.PORT || 5000);

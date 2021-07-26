@@ -46,7 +46,6 @@ navigator.mediaDevices.getUserMedia({audio: true,video: true,})
         });
     };
 socket.on('msg',( msg)=>{
-    console.log(msg);
     let message = document.createElement('div');
     message.classList.add('message' ,'others_message');
     message.innerText = msg;
