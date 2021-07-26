@@ -9,7 +9,7 @@ const inviteButton = document.getElementById("inviteButton");
 const stopVideo = document.getElementById("stopVideo");
 const muteButton = document.getElementById("muteButton");
 myVideo.muted = true;
-var peer = new Peer(undefined, {path: "/peerjs",host: "/",port: "5000"});
+var peer = new Peer(undefined, {path: "/peerjs",host: "/"});
 let myVideoStream;
 navigator.mediaDevices.getUserMedia({audio: true,video: true,})
     .then((stream) => {
