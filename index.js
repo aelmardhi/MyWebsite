@@ -81,14 +81,13 @@ app.use('/api/rtc',rtcRoute);
 app.use("/peerjs", peerServer);
 
 io.on("connection", (socket) => {
-  console.log('soket connected')
   socket.on("join-room", (roomId, userId) => {
     socket.join(roomId);
-    
     socket.to(roomId).emit("user-connected", userId);
   });
   socket.on('msg',(msg)=>{
-    socket.broadcast.emit('msg',msg);
+
+    socket.rooms.forEach(r => socket.to(r).emit('msg',msg));
   })
 });
 io.on('log',(id, msg)=>{
