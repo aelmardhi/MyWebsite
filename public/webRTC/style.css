@@ -188,4 +188,8 @@ padding: 5px;
         max-height: 200px;
         max-width: 200px;
     }
+    .fullscreen{
+        max-width: none;
+        max-height: none;
+    }
 }
