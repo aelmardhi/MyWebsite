@@ -184,4 +184,8 @@ padding: 5px;
     .main__right{
         font-size: .75rem;
     }
+    .video-grid-video{
+        max-height: 200px;
+        max-width: 200px;
+    }
 }
