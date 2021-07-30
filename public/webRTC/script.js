@@ -1,4 +1,8 @@
-
+let status = {
+    id:'',
+    uids: new Array(),
+    screenStream: null,
+};
 const socket = io("/");
 const sendBtn = document.getElementById("chat_message_send");
 const msgInput = document.getElementById("chat_message");
@@ -8,6 +12,7 @@ const myVideo = document.createElement("video");
 const inviteButton = document.getElementById("inviteButton");
 const stopVideo = document.getElementById("stopVideo");
 const muteButton = document.getElementById("muteButton");
+const shareScreen = document.getElementById("shareScreen");
 myVideo.muted = true;
 var peer = new Peer(undefined, {path: "/peerjs",host: "/"});
 let myVideoStream;
@@ -16,26 +21,36 @@ navigator.mediaDevices.getUserMedia({audio: true,video: true,})
         stopVideo.classList.add('activeBtn');
         muteButton.classList.add('activeBtn');
         myVideoStream = stream;
+        onClickFullScreen(myVideo)
         addVideoStream(myVideo, stream);
         peer.on("call", (call) => {
             call.answer(stream);
             const video = document.createElement("video");
+            onClickFullScreen(video)
             call.on("stream", (userVideoStream) => {
                 addVideoStream(video, userVideoStream);
             });
         });
         socket.on("user-connected", (userId) => {
+            status.uids.push(userId);
             connectToNewUser(userId, stream);
-        });
+            if(status.screenStream)
+                connectToNewUser(userId, status.screenStream);
+            });
     });
     const connectToNewUser = (userId, stream) => {
         const call = peer.call(userId, stream);
         const video = document.createElement("video");
+        onClickFullScreen(video)
+        video.onended = function(e){
+            video.remove();
+        }
         call.on("stream", (userVideoStream) => {
             addVideoStream(video, userVideoStream);
         });
     };
     peer.on("open", (id) => {
+        status.id = id;
         socket.emit("join-room", ROOM_ID, id);
     });
     const addVideoStream = (video, stream) => {
@@ -95,3 +110,20 @@ stopVideo.addEventListener('click',(e)=>{
     myVideoStream.getVideoTracks()[0].enabled = !myVideoStream.getVideoTracks()[0].enabled;
     stopVideo.classList.toggle('activeBtn');
 })
+shareScreen.addEventListener('click',async (e)=>{
+     status.screenStream = await navigator.mediaDevices.getDisplayMedia()
+        status.uids.forEach(u => peer.call(u,status.screenStream));
+        const video = document.createElement('video');
+        onClickFullScreen(video)
+        addVideoStream(video, status.screenStream);
+        shareScreen.classList.add('activeBtn');
+    
+})
+
+const onClickFullScreen = (video)=>{
+    video.classList.add('video-grid-video');
+    video.onclick = function(e){
+        video.classList.toggle('fullscreen')
+        videoGrid.classList.toggle('fullscreen-grid')
+    }
+}

@@ -55,7 +55,7 @@ body{
     justify-content: center;
     flex-wrap: wrap;
 }
-.video-grid video{
+.video-grid-video{
     max-width: 300px;
     max-height: 300px;
     margin: 10px;
@@ -73,7 +73,7 @@ body{
 .main__message_container input{
 width: 80%;
 height: 100%;
-font-size: 1.2rem;
+font-size: 1.2em;
 border: none;
 padding: 5px;
 
@@ -84,7 +84,7 @@ padding: 5px;
     background-color: #139;
     color: #fff;
     font-weight: 900;
-    font-size: 1rem;
+    font-size: rem;
 }
 .main__chat_window{
     height: calc(100% - 50px);
@@ -93,7 +93,7 @@ padding: 5px;
     position: absolute;
     top: 50px;
     left: 0;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 .message{
     width: fit-content  ;
@@ -133,6 +133,7 @@ padding: 5px;
 .options__button svg{
     width: 100%;
     height: 100%;
+    color: white;
 }
 .inviteButton{
     background-color: rgb(20, 23, 228);
@@ -140,16 +141,47 @@ padding: 5px;
 .activeBtn{
     background-color: rgb(17, 235, 64);
 }
-.fa-microphone-slash{
+.shown{
     display: block;
 }
-.activeBtn .fa-microphone-slash{
+.activeBtn .shown{
     display: none;
 }
 
-.fa-microphone{
+.hidden{
     display: none;
 }
-.activeBtn .fa-microphone{
+.activeBtn .hidden{
     display: block;
+}
+.fullscreen{
+    max-width: none;
+    max-height: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+.fullscreen-grid::after {
+    content: '';
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: black;
+    z-index: 10;
+}
+@media screen and (max-width:800px) {
+    body{
+        --header-height: 60px;
+    }
+    .options__button{
+        padding: 5px;
+    }
+    .main__right{
+        font-size: .75rem;
+    }
 }
