@@ -35,8 +35,8 @@
         }
         .title{
             color: white;
-            padding: 23px;
-            font-size: 3rem;
+            padding: 15px;
+            font-size: 1.5rem;
             font-weight: bolder;
             background: #39f
         }
@@ -52,12 +52,13 @@
         li + li {
             border-top: 1px solid #39f9;
         }
-        ul li a{
+        ul li a,
+        .games h3{
             color: #06e;
             display: block;
            font-size: .75rem;
             font-weight: bold;
-            padding: 20px 30px;
+            padding: 10px 15px;
             width: 100%;
             font-family: sans-serif;
             letter-spacing: 1px;
@@ -69,15 +70,19 @@
             grid-template-columns: 3fr 1fr 1fr;
             
         }
-        ul li a:hover{
+        ul li a:hover,
+        .games h3:hover,
+        .games:focus-within h3,
+        .games:hover h3{
             background: #3af;
             color: white;
-            font-size: 2rem;
+            font-size: 1rem;
         }
-        ul li a:active{
+        ul li a:active,
+        ul li h3:active{
             background: #3ff;
             color: white;
-            font-size: 1.25rem;
+            font-size: 1rem;
         }
         .downloads{
             display: none;
@@ -94,27 +99,62 @@
             border-left: 1px solid #09f9;
         }
         .downloads ul li a{
-                font-size: 1.2rem;
+                font-size: .8rem;
             }
         .downloads ul li a:hover{
-                font-size: 1.5rem;
+                font-size: 1.1rem;
             }
+        .games{
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .games h3{
+            z-index: 200;
+        }
+        .games_list{
+            overflow: hidden;
+            z-index: -2;
+            position: relative;
+            top: -100px;
+            height: 0;
+            transition: all .5s ease-in-out;
+        }
+        .games_list li{
+            background-color: #00538e;
+            border: none;
+        }
+        .games_list li a{
+            color: #e3f4ff;
+            font-size: .6rem;
+        }
+        .games:focus-within .games_list,
+        .games:active .games_list,
+        .games:hover .games_list{
+           height:  calc(5.4rem + 160px);
+           top: 0;
+        }
         @media(min-width:600px){
-            ul li a{
-                padding: 20px 15px;
+            ul li a,
+            .games h3{
+                padding: 10px 15px;
                 font-size: 1rem;
             }
             ul li a:active{
             font-size: 1.2rem;
         }
-            ul li a:hover{
+            ul li a:hover,
+            .games h3:hover,
+            .games:focus-within h3,
+            .games:hover h3{
             font-size: 1.5rem;
+        }
+        
+        .games_list li a:hover{
+            font-size: .8rem;
         }
         .downloads ul li a{
                 font-size: .9rem;
-            }
-            .title{
-                font-size: 3rem;
             }
             
         span {
@@ -127,6 +167,7 @@
                 margin: 2em auto;
             }
         }
+        
     </style>
     <body>
         <article class="main">
@@ -139,8 +180,21 @@
                     <li><a href="dithering/">Dithering Demo</a></li>
                     <li><a href="jpeg/">JPEG</a></li>
                     <li><a href="api/rtc/">videoChat</a></li>
+                    <li class="games">
+                        <h3>Games</h3>
+                        <ul class="games_list">
+                            <li><a href="games/candy_crush/">Candy Crush</a></li>
+                            <li><a href="games/connect_four/">Connect Four</a></li>
+                            <li><a href="games/frogger/">Frogger</a></li>
+                            <li><a href="games/memory_game/">Memory Game</a></li>
+                            <li><a href="games/snake/">Snake</a></li>
+                            <li><a href="games/space-invader/">Space Invader</a></li>
+                            <li><a href="games/tetris/">Tetris</a></li>
+                            <li><a href="games/whack-a-mole/">Whack a Mole</a></li>
+                        </ul>
+                    </li>
                     <li><a href="chato_1.0.0.apk">chato apk</a></li>
-                </ul>
+                    </ul>
             </div>
         </article>
         <article class="downloads" id="downloads">

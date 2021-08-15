@@ -1,0 +1,135 @@
+   *,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+@root{
+    
+} 
+
+body{
+    text-align: center;
+    padding: 3em 0;
+    background-color: azure;
+}
+
+.displayer{
+    background-color: beige;
+    border: 2px dashed green ;
+}
+
+button {
+    font-size: 20px;
+    padding: ;
+}
+
+.grid {
+    margin: 10px auto;
+    border: 1px solid;
+    display: flex;
+    flex-wrap: wrap;
+    height: 402px;
+    width: 302px;
+}
+
+.next-grid {
+
+    margin: 10px auto;
+    border: 1px solid;
+
+    display: flex;
+    flex-wrap: wrap;
+    height: 82px;
+    width: 82px;
+}
+.next-grid div {
+    width: 20px;
+    height: 20px;
+    
+}
+.square {
+    
+    width: 20px;
+    height: 20px;
+    background-color: yellow;
+}
+
+@media(max-width:800px) {
+    .displayer{
+        display: flex;
+        justify-content: space-around;
+    }
+    .stats{
+        display: flex;
+        flex-direction: column;
+        width: 100px;
+        justify-content: space-around;
+        font-size: 1.5em;
+        
+    }
+    .grid{
+        width: 152px;
+        height: 202px;
+    }
+    .square{
+        width: 10px;
+        height: 10px;
+    }
+    .next-grid div {
+    width: 20px;
+    height: 20px;
+    }
+    .next-grid {
+    width: 82px;
+    height: 82px;
+    }
+    
+}
+
+.block {
+    border: 1px outset;
+    background-color: blue;
+}
+.block2 {
+    background-color: purple;
+}
+.block3 {
+    background-color: green;
+}
+
+.controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    max-height: 300px;
+    max-width: 300px;
+    margin: 20px auto;
+    background-color: gainsboro;
+    padding: 10px;
+    border-radius: 80px;
+}
+
+.controls button{
+    background-color: gray;
+    padding: 7px 10px;
+    border-radius: 80px;
+}
+
+.up {
+    grid-column: 2/3;
+    grid-row: 1/2;
+}
+.left{
+    grid-column: 1/2;
+    grid-row: 2/3
+}
+.right{
+    grid-column: 3/4;
+    grid-row: 2/3
+}
+.down {
+    grid-column: 2/3;
+    grid-row: 3/4;
+}

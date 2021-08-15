@@ -1,0 +1,121 @@
+   *,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+@root{
+    
+} 
+
+body{
+    text-align: center;
+    padding: 3em 0;
+    background-color: azure;
+}
+
+button {
+    font-size: 20px;
+    padding: 5px;
+    margin: 1px 10px;
+    background: none;
+    border-width: 1px;
+    border-color: aqua ;
+    color: darkmagenta;
+    font-family: fantasy;
+}
+
+h3{
+    font-weight: 900;
+    font-family: cursive;
+    padding: 2px;
+    margin: 2px;
+}
+span {
+    font-weight: 200;
+    font-size: 0.8em;
+    font-family: monospace;
+    
+}
+
+.grid {
+    margin: 10px auto;
+    border: 1px solid;
+    display: flex;
+    flex-wrap: wrap;
+    height: 272px;
+    width: 272px;
+    background-color: ghostwhite;
+}
+
+.grid div {
+    width: 10px;
+    height: 10px;
+}
+
+.ending-block{
+    background-color: palevioletred;
+}
+.starting-block{
+    background-color: skyblue;
+}
+
+.c1{
+    background-color: black;
+}
+.c2 , .c3{
+    background-color: gray;
+}
+.l1 , .l2 , .l3{
+    background-color: brown;
+}
+.l4 , .l5{
+    background-color: lightblue;
+}
+.frog{
+    background-color: green;
+
+}
+
+
+
+
+.controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    max-height: 300px;
+    max-width: 300px;
+    margin: 20px auto;
+    background-color: antiquewhite;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.controls button {
+    background-color: dimgray;
+    border-width: 3px ;
+    
+    border-color: silver;
+    border-radius: 9px;
+    color: aliceblue;
+    margin: 1px;
+}
+
+.up {
+    grid-column: 2/3;
+    grid-row: 1/2;
+}
+.left{
+    grid-column: 1/2;
+    grid-row: 2/3
+}
+.right{
+    grid-column: 3/4;
+    grid-row: 2/3
+}
+.down {
+    grid-column: 2/3;
+    grid-row: 3/4;
+}

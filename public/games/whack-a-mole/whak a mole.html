@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <style>
+           *,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+@root{
+    
+} 
+body{
+    text-align: center;
+    background: #f4e6f1;
+}
+button{
+    background: #c1d8b9;
+    padding: 10px 30px;
+    margin: 20px;
+}
+
+.square {
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    background: white;
+}
+
+.grid {
+    margin: 0  auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    width: 618px;
+    height: 618px;
+    min-width: 200px;
+}
+
+.mole {
+    background-color: aqua;
+   background-image: url('https://image.flaticon.com/icons/svg/235/235368.svg');
+/*    background-image: url(mole.png);*/
+   background-size: cover;
+}
+
+.board {
+    margin: auto 200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around
+    
+}
+
+@media(max-width:600px){
+    .square{
+    width: 100px;
+    height: 100px;
+    margin: 2px;
+    }
+    .grid{
+    width: 318px;
+    height: 318px; 
+    }
+    .board {
+        margin: auto;
+    }
+}
+    </style>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <title>Whack a mole</title>
+        
+    </head>
+    <body>
+        
+            <h1> Whack a mole!</h1>
+        <div class="board">
+            <h2>Your score:</h2>
+            <h2 id="score">0</h2>
+
+            <h2> Seconds left:</h2>
+            <h2 id="time-left">60</h2>
+        </div>
+        <div class="grid">
+            <div class="square" id="1"></div>
+            <div class="square" id="2"></div>
+            <div class="square" id="3"></div>
+            <div class="square" id="4"></div>
+            <div class="square" id="5"></div>
+            <div class="square" id="6"></div>
+            <div class="square" id="7"></div>
+            <div class="square" id="8"></div>
+            <div class="square" id="9"></div>
+        </div>
+        
+        <div>
+            <button onclick="setDiffecality(0)" >EASY</button>
+            <button onclick="setDiffecality(1)" >MEDIUM</button>
+            <button onclick="setDiffecality(2)" >HARD</button>
+        </div>
+        <audio id="so" src="https://www.partnersinrhyme.com/files/sounds1/MP3/human/fight/slap.mp3"
+               preload="auto" controls="none" style="display: none;"></audio>
+      <script >
+    //document.body.addEventListener('DOMContentLoaded', () => { 
+        'use strict';
+
+function sound() {
+    'use strict';
+    this.sound = document.getElementById('so');
+    
+    this.play = function(){
+        this.sound.play()
+    }
+    this.stop = function() {
+        this.sound.stop();
+    }
+    
+}
+
+const square = document.querySelectorAll('.square')
+const mole = document.querySelectorAll('.mole')
+const timeLeft = document.querySelector('#time-left')
+let score = document.querySelector('#score')
+
+let hitPosition = 2
+let result = 0
+let currentTime = timeLeft.textContent
+let timer = 1000;
+let timerId1 = null
+let timerId2 = null
+const hit = new sound() 
+
+
+function randomSquare(){
+    square.forEach(className => {
+        className.classList.remove('mole')
+    })
+    let randomPosition = square[Math.floor(Math.random() * 9)]
+    do {
+    randomPosition = square[Math.floor(Math.random() * 9)]
+    }while(randomPosition.id === hitPosition)
+        
+    randomPosition.classList.add('mole')
+    hitPosition = randomPosition.id
+}
+
+square.forEach(id => {
+    id.addEventListener('mousedown', () => {
+        if (id.id === hitPosition && currentTime !== 0){
+            result+= 8
+            score.textContent = result
+            hit.play()
+            setTimeout(() => hit.stop(),400);
+    
+        }
+    })
+})
+
+function moveMole() {
+    
+    //console.log(square)
+    timerId2 = setInterval(randomSquare, timer)
+}
+
+function countDown() {
+    currentTime--
+    timeLeft.textContent = currentTime
+    
+    if (currentTime === 0){
+        clearInterval(timerId1)
+        clearInterval(timerId2)
+        alert('GAME OVER! your final score is '+ result)
+    }
+}
+
+timerId1 = setInterval(countDown,1000)
+moveMole()
+
+
+function setDiffecality(i){
+    switch(i){
+        case 0 :
+            timer = 1200
+            break;
+        case 1 :
+            timer = 800
+            break;
+        case 2 :
+            timer = 400
+            break;
+        default:
+            timer = 1000
+            break;
+    }
+    clearInterval(timerId1)
+    clearInterval(timerId2)
+    timerId1 = setInterval(countDown,1000)
+    timerId2 = setInterval(randomSquare,timer)
+    result = 0
+    currentTime = 60
+    score.textContent = result
+}
+       // });
+
+        </script>
+    </body> 
+</html>

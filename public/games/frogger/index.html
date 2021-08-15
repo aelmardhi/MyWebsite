@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <title>Frogger</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="app.js" charset="utf-8"></script>
+    </head>
+    <body>
+        
+        <button class="start">Start / Restart </button> 
+        <h3 class="score">Status: <span> Press Start to Start The Game</span></h3>
+        <h3 class="time-left">time Left: <span>180</span></h3>
+        
+        <div class="grid">
+            
+        </div>
+        
+        <div class="controls">
+            <button class="up" id="up">▲</button>
+            <button class="left" id="left">◄</button>
+            <button class="right" id="right">►</button>
+            <button class="down" id="down">▼</button>
+        </div>
+        
+        <div>
+            <button onclick="setDefecalty(0)">EASY</button>
+            <button onclick="setDefecalty(1)">MEDIUM</button>
+            <button onclick="setDefecalty(2)">HARD</button>
+        </div>
+    </body> 
+</html>

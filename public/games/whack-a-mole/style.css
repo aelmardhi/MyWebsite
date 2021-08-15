@@ -1,0 +1,66 @@
+   *,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+@root{
+    
+} 
+body{
+    text-align: center;
+    background: #f4e6f1;
+}
+button{
+    background: #c1d8b9;
+    padding: 10px 30px;
+    margin: 20px;
+}
+
+.square {
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    background: white;
+}
+
+.grid {
+    margin: 0  auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    width: 618px;
+    height: 618px;
+    min-width: 200px;
+}
+
+.mole {
+    background-color: aqua;
+   background-image: url('https://image.flaticon.com/icons/svg/394/394790.sv9');
+    background-image: url(mole.png);
+   background-size: cover;
+}
+
+.board {
+    margin: auto 200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around
+    
+}
+
+@media(max-width:600px){
+    .square{
+    width: 100px;
+    height: 70px;
+    margin: 2px;
+    }
+    .grid{
+    width: 318px;
+    height: 318px; 
+    }
+    .board {
+        margin: auto;
+    }
+}

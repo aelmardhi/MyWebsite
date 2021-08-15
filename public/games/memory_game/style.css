@@ -1,0 +1,59 @@
+body{
+    background: #d6dfea;
+}
+
+.grid {
+    padding: 10px;
+    background-image: radial-gradient(#13c635,#028e1d);
+    box-shadow: 0.25em .25em .75em rgba(0,0,0,.25),0.125em .125em .25em rgba(0,0,0,.15);
+    border: 2px solid #0e4a1a;
+    border-radius: 20px;
+    margin:  0 auto ;
+    display: grid;
+    grid-template-columns: repeat(4,1fr) ;
+    grid-template-rows: repeat(auto-fit ,(minmax(100px,1fr)));
+    grid-gap: 20px;
+    max-height: 500px;
+    max-width: 500px;
+}
+
+.card {
+    border: 1px ridge black;
+    border-radius: 10px;
+    box-shadow: 0.25em .25em .75em rgba(0,0,0,.25),0.125em .125em .25em rgba(0,0,0,.15);
+}
+
+.result{
+    text-align: center;
+    font-size: 3em;
+    color: #002d77;
+    background: #e0dfcd;
+    border: solid;
+    border-style: groove;
+    margin-bottom: 0;
+}
+
+#result , #tries{
+    color: #508df0;
+    
+}
+
+#message{
+    margin: .5em;
+    text-align: center;
+    font-size: 2em;
+}
+
+.reload{
+    display: none;
+}
+
+.won .card {
+    display: none;
+}
+
+.won .reload {
+    display: block;
+    grid-column: 2/4;
+    margin: 200px 50px;
+}
