@@ -98,11 +98,11 @@
   <button class="rec" id="rec">REC</button>
   <button class="stop" id="stop">STOP</button>
   </div>
-  <script>
+  <script defer>
     var rec = document.getElementById("rec");
     var stop = document.getElementById("stop");
     var notAvailable = document.getElementById("notAvailable");
-    if(!navigator || !navigator.mediaDevices || navigator.mediaDevices.getDisplayMedia || !MediaRecorder)
+    if(!navigator || !navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia || !MediaRecorder)
       document.body.classList.add('not_available')
     // Optional frames per second argument
     rec.onclick = () =>
