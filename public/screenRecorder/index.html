@@ -73,6 +73,17 @@
             box-shadow: 0 0 50px #f00f;
           }
         }
+        .not_available_alert{
+          color: red;
+          font-size: 25px;
+          display: none;
+        }
+        .not_available .not_available_alert{
+          display: block;
+        }
+        .not_available button{
+          display: none;
+        }
       </style>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -83,13 +94,16 @@
 
 <body> <div class="center">
   <h1 class="title">SCREEN RECORDER</h1>
+  <h3 class="not_available_alert" id="notAvailable">Your Browser does not support screen recording </h3>
   <button class="rec" id="rec">REC</button>
   <button class="stop" id="stop">STOP</button>
   </div>
   <script>
     var rec = document.getElementById("rec");
     var stop = document.getElementById("stop");
-    
+    var notAvailable = document.getElementById("notAvailable");
+    if(!navigator || !navigator.mediaDevices || navigator.mediaDevices.getDisplayMedia || !MediaRecorder)
+      document.body.classList.add('not_available')
     // Optional frames per second argument
     rec.onclick = () =>
       navigator.mediaDevices.getDisplayMedia({
