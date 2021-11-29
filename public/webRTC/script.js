@@ -37,6 +37,9 @@ navigator.mediaDevices.getUserMedia({audio: true,video: true,})
             call.on("error", ()=> {
                 video.remove();
             });
+            stream.getVideoTracks()[0].addEventListener('ended', () => {
+                video.remove();
+            })
             status.calls[call.connectionId] = call;
         });
         socket.on("user-connected", (userId) => {
