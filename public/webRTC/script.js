@@ -42,18 +42,28 @@ navigator.mediaDevices.getUserMedia({audio: true,video: true,})
                 video.remove();
             });
             status.calls[call.connectionId] = call;
+            if(!status.uids[call.peer])status.uids.push(call.peer);
         });
         socket.on("user-connected", (userId) => {
             if(status.uids.some( i => i==userId)){
                 status.calls[userId] && status.calls[userId].close();
             }
-            status.uids.push(userId);
+            if(!status.uids[userId])status.uids.push(userId);
             connectToNewUser(userId, stream);
             if(status.screenStream)
                 connectToNewUser(userId, status.screenStream);
             });
 	socket.on("user-disconnected", (userId) => {
-	    peer.connections[userId] && peer.connections[userId][0] && peer.connections[userId][0].close();
+        if (peer.connections[userId] && peer.connections[userId].length){
+            for( let c in peer.connections[userId]){
+                c.close();
+                if(status.calls.hasOwnProperty(c.connectionId)){
+                    delete status.calls[c.connectionId];
+                }
+            }
+        if(status.uids[userId]) status.uids = status.uids.filter(u => u!= userId);
+        }
+	    //peer.connections[userId] && peer.connections[userId][0] && peer.connections[userId][0].close();
 	})
     });
     const connectToNewUser = (userId, stream) => {
@@ -72,7 +82,7 @@ navigator.mediaDevices.getUserMedia({audio: true,video: true,})
         call.on("error", ()=> {
             video.remove();
         });
-	status.calls[userId] = call;
+	status.calls[call.connectionId] = call;
     };
     peer.on("open", (id) => {
         status.id = id;
@@ -95,6 +105,7 @@ navigator.mediaDevices.getUserMedia({audio: true,video: true,})
     socket.on('close-call',( call)=>{
         if(status.calls.hasOwnProperty(call)){
             status.calls[call].close();
+            delete status.calls[call];
         }
     })
         
@@ -145,7 +156,7 @@ shareScreen.addEventListener('click',async (e)=>{
     screen_calls = [];
      status.screenStream = await navigator.mediaDevices.getDisplayMedia()
      for (let u in status.uids) {
-        let call = peer.call(u,status.screenStream) ;
+        let call = peer.connections.call(u,status.screenStream) ;
         screen_calls.push(call);
      }  
      const video = document.createElement('video');
@@ -157,8 +168,9 @@ shareScreen.addEventListener('click',async (e)=>{
             status.screenStream.getTracks().forEach(track => track.stop());
             video.remove();
             for (let c in screen_calls){
-                c.close();
-                socket.emit("close-call",c);
+                console.log("closing",c)
+                c.close();  
+                socket.emit("close-call",c.connectionId);
             }
         })
 })
