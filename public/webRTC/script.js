@@ -30,6 +30,10 @@ navigator.mediaDevices.getUserMedia({audio: true,video: true,})
             onClickFullScreen(video)
             call.on("stream", (userVideoStream) => {
                 addVideoStream(video, userVideoStream);
+
+                userVideoStream.getVideoTracks()[0].addEventListener('ended', () => {
+                    video.remove();
+                })
             });
             call.on("close", ()=> {
                 video.remove();
@@ -37,9 +41,6 @@ navigator.mediaDevices.getUserMedia({audio: true,video: true,})
             call.on("error", ()=> {
                 video.remove();
             });
-            stream.getVideoTracks()[0].addEventListener('ended', () => {
-                video.remove();
-            })
             status.calls[call.connectionId] = call;
         });
         socket.on("user-connected", (userId) => {
