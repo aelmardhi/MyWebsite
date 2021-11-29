@@ -40,6 +40,9 @@ navigator.mediaDevices.getUserMedia({audio: true,video: true,})
             status.calls[call.connectionId] = call;
         });
         socket.on("user-connected", (userId) => {
+            if(status.uids.some( i => i==userid)){
+                status.calls[userId] && status.calls[userId].close();
+            }
             status.uids.push(userId);
             connectToNewUser(userId, stream);
             if(status.screenStream)
