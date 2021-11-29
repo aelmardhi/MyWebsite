@@ -2,7 +2,7 @@ let status = {
     id:'',
     uids: new Array(),
     screenStream: null,
-    calls = {}
+    calls : {}
 };
 const socket = io("/");
 const sendBtn = document.getElementById("chat_message_send");
