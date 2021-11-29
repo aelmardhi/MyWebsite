@@ -55,7 +55,7 @@ navigator.mediaDevices.getUserMedia({audio: true,video: true,})
             });
 	socket.on("user-disconnected", (userId) => {
         if (peer.connections[userId] && peer.connections[userId].length){
-            for( let c in peer.connections[userId]){
+            for( let c of peer.connections[userId]){
                 c.close();
                 if(status.calls.hasOwnProperty(c.connectionId)){
                     delete status.calls[c.connectionId];
@@ -155,7 +155,7 @@ stopVideo.addEventListener('click',(e)=>{
 shareScreen.addEventListener('click',async (e)=>{
     screen_calls = [];
      status.screenStream = await navigator.mediaDevices.getDisplayMedia()
-     for (let u in status.uids) {
+     for (let u of status.uids) {
         let call = peer.connections.call(u,status.screenStream) ;
         screen_calls.push(call);
      }  
