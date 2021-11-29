@@ -119,13 +119,20 @@ stopVideo.addEventListener('click',(e)=>{
     stopVideo.classList.toggle('activeBtn');
 })
 shareScreen.addEventListener('click',async (e)=>{
+    screen_calls = [];
      status.screenStream = await navigator.mediaDevices.getDisplayMedia()
-        status.uids.forEach(u => peer.call(u,status.screenStream));
+        status.uids.forEach(u => {screen_calls.push( peer.call(u,status.screenStream))});
         const video = document.createElement('video');
         onClickFullScreen(video)
         addVideoStream(video, status.screenStream);
         shareScreen.classList.add('activeBtn');
-    
+        status.screenStream.getVideoTracks()[0].addEventListener('ended', () => {
+            shareScreen.classList.remove('activeBtn');
+            status.screenStream.getTracks().forEach(track => track.stop());
+            video.remove();
+            screen_calls.forEach(c => c.close())
+
+        })
 })
 
 const onClickFullScreen = (video)=>{
@@ -135,3 +142,8 @@ const onClickFullScreen = (video)=>{
         videoGrid.classList.toggle('fullscreen-grid')
     }
 }
+
+window.onbeforeunload = function(){
+    status.calls.forEach(c => c.close())
+    return 'Are you sure you want to leave?';
+  };
