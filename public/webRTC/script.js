@@ -2,6 +2,7 @@ let status = {
     id:'',
     uids: new Array(),
     screenStream: null,
+    calls = {}
 };
 const socket = io("/");
 const sendBtn = document.getElementById("chat_message_send");
@@ -37,6 +38,9 @@ navigator.mediaDevices.getUserMedia({audio: true,video: true,})
             if(status.screenStream)
                 connectToNewUser(userId, status.screenStream);
             });
+	socket.on("user-disconnected", (userId) => {
+	    if(status.calls[userId]) status.calls[userId].close();
+	})
     });
     const connectToNewUser = (userId, stream) => {
         const call = peer.call(userId, stream);
@@ -48,6 +52,10 @@ navigator.mediaDevices.getUserMedia({audio: true,video: true,})
         call.on("stream", (userVideoStream) => {
             addVideoStream(video, userVideoStream);
         });
+        call.on("close", ()=> {
+            video.remove();
+        });
+	status.calls[userId] = call;
     };
     peer.on("open", (id) => {
         status.id = id;
