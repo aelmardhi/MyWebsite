@@ -91,7 +91,8 @@ router.post('/update',async (req,res)=>{
         const fl = __dirname+'/../public/downloads/'+fn;
         fs.access(fl,fs.constants.R_OK,err => { 
             if (err){
-                 fs.writeFile(fl,'',er => console.log(req.body,er));
+                 fs.writeFile(fl,'',er => {if (er) console.log(req.body,er);
+                    else
                  ytdl(req.body.message.text,{"quality": 18})
                 .on('end',()=>{
                     res.json({
@@ -101,6 +102,7 @@ router.post('/update',async (req,res)=>{
                     });
                 })
                 .pipe(fs.createWriteStream(fl));
+            })
             } else {
                 res.json({
                     'method':'sendVideo',
