@@ -53,7 +53,7 @@ navigator.mediaDevices.getUserMedia({audio: true,video: true,})
                 connectToNewUser(userId, status.screenStream);
             });
 	socket.on("user-disconnected", (userId) => {
-	    if(status.calls[userId]) status.calls[userId].close();
+	    peer.connections[userId] && peer.connections[userId][0] && peer.connections[userId][0].close();
 	})
     });
     const connectToNewUser = (userId, stream) => {
