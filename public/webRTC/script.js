@@ -31,6 +31,9 @@ navigator.mediaDevices.getUserMedia({audio: true,video: true,})
             call.on("stream", (userVideoStream) => {
                 addVideoStream(video, userVideoStream);
             });
+            call.on("close", ()=> {
+                video.remove();
+            });
         });
         socket.on("user-connected", (userId) => {
             status.uids.push(userId);
