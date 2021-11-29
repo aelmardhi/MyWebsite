@@ -156,7 +156,7 @@ shareScreen.addEventListener('click',async (e)=>{
     screen_calls = [];
      status.screenStream = await navigator.mediaDevices.getDisplayMedia()
      for (let u of status.uids) {
-        let call = peer.connections.call(u,status.screenStream) ;
+        let call = peer.call(u,status.screenStream) ;
         screen_calls.push(call);
      }  
      const video = document.createElement('video');
