@@ -89,17 +89,26 @@ router.post('/update',async (req,res)=>{
         const fn =  info.videoDetails.videoId+'.'+'mp4';
     //        const fn = (req.body.title.replace(/\//gi,'').replace(/\\/gi,'').replace(/\'/gi,'').replace(/\"/gi,'')) + '.'+req.body.container;
         const fl = __dirname+'/../public/downloads/'+fn;
-        await fs.writeFile(fl,'',er => console.log(req.body,er));
-        await ytdl(req.body.message.text,{"quality": 18})
-        .on('end',()=>{
-            res.json({
-                'method':'sendVideo',
-                'chat_id':req.body.message.chat.id,
-                'video':'https://dardasha.herokuapp.com/'+encodeURI('downloads/'+fn)
-            });
-          })
-      .pipe(fs.createWriteStream(fl));
-        
+        fs.access(fl,fs.constants.R_OK,err => { 
+            if (err){
+                await fs.writeFile(fl,'',er => console.log(req.body,er));
+                await ytdl(req.body.message.text,{"quality": 18})
+                .on('end',()=>{
+                    res.json({
+                        'method':'sendVideo',
+                        'chat_id':req.body.message.chat.id,
+                        'video':'https://dardasha.herokuapp.com/'+encodeURI('downloads/'+fn)
+                    });
+                })
+                .pipe(fs.createWriteStream(fl));
+            } else {
+                res.json({
+                    'method':'sendVideo',
+                    'chat_id':req.body.message.chat.id,
+                    'video':'https://dardasha.herokuapp.com/'+encodeURI('downloads/'+fn)
+                });
+            }
+        })
         }catch(err){
             console.log(req.body,err);
             res.json({
