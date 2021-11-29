@@ -37,6 +37,7 @@ navigator.mediaDevices.getUserMedia({audio: true,video: true,})
             call.on("error", ()=> {
                 video.remove();
             });
+            status.calls[call.connectionId] = call;
         });
         socket.on("user-connected", (userId) => {
             status.uids.push(userId);
