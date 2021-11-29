@@ -34,6 +34,9 @@ navigator.mediaDevices.getUserMedia({audio: true,video: true,})
             call.on("close", ()=> {
                 video.remove();
             });
+            call.on("error", ()=> {
+                video.remove();
+            });
         });
         socket.on("user-connected", (userId) => {
             status.uids.push(userId);
@@ -56,6 +59,9 @@ navigator.mediaDevices.getUserMedia({audio: true,video: true,})
             addVideoStream(video, userVideoStream);
         });
         call.on("close", ()=> {
+            video.remove();
+        });
+        call.on("error", ()=> {
             video.remove();
         });
 	status.calls[userId] = call;
@@ -148,5 +154,6 @@ const onClickFullScreen = (video)=>{
 
 window.onbeforeunload = function(){
     status.calls.forEach(c => c.close())
+    socket.emit('disconnect')
     return 'Are you sure you want to leave?';
   };
