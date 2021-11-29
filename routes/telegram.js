@@ -91,8 +91,8 @@ router.post('/update',async (req,res)=>{
         const fl = __dirname+'/../public/downloads/'+fn;
         fs.access(fl,fs.constants.R_OK,err => { 
             if (err){
-                await fs.writeFile(fl,'',er => console.log(req.body,er));
-                await ytdl(req.body.message.text,{"quality": 18})
+                 fs.writeFile(fl,'',er => console.log(req.body,er));
+                 ytdl(req.body.message.text,{"quality": 18})
                 .on('end',()=>{
                     res.json({
                         'method':'sendVideo',
