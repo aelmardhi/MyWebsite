@@ -85,13 +85,19 @@ navigator.mediaDevices.getUserMedia({audio: true,video: true,})
             videoGrid.append(video);
         });
     };
-socket.on('msg',( msg)=>{
-    let message = document.createElement('div');
-    message.classList.add('message' ,'others_message');
-    message.innerText = msg;
-    messages.appendChild(message);
-})
+    socket.on('msg',( msg)=>{
+        let message = document.createElement('div');
+        message.classList.add('message' ,'others_message');
+        message.innerText = msg;
+        messages.appendChild(message);
+    })
 
+    socket.on('close-call',( call)=>{
+        if(status.calls.hasOwnProperty(call)){
+            status.calls[call].close();
+        }
+    })
+        
 sendBtn.addEventListener('click',handleMessage);
 //msgInput.addEventListener('input',handleMessage);
 function handleMessage (e){
@@ -138,8 +144,11 @@ stopVideo.addEventListener('click',(e)=>{
 shareScreen.addEventListener('click',async (e)=>{
     screen_calls = [];
      status.screenStream = await navigator.mediaDevices.getDisplayMedia()
-        status.uids.forEach(u => {screen_calls.push( peer.call(u,status.screenStream))});
-        const video = document.createElement('video');
+     for (let u in status.uids) {
+        let call = peer.call(u,status.screenStream) ;
+        screen_calls.push(call);
+     }  
+     const video = document.createElement('video');
         onClickFullScreen(video)
         addVideoStream(video, status.screenStream);
         shareScreen.classList.add('activeBtn');
@@ -147,8 +156,10 @@ shareScreen.addEventListener('click',async (e)=>{
             shareScreen.classList.remove('activeBtn');
             status.screenStream.getTracks().forEach(track => track.stop());
             video.remove();
-            screen_calls.forEach(c => c.close())
-
+            for (let c in screen_calls){
+                c.close();
+                socket.emit("close-call",c);
+            }
         })
 })
 

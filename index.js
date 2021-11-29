@@ -92,6 +92,10 @@ io.on("connection", (socket) => {
 
     socket.rooms.forEach(r => socket.to(r).emit('msg',msg));
   })
+  socket.on('close-call',(msg)=>{
+
+    socket.rooms.forEach(r => socket.to(r).emit('close-call',msg));
+  })
 });
 io.on('log',(id, msg)=>{
   io.broadcast(msg);
