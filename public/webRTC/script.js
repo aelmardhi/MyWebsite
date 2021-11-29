@@ -167,7 +167,7 @@ shareScreen.addEventListener('click',async (e)=>{
             shareScreen.classList.remove('activeBtn');
             status.screenStream.getTracks().forEach(track => track.stop());
             video.remove();
-            for (let c in screen_calls){
+            for (let c of screen_calls){
                 console.log("closing",c)
                 c.close();  
                 socket.emit("close-call",c.connectionId);
