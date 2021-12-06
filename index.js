@@ -9,10 +9,8 @@ const bodyParser = require('body-parser');
 
 
 
-
+const html404 = fs.readFileSync('404.html').toString();
 const { ExpressPeerServer } = require("peer");
-
-
 
 const authRoute = require('./routes/auth');
 const messageRoute = require('./routes/messages');
@@ -79,6 +77,12 @@ app.use('/api/upload', uploadRoute);
 app.use('/api/telegram/'+process.env.TELEGRAM_TOKEN,telegramRoute);
 app.use('/api/rtc',rtcRoute);
 app.use("/peerjs", peerServer);
+// if no page match
+app.get('*', (req,res) => {
+  res.status(404).header({
+    accept: 'text/html',
+  }).send(html404?html404:'404:not Found');
+})
 
 io.on("connection", (socket) => {
   socket.on("join-room", (roomId, userId) => {
