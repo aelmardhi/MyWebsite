@@ -7,9 +7,12 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-
-
-const html404 = fs.readFileSync('404.html').toString();
+var html404;
+try{
+html404 = fs.readFileSync('404.html').toString();
+} catch(e){
+html404 = '404: not found';
+}
 const { ExpressPeerServer } = require("peer");
 
 const authRoute = require('./routes/auth');
