@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<meta name="description" content="This is aelmardhi's personal site, it is used to run small projects">
+        <title>Home</title>
+    </head >
+    <style>
+        *, *:after, *:before{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            width: 100vw;
+            height: 100%;
+            justify-content: space-around;
+            display: flex;
+            flex-direction: column;
+        }
+        main{
+            display: flex;
+            flex-direction: row;
+            width: 80%;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .main{
+            border-left: none;
+            border-top-left-radius:0 ;
+            border-bottom-left-radius: 0;
+            width: 200px;
+            height: max-content;
+        }
+         article{
+             width: 80%;
+             margin: 0 auto;
+             border-radius: 1em;
+             overflow: hidden;
+             text-align: center;
+             box-shadow: 2px 2px 10px #0003,
+                 15px 15px 30px  #39f5;
+            border: 2px solid #39f9;
+        }
+        h2{
+            text-align: center;
+            color: #09f9;
+            font-family: monospace;
+        }
+        .title{
+            color: white;
+            padding: 15px;
+            font-size: 1.8rem;
+            font-weight: bolder;
+            background: #39f
+        }
+        .data{
+            width: 100%;
+             background: #e1ecfc;
+             padding: 20px auto;
+            
+        }
+        ul li{
+            list-style: none;
+        }
+        li + li {
+            border-top: 1px solid #39f9;
+        }
+        ul li a,
+        .games h3{
+            color: #06e;
+            display: block;
+           font-size: 1rem;
+            font-weight: bold;
+            padding: 10px 15px;
+            width: 100%;
+            font-family: sans-serif;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: all .3s ease;
+        }
+        ul li a:hover{
+            background: #3af;
+            color: white;
+        }
+        ul li a:active,
+        ul li h3:active{
+            background: #3ff;
+            color: white;
+        }
+        .downloads{
+            height: 100%;
+            border-bottom-right-radius: 0;
+            border-top-right-radius: 0;
+            border-bottom-left-radius: 0;
+            width: 100%;
+        }
+        progress{
+            width: 100%;
+        }
+        .downloads .title{
+            background: linear-gradient(90deg,#06e 20%, #5af 70%, #39f 100%);
+        }
+        span {
+            margin: 0;
+            overflow: hidden;
+            /* text-overflow: ellipsis; */
+        }
+        .downloads ul{
+            max-height: 90vh;
+            height: 100%;
+            padding: 15px;
+            background: #06e;
+            box-shadow: inset 0 0 8px #0003 , inset 0 0 15px #0001;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px ,1fr));
+        }
+        .downloads ul li {
+            position: relative;
+            margin: 5px;
+            
+        }
+        .downloads ul li a{
+            display: flex;
+            flex-direction: column;
+                font-size: .8rem;
+            padding: 0;
+            background-color: white;
+            border: 1px solid #06e;
+        }
+        .downloads ul li a:hover{
+            box-shadow: 0 0 6px #0005, 0 0 12px #0003;
+        }
+        .downloads ul li a span{
+            background: linear-gradient(45deg ,#06e 50%, #fff 70%);
+            color: white;
+            padding-left: 10px;;
+            text-align: left;
+        }
+        
+        .downloads ul li a:hover span{
+            background: linear-gradient(45deg ,#39f 50%, #fff 70%);
+        }
+        .downloads ul li .download_link{
+            position: absolute;
+            border: none;
+            font-size: 1em;
+            bottom: 5px;
+            right: 1px;
+            color: #39f;
+            width: max-content;
+            padding:  5px .5em;
+            background-color: white;
+        }
+        .downloads ul li .download_link:hover{
+            background-color: #39f;
+            color: white;
+        }
+        .downloads ul li a span:nth-child(1){
+            color: #06e;
+            background: white;
+                height: 50px;
+                font-size: 1.6rem;
+                display: flex;
+                align-items: center;
+                justify-content: start;
+                font-weight: normal;
+            }
+        .downloads ul li a:hover span:nth-child(1){
+            background-color: #3af;
+            color: white;
+        }
+        .games{
+            border-top-left-radius: 0;
+            display: flex;
+            flex-direction: row;
+        }
+        
+        .games h3{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 200px;
+            background: linear-gradient(90deg,#06e 20%, #3af 100%);
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 900;
+        }
+        .games_list{
+            width: 100%;
+            box-shadow: inset 0 0 8px #0005 , inset 0 0 15px #0003;
+            display: flex;
+            flex-direction: row;
+            overflow-y: hidden;
+            overflow-x: scroll;
+        }
+        .games_list li{
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+        }
+        .games_list li a{
+            display: flex;
+            align-items: center;
+        }
+        body > h2{
+            margin: 1rem;
+        }
+        
+        @media(max-width:600px){
+            article, main{
+                width: 100%;
+            }
+            .title{
+                font-size: 1rem;
+            }
+            .games h3{
+                font-size: 1rem;
+                width: 100px;
+            }
+            ul li a{
+                font-size: .75rem;
+            }
+            .downloads ul{
+                padding: 5px;
+                grid-template-columns: repeat(auto-fit, minmax(200px ,1fr));
+
+            }
+            .downloads ul li .download_link{
+                font-size: .6rem;
+                padding: 5px 5px;
+            }
+            .downloads ul li a span{
+                font-size: .7rem;
+            }
+            .downloads ul li a span:nth-child(1){
+                font-size: .8rem;
+            }
+        }
+        
+    </style>
+    <body>
+        <main>
+        <article class="downloads" id="downloads">
+            <div class="title">Downloads</div>
+            <div class="data">
+                <ul id="downloads-list"><progress></progress></ul>
+            </div>
+        </article>
+        <article class="main">
+            <div class="title">Main Routes</div>
+            <div class="data">
+                <ul>
+                    <li><a href="download.html">Http Downloader</a></li>
+                    <li><a href="upload.html">File Uploader</a></li>
+                    <li><a href="ytdl/">Youtube Downloader</a></li>
+                    <li><a href="dithering/">Dithering Demo</a></li>
+                    <li><a href="jpeg/">JPEG</a></li>
+                    <li><a href="screenRecorder/">Screen Recorder</a></li>
+                    <li><a href="api/rtc/">videoChat</a></li>
+                    <li><a href="chato_1.0.0.apk">chato apk</a></li>
+                    </ul>
+            </div>
+        </article>
+        </main>
+        <article class="games">
+            <h3>Games</h3>
+            <ul class="games_list">
+                <li><a href="games/brick-breaker/">Brick Breaker</a></li>
+                <li><a href="games/candy_crush/">Candy Crush</a></li>
+                <li><a href="games/connect_four/">Connect Four</a></li>
+                <li><a href="games/frogger/">Frogger</a></li>
+                <li><a href="games/globe/">Globe</a></li>
+                <li><a href="games/memory_game/">Memory Game</a></li>
+                <li><a href="games/snake/">Snake</a></li>
+                <li><a href="games/space-invader/">Space Invader</a></li>
+                <li><a href="games/stack/">Stack</a></li>
+                <li><a href="games/tetris/">Tetris</a></li>
+                <li><a href="games/whack-a-mole/">Whack a Mole</a></li>
+            </ul>
+        </article>
+        
+        <h2>aelmardhi © 2020</h2>
+    </body>
+    <script>
+        const host = 'https://dardasha.herokuapp.com';
+        document.addEventListener('DOMContentLoaded',function(){
+            const list = document.getElementById('downloads-list');
+            const downloads = document.getElementById('downloads');
+            fetch(host+'/api/download/files').then(r => r.json()).then(res => {
+                    downloads.classList.add('showDownloads');
+                    
+                    list.innerHTML = res.map(i =>{ 
+                        let t = i.modified;
+                        let s = (i.size > 1024)?((i.size > 1024 * 1024)? (i.size / 1024 /1024).toFixed(2) + ' MB' : (i.size / 1024).toFixed(2) + ' KB') : i.size + ' B'   ;
+                        
+                        return'<li><a href="./downloads/'+encodeURI(i.name)+'"><span>'+i.name+'</span><span>'+t+'</span><span>'+s+'</span></a><a  class="download_link" href="./downloads/'+encodeURI(i.name)+'" download="'+encodeURI(i.name)+'">DOWNLOAD</a></li>'}).join('');
+                 }).catch(err => console.log('fetch'+err+err.data));
+
+        })
+    </script>
+</html>
