@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body{
+      height: 100vh;
+      --width : 480px;
+      --height : calc(270px + 50px) ;
+    }
+    canvas{
+      height: 100%;
+      width: 100%;
+      display: block;
+    }
+    input {
+      height: 30px;
+    }
+    .controls{
+      display: block;
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      width: calc(50vw - 10px);
+      height: var(--height);
+      background-color: rgb(241, 240, 138);
+      transition: transform .3s ease ;
+      transform: translateY(100%);
+      box-shadow: 0 0 5px #0003;
+    }
+    .showControls .controls{
+      transform: translateY(0%);
+    }
+    .controls form{
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      flex-direction: column;
+      padding: 0 5px;
+    }
+    .buttons{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
+    }
+    .btn{
+      width: 100%;
+      padding: 10px 5px;
+      background-color: #f66;
+      border: none;
+    }
+    .showAdd .addBtn,.showMul .mulBtn,.showFlt .fltBtn{
+      background-color: rgb(235, 232, 67);
+    }
+    .add{
+      display: none;
+    }
+    .mul{
+      display: none;
+    }
+    .flt{
+      display: none;
+    }
+    .showAdd .add{
+      display: block;
+    }
+    .showMul .mul{
+      display: block;
+    }
+    .showFlt .flt{
+      display: block;
+    }
+  </style>
+  <title>Filter Demo</title>
+</head>
+<body class="showAdd">
+  <input type="file" onchange="draw()" accept="image/*">
+  <canvas id="canvas" width="1920" height="1080"></canvas>
+  <div class="controls">
+    <form id="form">
+      <div class="buttons">
+      <button id="fltBtn" class="fltBtn btn">Filter</button>
+      <button id="addBtn" class="addBtn btn">ADD</button>
+      <button id="mulBtn" class="mulBtn btn">Multiply</button>
+      </div>
+      <label>Save At</label>
+    <select id="saveAt" name="saveAt" required>
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+      <option>6</option>
+      <option>7</option>
+      <option>8</option>
+      <option>9</option>
+      <option>10</option>
+    </select>
+    <div class="add" id="add">
+      (
+      <select id="add1" name="add1">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+      </select>
+      X<input type="number" id="add1Scale" value="0.5" step="0.01">
+      )+(
+      <select id="add2" name="add2">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+      </select>
+      X<input type="number" id="add2Scale" value="0.5" step="0.01">
+      )
+    </div>
+    <div class="mul" id="mul">
+      <select id="mul1" name="mul1">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+      </select>
+      x
+      <select id="mul2" name="mul2">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+      </select>
+    </div>
+    <div class="flt" id="flt">
+      <label>Image</label>
+      <select id="fltImg" name="fltImg">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+      </select>
+      <table>
+        <thead><td>Filter</td></thead>
+        <tbody>
+          <tr>
+            <td><input type="number" name="flt00" id="flt00" value="0" step="0.01"></td>
+            <td><input type="number" name="flt01" id="flt01" value="0" step="0.01"></td>
+            <td><input type="number" name="flt02" id="flt02" value="0" step="0.01"></td>
+          </tr>
+          <tr>
+            <td><input type="number" name="flt10" id="flt10" value="0" step="0.01"></td>
+            <td><input type="number" name="flt11" id="flt11" value="0" step="0.01"></td>
+            <td><input type="number" name="flt12" id="flt12" value="0" step="0.01"></td>
+          </tr>
+          <tr>
+            <td><input type="number" name="flt20" id="flt20" value="0" step="0.01"></td>
+            <td><input type="number" name="flt21" id="flt21" value="0" step="0.01"></td>
+            <td><input type="number" name="flt22" id="flt22" value="0" step="0.01"></td>
+          </tr>
+        </tbody>
+      </table>
+      X
+      <input type="number" name="fltScale" id="fltScale" value="1" step="0.0000000000001">
+      /
+      <input type="number" name="fltScale2" id="fltScale2" value="1" step="0.0000000000001">
+      +
+      <input type="number" name="fltGain" id="fltGain" value="0" step="0.01">
+    </div>
+    <input class="btn" type="submit">
+  </form>
+  </div>
+  <script src="script.js">
+  </script>
+</body>
+</html>	
