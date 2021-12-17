@@ -95,6 +95,8 @@ function draw(e) {
       newImageData = addImageData(newImageData,imageData,1,1)
       ctx.putImageData(newImageData, 1*width, 0);
 
+      
+      addNumbers()
       document.body.classList.add('showControls')
     })
   }
@@ -198,6 +200,12 @@ function draw(e) {
       data[i+3] = data[i+3] 
     }
     return imageData;
+  }
+  function addNumbers(){
+    ctx.font = margin-10+'px sans-serif'
+    for(let i=0; i <10;i++ ){
+      ctx.fillText(i+1,width*(i%4)+width/2-10,Math.floor(i/4+1)*(height+margin)-10)
+    }
   }
 
 
