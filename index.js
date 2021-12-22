@@ -29,9 +29,8 @@ const rtcRoute = require('./routes/rtc');
 const cloudinary = require('cloudinary');
 
 dotenv.config();
-
 var server;
-if (process.env.USE_LOCALHOST_HTTPS){
+if (process.env.USE_LOCALHOST_HTTPS == 'true'){
   const key = fs.readFileSync('./localhost/localhost.decrypted.key');
   const cert = fs.readFileSync('./localhost/localhost.crt');
   server = require("https").Server({ key, cert },app);
