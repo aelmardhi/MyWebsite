@@ -18,11 +18,14 @@ self.addEventListener('install', function(e) {
 self.addEventListener('fetch', function(e) {
   e.respondWith(
     caches.open(cacheName).then(function(cache) {
-      cache.match(e.request).then(function(CacheResponse) {
-        return CacheResponse || fetch(e.request).then(function(networkResponse){
-          cache.put(e.request,networkResponse);
-        })
-        
+      cache.match(e.request).then(function(cacheResponse) {
+        if(cacheResponse){
+          fetch(e.request).then(function(networkResponse){
+            cache.put(e.request,networkResponse);
+          })
+          return cacheResponse;
+        }
+        return fetch(e.request);
       })
     })
   );
