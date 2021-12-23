@@ -224,7 +224,44 @@
         }
         
         @media(max-width:600px){
-            
+            article, main{
+                width: 100%;
+            }
+            main{
+                margin: 0em;
+            }
+
+            .title{
+                font-size: 1rem;
+            }
+            .games h3{
+                font-size: 1rem;
+                width: 100px;
+            }
+            ul li a{
+                font-size: .75rem;
+            }
+            .downloads{
+                border-radius: 0;
+            }
+            .downloads ul{
+                padding: 5px;
+                grid-template-columns: repeat(auto-fit, minmax(200px ,1fr));
+
+            }
+            .downloads ul li .download_link{
+                font-size: .6rem;
+                padding: 5px 5px;
+            }
+            .downloads ul li a span{
+                font-size: .7rem;
+            }
+            .downloads ul li a span:nth-child(1){
+                font-size: .8rem;
+            }
+            .main{
+                border-top-right-radius: 0;
+            }
         }
         
     </style>
