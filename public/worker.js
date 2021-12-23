@@ -19,10 +19,10 @@ self.addEventListener('fetch', function(e) {
   e.respondWith(
     caches.open(cacheName).then(function(cache) {
       cache.match(e.request).then(function(CacheResponse) {
-        fetch(e.request).then(function(networkResponse){
+        return CacheResponse || fetch(e.request).then(function(networkResponse){
           cache.put(e.request,networkResponse);
         })
-        return CacheResponse || networkResponse
+        
       })
     })
   );
