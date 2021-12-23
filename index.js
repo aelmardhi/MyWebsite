@@ -4,8 +4,9 @@ const urlModule = require('url');
 const app = express();
 
 const dotenv = require('dotenv');
+dotenv.config();
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 
 var html404;
 try{
@@ -22,13 +23,13 @@ const uploadRoute = require('./routes/upload');
 const downloadRoute = require('./routes/download');
 const telegramRoute = require('./routes/telegram');
 const rtcRoute = require('./routes/rtc');
+const webPushRoute = require('./routes/webPush')
 
 
 
 
 const cloudinary = require('cloudinary');
 
-dotenv.config();
 var server;
 if (process.env.USE_LOCALHOST_HTTPS == 'true'){
   const key = fs.readFileSync('./localhost/localhost.decrypted.key');
@@ -56,8 +57,8 @@ cloudinary.config({
 });
 
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(express.json());
+app.use(express.urlencoded());
 app.use(express.static('public'));
 app.use('/test',express.static('testing site'));
 //app.use('/uploads/profile_images',express.static('uploads/profile_images'));
@@ -71,6 +72,8 @@ app.use((req,res,next) => {
     );
     next();    
 });
+
+app.use('/',webPushRoute);
 app.use('/api/user', authRoute);
 app.use('/api/messages', messageRoute);
 app.use('/api/ytdl', ytdlRoute);
