@@ -16,17 +16,17 @@ self.addEventListener('install', function(e) {
 
 /* Serve cached content when offline */
 self.addEventListener('fetch', function(e) {
-  e.respondWith(
-    caches.open(cacheName).then(function(cache) {
-      cache.match(e.request).then(function(cacheResponse) {
-        if(cacheResponse){
-          fetch(e.request).then(function(networkResponse){
-            cache.put(e.request,networkResponse);
-          })
-          return cacheResponse;
-        }
-        return fetch(e.request);
+  e.respondWith((async ()=>{
+    let cache = await caches.open(cacheName);
+    let cacheResponse = await cache.match(e.request);
+    if(cacheResponse){
+      fetch(e.request).then(function(networkResponse){
+        cache.put(e.request,networkResponse);
       })
-    })
-  );
+      return cacheResponse;
+    }
+    let networkResponse = await fetch(e.request)
+    return networkResponse
+  })())
+
 });
