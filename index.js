@@ -25,6 +25,7 @@ const telegramRoute = require('./routes/telegram');
 const rtcRoute = require('./routes/rtc');
 const webPushRoute = require('./routes/webPush')
 
+const {deleteOld} = require('./models/subscribtion')
 
 
 
@@ -47,7 +48,10 @@ mongoose.connect(process.env.DB_CONNECT,
                  {useNewUrlParser: true, useUnifiedTopology: true },
                  (err) =>{
     if(err)console.log(err);
-    else console.log('connected to db');
+    else {
+      console.log('connected to db');
+      deleteOld()
+    }
 });
 
 cloudinary.config({ 

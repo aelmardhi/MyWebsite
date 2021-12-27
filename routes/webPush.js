@@ -4,7 +4,8 @@
 // https://tools.ietf.org/html/draft-ietf-webpush-encryption.
 const webPush = require('web-push');
 const router = require('express').Router();
-let subscriptions = []
+const {Subscribtion} = require('../models/subscribtion');
+
 if (!process.env.VAPID_PUBLIC_KEY || !process.env.VAPID_PRIVATE_KEY) {
   console.log("You must set the VAPID_PUBLIC_KEY and VAPID_PRIVATE_KEY "+
     "environment variables. You can use the following ones:");
@@ -22,17 +23,39 @@ webPush.setVapidDetails(
     res.send(process.env.VAPID_PUBLIC_KEY);
   });
 
-  router.post( '/register', function(req, res) {
+  router.post( '/register',async function(req, res) {
     // A real world application would store the subscription info.
-    if(!subscriptions.some(s=> s.endpoint == req.body.subscription.endpoint))
-    subscriptions.push(req.body.subscription);
-    console.log(subscriptions);
-    res.sendStatus(201);
+    const subExist = await Subscribtion.findOne({subscribtion: JSON.stringify(req.body.subscription)});
+    if(subExist) {
+      subExist.date = Date.now();
+      try{
+        await subExist.save()
+      }catch{
+        return res.sendStatus(500);
+      }
+      return res.sendStatus(201);
+    }
+
+    let newSub = new Subscribtion({
+      subscribtion: JSON.stringify(req.body.subscription),
+      date: Date.now()
+    })
+    try{
+      newSub.save();
+    }catch(e){
+      res.sendStatus(500);
+    }
+
+    // if(!subscriptions.some(s=> s.endpoint == req.body.subscription.endpoint))
+    // subscriptions.push(req.body.subscription);
+    // console.log(subscriptions);
+    // res.sendStatus(201);
   });
 
-  router.post( '/sendNotification', function(req, res) {
-  
-      Promise.all(subscriptions.map(subscription => webPush.sendNotification(subscription,JSON.stringify( req.body.payload )|| '{title:"",body:""}')))
+  router.post( '/sendNotification',async function(req, res) {
+    try{
+      let subscribtions =await Subscribtion.find();
+      Promise.all(subscribtions.map(subscription => webPush.sendNotification(JSON.parse(subscription.subscribtion),JSON.stringify( req.body.payload )|| '{title:"",body:""}')))
       .then(function() {
         res.sendStatus(201);
       })
@@ -40,6 +63,10 @@ webPush.setVapidDetails(
         res.sendStatus(500);
         console.log(error);
       });
+    }catch(e){
+      res.status(500).send(e.message)
+    }
+      
   });
 
   module.exports = router;
