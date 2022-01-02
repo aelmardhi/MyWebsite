@@ -60,7 +60,7 @@ const defaultOnData = (data)=>{
         a.rel = 'noopener'
         // a.href = URL.createObjectURL(new Blob(bytes));
         a.href = 'data:'+data.filetype+';base64,'+btoa(fileUrl);
-        setTimeout(function () { URFileSystemWritableFileStreamL.revokeObjectURL(a.href) }, 4E4)
+        setTimeout(function () { URL.revokeObjectURL(a.href) }, 4E4)
         setTimeout(() => {
             a.click();
         }, 0);
@@ -128,6 +128,7 @@ function Sender(){
             d = file
             let blob = file.slice(0,FRAME_LIMIT)
             di = new DownloadItem(file.name,file.size)
+            di.update(blob.size)
             con.send({
                 file: blob,
                 filename: file.name,
@@ -141,7 +142,7 @@ function Sender(){
                 di.done();
             }
             con.on('data', data=>{
-                if(size>=file.size)return;
+                if(data>=file.size)return;
                 blob = file.slice(data,data+FRAME_LIMIT)
                 let done = FRAME_LIMIT + data >= file.size;
                 con.send({
