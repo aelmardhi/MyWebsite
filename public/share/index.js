@@ -2,8 +2,8 @@ const filesList = document.getElementById('files');
 const FRAME_LIMIT = 1024*1024*1;
 const params = new URLSearchParams(location.search)
 let CONNECTION_ID = params.get('c');
-// var peer = new Peer(undefined, {path: "/peerjs",host: "/"});    //on server
-var peer = new Peer(undefined, {path: "/peerjs",host: "/", port:5000}); //on local
+var peer = new Peer(undefined, {path: "/peerjs",host: "/"});    //on server
+// var peer = new Peer(undefined, {path: "/peerjs",host: "/", port:5000}); //on local
 
 let d
 let conn
