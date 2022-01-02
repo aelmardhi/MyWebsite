@@ -139,8 +139,9 @@ function Sender(){
             });
             if(done){
                 di.done();
-            }else{
+            }
             con.on('data', data=>{
+                if(size>=file.size)return;
                 blob = file.slice(data,data+FRAME_LIMIT)
                 let done = FRAME_LIMIT + data >= file.size;
                 con.send({
@@ -158,7 +159,7 @@ function Sender(){
                     }
                     di.update(data+blob.size)
             });
-            }
+            
         }
     })
     
