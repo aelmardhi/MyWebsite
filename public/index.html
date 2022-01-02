@@ -197,7 +197,7 @@
         .downloads ul li .download_link{
             position: absolute;
             border: none;
-            font-size: 1em;
+            font-size: .75rem;
             bottom: 5px;
             right: 1px;
             color: var(--clr-secondary);
@@ -213,7 +213,7 @@
             color: var(--clr-accent1);
             background: var(--clr-light);
                 height: 50px;
-                font-size: 1.6rem;
+                font-size: 1.1rem;
                 display: flex;
                 align-items: center;
                 justify-content: start;
@@ -325,6 +325,7 @@
                     <li><a href="filter/">Filter Demo</a></li>
                     <li><a href="jpeg/">JPEG</a></li>
                     <li><a href="screenRecorder/">Screen Recorder</a></li>
+                    <li><a href="share/">Share Files</a></li>
                     <li><a href="api/rtc/">videoChat</a></li>
                     <li><a href="chato_1.0.0.apk">chato apk</a></li>
                     </ul>
@@ -356,7 +357,6 @@
             const list = document.getElementById('downloads-list');
             const downloads = document.getElementById('downloads');
             fetch(host+'/api/download/files').then(r => r.json()).then(res => {
-                    downloads.classList.add('showDownloads');
                     
                     list.innerHTML = res.map(i =>{ 
                         let t = i.modified;
