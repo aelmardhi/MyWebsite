@@ -17,17 +17,8 @@ const showPickeronData = async (data)=>{
             fileHandle = await directoryHandle.getFileHandle(data.filename,{create:true});
             
             writeable = await fileHandle.createWritable();
-           
-           await writeable.write({data:data.file,position:size,type:'write'});
-           size += data.size; 
-           di.update(size);
-           if(data.done){
-               di.done();
-               await writeable.close();
-               alert('recived file '+data.filename);
-           }else{
-               conn.send(size)
-           }
+            size=0
+            conn.send(0);
         })
         return;
     }
@@ -175,17 +166,13 @@ function Sender(){
     
     con.on("error", (err) => {
         console.log('outdated url'+err);
-        let p = document.createElement('p');
-        p.innerText = 'outdated url'+err
-        p.style.color = 'red'
-        filesList.appendChild(p)
+    let p = document.createElement('p');
+    p.innerText = err
+    p.style.color = 'red'
+    filesList.appendChild(p)
     })
 }
 peer.on("open", (id) => {
-    let p = document.createElement('p');
-        p.innerText = CONNECTION_ID
-        p.style.color = 'blue'
-        filesList.appendChild(p)
     if(CONNECTION_ID){
         Sender();
     }else{
