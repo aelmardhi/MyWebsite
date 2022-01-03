@@ -166,6 +166,10 @@ function Sender(){
     
     con.on("error", (err) => {
         console.log('outdated url'+err);
+        let p = document.createElement('p');
+        p.innerText = 'outdated url'+err
+        p.style.color = 'red'
+        filesList.appendChild(p)
     })
 }
 peer.on("open", (id) => {
@@ -177,7 +181,13 @@ peer.on("open", (id) => {
 })
 
 
-peer.on("error", console.log)
+peer.on("error", (rr)=>{
+    console.log(err);
+    let p = document.createElement('p');
+    p.innerText = err
+    p.style.color = 'red'
+    filesList.appendChild(p)
+})
 
 function toBytesString(s){
 
