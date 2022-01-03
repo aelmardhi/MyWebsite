@@ -183,7 +183,7 @@ function Sender(){
 }
 peer.on("open", (id) => {
     let p = document.createElement('p');
-        p.innerText = 'outdated url'+err
+        p.innerText = CONNECTION_ID
         p.style.color = 'blue'
         filesList.appendChild(p)
     if(CONNECTION_ID){
