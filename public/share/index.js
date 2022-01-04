@@ -181,7 +181,7 @@ peer.on("open", (id) => {
 })
 
 
-peer.on("error", (rr)=>{
+peer.on("error", (err)=>{
     console.log(err);
     let p = document.createElement('p');
     p.innerText = err
