@@ -15,8 +15,8 @@ const stopVideo = document.getElementById("stopVideo");
 const muteButton = document.getElementById("muteButton");
 const shareScreen = document.getElementById("shareScreen");
 myVideo.muted = true;
-// var peer = new Peer(undefined, {path: "/peerjs",host: "/"});    //on server
-var peer = new Peer(undefined, {path: "/peerjs",host: "/", port:5000}); //on local
+var peer = new Peer(undefined, {path: "/peerjs",host: "/"});    //on server
+// var peer = new Peer(undefined, {path: "/peerjs",host: "/", port:5000}); //on local
 let myVideoStream;
 navigator.mediaDevices.getUserMedia({audio: true,video: true,})
     .then((stream) => {
