@@ -6,11 +6,12 @@ const router = require('express').Router();
 
 
 router.post('/info', async (req,res)=> {
+    console.log(req.ip);
     if(!(req && req.body && req.body.id)){
         res.status(400).send('request should have body with id');
     }
     let info = await ytdl.getInfo(req.body.id);
-    console.log(info.formats);
+    
     let retInfo = {
         'id': info.videoDetails.videoId,
         'title': info.videoDetails.title,
@@ -24,6 +25,7 @@ router.post('/info', async (req,res)=> {
 //            "resolution": i.resolution,
             "encoding": (i.hasVideo?'v':'')+(i.hasAudio?'a':''),
 //            "encoding": i.encoding,
+            "url": i.url.replace(/ip=\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}/,'ip='+req.ip),
         }))
     }
     res.status(200).json(retInfo);

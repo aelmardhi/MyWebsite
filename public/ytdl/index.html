@@ -267,7 +267,7 @@
         </div>
     </div>
     <script>
-        const host = 'https://dardasha.herokuapp.com';
+        const host = '';
         const loader = document.querySelector('.loader');
         const btn = document.querySelector('button');
         let resultDisplay;
@@ -319,12 +319,18 @@
                 '<td>' + (i.resolution ? i.resolution : '-') + '</td>' +
                 '<td>' + (i.container ? i.container : '-') + '</td>' +
                 '<td>' + (i.encoding ? i.encoding : '-') + '</td>' +
-                '<td>' + '<button onclick="download(' + i.itag + ',\'' + i.container + '\')">Download</button></td>' +
+                '<td>' + '<button onclick="download(' + i.itag + ',\'' + i.container +'\',\''+ i.url+'\')">Download</button></td>' +
                 '</tr>').join('');
         }
 
-        function download(itag, container) {
+        function download(itag, container, url) {
             messagesDisplay.classList.remove('showMessages');
+            resultDisplay.innerHTML = `<a class="directLink" href="${url}">Direct Link</a>
+            '<button onclick="serverDownload(${itag},\'${container}\',\'i.url\')">Download</button> `
+            
+            
+        }
+        function serverDownload(itag, container) {
             loader.classList.add('showLoader');
             fetch(host + '/api/ytdl/download', {
                 method: 'POST',
