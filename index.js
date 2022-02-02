@@ -6,7 +6,6 @@ const app = express();
 const dotenv = require('dotenv');
 dotenv.config();
 const mongoose = require('mongoose');
-// const bodyParser = require('body-parser');
 
 var html404;
 try{
