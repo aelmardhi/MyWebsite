@@ -5,7 +5,11 @@ const app = express();
 
 const dotenv = require('dotenv');
 dotenv.config();
+<<<<<<< HEAD
 const mongoose = require('mongoose');
+=======
+const mongoose = require('mongoose');]
+>>>>>>> e8db5a3022ccfe40749f2e89b58983e041b3dc5a
 
 var html404;
 try{
