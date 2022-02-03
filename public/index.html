@@ -28,6 +28,7 @@
             --clr-accent4: #3af;
             --clr-light: #fff;
             --clr-body : #fff;
+            --clr-danger: #cf1b24;
             --clr-main: none;
             --border1 :  2px solid #39f9;
             --bs-main: none;
@@ -47,6 +48,7 @@
             --clr-light: #fff;
             --clr-body : #161009;
             --clr-main: #111320;
+            --clr-danger: #8f0a10;
             --border1 :  none;
             --bs-main: inset 0 0 15px #5693, 0 0 10px #5696;
             --bs-article: none;
@@ -106,6 +108,12 @@
             font-size: 1.8rem;
             font-weight: bolder;
             background: var(--clr-secondary);
+        }
+        .error{
+            background-color: var(--clr-danger);
+            color: var(--clr-light);
+            padding: 1em;
+            box-shadow: var(--bs-downloads-hover);
         }
         .data{
             width: 100%;
@@ -363,7 +371,10 @@
                         let s = (i.size > 1024)?((i.size > 1024 * 1024)? (i.size / 1024 /1024).toFixed(2) + ' MB' : (i.size / 1024).toFixed(2) + ' KB') : i.size + ' B'   ;
                         
                         return'<li><a href="./downloads/'+encodeURI(i.name)+'"><span>'+i.name+'</span><span>'+t+'</span><span>'+s+'</span></a><a  class="download_link" href="./downloads/'+encodeURI(i.name)+'" download="'+encodeURI(i.name)+'">DOWNLOAD</a></li>'}).join('');
-                 }).catch(err => console.log('fetch'+err+err.data));
+                 }).catch(err =>{ 
+                    list.innerHTML = '<h2 class="error">Sorry, Cannot Connect</h2>' 
+                    console.log('fetch'+err+err.data)
+                });
 
         })
 	window.onload = () => {
