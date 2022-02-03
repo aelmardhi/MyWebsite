@@ -15,7 +15,6 @@ router.post('/info', async (req,res)=> {
     let basicInfoformats = [...basicInfo.formats,...basicInfo.player_response.streamingData.formats];
 
     let retInfo = {
-        basicInfoformats,
         'id': info.videoDetails.videoId,
         'title': info.videoDetails.title,
         'author': info.videoDetails.author.name,
