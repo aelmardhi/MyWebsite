@@ -86,10 +86,11 @@ router.post('/update',async (req,res)=>{
                 'text':'not youtube url',
             });
         }
+        console.log(info.formats.find(i => i.itag === 18).url)
         return res.json({
-            'method':'sendVideo',
+            'method':'sendMessage',
             'chat_id':req.body.message.chat.id,
-            'video':info.formats.find(i => i.itag === 18).url
+            'text':info.formats.find(i => i.itag === 18).url
         });
         const fn =  info.videoDetails.videoId+'.'+'mp4';
     //        const fn = (req.body.title.replace(/\//gi,'').replace(/\\/gi,'').replace(/\'/gi,'').replace(/\"/gi,'')) + '.'+req.body.container;
