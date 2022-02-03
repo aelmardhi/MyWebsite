@@ -25,7 +25,8 @@ router.post('/info', async (req,res)=> {
 //            "resolution": i.resolution,
             "encoding": (i.hasVideo?'v':'')+(i.hasAudio?'a':''),
 //            "encoding": i.encoding,
-            "url": i.url.replace(/ip=\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}/,'ip='+req.ip),
+            "url": i.url,
+            // "url": i.url.replace(/ip=\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}/,'ip='+req.ip),
         }))
     }
     res.status(200).json(retInfo);
