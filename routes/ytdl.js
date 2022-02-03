@@ -10,8 +10,10 @@ router.post('/info', async (req,res)=> {
     if(!(req && req.body && req.body.id)){
         res.status(400).send('request should have body with id');
     }
-    let info = await ytdl.getBasicInfo(req.body.id);
-    
+    let info = await ytdl.getInfo(req.body.id);
+    let basicInfo = await ytdl.getBasicInfo(req.body.id);
+    let basicInfoformats = [...basicInfo.formats,...basicInfo.player_response.streamingData.formats];
+
     let retInfo = {
         'id': info.videoDetails.videoId,
         'title': info.videoDetails.title,
@@ -25,7 +27,7 @@ router.post('/info', async (req,res)=> {
 //            "resolution": i.resolution,
             "encoding": (i.hasVideo?'v':'')+(i.hasAudio?'a':''),
 //            "encoding": i.encoding,
-            "url": i.url,
+            "url": (basicInfoformats.find(e => e.itag === i.itag)).url,
             // "url": i.url.replace(/ip=\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}/,'ip='+req.ip),
         }))
     }
