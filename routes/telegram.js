@@ -78,7 +78,7 @@ res.json({
 router.post('/update',async (req,res)=>{
    // await download(req,res);
     try{
-        let info = await ytdl.getInfo(req.body.message.text);
+        let info = await ytdl.getBasicInfo(req.body.message.text);
         if(!info.videoDetails.videoId){
             res.json({
                 'method':'sendMessage',
@@ -86,6 +86,11 @@ router.post('/update',async (req,res)=>{
                 'text':'not youtube url',
             });
         }
+        return res.json({
+            'method':'sendVideo',
+            'chat_id':req.body.message.chat.id,
+            'video':info.formats.find(i => i.itag === 18).url
+        });
         const fn =  info.videoDetails.videoId+'.'+'mp4';
     //        const fn = (req.body.title.replace(/\//gi,'').replace(/\\/gi,'').replace(/\'/gi,'').replace(/\"/gi,'')) + '.'+req.body.container;
         const fl = __dirname+'/../public/downloads/'+fn;
