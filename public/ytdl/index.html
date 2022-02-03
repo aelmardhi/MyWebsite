@@ -325,9 +325,9 @@
 
         function download(itag, container, url) {
             messagesDisplay.classList.remove('showMessages');
-            // resultDisplay.innerHTML = `<a class="directLink" href="${url}">Direct Link</a>
-            // '<button onclick="serverDownload(${itag},\'${container}\',\'i.url\')">Download</button> `
-            serverDownload(itag, container);
+            resultDisplay.innerHTML = `<a class="directLink" href="${url}">Direct Link</a>
+            '<button onclick="serverDownload(${itag},\'${container}\',\'i.url\')">Download</button> `
+            // serverDownload(itag, container);
             
         }
         function serverDownload(itag, container) {
