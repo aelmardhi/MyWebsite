@@ -86,6 +86,7 @@ router.post('/update',async (req,res)=>{
                 'text':'not youtube url',
             });
         }
+        console.log(info)
         return res.json({
             'method':'sendVideo',
             'chat_id':req.body.message.chat.id,
