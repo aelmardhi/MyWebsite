@@ -325,7 +325,7 @@
 
         function download(itag, container, url) {
             messagesDisplay.classList.remove('showMessages');
-            resultDisplay.innerHTML = `<a class="directLink" href="${url}" download="${encodeURI(info.title+'.'+(container?container:'mp4'))}">Direct Link</a>
+            resultDisplay.innerHTML = `<a class="directLink" href="${url}" download="${info.title+'.'+(container?container:'mp4')}">Direct Link</a>
             <button onclick="serverDownload(${itag},\'${container}\',\'i.url\')">Download</button> `
             // serverDownload(itag, container);
             
