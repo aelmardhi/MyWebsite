@@ -10,7 +10,7 @@ router.post('/info', async (req,res)=> {
     if(!(req && req.body && req.body.id)){
         res.status(400).send('request should have body with id');
     }
-    let info = await ytdl.getInfo(req.body.id);
+    let info = await ytdl.getBasicInfo(req.body.id);
     
     let retInfo = {
         'id': info.videoDetails.videoId,
