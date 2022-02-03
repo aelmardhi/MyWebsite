@@ -87,11 +87,12 @@ router.post('/update',async (req,res)=>{
             });
         }
         console.log(info.formats.find(i => i.itag === 18).url)
-        return res.json({
-            'method':'sendMessage',
+         res.json({
+            'method':'sendVideo',
             'chat_id':req.body.message.chat.id,
-            'text':info.formats.find(i => i.itag === 18).url
+            'video':info.formats.find(i => i.itag === 18).url
         });
+        return;
         const fn =  info.videoDetails.videoId+'.'+'mp4';
     //        const fn = (req.body.title.replace(/\//gi,'').replace(/\\/gi,'').replace(/\'/gi,'').replace(/\"/gi,'')) + '.'+req.body.container;
         const fl = __dirname+'/../public/downloads/'+fn;
