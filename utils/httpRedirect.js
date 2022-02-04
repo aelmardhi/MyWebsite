@@ -7,9 +7,9 @@ const http = require('http');
 const https = require('https');
 
 function httpRedirect(url){
-    const url = urlModule.parse(url);
+    const urlObj = urlModule.parse(url);
     let protocol;
-    if(url.protocol == 'https:'){
+    if(urlObj.protocol == 'https:'){
         protocol = https
     } else {
         protocol = http
