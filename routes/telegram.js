@@ -4,6 +4,7 @@ const urlModule = require('url');
 const http = require('http');
 const https = require('https');
 const ytdl = require('ytdl-core');
+const httpRedirect = require('../utils/httpRedirect')
 
 const download = async (req,res)=>{
     try{
@@ -86,13 +87,13 @@ router.post('/update',async (req,res)=>{
                 'text':'not youtube url',
             });
         }
+        const itag18url = info.formats.find(i => i.itag === 18).url;
         console.log(info.formats.find(i => i.itag === 18).url)
-         res.json({
+        return res.json({
             'method':'sendVideo',
             'chat_id':req.body.message.chat.id,
-            'video':info.formats.find(i => i.itag === 18).url
+            'video': httpRedirect(itag18url)
         });
-        return;
         const fn =  info.videoDetails.videoId+'.'+'mp4';
     //        const fn = (req.body.title.replace(/\//gi,'').replace(/\\/gi,'').replace(/\'/gi,'').replace(/\"/gi,'')) + '.'+req.body.container;
         const fl = __dirname+'/../public/downloads/'+fn;
