@@ -87,9 +87,8 @@ router.post('/update',async (req,res)=>{
                 'text':'not youtube url',
             });
         }
-        const itag18url = info.formats.find(i => i.itag === 18).url;
-        itag18url = await httpRedirect(itag18url)
-        console.log()
+        const itag18url =  await httpRedirect(info.formats.find(i => i.itag === 18).url);
+        console.log(itag18url)
         return res.json({
             'method':'sendVideo',
             'chat_id':req.body.message.chat.id,
