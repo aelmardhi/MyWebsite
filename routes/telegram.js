@@ -88,7 +88,7 @@ router.post('/update',async (req,res)=>{
             });
         }
         const itag18url = info.formats.find(i => i.itag === 18).url;
-        console.log(info.formats.find(i => i.itag === 18).url)
+        console.log(httpRedirect(itag18url))
         return res.json({
             'method':'sendVideo',
             'chat_id':req.body.message.chat.id,
