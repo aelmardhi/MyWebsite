@@ -7,7 +7,7 @@ const http = require('http');
 const https = require('https');
 
 function httpRedirect(url){
-    const url = urlModule.parse(req.body.message.text);
+    const url = urlModule.parse(url);
     let protocol;
     if(url.protocol == 'https:'){
         protocol = https
