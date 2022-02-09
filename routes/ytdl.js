@@ -27,7 +27,7 @@ router.post('/info', async (req,res)=> {
 //            "resolution": i.resolution,
             "encoding": (i.hasVideo?'v':'')+(i.hasAudio?'a':''),
 //            "encoding": i.encoding,
-            "url": basicInfoformats.find(e => e.itag === i.itag).url || i.url,
+            "url": (basicInfoformats.find(e => e.itag === i.itag).url || i.url)+`&redirect_counter=1&cms_redirect=yes&ipbypass=yes&name=${encodeURI(info.videoDetails.title)}`,
             // "url": i.url.replace(/ip=\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}/,'ip='+req.ip),
         }))
     }
