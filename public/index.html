@@ -70,7 +70,7 @@
             flex-direction: column;
             background-color: var(--clr-body);
             overflow-x: hidden;
-            font-family: system-ui sans-serif;
+            font-family: system-ui ,sans-serif;
         }
         main{
             display: flex;
@@ -102,7 +102,6 @@
         h2{
             text-align: center;
             color: #09f9;
-            font-family: monospace;
         }
         .title{
             color: var(--clr-light);
@@ -301,16 +300,20 @@
         .mobile_nav span{
             display: block;
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 0rem;
+            left: 33.33vw;
             height: .25rem;
             width: 33.33vw;
-            transform: translateX(100%);
-            background-color: #00ff71;
-            transition: transform .5s ease;
+            transform: translateX(0);
+            background-color: var(--clr-light);
+            transition: transform .2s ease ;
         }
         @media(max-width:600px){
             article, main, .main, .downloads, .games{
+                position: fixed;	
+		top: 0;
+                left: 0;
+                max-width: none;
                 width: 100vw;
                 height: calc(100vh - 6rem);
                 border-radius: 0;
@@ -322,10 +325,7 @@
             }
             article{
                 transition: transform .3s cubic-bezier(0.61, 0.22, 0.27, 0.8);
-                position: fixed;
-                top: 0;
-                left: 0;
-                max-width: none;
+                
                 transform: translateX(0px);
             }
             ul li a{
@@ -366,6 +366,19 @@
             }
             .games h3{
                 background: linear-gradient(90deg,var(--clr-accent4) 20%, var(--clr-accent1) 100%);
+            }
+	    body > h2{
+                position: fixed;
+                left: 0;
+                bottom:3rem ;
+                width: 100%;
+                height: 3rem;
+                font-size:1rem ;
+                padding:.8rem ;
+                margin:0rem ;
+                background: var(--clr-accent4) ;
+                color: var(--clr-light) ;
+
             }
             .mobile_nav{
                 display: flex;
@@ -416,7 +429,7 @@
             </ul>
         </article>
         
-        <h2>aelmardhi © 2021</h2>
+        <h2>aelmardhi © 2022</h2>
         <div id="mobileNav" class="mobile_nav">
             <span></span>
             <button onclick="mobileNavClick(1)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M144 480C64.47 480 0 415.5 0 336C0 273.2 40.17 219.8 96.2 200.1C96.07 197.4 96 194.7 96 192C96 103.6 167.6 32 256 32C315.3 32 367 64.25 394.7 112.2C409.9 101.1 428.3 96 448 96C501 96 544 138.1 544 192C544 204.2 541.7 215.8 537.6 226.6C596 238.4 640 290.1 640 352C640 422.7 582.7 480 512 480H144zM303 392.1C312.4 402.3 327.6 402.3 336.1 392.1L416.1 312.1C426.3 303.6 426.3 288.4 416.1 279C407.6 269.7 392.4 269.7 383 279L344 318.1V184C344 170.7 333.3 160 320 160C306.7 160 296 170.7 296 184V318.1L256.1 279C247.6 269.7 232.4 269.7 223 279C213.7 288.4 213.7 303.6 223 312.1L303 392.1z"/></svg></button>
@@ -497,11 +510,8 @@ navigator.serviceWorker.ready
         let mobileNav = document.getElementById('mobileNav')
         let btns = mobileNav.getElementsByTagName('button')
         
-        mobileNav.getElementsByTagName('span').item(0).style.transform = 'translateX('+ 100*(1-i)+ '%) scaleX(3) '
-        setTimeout(()=>{
-            mobileNav.getElementsByTagName('span').item(0).style.transform = 'translateX('+ 100*(1-i)+ '%) scaleX(1) '
+        mobileNav.getElementsByTagName('span').item(0).style.transform = 'translateX('+ 100*(-i*1)+ '%) scaleX(1) '
         
-        },100)
         for(let e=0;e<articles.length;e++){
             articles.item(e).style.transform = 'translateX('+ i*100 +'%)'
             btns.item(e).style.background = 'none'
