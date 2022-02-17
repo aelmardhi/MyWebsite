@@ -115,12 +115,13 @@
             color: var(--clr-light);
             padding: 1em;
             box-shadow: var(--bs-downloads-hover);
+            height: fit-content;
         }
         .data{
             width: 100%;
              background: var(--clr-primary);
-             padding: 20px auto;
-            
+             padding: 0 ;
+            height: calc(100% - 1.8rem - 30px);
         }
         ul li{
             list-style: none;
@@ -328,6 +329,10 @@
                 
                 transform: translateX(0px);
             }
+            ul, .games_list{
+                overflow-y: auto;
+                height: 100%;
+            }
             ul li a{
                 padding: 1rem;
                 font-size: 1.2rem;
@@ -338,6 +343,9 @@
                 width: 100%;
                 max-width: none;
             }
+            .data{
+            height: calc(100% - 2rem - 30px);
+            }
             .downloads{
                 left: -100vw;
             }
@@ -345,6 +353,7 @@
                 background: linear-gradient(90deg,var(--clr-accent1) 20%,  var(--clr-secondary) 70%);
             }
             .downloads ul{
+                max-height: none;
                 padding: 5px;
                 grid-template-columns: repeat(auto-fit, minmax(200px ,1fr));
 
