@@ -548,6 +548,11 @@ navigator.serviceWorker.ready
         }
         e.target.classList.add('active_link')
     }))
+    window.addEventListener('pagehide',()=>{
+        for(let l of links){
+            l.classList.remove('active_link')
+        }
+    })
     </script>
     <script>
         window.dataLayer = window.dataLayer || [];
