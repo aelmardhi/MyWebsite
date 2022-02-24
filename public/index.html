@@ -146,13 +146,8 @@
             background: #3af;
             color: var(--clr-light);
         }
-        ul li a:active,
-        ul li h3:active{
-            background: linear-gradient(60deg, #3df3 20%, #3ff 50%,  #3df3 80%);
-            background-repeat: repeat-x;
-            animation: active_link 1s ease 0s infinite ;
-            /* color: var(--clr-light); */
-        }
+    
+        
         .downloads{
             height: 100%;
             border-bottom-right-radius: 0;
@@ -311,6 +306,14 @@
             background-color: var(--clr-light);
             transition: transform .2s ease ;
         }
+        .active_link, .active_link:focus, .active_link:active, .active_link:hover{
+            background: linear-gradient(60deg, #3df3 20%, #3ff 50%,  #3df3 80%);
+            background-repeat: repeat-x;
+            animation: active_link_animation 1s ease 0s infinite ;
+        }
+
+
+        /*************************************************************/
         @media(max-width:600px){
             article, main, .main, .downloads, .games{
                 position: fixed;	
@@ -394,7 +397,7 @@
                 display: flex;
             }
         }
-@keyframes active_link {
+@keyframes active_link_animation {
     0%{
         background-position-x: 0em;
     }
@@ -536,6 +539,15 @@ navigator.serviceWorker.ready
         }
         btns.item(1-i).style.background = 'var(--clr-accent3)'
     }
+    let links = document.querySelectorAll('ul li a')
+    links.forEach(l=> l.addEventListener('click',
+    function linkKlick(e){
+        
+        for(let l of links){
+            l.classList.remove('active_link')
+        }
+        e.target.classList.add('active_link')
+    }))
     </script>
     <script>
         window.dataLayer = window.dataLayer || [];
