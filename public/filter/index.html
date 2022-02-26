@@ -51,7 +51,7 @@
       background-color: #f66;
       border: none;
     }
-    .showAdd .addBtn,.showMul .mulBtn,.showFlt .fltBtn{
+    .showAdd .addBtn,.showMul .mulBtn,.showFlt .fltBtn,.showHistEq .histEqBtn{
       background-color: rgb(235, 232, 67);
     }
     .add{
@@ -63,6 +63,9 @@
     .flt{
       display: none;
     }
+    .histEq{
+      display: none;
+    }
     .showAdd .add{
       display: block;
     }
@@ -70,6 +73,9 @@
       display: block;
     }
     .showFlt .flt{
+      display: block;
+    }
+    .showHistEq .histEq{
       display: block;
     }
   </style>
@@ -93,6 +99,7 @@
       <button id="fltBtn" class="fltBtn btn">Filter</button>
       <button id="addBtn" class="addBtn btn">ADD</button>
       <button id="mulBtn" class="mulBtn btn">Multiply</button>
+      <button id="histEqBtn" class="histEqBtn btn">Histogram Eq</button>
       </div>
       <label>Save At</label>
     <select id="saveAt" name="saveAt" required>
@@ -205,6 +212,21 @@
       <input type="number" name="fltScale2" id="fltScale2" value="1" step="0.0000000000001">
       +
       <input type="number" name="fltGain" id="fltGain" value="0" step="0.01">
+    </div>
+
+    <div class="histEq" id="histEq">
+      <select id="histEqImg" name="histEqImg">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+      </select>
     </div>
     <input class="btn" type="submit">
   </form>

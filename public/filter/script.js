@@ -25,6 +25,7 @@ let flt22 = ctrlForm.querySelector('#flt22');
 let fltGain = ctrlForm.querySelector('#fltGain');
 let fltScale = ctrlForm.querySelector('#fltScale');
 let fltScale2 = ctrlForm.querySelector('#fltScale2');
+let histEqImg = ctrlForm.querySelector('#histEqImg');
 let id;
 var canvas = document.getElementById('canvas');
   var ctx = canvas.getContext('2d');
@@ -94,7 +95,8 @@ function draw(e) {
       ctx.putImageData(newImageData, 2*width, 0);
       newImageData = addImageData(newImageData,imageData,1,1)
       ctx.putImageData(newImageData, 1*width, 0);
-
+      fff = equalizeHistogram(imageData)
+      ctx.putImageData(equalizeHistogram(imageData), 0, height + margin);
       
       addNumbers()
       document.body.classList.add('showControls')
@@ -208,20 +210,90 @@ function draw(e) {
     }
   }
 
+  function equalize(imageData){
+    const width = imageData.width;
+    const height = imageData.height;
+    let data = imageData.data;
+    let newImageData = new ImageData(width, height);
+    let newData = new Float32Array( newImageData.data.length);
+    let sumR =0, sumG = 0, sumB= 0;
+    for(let i=0; i<data.length;i+=4){
+      let s = data[i]+ data[i+1] + data[i+2]+0.1;
+      sumR += newData[i] = data[i]/s*255
+      sumG += newData[i+1] = data[i+1]/s*255
+      sumB += newData[i+2] = data[i+2]/s*255
+      newData[i+3] = 255
+    }
+    r_ = 3*sumR / width / height;
+    g_ = 3*sumG / width / height;
+    b_ = 3*sumB / width / height;
+    console.log(sumR, sumG,sumB,r_,g_,b_)
+    for(let i=0; i<data.length;i+=4){
+      
+      newImageData.data[i] = newData[i]/r_*255
+      newImageData.data[i+1] = newData[i+1]/g_*255
+      newImageData.data[i+2] = newData[i+2]/b_*255
+      newImageData.data[i+3] = 255
+    }
+
+    return newImageData
+  }
+
+  function equalizeHistogram(imageData){
+    const width = imageData.width;
+    const height = imageData.height;
+    let data = imageData.data;
+    let newImageData = new ImageData(width, height);
+    let newData = new Float32Array( newImageData.data.length);
+    let histR =new Int16Array(256), histG = new Int16Array(256), histB= new Int16Array(256);
+    for(let i=0; i<data.length;i+=4){
+      // let s = Math.floor((data[i]+ data[i+1] + data[i+2])/3);
+      histR[data[i]]++;
+      histG[data[i+1]]++;
+      histB[data[i+2]]++;
+    }
+    let accR = 0, accG = 0, accB = 0;
+    // let newHistR =new Int16Array(256), newHistG = new Int16Array(256), newHistB= new Int16Array(256);
+    for(let i=0; i<256;i++){
+      accR += histR[i]
+      accG += histG[i]
+      accB += histB[i]
+      histR[i] = accR/width/height * 255;
+      histG[i] = accG/width/height * 255;
+      histB[i] = accB/width/height * 255;
+    }
+    // console.log(accR, accG,accB,histR)
+    for(let i=0; i<data.length;i+=4){
+      
+      newImageData.data[i] = histR[data[i]]
+      newImageData.data[i+1] = histG[data[i+1]]
+      newImageData.data[i+2] = histB[data[i+2]]
+      newImageData.data[i+3] = 255
+    }
+
+    return newImageData
+  }
+
 
   document.getElementById('addBtn').addEventListener('click',(e)=>{
     document.body.classList.add('showAdd');
-    document.body.classList.remove('showMul','showFlt');
+    document.body.classList.remove('showMul','showFlt','showHistEq');
     e.preventDefault();
   })
   document.getElementById('mulBtn').addEventListener('click',(e)=>{
     document.body.classList.add('showMul');
-    document.body.classList.remove('showAdd','showFlt');
+    document.body.classList.remove('showAdd','showFlt','showHistEq');
     e.preventDefault();
   })
   document.getElementById('fltBtn').addEventListener('click',(e)=>{
     document.body.classList.add('showFlt');
-    document.body.classList.remove('showMul','showAdd');
+    document.body.classList.remove('showMul','showAdd','showHistEq');
+    e.preventDefault();
+  })
+
+  document.getElementById('histEqBtn').addEventListener('click',(e)=>{
+    document.body.classList.add('showHistEq');
+    document.body.classList.remove('showMul','showAdd','showFlt');
     e.preventDefault();
   })
 
@@ -260,5 +332,10 @@ function draw(e) {
 
       let filteredData = applyFilter(fltData,filter,fltGain.value*1,fltScale.value/fltScale2.value);
       putImageDataByIndex(filteredData,saveAtValue);
+    }
+    if(document.body.classList.contains('showHistEq')){
+      let = imgData = getImageDataByIndex(histEqImg.value);
+      let equalizeedImg = equalizeHistogram(imgData);
+      putImageDataByIndex(equalizeedImg,saveAtValue);
     }
   })
