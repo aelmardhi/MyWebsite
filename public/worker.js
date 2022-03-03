@@ -30,7 +30,7 @@ self.addEventListener('fetch', function(e) {
     let networkResponse = await fetch(e.request)
     return networkResponse
     }catch (e){
-      cache.match('error_connect.html');
+     return await cache.match('error_connect.html');
     }
   })())
 
