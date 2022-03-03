@@ -4,6 +4,20 @@ var filesToCache = [
   '/',
   '/index.html',
   'error_connect.html',
+  '/dithering/',
+  '/dithering/index.html',
+  '/dithering/script.js',
+  '/filter/',
+  '/filter/index.html',
+  '/filter/script.js',
+  '/jpeg/',
+  '/jpeg/index.html',
+  '/jpeg/decoder.js',
+  '/jpeg/encoder.js',
+  '/jpeg/main.js',
+  '/jpeg/style.css',
+  '/screenRecorder/',
+  '/screenRecorder/index.html',
 ];
 
 /* Start the service worker and cache all of the app's content */
