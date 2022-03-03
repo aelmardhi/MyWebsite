@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        
+        :root{
+            --clr-primary:#e1ecfc;
+            --clr-secondary: #39f;
+            --clr-accent1: #06e;
+            --clr-accent2: #5af;
+            --clr-accent3: #0061e3;
+            --clr-accent4: #3af;
+            --clr-light: #fff;
+            --clr-body : #fff;
+            --clr-danger: #cf1b24;
+            --clr-main: none;
+            --border1 :  2px solid #39f9;
+            --bs-main: none;
+            --bs-article: 2px 2px 10px #0003, 10px 10px 20px  #39f5;
+            --bs-downloads: inset 0 0 8px #0003 , inset 0 0 15px #0001;
+            --bs-downloads-hover: 0 0 6px #0005, 0 0 12px #0003;
+            --bs-games:inset 0 0 8px #0005 , inset 0 0 15px #0003;
+        }
+        @media(prefers-color-scheme: dark){ 
+            :root{   
+            --clr-primary:#232834;
+            --clr-secondary: #126;
+            --clr-accent1: #025;
+            --clr-accent2: #128;
+            --clr-accent3: #92b3ff;
+            --clr-accent4: #126;
+            --clr-light: #fff;
+            --clr-body : #161009;
+            --clr-main: #111320;
+            --clr-danger: #8f0a10;
+            --border1 :  none;
+            --bs-main: inset 0 0 15px #5693, 0 0 10px #5696;
+            --bs-article: none;
+            --bs-downloads: inset 0 0 8px #0003 , inset 0 0 15px #0001;
+            --bs-downloads-hover: 0 0 6px #0005, 0 0 12px #0003;
+            --bs-games:inset 0 0 8px #0005 , inset 0 0 15px #0003;
+            }
+        }
+        *, *:after, *:before{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--clr-body);
+        }
+        .error{
+            background-color: var(--clr-danger);
+            color: var(--clr-light);
+            padding: 1em;
+            box-shadow: var(--bs-downloads-hover);
+            height: fit-content;
+        }
+
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Connect</title>
+</head>
+<body>
+    <h2 class="error">Sorry, Cannot Connect</h2>
+    <script>
+        document.addEventListener('DOMContentLoaded', (e)=>{
+            setTimeout(()=>history.back(),1000);
+        })
+    </script>
+</body>
+</html>

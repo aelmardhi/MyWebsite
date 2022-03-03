@@ -3,6 +3,7 @@ var cacheName = 'hello-pwa';
 var filesToCache = [
   '/',
   '/index.html',
+  'error_connect.html',
 ];
 
 /* Start the service worker and cache all of the app's content */
@@ -25,8 +26,12 @@ self.addEventListener('fetch', function(e) {
       })
       return cacheResponse;
     }
+    try{
     let networkResponse = await fetch(e.request)
     return networkResponse
+    }catch (e){
+      cache.match('error_connect.html');
+    }
   })())
 
 });
