@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    *,*::after,*::before{
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    body{
+      height: 100vh;
+      --width : 480px;
+      --height : calc(270px + 60px) ;
+      background-color: #130005;
+    }
+    canvas{
+      height: 80%;
+      width: 80%;
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    input {
+      height: 30px;
+    }
+    button{
+      background-color: transparent;
+      border: none; 
+      color: #f5f5ff;
+      font-size: 1.25em;
+      font-weight: bold;
+    }
+    .panel{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+    .panel div{
+      width: 100%;
+      background-color: #152028;
+      border-radius: 1em 1em 0 0;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      padding: .25em;
+      transition: transform .25s ease-in-out;
+      transform: translateY(0%);
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .panel input{
+      width: 80%;
+    }
+    .panel h2{
+      color: white;
+      margin: 0 1em;
+    }
+    aside.btns{
+      border-radius: 0;
+      background-color: #15331c;
+      width: 100%;
+      padding: 1em;
+      transform: none;
+      z-index: 1;
+    }
+
+  </style>
+  <title>Filter Demo</title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-V95FG9MK9N"></script> -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-V95FG9MK9N');
+  </script>
+</head>
+<body class="showAdd">
+  <input type="file" accept="image/*" autofocus>
+  <canvas id="canvas" width="1920" height="1080"></canvas>
+  <article class="panel">
+   
+    <div class="brightness"> <h2>Brightness</h2><input type="range" name="brightness" id="brightness" min="0" max="200" value="100"></div>
+    <div class="contrast"> <h2>Contrast</h2><input type="range" name="contrast" id="contrast" min="0" max="200" value="100"></div>
+    <div class="saturate"> <h2>Saturate</h2><input type="range" name="saturate" id="saturate" min="0" max="200" value="100"></div>
+    <div class="highlights"> <h2>Highlights</h2><input type="range" name="highlights" id="highlights" min="0" max="200" value="100"></div>
+    <aside class="btns">
+      <button id="brightnessBtn">brightness</button>
+      <button id="contrastBtn">contrast</button>
+      <button id="saturateBtn">saturate</button>
+      <button id="highlightsBtn">highlights</button>
+    </aside>
+  </article>
+        <script src="script.js">
+  </script>
+</body>
+</html>	

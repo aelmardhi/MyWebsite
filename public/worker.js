@@ -83,10 +83,7 @@ self.addEventListener('push', function(event) {
       //                         'click here to re-open it!';
       // }
 
-      // Show a notification with title 'ServiceWorker Cookbook' and body depending
-      // on the state of the clients of the service worker (three different bodies:
-      // 1, the page is focused; 2, the page is still open but unfocused; 3, the page
-      // is closed).
+      
       return self.registration.showNotification('Dardasha', {
         body: payload.body,
         title: payload.title,
