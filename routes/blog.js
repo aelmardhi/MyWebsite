@@ -4,11 +4,16 @@ const verify  = require('./verifyToken');
 const Post = require('../models/Post')
 const {User} = require('../models/User')
 
-router.get('/',async (req,res)=>{
+router.get('/', verify.lenientVerify,async (req,res)=>{
     const { page = 1, limit = 10 } = req.query;
     try {
         // execute query with page and limit values
-        let posts = await Post.find()
+        let posts = await Post.find({
+            $or: [
+                {public: { $eq: true}},
+                {author: { $eq: req.user._id}}
+            ]
+        })
           .limit(limit * 1)
           .skip((page - 1) * limit)
           .exec();
@@ -45,11 +50,13 @@ router.get('/',async (req,res)=>{
     }
 });
 
-router.get('/post/:id',async (req, res)=>{
+router.get('/post/:id', verify.lenientVerify,async (req, res)=>{
     const {id} = req.params
     try{
         const post = await Post.findById(id)
         const u = await User.findById(post.author)
+        if(!post.public && (req.user._id != post.author))
+            return res.status(401).send('Error: You are not allowed to view this')
         res.json({
             author:{
                 name: u.name,
@@ -77,12 +84,38 @@ router.post('/new',verify, async (req, res)=>{
     try{
         let _blocks = JSON.stringify( blocks)
         let post = new Post({title,project,author:req.user._id,public,time,blocks:_blocks})
-        await post.save()
-        res.send('post saved correctly');
+        const savedPost = await post.save()
+        res.json({id: savedPost._id});
     }catch(e){
         res.status(500).send('some issue happend')
         console.log(e);
     }
 })
 
+
+router.post('/post/:id/edit',verify,async (req, res)=>{
+    const {id} = req.params
+    try{
+        const post = await Post.findById(id)
+        if(post.author != req.user._id)
+            return res.status(401).send('Error: you are not allowed to edit this')
+        const u = await User.findById(post.author)
+        if(req.body.title)
+            post.title = req.body.title
+        if(req.body.public)
+            post.public = req.body.public
+        if(req.body.blocks)
+            post.blocks = JSON.stringify(req.body.blocks)
+        if(req.body.time)
+            post.time = req.body.time
+        if(req.body.project)
+            post.project = req.body.project
+        await post.save();
+        
+        res.send('post updated')
+    }catch(err){
+        res.status(500).send('some issue happend')
+        console.error(err.message);
+    }
+})
 module.exports = router
