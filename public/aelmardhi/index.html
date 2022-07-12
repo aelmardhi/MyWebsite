@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+	@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,900;1,400&display=swap');
+	
+        *,
+    *::before,
+    *::after {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+		html{
+			font-size: 1rem;
+		}
+        body{
+            background: linear-gradient(90deg, #0e7bf4 0%, #1065f5 10%, #1160f5 30%, #0e76f5 40%, #0e76f5 50%, #0e77f5 100% );
+            /* display: flex;
+            flex-direction: row; */
+			font-family: 'Poppins', sans-serif;
+        }
+		
+        article{
+            width: 90%;
+            position: relative;
+            z-index: 10;
+            margin: 0 auto;
+        }
+        .welcome{
+            display: flex;
+            z-index: 5;
+            flex-direction: row;
+            position: sticky;
+            top: 0;
+            
+        }
+        .welcome div{
+            width: 100%;
+            background: linear-gradient(0deg, #0e76f5,#0c88f5 20%,#09a9f4 50%, #06c1f4 70%,#02e2f3 100%);
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            justify-content: center;
+            align-items: center;
+        }
+        .welcome div h1,.heading2{
+            font-size: 3em;
+            color: #dc5b04;
+        }
+        .welcome div h3,.skills div h3{
+            font-size: 1.5em;
+            color: #edc24b;
+        }
+		.home{
+			position: absolute;
+			top:.5em;
+			right:5%;
+			padding :.1em .5em;
+			font-size: 1.3em;
+			border: 2px solid #fff0;
+			color: #fff;
+			background: transparent;
+			border-radius: .2em;
+			text-decoration: none;
+			transition: all .1s ease-in-out;
+		}
+		.home:hover{
+			border: 2px solid #fff;
+		}
+        aside{
+			max-width: 50%;
+        }
+        aside img{
+            height: 100%;
+			width: 100%;
+        }
+        .about{
+            position: sticky;
+            width: 100%;
+            /* height: 951px; */
+            /* max-width: 1500px; */
+            margin: 0 auto;
+            background: white;
+            border-top: 8px solid #edc24b;
+            box-shadow: 0px 0px 20px #0003, 0 0 5px #0006;
+            z-index: 50;
+			padding: 8em 4em 12em 4em;
+        }
+        .about1{
+            top: -50em;
+        }
+		.about p, .about ul{
+			font-size:2em;
+			max-width: 600px;
+			margin: 1em 1em 0em auto;
+			padding-bottom: 1em;
+		}
+		 .heading{
+			font-size: 4em;
+			padding : 0em  0 0 0em;
+            color: #edc24b;
+            text-shadow:3px 2px 2px #dc5b04;
+		}
+		.about hr{
+			width: 10em;
+			height: 0.1em;
+			margin :2em auto;
+			background-color: #edc24b;
+			border: none;
+		}
+        .skills, .contacts{
+            /* position: sticky;
+            top: 0; */
+            width: 100%;
+            z-index: 30;
+            background-color: #4577f5;
+            background-attachment: fixed;
+            width: 100%;
+            display: flex;
+            background: linear-gradient(0deg, #0e76f5,#0c88f5 20%,#09a9f4 50%, #06c1f4 70%,#02e2f3 100%);
+        }
+        .skills >div, .contacts> div{
+            background-attachment: fixed;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+			transition: opacity .5s ease;
+			padding: 7em 1em 4em 1em;
+        }
+		.skills >div{
+			
+            background: linear-gradient(0deg, #0e76f5,#0c88f5 20%,#09a9f4 50%, #06c1f4 70%,#02e2f3 100%);
+		}
+		.skills{
+			max-height: 500px;
+			position: relative;
+		}
+		.paralex{
+			position: absolute;
+			top:0;
+			left:0;
+			z-index: -1;
+			overflow: hidden;
+		}
+		.paralex img{
+			position: absolute;
+			bottom: 0;
+			left:0;
+			width: 100%;
+			transform-origin: bottom;
+		}
+		.paralex h1{
+			position: absolute;
+			left: 4em;
+			top: 30%;
+			text-align: center;
+			font-size: 3em;
+			color: #3252;
+			background: linear-gradient(45deg, #a3905b, #131e29);
+			-webkit-background-clip: text;
+
+		}
+		.paralex img:nth-child(1){
+			/*position: static;*/
+		}
+		
+        .contacts{
+            position: sticky;
+            bottom: 0;
+			color: #fff;
+			padding: 8em 1em;
+        }
+		.contacts a{ 
+		font-weight: normal;
+			color: #dc5b04;
+		}
+		.contacts a:hover{
+            text-shadow:2px 1px 2px #edc24b;
+		}
+		.contacts h3{
+			display: flex;
+			align-items: center;
+			font-size: 1.5em;
+			margin: .25em;
+		}
+		.icon{
+			fill: #fff;
+			width: 1.4em;
+			height: 1.4em;
+			margin: .25em;
+		}
+		.loader{
+		margin: 3em;
+        width: 10em;
+        height: 10em;
+        border-radius: 50%;
+        --loader-width: .5em;
+        --loader-clr: #edc24b;
+        border:var(--loader-width) solid var(--loader-clr); 
+        animation: loader 1s ease-in-out infinite ;
+		}
+		@media (max-width:800px) {
+			html{
+				font-size: .75rem;
+			}
+			.about p, .about ul{
+				max-width: 500px;
+			}
+		}
+		@media (max-width:600px) {
+			html{
+				font-size: .7rem;
+			}
+			article{
+				width: 94%;
+			}
+            aside {
+				max-width: unset;
+				height:100%;
+            }
+            .welcome{
+				flex-direction: column-reverse;
+				align-items: stretch;
+			}
+			aside img{
+			}
+			.welcome div{
+				background: #03def3;
+				font-size: .8rem;
+				padding:10em 1em 3em 1em;
+			}
+			.about1 {
+				top: -60em;
+			}
+			.about p{
+				margin: 2em .75em 0em 1em;
+			}
+			 .about ul{
+				margin: 2em .75em 0em 2em;
+			}
+			.contacts{
+				flex-direction: column;
+			}
+            .skills{
+				height: auto;
+				font-size: .75em;
+			}
+			.skills > div{
+				padding: 5em 1em 3em 1em;
+			}
+        }
+        @media (max-width:400px) {
+            html{
+				font-size: .5rem;
+			}
+            aside {
+			
+            }
+            
+        }
+        
+    @keyframes loader{
+        0%{
+        border-bottom: var(--loader-width) solid var(--loader-clr);
+        border-right: var(--loader-width) solid var(--loader-clr);
+        border-top: var(--loader-width) solid var(--loader-clr); 
+        transform: rotate(0deg) ;
+        }
+        10%{
+        border-bottom: 0px solid var(--loader-clr);
+        border-right: var(--loader-width) solid var(--loader-clr);
+        }
+        11%{
+        border-bottom: var(--loader-width) solid transparent;
+        }
+        20%{
+        border-right: 0px solid var(--loader-clr);
+        border-top: var(--loader-width) solid var(--loader-clr);
+        }
+        30%{
+        border-top: 0px solid var(--loader-clr);
+        }
+        69%{
+        border-bottom: var(--loader-width) solid transparent;
+        }
+        70%{
+        border-bottom: 0px solid var(--loader-clr);
+        }
+        80%{
+        border-right: 0px solid var(--loader-clr);
+        border-bottom: var(--loader-width) solid var(--loader-clr);
+        }
+        90%{
+        border-top: 0px solid var(--loader-clr);
+        border-right: var(--loader-width) solid var(--loader-clr);
+        }
+        100%{
+        transform: rotate(-360deg);
+        border-bottom: var(--loader-width) solid var(--loader-clr);
+        border-right: var(--loader-width) solid var(--loader-clr);
+        border-top: var(--loader-width) solid var(--loader-clr);
+        }
+    }
+
+        </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>aelmardhi</title>
+</head>
+<body>
+    <section class="welcome">
+        <aside><img src="portrait.png" alt="portrait"></aside>
+        <div>
+			<a class="home" href="/">HOME</a>
+            <h1>Abdalla Elmardhi</h1>
+            <h3>web Developer</h3>
+        </div>
+    </section>
+    <main>
+        <article>
+        <section class="about about1">
+			<h1 class="heading">
+				About
+			</h1>
+			<p>
+				I'm Abdalla Elmardhi a software engineering graduate from University of khartoum, and a full stack web developer.
+				I use web technologies to create awesome apps, and make ideas come true.
+				<hr>
+			</p>
+			
+        </section>
+        <section class="skills">
+			<div class="paralex" id="images">
+					<img src="./layer_4.jpg"></img>
+					<img src="./layer_3.png"></img>
+					<h1>from <br/>Khartoum</h1>
+					<img src="./layer_2.png"></img>
+					<img src="./layer_1.png"></img>
+					
+			</div>
+            <div id="loaderDiv">
+                <h1 class="heading2">Aelmardhi</h1>
+				<div class="loader"></div>
+				
+            </div>
+        </section>
+    </article>
+        <article>
+        
+        <section class="about">
+			<h1 class="heading">Technologies</h1>
+			<h3>Here are a few technologies I’ve been working with recently:</h3>
+			<ul>
+				<li> NodeJs </li>
+				<li> ReactJs </li>
+				<li> MongoDb </li>
+				<li> PWA </li>
+				<li> webRTC </li>
+			</ul>
+			<hr/>
+        </section>
+        <section class="contacts">
+            <div>
+                <h1 class="heading">Contacts</h1>
+                <h3>
+				<svg class="icon" height="100%" id="Layer_1" style="" version="1.1" viewBox="3 3 49.6934 49.6934" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="29.3938,31.666 39.309,38.5604 39.309,24.8362 34.9235,27.8569 "/><path d="M28.3472,3.9229c-13.5996,0-24.625,11.0234-24.625,24.623c0,13.5997,11.0254,24.625,24.625,24.625  c13.5986,0,24.624-11.0253,24.624-24.625C52.9712,14.9463,41.9458,3.9229,28.3472,3.9229z M39.9141,39.7094v0.0007H16.7774h-0.8704  c-1.3447,0-2.4451-1.1003-2.4451-2.4451V20.5627c0-1.3448,1.1003-2.4451,2.4451-2.4451l0.0096,0.0072l-0.0096-0.0078h24.9518  c1.3447,0,2.445,1.1002,2.445,2.4449v0.7087l0.0007-0.0005l-0.0007,0.0007l0.004,15.9963  C43.2494,39.0451,42.479,39.6797,39.9141,39.7094z"/><path d="M28.3421,32.2622c-0.1196,0-0.2391-0.0359-0.3419-0.1073l-0.1786-0.1244l-10.1835,7.0811h21.4153l-10.1863-7.0829  C28.8671,32.0287,28.4607,32.2622,28.3421,32.2622z"/><polygon points="40.858,18.1176 40.8587,18.117 40.8565,18.1187 "/><polygon points="39.037,18.7154 17.7191,18.7154 28.3432,26.5924 "/><polygon points="27.2877,31.659 17.382,24.8359 17.3764,38.5647 27.2976,31.666 "/></svg>
+				Email: <a  href="mailto:aelmardhi@gmail.com" rel="noopener noreferrer" target="_blank">aelmardhi@gmail.com</a></h3>
+				<h3>
+				<svg class="icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Telegram</title><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+				Telegram <a href="https://t.me/aelmardhi">@aelmardhi</a></h3>
+            </div>
+			<div>
+                <h1 class="heading">Profiles</h1>
+				<h3>
+				<svg class="icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+				Github <a href="https://github.com/aelmardhi">/aelmardhi</a></h3>
+				<h3>
+				<svg class="icon" height="100%" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;" version="1.1" viewBox="0 0 512 512" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:serif="http://www.serif.com/" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M256,0c141.29,0 256,114.71 256,256c0,141.29 -114.71,256 -256,256c-141.29,0 -256,-114.71 -256,-256c0,-141.29 114.71,-256 256,-256Zm-80.037,399.871l0,-199.921l-66.464,0l0,199.921l66.464,0Zm239.62,0l0,-114.646c0,-61.409 -32.787,-89.976 -76.509,-89.976c-35.255,0 -51.047,19.389 -59.889,33.007l0,-28.306l-66.447,0c0.881,18.757 0,199.921 0,199.921l66.446,0l0,-111.65c0,-5.976 0.43,-11.95 2.191,-16.221c4.795,-11.935 15.737,-24.299 34.095,-24.299c24.034,0 33.663,18.34 33.663,45.204l0,106.966l66.45,0Zm-272.403,-296.321c-22.74,0 -37.597,14.95 -37.597,34.545c0,19.182 14.405,34.544 36.717,34.544l0.429,0c23.175,0 37.6,-15.362 37.6,-34.544c-0.43,-19.595 -14.424,-34.545 -37.149,-34.545Z"/></svg>
+				LinkedIn: <a href="https://www.linkedin.com/in/abdalla-elmardhi-412960242/">Abdalla Elmardhi</a></h3>
+            </div>
+			
+        </section>
+        </article>
+    </main>
+	<script>
+	document.addEventListener('DOMContentLoaded',(e)=>{
+		const loaderDiv = document.getElementById('loaderDiv');
+		loaderDiv.style.opacity = 0;
+		let ims = document.querySelectorAll('#images img')
+		let text = document.querySelector('#images h1')
+		const _Y = ims[0].getBoundingClientRect().y - document.body.getBoundingClientRect().y
+		window.addEventListener('scroll',(e)=>{
+		let y = window.scrollY-_Y
+		if(y<0)y=0;
+		text.style.transform = 'translate('+y*-0.55+'px, '+y*0.2+'px)'
+		ims.forEach((m,i)=>{
+			m.style.transform = 'translateY('+y*0.1*(3-i)+'px) rotateX('+-y*i*0.02+'deg) scaleY('+(1+y*0.0001*i)+')'
+    })
+		})
+	
+	})
+	</script>
+</body>
+</html>
