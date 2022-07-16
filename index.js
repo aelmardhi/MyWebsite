@@ -23,6 +23,8 @@ const downloadRoute = require('./routes/download');
 const telegramRoute = require('./routes/telegram');
 const rtcRoute = require('./routes/rtc');
 const webPushRoute = require('./routes/webPush')
+const blogRoute = require('./routes/blog')
+const uploadImageRoute = require('./routes/uploadImage')
 
 const {deleteOld} = require('./models/subscribtion')
 
@@ -76,6 +78,10 @@ app.use((req,res,next) => {
     next();    
 });
 
+app.use('/blog/*',(req,res)=>{
+  res.sendFile(__dirname+'/public/blog/index.html')
+})
+
 app.use('/',webPushRoute);
 app.use('/api/user', authRoute);
 app.use('/api/messages', messageRoute);
@@ -84,6 +90,8 @@ app.use('/api/download', downloadRoute);
 app.use('/api/upload', uploadRoute);
 app.use('/api/telegram/'+process.env.TELEGRAM_TOKEN,telegramRoute);
 app.use('/api/rtc',rtcRoute);
+app.use('/api/blog',blogRoute);
+app.use('/api/uploadImage',uploadImageRoute);
 app.use("/peerjs", peerServer);
 // if no page match
 app.get('*', (req,res) => {
