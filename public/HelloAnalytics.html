@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Hello Analytics Reporting API V4</title>
+</head>
+<body>
+
+<h1>Hello Analytics Reporting API V4</h1>
+
+<!-- The API response will be printed here. -->
+<textarea cols="80" rows="20" id="query-output"></textarea>
+
+<script>
+  // Replace with your view ID.
+  var VIEW_ID = '257395433';
+
+  // Query the API and print the results to the page.
+
+  var access_token
+  var client
+  
+function rr2(a){
+
+	fetch('https://analyticsreporting.googleapis.com/v4/reports:batchGet',{
+		method: 'POST',
+	  headers:{
+		'Authorization': 'Bearer ' + access_token,
+		'Content-Type': 'application/json'
+	  },
+      body:JSON.stringify( {
+        reportRequests: [
+          {
+            viewId: VIEW_ID,
+            dateRanges: [
+              {
+                startDate: '7daysAgo',
+                endDate: 'today'
+              }
+            ],
+            metrics: [
+              {
+                expression: 'ga:sessions'
+              }
+            ]
+          }
+        ]
+      })
+	}).then(r=>r.json().then(displayResults))
+}
+  function displayResults(response) {
+    var formattedJson = JSON.stringify(response, null, 2);
+    document.getElementById('query-output').value = formattedJson;
+  }
+
+function init1(){
+client = google.accounts.oauth2.initTokenClient({
+          client_id: '650621703015-6t9gmfvi9ciscgucuojjhofvjqpothu3.apps.googleusercontent.com',
+          scope: 'https://www.googleapis.com/auth/analytics.readonly',
+          callback: (tokenResponse) => {
+			console.log(tokenResponse)
+            access_token = tokenResponse.access_token;
+			rr2()
+          },
+        });
+console.log( client)
+
+}
+function getToken() {
+        client.requestAccessToken();
+		
+      }
+</script>
+<button onclick= getToken()>sign In</button>
+<!-- Load the JavaScript API client and Sign-in library. -->
+<script src="https://accounts.google.com/gsi/client" async defer onload="init1()"></script>
+</body>
+</html>
