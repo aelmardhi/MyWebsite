@@ -13,3 +13,5 @@ a pwa
 * dip tasks and image editor
 * ytl
 * games
+
+this project uses Cloudinary for storing media and files and Mongo Atlas for NoSql database
