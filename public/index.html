@@ -181,6 +181,7 @@
             position: relative;
             margin: 5px;
             height: fit-content;
+			border: none;
         }
         .downloads ul li a{
             display: flex;
@@ -567,7 +568,7 @@
                 });
             
             fetch('/api/blog').then(r => r.json()).then(res => {
-                console.log(res);
+                
                 postsList.innerHTML = res.map(p =>{ 
                      return `<li><a href="/blog/post/${p.id}">
                         <div class="header">
