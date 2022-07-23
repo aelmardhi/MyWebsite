@@ -25,6 +25,7 @@ const rtcRoute = require('./routes/rtc');
 const webPushRoute = require('./routes/webPush')
 const blogRoute = require('./routes/blog')
 const uploadImageRoute = require('./routes/uploadImage')
+const scrapeRoute = require('./routes/scrape')
 
 const {deleteOld} = require('./models/subscribtion')
 
@@ -92,6 +93,7 @@ app.use('/api/telegram/'+process.env.TELEGRAM_TOKEN,telegramRoute);
 app.use('/api/rtc',rtcRoute);
 app.use('/api/blog',blogRoute);
 app.use('/api/uploadImage',uploadImageRoute);
+app.use('/api/scrape',scrapeRoute);
 app.use("/peerjs", peerServer);
 // if no page match
 app.get('*', (req,res) => {
