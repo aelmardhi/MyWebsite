@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Islamic Prayers Time</title>
+    <script src="./prayers.js"></script>
+</head>
+<style>
+:root{
+    --clr-primary:#e1ecfc;
+    --clr-secondary: #39f;
+    --clr-accent1: #06e;
+    --clr-accent2: #5af;
+    --clr-accent3: #0061e3;
+    --clr-accent4: #3af;
+    --clr-light: #fff;
+    --clr-body : #fff;
+    --clr-danger: #cf1b24;
+    --clr-main: none;
+    --border1 :  2px solid #39f9;
+    --bs-main: none;
+    --bs-article: 2px 2px 10px #0003, 10px 10px 20px  #39f5;
+    --bs-downloads: inset 0 0 8px #0003 , inset 0 0 15px #0001;
+    --bs-downloads-hover: 0 0 6px #0005, 0 0 12px #0003;
+    --bs-games:inset 0 0 8px #0005 , inset 0 0 15px #0003;
+}
+@media(prefers-color-scheme: dark){ 
+    :root{   
+    --clr-primary:#232834;
+    --clr-secondary: #126;
+    --clr-accent1: #025;
+    --clr-accent2: #128;
+    --clr-accent3: #92b3ff;
+    --clr-accent4: #126;
+    --clr-light: #fff;
+    --clr-body : #161009;
+    --clr-main: #111320;
+    --clr-danger: #8f0a10;
+    --border1 :  none;
+    --bs-main: inset 0 0 15px #5693, 0 0 10px #5696;
+    --bs-article: none;
+    --bs-downloads: inset 0 0 8px #0003 , inset 0 0 15px #0001;
+    --bs-downloads-hover: 0 0 6px #0005, 0 0 12px #0003;
+    --bs-games:inset 0 0 8px #0005 , inset 0 0 15px #0003;
+    }
+}
+*, *:after, *:before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    width: 100vw;
+    height: 100%;
+    justify-content: space-around;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--clr-body);
+    overflow-x: hidden;
+    font-family: system-ui ,sans-serif;
+}
+main{
+    margin: 2em auto;
+    max-width: 800px;
+    width: 100%;
+    background-color: var(--clr-primary);
+    box-shadow: var(--bs-article);
+    display: flex;
+    flex-direction: column;
+    border-radius: 1em;
+    overflow: hidden;
+}
+h1{
+    color: var(--clr-light);
+    padding: .5em 2em;
+    font-size: 3em;
+    text-align: center;
+    background: linear-gradient(90deg,var(--clr-accent1) 20%, var(--clr-accent2) 70%, var(--clr-secondary) 100%);;
+}
+table{
+    border: none;
+    width: 100%;
+    border-collapse: collapse;
+}
+tr{
+    
+    background:linear-gradient(90deg,var(--clr-accent2) , var(--clr-primary) );
+
+}
+tr:nth-child(even){
+    background:linear-gradient(90deg,var(--clr-primary) , var(--clr-accent2) );
+}
+button{
+    font-weight: bold;
+    font-size: large;
+    padding: .5em 3em;
+    margin: .5em;
+}
+td{
+    text-align: center;
+    font-size: 2em;
+    padding: .8em .2em; 
+}
+#location{
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    padding: .25em;
+}
+.controls{  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.controls fieldset{
+    display: flex;
+    flex-direction: row;
+    border: none;
+}
+.controls fieldset input{
+    flex-grow: 2;
+    margin: .25em 1em;
+    padding: .25em 1em;
+}
+.info{
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+    padding: .5em;
+    background-color: var(--clr-accent3);
+    color: var(--clr-light);
+    border: 2px dashed var(--clr-primary);
+}
+.changeLocation{
+    background-color: var(--clr-accent2);
+    color: var(--clr-light);
+    border: none;
+    box-shadow: var(--bs-article);
+}
+.changeLocation:hover{
+    background-color: var(--clr-accent1);
+}
+.changeLocation:active{
+    box-shadow: var(--bs-main);
+}
+@media screen and (max-width:800px){
+    body{
+        font-size: .75em;
+    }
+    main{
+        margin: 0;
+        border-radius: 0;
+    }
+    h1{
+        font-size: 3em;
+        padding: .5em .5em;
+    }
+}
+</style>
+<body>
+    <main>
+        <h1>Prayers Times</h1>
+        <table id="prayers">
+            <tbody></tbody>
+        </table>
+        <div class="controls">
+            <div class="info" id="info"> default location is Khartoum North</div>
+            <div id="location">
+                <fieldset>
+                    <label for="Lng">Longitude</label>
+                    <input type="number" id="Lng">
+                </fieldset>
+                <fieldset>
+                    <label for="Lat">Latitude</label>
+                    <input type="number" id="Lat">
+                </fieldset>
+                <button onclick="onAutoDetect()">Auto Detect Location</button>
+            </div>
+            <!-- <a id="setAlarm">Set Alarm</a> -->
+            <button class="changeLocation" onclick="changeLocation()">Chage Location</button>
+        </div>
+    </main>
+    <script>
+        const setAlarmLink = document.getElementById('setAlarm')
+        const list = document.querySelector('#prayers tbody')
+        const locationElement = document.getElementById('location')
+        let changeLocationVisible = false
+        function changeLocation(){
+            if(!changeLocationVisible){
+                changeLocationVisible = true
+                locationElement.style.display = 'flex' 
+                return
+            }
+            const lat = parseFloat( document.getElementById('Lat').value)
+            const lng = parseFloat( document.getElementById('Lng').value)
+            const TimeZone = (new Date().getTimezoneOffset())/-60
+            setTime(lng, lat, TimeZone)
+            printInfo(`for the location- Longitude: ${lng} and Lat: ${lat} `)
+        }
+        
+        function onAutoDetect(){
+            navigator.geolocation.getCurrentPosition((r)=>{
+               
+                const {latitude: lat, longitude:lng} = r.coords
+                const TimeZone = (new Date().getTimezoneOffset())/-60
+                setTime(lng, lat, TimeZone)
+                printInfo(`for the location detected- Longitude: ${lng} and Lat: ${lat} `)
+            } )
+        }
+        function printInfo(s){
+            document.getElementById('info').innerText = s
+        }
+        function setAlarm(t){
+            const intent = `
+            intent:  
+            tel:+249118331999
+            #Intent;   
+                action=ACTION_DIAL;  
+            end;
+            `
+            setAlarmLink.href = intent.replaceAll(' ','')
+        }
+        function setTime(){
+            let times
+            if(arguments.length)
+                times = prayerTimes(...arguments)
+            else 
+                times = prayerTimes()
+            
+            list.innerHTML = `
+            <tr><td>Fajr </td><td>${times.Fajr}</td></tr>
+            <tr><td>Sunrise </td><td>${times.Sunrise}</td></tr>
+            <tr><td>Dhuhr </td><td>${times.Dhuhr}</td></tr>
+            <tr><td>Asr </td><td>${times.Asr}</td></tr>
+            <tr><td>Maghrib </td><td>${times.Maghrib}</td></tr>
+            <tr><td>Isha </td><td>${times.Isha}</td></tr>
+            `;
+            // setAlarm(times.Fajr)
+        }
+        setTime()
+    </script>
+</body>
+</html>
