@@ -17,15 +17,6 @@ router.get('/',async (req, res)=>{
 
 
 
-(async () => {
-    
-    
-
-    writeable.write(JSON.stringify())
-    
-  
-  
-})()
 
 
 async function getKooraHome(browser){
