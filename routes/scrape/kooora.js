@@ -4,13 +4,17 @@ const puppeteer = require('puppeteer');
 
 
 router.get('/',async (req, res)=>{
-    const browser = await puppeteer.launch()
+    try{
+        const browser = await puppeteer.launch()
 
-    const main = await getKooraHome(browser)
-    const barca = await getKooraTeamImportant(browser, 63)
-    browser.close()
+        const main = await getKooraHome(browser)
+        const barca = await getKooraTeamImportant(browser, 63)
+        browser.close()
 
-    return res.json({...main, barca,baseUrl:'https://www.kooora.com/default.aspx'})
+        return res.json({...main, barca,baseUrl:'https://www.kooora.com/default.aspx'})
+    }catch(e){
+        res.status(500).send('some error happend')
+    }
 })
 
 
@@ -103,7 +107,7 @@ async function getKooraTeamImportant (browser, team){
     }
     function parseScoreRow (r){
         return{
-            cmpetetion: parseTD(r.childNodes[0]),
+            competetion: parseTD(r.childNodes[0]),
             time: parseTD(r.childNodes[1]),
             home:  parseTD(r.childNodes[3]),
             score: parseTD(r.childNodes[4]),

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
     <style>
         :root{
             --clr-primary:#e1ecfc;
@@ -53,25 +53,105 @@
             background-color: var(--clr-body);
             overflow-x: hidden;
             font-family: system-ui ,sans-serif;
+            font-size: .8rem;
             color: var(--clr-accent3);
         }
+        main{
+            max-width: 1000px;
+            margin: .5em auto;
+            width: 100%;
+        }
+        img{
+            width: 5em;
+            height: 5em;
+        }
+
+        section{
+            display: flex;
+            flex-direction:row;
+            align-items: start;
+            justify-content: stretch;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        section > div{
+            display: flex;
+            flex-direction:column;
+            align-items:center;
+            width: 100%;
+            border: 2px solid var(--clr-accent1);
+            box-shadow: var(--bs-article);
+            border-radius: .5em;
+            overflow: hidden;
+        }
+        progress{
+            width: 100%;
+            padding: 1em;
+        }
+        h1,h2{
+            font-size: 2.5em;
+            padding: .5em 1em;
+            background: var(--clr-accent2);
+            color: var(--clr-light);
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+        }
+        h1{
+            background: var(--clr-accent1)
+        }
+        table{
+            width:100%;
+            
+                    border-collapse: collapse ;
+        }
+        tr{
+            background: var(--clr-primary)
+        }
+        tr:nth-child(even){
+            background: var(--clr-accent2);
+            color: var(--clr-llightblue);
+        }
+        td{
+            padding:1em;
+        }
+        @media screen and (max-width:800px){
+            section{
+                flex-direction: column;
+            }
+            section > div{
+                margin-bottom: 1em;
+            }
+        }
+
     </style>
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Feed</title>
+        
     </head>
     <body>
         <main>
             <section>
-                <div id="currentMatches" class="matches"><ul></ul></div>
-                <div class="news" id="featuredNews"><ul></ul></div>
+                <div class="matches">
+                    <h2>المباريات الحالية</h2>
+                    <table><tbody id="currentMatches"><tr><td><progress></progress></td></tr></tbody></table>
+                </div>
+                <div class="news">
+                    <h2>اﻷخبار</h2>
+                    <table><tbody id="featuredNews"><tr><td><progress></progress></td></tr></tbody></table>
+                </div>
             </section>
-            <h1>FC Barcelona</h1>
+            <h1>برشلونة</h1>
             <section class="barcelona" id="barcelona">
-                <div id="matches" class="matches"><ul></ul></div>
-                <div class="news" id="news"><ul></ul></div>
+                <div  class="matches">
+                    <h2>مباريات</h2>
+                    <table><tbody id="matches"><tr><td><progress></progress></td></tr></tbody></table></div>
+                <div class="news">
+                    <h2>اخبار</h2>
+                    <table ><tbody  id="news"><tr><td><progress></progress></td></tr></tbody></table></div>
             </section>
         </main>
         <script>
@@ -79,16 +159,64 @@
             const featuredNews = document.getElementById('featuredNews')
             const barcelona = {
                 element: document.getElementById('barcelona'),  
-                news: document.getElementById('barcelona').getElementById('news'),  
+                news: document.querySelector('#barcelona #news'),
+                matches: document.querySelector('#barcelona #matches'),
+
             }
             fetch('/api/scrape/kooora',
                 {
                     method: 'GET',
                     headers: {
-                        accept:'Accept/json'
+                        accept:'Applicaion/json'
                     }
                 }
             ).then(r=>r.json()).then(d=>{
+ 
+                currentMatches.innerHTML = d.matches.map(m =>{
+                    return `<tr onclick=" location='${d.baseUrl+m?.url}';">
+                            <td>
+                                ${m.home.img?
+                                    `<img src="${m.home?.img}" alt="${m.home?.name}"></img>`
+                                    : `<b>${m.home?.name}</b>`  }
+                            </td>
+                            <td>${m.score}</td>
+                            <td>
+                                ${m.away.img?
+                                    `<img src="${m.away?.img}" alt="${m.away?.name}"></img>`
+                                    : `<b>${m.away?.name}</b>`  }
+                            </td>
+                            </tr>`
+                }).join('')
+
+                featuredNews.innerHTML = d.news.map(r =>{
+                    return `<tr onclick=" location='${d.baseUrl+r?.url}';">
+                            <td><img src="${r?.img}"></img></td>
+                            <td><h3> ${r?.text}</h3></td>
+                        </tr>`
+                }).join('')
+
+                barcelona.matches.innerHTML = d.barca.matches.map(m =>{
+                    return `<tr onclick=" location='${d.baseUrl+m?.url}';">
+                            <td>
+                                <a href="${d.baseUrl+m.home?.href}">${m.home?.name}</a>    
+                            </td>
+                            <td><a href="${d.baseUrl+m.score?.href}">${m.score?.name}</a> </td>
+                            <td>
+                                <a href="${d.baseUrl+m.away?.href}">${m.away?.name}</a> 
+                            </td>
+                            <td>${m.time}</td>
+                            <td>
+                                <a href="${d.baseUrl+m.competetion?.href}">${m.competetion?.name}</a> 
+                            </td>
+                        </tr>`
+                }).join('')
+
+                barcelona.news.innerHTML = d.barca.news.map(r =>{
+                    return `<tr onclick=" location='${d.baseUrl+r?.url}';">
+                            <td><img src="${r?.img}"></img></td>
+                            <td><h3> ${r?.text}</h3></td>
+                        </tr>`
+                }).join('')
 
             })
         </script>
