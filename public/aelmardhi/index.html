@@ -132,7 +132,7 @@
             align-items: center;
             height: 100%;
 			transition: opacity .5s ease;
-			padding: 7em 1em 4em 1em;
+			padding: 7em 0em 4em 0em;
         }
 		.skills >div{
 			
@@ -168,7 +168,7 @@
 
 		}
 		.paralex img:nth-child(1){
-			/*position: static;*/
+			position: static;
 		}
 		
         .contacts{
@@ -229,8 +229,7 @@
 				flex-direction: column-reverse;
 				align-items: stretch;
 			}
-			aside img{
-			}
+			
 			.welcome div{
 				background: #03def3;
 				font-size: .8rem;
@@ -253,16 +252,13 @@
 				font-size: .75em;
 			}
 			.skills > div{
-				padding: 5em 1em 3em 1em;
+				padding: 5em 0em 3em 0em;
 			}
         }
         @media (max-width:400px) {
             html{
 				font-size: .5rem;
 			}
-            aside {
-			
-            }
             
         }
         
@@ -391,11 +387,21 @@
         </article>
     </main>
 	<script>
-	document.addEventListener('DOMContentLoaded',(e)=>{
+	let ims = document.querySelectorAll('#images img')
+	let text = document.querySelector('#images h1')
+	let imgsCount = ims.length;
+	ims.forEach(i=>{
+		i.onload = function(){
+			imgsCount--;
+			if(imgsCount <= 0){
+				onImgsLoadedAll()
+			}
+		}
+	})
+	function onImgsLoadedAll(){
 		const loaderDiv = document.getElementById('loaderDiv');
 		loaderDiv.style.opacity = 0;
-		let ims = document.querySelectorAll('#images img')
-		let text = document.querySelector('#images h1')
+		
 		const _Y = ims[0].getBoundingClientRect().y - document.body.getBoundingClientRect().y
 		window.addEventListener('scroll',(e)=>{
 		let y = window.scrollY-_Y
@@ -406,7 +412,7 @@
     })
 		})
 	
-	})
+	}
 	</script>
 </body>
 </html>
