@@ -26,7 +26,7 @@ router.get('/',async (req, res)=>{
 async function getKooraHome(browser){
 
     const page = await browser.newPage()
-    await page.goto('https://www.kooora.com/default.aspx',{timeout:100000})
+    await page.goto('https://www.kooora.com/default.aspx',{timeout:300000})
     const matches = await page.$eval('.liveMatches > table', el => {
         function parseTD(td){
             if(td.classList.contains('liveTeam')){
@@ -94,7 +94,7 @@ async function getKooraHome(browser){
 
 async function getKooraTeamImportant (browser, team){
     const page = await browser.newPage()
-  await page.goto('https://www.kooora.com/default.aspx?team='+team,{timeout:100000})
+  await page.goto('https://www.kooora.com/default.aspx?team='+team,{timeout:300000})
   const matches = await page.$eval('.lastMatches > table', el => {
     function parseTD(td){
         const a= td.childNodes[0]
