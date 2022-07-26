@@ -4,20 +4,16 @@ var filesToCache = [
   '/',
   '/index.html',
   'error_connect.html',
-  '/dithering/',
-  '/dithering/index.html',
-  '/dithering/script.js',
-  '/filter/',
-  '/filter/index.html',
-  '/filter/script.js',
-  '/jpeg/',
-  '/jpeg/index.html',
-  '/jpeg/decoder.js',
-  '/jpeg/encoder.js',
-  '/jpeg/main.js',
-  '/jpeg/style.css',
-  '/screenRecorder/',
-  '/screenRecorder/index.html',
+];
+
+const foldersToCache = [
+  '/aelmardhi',
+  'games',
+  '/dithering',
+  '/filter',
+  '/jpeg',
+  '/jpeg',
+  '/screenRecorder',
 ];
 
 /* Start the service worker and cache all of the app's content */
@@ -42,6 +38,10 @@ self.addEventListener('fetch', function(e) {
     }
     try{
     let networkResponse = await fetch(e.request)
+    const path = new URL(e.request.url).pathname
+    if(foldersToCache.some(l=> path.match(l))){
+      cache.put(e.request,networkResponse);
+    }
     return networkResponse
     }catch (e){
      return await cache.match('error_connect.html');
