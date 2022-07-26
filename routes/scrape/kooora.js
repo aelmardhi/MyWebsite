@@ -14,6 +14,7 @@ router.get('/',async (req, res)=>{
         return res.json({...main, barca,baseUrl:'https://www.kooora.com/default.aspx',time: new Date()})
     }catch(e){
         res.status(500).send('some error happend')
+        console.log(req.path+'::'+e.message)
     }
 })
 
