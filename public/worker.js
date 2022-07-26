@@ -4,14 +4,16 @@ var filesToCache = [
   '/',
   '/index.html',
   'error_connect.html',
+  /// APIs
+  '/api/scrape/kooora'
 ];
 
 const foldersToCache = [
+  '/feed',
   '/aelmardhi',
   'games',
   '/dithering',
   '/filter',
-  '/jpeg',
   '/jpeg',
   '/screenRecorder',
 ];

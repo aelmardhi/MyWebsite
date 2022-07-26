@@ -11,7 +11,7 @@ router.get('/',async (req, res)=>{
         const barca = await getKooraTeamImportant(browser, 63)
         browser.close()
 
-        return res.json({...main, barca,baseUrl:'https://www.kooora.com/default.aspx'})
+        return res.json({...main, barca,baseUrl:'https://www.kooora.com/default.aspx',time: new Date()})
     }catch(e){
         res.status(500).send('some error happend')
     }

@@ -65,7 +65,9 @@
             width: 5em;
             height: 5em;
         }
-
+        a:any-link{
+            color: var(--clr-accent3);
+        }
         section{
             display: flex;
             flex-direction:row;
@@ -134,6 +136,7 @@
     </head>
     <body>
         <main>
+            <p id="lastTimeUpdated"></p>
             <section>
                 <div class="matches">
                     <h2>المباريات الحالية</h2>
@@ -157,6 +160,7 @@
         <script>
             const currentMatches = document.getElementById('currentMatches')
             const featuredNews = document.getElementById('featuredNews')
+            const lastTimeUpdated= document.getElementById('lastTimeUpdated')
             const barcelona = {
                 element: document.getElementById('barcelona'),  
                 news: document.querySelector('#barcelona #news'),
@@ -171,7 +175,7 @@
                     }
                 }
             ).then(r=>r.json()).then(d=>{
- 
+                lastTimeUpdated.textContent = `Last update on ${d.time}`
                 currentMatches.innerHTML = d.matches.map(m =>{
                     return `<tr onclick=" location='${d.baseUrl+m?.url}';">
                             <td>
