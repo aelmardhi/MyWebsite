@@ -10,8 +10,9 @@ var filesToCache = [
 
 const foldersToCache = [
   '/feed',
+  '/prayers',
   '/aelmardhi',
-  'games',
+  '/games',
   '/dithering',
   '/filter',
   '/jpeg',
