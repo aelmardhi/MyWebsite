@@ -9,11 +9,11 @@ router.get('/',async (req, res)=>{
         const timezone = req.headers.timezone || "Africa/Khartoum"
         const page = await browser.newPage()
         page.emulateTimezone(timezone)
-        const main = await getKooraHome(page)
-        const barca = await getKooraTeamImportant(page, 63)
+        const [main,barca]=await Promise.all([getKooraHome(page),getKooraTeamImportant(page, 63)]);
+        
         browser.close()
 
-        return res.json({...main, barca,baseUrl:'https://www.kooora.com/default.aspx',time: new Date()})
+        return res.json({...main, barca,baseUrl:'https://www.kooora.com/default.aspx',time:  Date()})
     }catch(e){
         res.status(500).send('some error happend')
         console.log(req.path+'::'+e.message)
