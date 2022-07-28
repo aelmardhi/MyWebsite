@@ -6,9 +6,11 @@ const puppeteer = require('puppeteer');
 router.get('/',async (req, res)=>{
     try{
         const browser = await puppeteer.launch()
-
-        const main = await getKooraHome(browser)
-        const barca = await getKooraTeamImportant(browser, 63)
+        const timezone = req.headers.timezone || "Africa:Khartoum"
+        const page = await browser.newPage()
+        page.emulateTimezone(timezone)
+        const main = await getKooraHome(page)
+        const barca = await getKooraTeamImportant(page, 63)
         browser.close()
 
         return res.json({...main, barca,baseUrl:'https://www.kooora.com/default.aspx',time: new Date()})
@@ -24,10 +26,9 @@ router.get('/',async (req, res)=>{
 
 
 
-async function getKooraHome(browser){
+async function getKooraHome(page){
 
-    const page = await browser.newPage()
-    await page.goto('https://www.kooora.com/default.aspx',{timeout:300000})
+    await page.goto('https://www.kooora.com/default.aspx',{timeout:300000, waitUntil:"domcontentloaded"})
     const matches = await page.$eval('.liveMatches > table', el => {
         function parseTD(td){
             if(td.classList.contains('liveTeam')){
@@ -93,9 +94,8 @@ async function getKooraHome(browser){
     return {news, matches}
 }
 
-async function getKooraTeamImportant (browser, team){
-    const page = await browser.newPage()
-  await page.goto('https://www.kooora.com/default.aspx?team='+team,{timeout:300000})
+async function getKooraTeamImportant (page, team){
+  await page.goto('https://www.kooora.com/default.aspx?team='+team,{timeout:300000, waitUntil:"domcontentloaded"})
   const matches = await page.$eval('.lastMatches > table', el => {
     function parseTD(td){
         const a= td.childNodes[0]

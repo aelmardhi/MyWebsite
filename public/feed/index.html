@@ -171,7 +171,8 @@
                 {
                     method: 'GET',
                     headers: {
-                        accept:'Applicaion/json'
+                        accept:'Applicaion/json',
+                        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || ''
                     }
                 }
             ).then(r=>r.json()).then(d=>{
