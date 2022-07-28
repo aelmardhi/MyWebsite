@@ -3,19 +3,19 @@ var cacheName = 'hello-pwa';
 var filesToCache = [
   '/',
   '/index.html',
-  'error_connect.html',
+  '/error_connect.html',
   /// APIs
   '/api/scrape/kooora'
 ];
 
 const foldersToCache = [
-  '/feed',
-  '/prayers',
   '/aelmardhi',
-  '/games',
   '/dithering',
+  '/feed',
   '/filter',
+  '/games',
   '/jpeg',
+  '/prayers',
   '/screenRecorder',
 ];
 
