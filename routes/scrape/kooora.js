@@ -27,7 +27,7 @@ router.get('/',async (req, res)=>{
 
 
 async function getKooraHome(page){
-
+    try{
     await page.goto('https://www.kooora.com/default.aspx',{timeout:300000, waitUntil:"domcontentloaded"})
     const matches = await page.$eval('.liveMatches > table', el => {
         function parseTD(td){
@@ -60,7 +60,6 @@ async function getKooraHome(page){
         
         return  r
     
-    
     })
 
     let featurednews = await page.$eval('#featuredNews > ul', el => {
@@ -92,9 +91,14 @@ async function getKooraHome(page){
     })
     news.push(...featurednews)
     return {news, matches}
+
+}catch(e){
+    throw e;
+}
 }
 
 async function getKooraTeamImportant (page, team){
+    try{
   await page.goto('https://www.kooora.com/default.aspx?team='+team,{timeout:300000, waitUntil:"domcontentloaded"})
   const matches = await page.$eval('.lastMatches > table', el => {
     function parseTD(td){
@@ -145,6 +149,10 @@ async function getKooraTeamImportant (page, team){
     })
 
     return {news, matches, team}
+
+}catch(e){
+    throw e;
+}
 }
 
 
