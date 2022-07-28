@@ -6,7 +6,7 @@ const puppeteer = require('puppeteer');
 router.get('/',async (req, res)=>{
     try{
         const browser = await puppeteer.launch()
-        const timezone = req.headers.timezone || "Africa:Khartoum"
+        const timezone = req.headers.timezone || "Africa/Khartoum"
         const page = await browser.newPage()
         page.emulateTimezone(timezone)
         const main = await getKooraHome(page)
