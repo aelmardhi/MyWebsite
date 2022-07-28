@@ -176,7 +176,7 @@
                     }
                 }
             ).then(r=>r.json()).then(d=>{
-                lastTimeUpdated.textContent = `Last update on ${Date.parse(d.time)}`
+                lastTimeUpdated.textContent = `Last update on ${(new Date(d.time)).toString()}`
                 currentMatches.innerHTML = d.matches.map(m =>{
                     return `<tr onclick=" location='${d.baseUrl+m?.url}';">
                             <td>

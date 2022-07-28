@@ -7,16 +7,14 @@ router.get('/',async (req, res)=>{
     try{
         const browser = await puppeteer.launch()
         const timezone = req.headers.timezone || "Africa/Khartoum"
-        const page = await browser.newPage()
-        page.emulateTimezone(timezone)
-        const [main,barca]=await Promise.all([getKooraHome(page),getKooraTeamImportant(page, 63)]);
+        const [main,barca]=await Promise.all([getKooraHome(browser,timezone),getKooraTeamImportant(browser,timezone, 63)]);
         
         browser.close()
-
+        timezone
         return res.json({...main, barca,baseUrl:'https://www.kooora.com/default.aspx',time:  Date()})
     }catch(e){
         res.status(500).send('some error happend')
-        console.log(req.path+'::'+e.message)
+        console.log(req.route.toString()+'::'+e.message)
     }
 })
 
@@ -26,9 +24,11 @@ router.get('/',async (req, res)=>{
 
 
 
-async function getKooraHome(page){
+async function getKooraHome(browser,timezone){
     try{
-    await page.goto('https://www.kooora.com/default.aspx',{timeout:300000, waitUntil:"domcontentloaded"})
+        const page = await browser.newPage()
+        page.emulateTimezone(timezone)
+        await page.goto('https://www.kooora.com/default.aspx',{timeout:300000, waitUntil:"domcontentloaded"})
     const matches = await page.$eval('.liveMatches > table', el => {
         function parseTD(td){
             if(td.classList.contains('liveTeam')){
@@ -97,9 +97,11 @@ async function getKooraHome(page){
 }
 }
 
-async function getKooraTeamImportant (page, team){
+async function getKooraTeamImportant (browser,timezone, team){
     try{
-  await page.goto('https://www.kooora.com/default.aspx?team='+team,{timeout:300000, waitUntil:"domcontentloaded"})
+        const page = await browser.newPage()
+        page.emulateTimezone(timezone)
+        await page.goto('https://www.kooora.com/default.aspx?team='+team,{timeout:300000, waitUntil:"domcontentloaded"})
   const matches = await page.$eval('.lastMatches > table', el => {
     function parseTD(td){
         const a= td.childNodes[0]
