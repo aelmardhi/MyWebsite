@@ -44,7 +44,7 @@ async function getKooraHome(browser,timezone){
         }
         function parseScoreRow (r){
             return{
-                url: /\?m=[1-9]+/.exec(r.onclick.toString())[0],
+                url: /\?m=[0-9]+/.exec(r.onclick.toString())[0],
                 home:  parseTD(r.childNodes[0]),
                 score: parseTD(r.childNodes[1]),
                 away: parseTD(r.childNodes[2]),
