@@ -1,3 +1,12 @@
+/*
+* this file is a copy of the files
+* prayers.js
+* qibla.js
+* degHelpers
+*
+*this is done to import one file 
+*/
+
 function prayerTimes( Lng = 32.5486, Lat = 15.6569, TimeZone = 2){ //default to Khartoum North, Sudan
     const unixDate = new Date().getTime()
 
@@ -67,4 +76,54 @@ function A(t, L, D){
     const arccos = acos((nom 
         /dnom))
     return 1/15* arccos
+}
+
+
+const MAKKA = {
+    lng: 39.82621,
+    lat: 21.42252,
+};
+
+function getQibla(Lng = 32.5486, Lat = 15.6569){
+    const dLng = Lng-MAKKA.lng;
+    return (360-rad2deg(getDirectionRad(deg2rad(Lat), deg2rad(MAKKA.lat), deg2rad(dLng))))%360;
+}
+function getDirectionRad(lat1, lat2, dLng) {
+    return Math.atan2(Math.sin(dLng), Math.cos(lat1) * Math.tan(lat2) - Math.sin(lat1) * Math.cos(dLng));
+}
+
+console.log(getQibla());
+
+function deg2rad(deg){
+    return deg * Math.PI/180;
+}
+
+function rad2deg(rad){
+    return rad / Math.PI*180;
+}
+
+function cos(a){
+    return Math.cos(deg2rad(a))
+}
+function sin(a){
+    return Math.sin(deg2rad(a))
+}
+function tan(a){
+    return Math.tan(deg2rad(a))
+}
+
+function asin(a){
+    return rad2deg( Math.asin(a))
+}
+function acos(a){
+    return rad2deg( Math.acos(a))
+}
+function atan(a){
+    return rad2deg( Math.atan(a))
+}
+function atan2(a,b){
+    return rad2deg( Math.atan2(deg2rad(a),deg2rad(b)))
+}
+function acot(a){
+    return (rad2deg( Math.atan(1/a)))
 }

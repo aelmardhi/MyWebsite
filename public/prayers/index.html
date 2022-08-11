@@ -5,7 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Islamic Prayers Time</title>
+    <script src="./main.js"></script>
+    <!-- <script src="./degHelpers.js"></script>
     <script src="./prayers.js"></script>
+    <script src="./qibla.js"></script> -->
 </head>
 <style>
 :root{
@@ -76,7 +79,7 @@ main{
 h1{
     color: var(--clr-light);
     padding: .5em 2em;
-    font-size: 3em;
+    font-size: 2em;
     text-align: center;
     background: linear-gradient(90deg,var(--clr-accent1) 20%, var(--clr-accent2) 70%, var(--clr-secondary) 100%);;
 }
@@ -103,6 +106,17 @@ td{
     text-align: center;
     font-size: 2em;
     padding: .8em .2em; 
+}
+.column{
+    display: flex;
+    flex-direction: column;
+}
+.row{
+    display: flex;
+    flex-direction: row;
+}
+.spaceAround{
+    justify-content: space-around;
 }
 #location{
     display: none;
@@ -150,6 +164,30 @@ td{
 .changeLocation:active{
     box-shadow: var(--bs-main);
 }
+.qiblaCompass{
+    height: 8em;
+    width: 8em;
+    border-radius: 50%;
+    background-color: var(--clr-accent4);
+    border: 4px solid var(--clr-accent3);
+    position: relative;
+}
+.qibla{
+ font-size: 1.25em;
+ padding: .5em;
+}
+.qibla h2{
+    font-size: 3.25em;
+}
+.qiblaCompass > div{
+    width: .5em;
+    height: 50%;
+    background-color: var(--clr-accent1);
+    position: absolute;
+    top: 0%;
+    left: calc(50% - 0.25em);
+    transform-origin: bottom;
+}
 @media screen and (max-width:800px){
     body{
         font-size: .75em;
@@ -186,6 +224,15 @@ td{
             <!-- <a id="setAlarm">Set Alarm</a> -->
             <button class="changeLocation" onclick="changeLocation()">Chage Location</button>
         </div>
+        <div class="qibla row spaceAround">
+            <div class="column spaceAround">
+                <h3>Qibla</h3>
+                <h2 id="qiblaValue"></h2>
+            </div>
+            <div class="qiblaCompass">
+                <div></div>
+            </div>
+        </div>
     </main>
     <script>
         const setAlarmLink = document.getElementById('setAlarm')
@@ -201,7 +248,7 @@ td{
             const lat = parseFloat( document.getElementById('Lat').value)
             const lng = parseFloat( document.getElementById('Lng').value)
             const TimeZone = (new Date().getTimezoneOffset())/-60
-            setTime(lng, lat, TimeZone)
+            setAll(lng, lat, TimeZone)
             printInfo(`for the location- Longitude: ${lng} and Lat: ${lat} `)
         }
         
@@ -210,7 +257,7 @@ td{
                
                 const {latitude: lat, longitude:lng} = r.coords
                 const TimeZone = (new Date().getTimezoneOffset())/-60
-                setTime(lng, lat, TimeZone)
+                setAll(lng, lat, TimeZone)
                 printInfo(`for the location detected- Longitude: ${lng} and Lat: ${lat} `)
             } )
         }
@@ -244,7 +291,21 @@ td{
             `;
             // setAlarm(times.Fajr)
         }
-        setTime()
+        function setQibla(){
+            let angle
+            if(arguments.length)
+                angle = getQibla(...arguments)
+            else 
+                angle = getQibla()
+            angle = angle.toFixed(2);
+            document.getElementById('qiblaValue').innerText = angle+' °';
+            document.querySelector('.qiblaCompass > div').style.transform = 'rotate('+angle +'deg)'
+        }
+        function setAll(){
+            setQibla(...arguments)
+            setTime(...arguments)
+        }
+        setAll()
     </script>
 </body>
 </html>
