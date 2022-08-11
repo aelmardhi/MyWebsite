@@ -1,9 +1,12 @@
 const router = require('express').Router()
 const puppeteer = require('puppeteer');
 
-
+let cache = {};
 
 router.get('/',async (req, res)=>{
+    if(cache && Object.keys(cache).length){
+        return res.json(cache)
+    }
     try{
         const browser = await puppeteer.launch()
         const timezone = req.headers.timezone || "Africa/Khartoum"
@@ -11,7 +14,9 @@ router.get('/',async (req, res)=>{
         
         browser.close()
         timezone
-        return res.json({...main, barca,baseUrl:'https://www.kooora.com/default.aspx',time:  Date()})
+        let result = {...main, barca,baseUrl:'https://www.kooora.com/default.aspx',time:  Date()}
+        cache = result;
+        return res.json(result)
     }catch(e){
         res.status(500).send('some error happend')
         console.log(req.route.toString()+'::'+e.message)
