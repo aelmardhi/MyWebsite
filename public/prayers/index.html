@@ -177,7 +177,17 @@ td{
  padding: .5em;
 }
 .qibla h2{
-    font-size: 3.25em;
+    font-size: 4em;
+    padding-bottom: .25em;
+}
+.qibla button{
+    font-size: 1em;
+    padding: 1em 2em;
+    border-radius: 2em;
+    background-color: var(--clr-accent3);
+    color: var(--clr-body);
+    border: 1px solid var(--clr-accent1);
+    width: max-content;
 }
 .qiblaCompass > div{
     width: .5em;
@@ -228,6 +238,7 @@ td{
             <div class="column spaceAround">
                 <h3>Qibla</h3>
                 <h2 id="qiblaValue"></h2>
+                <button onclick="setNorth()">Set North</button>
             </div>
             <div class="qiblaCompass">
                 <div></div>
@@ -239,6 +250,8 @@ td{
         const list = document.querySelector('#prayers tbody')
         const locationElement = document.getElementById('location')
         let changeLocationVisible = false
+        let qiblaAngle = 0;
+        let screenNorthOrientation = 0;
         function changeLocation(){
             if(!changeLocationVisible){
                 changeLocationVisible = true
@@ -260,6 +273,25 @@ td{
                 setAll(lng, lat, TimeZone)
                 printInfo(`for the location detected- Longitude: ${lng} and Lat: ${lat} `)
             } )
+        }
+        function setNorth(e){
+            const options = { frequency: 60, referenceFrame: 'device' };
+            const sensor = new RelativeOrientationSensor(options);
+
+            sensor.addEventListener('reading', () => {
+            // model is a Three.js object instantiated elsewhere.
+            let angle = ToEulerAngles(sensor.quaternion).yaw;
+            angle += qiblaAngle;
+            angle = Math.round(angle)
+            console.log(angle)
+            document.querySelector('.qiblaCompass > div').style.transform = 'rotate('+angle +'deg)'
+            });
+            sensor.addEventListener('error', error => {
+            if (event.error.name == 'NotReadableError') {
+                console.log("Sensor is not available.");
+            }
+            });
+            sensor.start();
         }
         function printInfo(s){
             document.getElementById('info').innerText = s
@@ -296,7 +328,8 @@ td{
             if(arguments.length)
                 angle = getQibla(...arguments)
             else 
-                angle = getQibla()
+            angle = getQibla()
+            qiblaAngle = angle;
             angle = angle.toFixed(2);
             document.getElementById('qiblaValue').innerText = angle+' °';
             document.querySelector('.qiblaCompass > div').style.transform = 'rotate('+angle +'deg)'
