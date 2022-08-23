@@ -21,6 +21,7 @@
     --clr-light: #fff;
     --clr-body : #fff;
     --clr-danger: #cf1b24;
+    --clr-success: #37fb34;
     --clr-main: none;
     --border1 :  2px solid #39f9;
     --bs-main: none;
@@ -41,11 +42,12 @@
     --clr-body : #161009;
     --clr-main: #111320;
     --clr-danger: #8f0a10;
+    --clr-success: #1a9c36;
     --border1 :  none;
     --bs-main: inset 0 0 15px #5693, 0 0 10px #5696;
     --bs-article: none;
     --bs-downloads: inset 0 0 8px #0003 , inset 0 0 15px #0001;
-    --bs-downloads-hover: 0 0 6px #0005, 0 0 12px #0003;
+    --bs-downloads-hover: 0 0 6px #0005, 0 0 12px #000#37fb343;
     --bs-games:inset 0 0 8px #0005 , inset 0 0 15px #0003;
     }
 }
@@ -117,6 +119,9 @@ td{
 }
 .spaceAround{
     justify-content: space-around;
+}
+.success{
+    background-color: var(--clr-success) !important;
 }
 #location{
     display: none;
@@ -285,6 +290,10 @@ td{
             angle = Math.round(angle)
             console.log(angle)
             document.querySelector('.qiblaCompass > div').style.transform = 'rotate('+angle +'deg)'
+            if((angle%90)==0)
+                document.querySelector('.qiblaCompass').classList.add('success')
+            else
+                document.querySelector('.qiblaCompass').classList.remove('success')
             });
             sensor.addEventListener('error', error => {
             if (event.error.name == 'NotReadableError') {
