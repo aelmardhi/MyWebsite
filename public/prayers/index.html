@@ -265,7 +265,6 @@ td{
             }
             const lat = parseFloat( document.getElementById('Lat').value)
             const lng = parseFloat( document.getElementById('Lng').value)
-            const TimeZone = (new Date().getTimezoneOffset())/-60
             setAll(lng, lat, TimeZone)
             printInfo(`for the location- Longitude: ${lng} and Lat: ${lat} `)
         }
@@ -274,7 +273,6 @@ td{
             navigator.geolocation.getCurrentPosition((r)=>{
                
                 const {latitude: lat, longitude:lng} = r.coords
-                const TimeZone = (new Date().getTimezoneOffset())/-60
                 setAll(lng, lat, TimeZone)
                 printInfo(`for the location detected- Longitude: ${lng} and Lat: ${lat} `)
             } )
@@ -353,8 +351,10 @@ td{
             document.querySelector('.qiblaCompass > div').style.transform = 'rotate('+angle +'deg)'
         }
         function setAll(){
-            setQibla(...arguments)
-            setTime(...arguments)
+            if(arguments.length)
+                arguments.TimeZone = (new Date().getTimezoneOffset())/-60
+            setQibla(...arguments,)
+            setTime(...arguments,)
         }
         setAll()
     </script>
