@@ -11,6 +11,28 @@
             display: flex;
             flex-direction: row;
         }
+
+        .education{
+            padding: .5em;
+        }
+        .education li > div{
+            padding: 1.5em;
+        }
+        .education .degree{
+            border-left: 1px solid black;
+            position: relative;
+        }
+        .education .degree::after{
+            content: "";
+            position: absolute;
+            left: calc(var(--width) * -0.5);
+            --width: 20px;
+            top: var(--width);
+            width: var(--width);
+            height: var(--width);
+            border-radius: 50%;
+            background: #000;
+        }
     </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -44,19 +66,19 @@
         </ul>
     </aside>
     <main>
-        <section>
+        <section class="education">
             <h1>Education</h1>
             <ul>
                 <li class="row">
-                    <div>
-                        <h2 class="inistitute">University of Khartoum</h2>
+                    <div class="inistitute">
+                        <h2 class="name">University of Khartoum</h2>
                         <h4 class="location">Khartoum</h4>
                         <h3 class="year">2021</h3>
                     </div>
-                    <div>
-                        <h2 class="degree">Bachelor of Science</h2>
-                        <h4 class="major">Electrical and Electronic Engineering (Software Engineering)</h4>
-                        <h3 class="extra">Graduated with Honors first class</h3>
+                    <div class="degree">
+                        <h3 class="name">Bachelor of Science</h3>
+                        <h2 class="major">Electrical and Electronic Engineering (Software Engineering)</h2>
+                        <h4 class="extra">Graduated with Honors first class</h4>
                     </div>
                 </li>
             </ul>
