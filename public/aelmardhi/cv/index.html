@@ -1,39 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <style>
-        *,*::after,*::before{
+        *,
+        *::after,
+        *::before {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        .row{
+
+        .row {
             display: flex;
             flex-direction: row;
         }
-        body{
+
+        body {
             height: 100vh;
             width: 100vw;
         }
-        aside{
+
+        aside {
             background-color: #222;
             box-shadow: 0 0 5px #002;
             z-index: 1;
         }
-        main{
+        ul{
+            list-style: none;
+        }
+
+        main {
             background-color: #f8f8f8;
         }
-        .education{
+        .header{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 1em 2em;
+        }
+        .header h1{
+            font-size: 4rem;
+        }
+        .header ul li{
+            display: flex;
+            flex-direction: row;
+            width: 250px;
+            justify-content: flex-start;
+        }
+        .header ul li svg{
+            width: 1em;
+            height: 1em;
+            margin-right: 10px;
+        }
+
+        .education {
             padding: .5em;
         }
-        .education li > div{
+
+        .education li>div {
             padding: 1.5em;
         }
-        .education .degree{
+
+        .education .degree {
             border-left: 1px solid black;
             position: relative;
         }
-        .education .degree::after{
+
+        .education .degree::after {
             content: "";
             position: absolute;
             left: calc(var(--width) * -0.5);
@@ -50,33 +84,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aelmardhi</title>
 </head>
+
 <body class="row">
     <aside>
-        <div>
-            <h1>Abdalla Elmardi</h1>
-        </div>
         <ul>
-            <ul>
-                <li>
-                    <h4 class="label">phone</h4>
-                    <a class="item" href="tel:+249118331999">+249 118 331 999</a>
-                </li>
-            </ul>
-            <ul>
-                <li>
-                    <h4 class="label">email</h4>
-                    <a class="item" href="mailto:aelmardhi@gmail.com">aelmardhi@gmail.com</a>
-                </li>
-            </ul>
-            <ul>
-                <li>
-                    <h4 class="label">github</h4>
-                    <a class="item" href="https://github.com/aelmardhi">/aelmardhi</a>
-                </li>
-            </ul>
+            <li>
+                <h4 class="label">github</h4>
+                <a class="item" href="https://github.com/aelmardhi">/aelmardhi</a>
+            </li>
         </ul>
     </aside>
     <main>
+        <section class="header">
+            <div>
+                <h1>Abdalla <br/>Elmardi</h1>
+            </div>
+            <ul>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/></svg>
+                    <a class="item" href="tel:+249118331999">+249 118 331 999</a>
+                </li>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg>
+                    <a class="item" href="mailto:aelmardhi@gmail.com">aelmardhi@gmail.com</a>
+                </li>
+            </ul>
+
+        </section>
         <section class="education">
             <h1>Education</h1>
             <ul>
@@ -96,6 +130,7 @@
         </section>
 
     </main>
-    
+
 </body>
+
 </html>
