@@ -15,6 +15,33 @@
             display: flex;
             flex-direction: row;
         }
+        progress{
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            height: 1em;
+            width: 100%;
+            border: none;
+        }
+        progress[value]::-webkit-progress-bar{
+            background-color: #666;
+        }
+        progress[value]::-webkit-progress-value{
+            background-color: #dddd;
+            box-shadow: 0 0 8px #0008;
+        }
+        progress[value]::-moz-progress-bar{
+            background-color: red;
+        }
+        /* .meter::after{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: attr(value);
+            background: #eee;
+        } */
 
         body {
             height: 100vh;
@@ -78,7 +105,13 @@
             height: 1em;
             margin-right: 10px;
         }
-
+        .languages h4{
+            color: #eee;
+            font-size: 1rem;
+        }
+        .links li{
+            margin-bottom: 1rem;
+        }
         .education {
             padding: .5em;
         }
@@ -133,6 +166,19 @@ building web applications and web technologies and attitude to learn more
                 <li>
                     <h4 class="label">Github</h4>
                     <a class="item" href="https://github.com/aelmardhi">/aelmardhi</a>
+                </li>
+            </ul>
+        </section>
+        <section class="languages">
+            <h2>Languages</h2>
+            <ul>
+                <li>
+                    <h4>Arabic</h4>
+                    <progress class="meter" value="1"></progress>
+                </li>
+                <li>
+                    <h4>English</h4>
+                    <progress class="meter" value=".8"></progress>
                 </li>
             </ul>
         </section>
