@@ -25,6 +25,8 @@
             background-color: #222;
             box-shadow: 0 0 5px #002;
             z-index: 1;
+            width: 350px;
+            padding: 1em;
         }
         ul{
             list-style: none;
@@ -32,6 +34,29 @@
 
         main {
             background-color: #f8f8f8;
+        }
+        h2{
+            font-size: 1.5rem;
+            padding: 1em 0em .5em 0;
+            color: #f8f8f8;
+        }
+        .about p{
+            color: #fff;
+            font-size: 1.2rem;
+        }
+        .links .label{
+            display: block;
+        }
+        .links li{
+            margin-bottom: 1rem ;
+        }
+        .links h4{
+            font-size: 1rem;
+            color: #eee;
+        }
+        .links a, .links:any-link{
+            color: #d5d5d5;
+
         }
         .header{
             display: flex;
@@ -87,12 +112,30 @@
 
 <body class="row">
     <aside>
-        <ul>
-            <li>
-                <h4 class="label">github</h4>
-                <a class="item" href="https://github.com/aelmardhi">/aelmardhi</a>
-            </li>
-        </ul>
+        <section class="about">
+            <h2>ABOUT ME</h2>
+            <p>
+                Motivated software engineer graduated recently from university of Khartoum with good practice in
+building web applications and web technologies and attitude to learn more
+            </p>
+        </section>
+        <section class="links">
+            <h2>LINKS</h2>
+            <ul>
+                <li>
+                    <h4 class="label">Website</h4>
+                    <a class="item" href="https://chato.onrender.com/">chato.onrender.com</a>
+                </li>
+                <li>
+                    <h4 class="label">LinkedIn</h4>
+                    <a class="item" href="https://www.linkedin.com/in/abdo-elmardhi-412960242/">/abdo-elmardhi-412960242</a>
+                </li>
+                <li>
+                    <h4 class="label">Github</h4>
+                    <a class="item" href="https://github.com/aelmardhi">/aelmardhi</a>
+                </li>
+            </ul>
+        </section>
     </aside>
     <main>
         <section class="header">
