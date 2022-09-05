@@ -3,6 +3,10 @@
 
 <head>
     <style>
+        @font-face {
+            font-family: tommy;
+            src: url("/fonts/made_tommy/MADE TOMMY Regular_PERSONAL USE.otf");
+        }
         *,
         *::after,
         *::before {
@@ -28,32 +32,33 @@
         }
         progress[value]::-webkit-progress-value{
             background-color: #dddd;
-            box-shadow: 0 0 8px #0008;
+            box-shadow: 0 0 3px #0005;
         }
         progress[value]::-moz-progress-bar{
             background-color: red;
         }
-        /* .meter::after{
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            width: attr(value);
-            background: #eee;
-        } */
+        main progress[value]::-webkit-progress-bar{
+            background-color: #dddd;
+        }
+        main progress[value]::-webkit-progress-value{
+            background-color: #1126a5;
+        }
 
         body {
             height: 100vh;
             width: 100vw;
+            font-family: tommy;
         }
 
         aside {
-            background-color: #222;
+            background-color: #0a0834;
             box-shadow: 0 0 5px #002;
             z-index: 1;
             width: 350px;
             padding: 1em;
+        }
+        section {
+            margin-bottom: 20px;
         }
         ul{
             list-style: none;
@@ -65,6 +70,8 @@
         h2{
             font-size: 1.5rem;
             padding: 1em 0em .5em 0;
+        }
+        aside h2{
             color: #f8f8f8;
         }
         .about p{
@@ -79,7 +86,7 @@
         }
         .links h4{
             font-size: 1rem;
-            color: #eee;
+            color: #d6e9db;
         }
         .links a, .links:any-link{
             color: #d5d5d5;
@@ -92,21 +99,37 @@
             padding: 1em 2em;
         }
         .header h1{
-            font-size: 4rem;
+            font-size: 3rem;
+        }
+        .header h3{
+            font-size: 1.5rem;
+            color: #183f52;
         }
         .header ul li{
             display: flex;
             flex-direction: row;
             width: 250px;
             justify-content: flex-start;
+            padding: .5em ;
         }
+        .header ul li+li{
+            border-top: 1px solid #ddd;
+        }
+
         .header ul li svg{
-            width: 1em;
-            height: 1em;
+            width: 1.25em;
+            height: 1.25em;
             margin-right: 10px;
+            fill: #1126a5;
+        }
+        .header a,
+        .header a:any-link{
+            color: #183f52;
+            font-size: 1.25rem;
+            text-decoration: none;
         }
         .languages h4{
-            color: #eee;
+            color: #d6e9db;
             font-size: 1rem;
         }
         .links li{
@@ -119,9 +142,18 @@
         .education li>div {
             padding: 1.5em;
         }
+        .education li h2{
+            padding: .5em 0;
+        }
+        .education li h3{
+            color: #183f52;
+        }
+        .education li h4{
+            color: #556299;
+        }
 
         .education .degree {
-            border-left: 1px solid black;
+            border-left: 1px solid #1126a5;
             position: relative;
         }
 
@@ -130,12 +162,29 @@
             position: absolute;
             left: calc(var(--width) * -0.5);
             --width: 20px;
-            top: var(--width);
+            top: 1.5em;
             width: var(--width);
             height: var(--width);
             border-radius: 50%;
-            background: #000;
+            background: #1126a5;
         }
+        .skills{
+            padding: .5em;
+        }
+        .skills ul {
+            padding: 1.5em;
+        }
+        .skills ul li{
+            padding: .5em;
+            display: flex;
+            flex-direction: row;
+        }
+        .skills ul li h4{
+            text-align: right;
+            padding-right: 20px;
+            width: 400px;
+        }
+
     </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -186,7 +235,8 @@ building web applications and web technologies and attitude to learn more
     <main>
         <section class="header">
             <div>
-                <h1>Abdalla <br/>Elmardi</h1>
+                <h1>ABDALLA <br/>ELMARDI</h1>
+                <h3>Web Developer</h3>
             </div>
             <ul>
                 <li>
@@ -214,6 +264,43 @@ building web applications and web technologies and attitude to learn more
                         <h2 class="major">Electrical and Electronic Engineering (Software Engineering)</h2>
                         <h4 class="extra">Graduated with Honors first class</h4>
                     </div>
+                </li>
+            </ul>
+        </section>
+        <section class="skills">
+            <h2>SKILLS</h2>
+            <ul>
+                <li>
+                    <h4>Javascript, Node , Express</h4>
+                    <progress value=".95"></progress>
+                </li>
+                <li>
+                    <h4>Python</h4>
+                    <progress value=".5"></progress>
+                </li>
+                <li>
+                    <h4>HTML, CSS, React</h4>
+                    <progress value=".9"></progress>
+                </li>
+                <li>
+                    <h4>Problem Solving</h4>
+                    <progress value=".85"></progress>
+                </li>
+                <li>
+                    <h4>SQL</h4>
+                    <progress value=".4"></progress>
+                </li>
+                <li>
+                    <h4>NoSQL, MongoDb</h4>
+                    <progress value=".8"></progress>
+                </li>
+                <li>
+                    <h4>Git</h4>
+                    <progress value=".7"></progress>
+                </li>
+                <li>
+                    <h4>UI, UX</h4>
+                    <progress value=".55"></progress>
                 </li>
             </ul>
         </section>
