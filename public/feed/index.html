@@ -106,18 +106,46 @@
             
                     border-collapse: collapse ;
         }
-        tr{
+        tr,li{
             background: var(--clr-primary)
         }
-        tr:nth-child(even){
+        tr:nth-child(even),
+        li:nth-child(even){
             background: var(--clr-accent2);
-            color: var(--clr-llightblue);
+            color: var(--clr-light);
         }
         td{
             padding:1em;
         }
         .matches td{
             text-align: center;
+        }
+        ul {
+            list-style: none;
+        }
+        summary{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        details a{
+            display: block;
+            font-weight: bold;
+            font-size: large;
+            padding: .5em 1em;
+            
+        }
+        details a:any-link{
+            color: var(--clr-accent1);
+        }
+        li:nth-child(even) details a:any-link{
+            color: var(--clr-primary);
+        }
+        details h3{
+            margin: .5em 1em;
+        }
+        details p{
+            padding: .5em 1em;
         }
         @media screen and (max-width:800px){
             section{
@@ -146,7 +174,7 @@
                 </div>
                 <div class="news">
                     <h2>اﻷخبار</h2>
-                    <table><tbody id="featuredNews"><tr><td><progress></progress></td></tr></tbody></table>
+                    <ul id="featuredNews"><li><progress></progress></li></ul>
                 </div>
             </section>
             <h1>برشلونة</h1>
@@ -156,7 +184,7 @@
                     <table><tbody id="matches"><tr><td><progress></progress></td></tr></tbody></table></div>
                 <div class="news">
                     <h2>اخبار</h2>
-                    <table ><tbody  id="news"><tr><td><progress></progress></td></tr></tbody></table></div>
+                    <ul id="news"><li><progress></progress></li></ul></div>
             </section>
         </main>
         <script>
@@ -196,10 +224,16 @@
                 }).join('')
 
                 featuredNews.innerHTML = d.news.map(r =>{
-                    return `<tr onclick=" location='${d.baseUrl+r?.url}';">
-                            <td><img src="${r?.img}"></img></td>
-                            <td><h3> ${r?.text}</h3></td>
-                        </tr>`
+                    return `<li>
+                        <details>
+                        <summary>
+                            <img src="${r?.img}"></img>
+                           <h3> ${r?.title}</h3>
+                        </summary>
+                            <p>${r?.text}</p>
+                            <a href="${d.baseUrl+r?.url}"> المزيد </a>
+                        </details>
+                        </li>`
                 }).join('')
 
                 barcelona.matches.innerHTML = d.barca.matches.map(m =>{
@@ -219,10 +253,16 @@
                 }).join('')
 
                 barcelona.news.innerHTML = d.barca.news.map(r =>{
-                    return `<tr onclick=" location='${d.baseUrl+r?.url}';">
-                            <td><img src="${r?.img}"></img></td>
-                            <td><h3> ${r?.text}</h3></td>
-                        </tr>`
+                    return `<li>
+                        <details>
+                        <summary>
+                            <img src="${r?.img}"></img>
+                           <h3> ${r?.title}</h3>
+                        </summary>
+                            <p>${r?.text}</p>
+                            <a href="${d.baseUrl+r?.url}"> المزيد </a>
+                        </details>
+                        </li>`
                 }).join('')
 
             })

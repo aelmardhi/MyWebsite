@@ -12,10 +12,16 @@ router.get('/',async (req, res)=>{
         const timezone = req.headers.timezone || "Africa/Khartoum"
         const [main,barca]=await Promise.all([getKooraHome(browser,timezone),getKooraTeamImportant(browser,timezone, 63)]);
         
-        browser.close()
-        timezone
+        // browser.close()
         let result = {...main, barca,baseUrl:'https://www.kooora.com/default.aspx',time:  Date()}
         cache = result;
+        result.news.forEach(async (n) => {
+            n.text = await updateNews(browser,timezone,n.url);
+        });
+        result.barca.news.forEach(async (n) => {
+            n.text = await updateNews(browser,timezone,n.url);
+        });
+        
         return res.json(result)
     }catch(e){
         res.status(500).send('some error happend')
@@ -24,7 +30,14 @@ router.get('/',async (req, res)=>{
 })
 
 
-
+async function updateNews(browser,timezone,urlQuery){
+    const page = await browser.newPage();
+    page.emulateTimezone(timezone)
+    await page.goto('https://www.kooora.com/default.aspx'+urlQuery,{timeout:300000, waitUntil:"domcontentloaded"});
+    return await page.$eval('#content .articlePage .articleBody', el => {
+        return el.textContent;
+    });
+}
 
 
 
@@ -73,7 +86,7 @@ async function getKooraHome(browser,timezone){
             let p = el.childNodes[i].querySelector('p');
             news.push({
                 url: p.querySelector('a').getAttribute('href'),
-                text: p.querySelector('a').textContent,
+                title: p.querySelector('a').textContent,
                 img: el.childNodes[i].querySelector('img')?.getAttribute('src'),
                 featured: true,
             })
@@ -88,7 +101,7 @@ async function getKooraHome(browser,timezone){
             if(a)
                 news.push({
                     url: a.getAttribute('href'),
-                    text: a.textContent,
+                    title: a.textContent,
                     img: el.childNodes[i].querySelector('img')?.getAttribute('src')
                 })
         }
@@ -147,7 +160,7 @@ async function getKooraTeamImportant (browser,timezone, team){
             let p = el.childNodes[i].querySelector('p');
             news.push({
                 url: p.querySelector('a').getAttribute('href'),
-                text: p.querySelector('a').textContent,
+                title: p.querySelector('a').textContent,
                 img: el.childNodes[i].querySelector('img')?.getAttribute('src'),
                 featured: true,
             })
