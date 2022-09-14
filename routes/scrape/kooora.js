@@ -3,13 +3,22 @@ const puppeteer = require('puppeteer');
 
 let cache = {};
 
+const timezone =  "Africa/Khartoum"
+tryLoad(timezone);
+
 router.get('/',async (req, res)=>{
+
+    // const timezone = req.headers.timezone || "Africa/Khartoum"
     if(cache && Object.keys(cache).length){
         return res.json(cache)
     }
+})
+
+async function tryLoad(timezone){
+
     try{
         const browser = await puppeteer.launch()
-        const timezone = req.headers.timezone || "Africa/Khartoum"
+        
         const [main,barca]=await Promise.all([getKooraHome(browser,timezone),getKooraTeamImportant(browser,timezone, 63)]);
         
         // browser.close()
@@ -27,7 +36,8 @@ router.get('/',async (req, res)=>{
         res.status(500).send('some error happend')
         console.log(req.route.toString()+'::'+e.message)
     }
-})
+}
+
 
 
 async function updateNews(browser,timezone,urlQuery){
