@@ -6,7 +6,7 @@ const router = require('express').Router();
 
 
 router.post('/info', async (req,res)=> {
-    console.log(req.ip);
+    // console.log(req.ip);
     if(!(req && req.body && req.body.id)){
         res.status(400).send('request should have body with id');
     }
@@ -18,7 +18,7 @@ router.post('/info', async (req,res)=> {
         'id': info.videoDetails.videoId,
         'title': info.videoDetails.title,
         'author': info.videoDetails.author.name,
-        'thumbnail': info.videoDetails.thumbnail.thumbnails[1].url,
+        'thumbnail': info.videoDetails.thumbnails[2].url,
         'formats': [...info.formats,...info.player_response.streamingData.formats].map( i => ({
             "itag" : i.itag,
             "container": i.container,
