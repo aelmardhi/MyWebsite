@@ -12,6 +12,7 @@ router.get('/',async (req, res)=>{
     if(cache && Object.keys(cache).length){
         return res.json(cache)
     }
+    return res.status(202).send("not ready yet")
 })
 
 async function tryLoad(timezone){
@@ -24,17 +25,23 @@ async function tryLoad(timezone){
         // browser.close()
         let result = {...main, barca,baseUrl:'https://www.kooora.com/default.aspx',time:  Date()}
         cache = result;
-        result.news.forEach(async (n) => {
+        for(let n of result.news ){
             n.text = await updateNews(browser,timezone,n.url);
-        });
-        result.barca.news.forEach(async (n) => {
+        }
+        for(let n of result.barca.news ){
             n.text = await updateNews(browser,timezone,n.url);
-        });
+        }
+
+        // result.news.forEach(async (n) => {
+        //     n.text = await updateNews(browser,timezone,n.url);
+        // });
+        // result.barca.news.forEach(async (n) => {
+        //     n.text = await updateNews(browser,timezone,n.url);
+        // });
         
-        return res.json(result)
     }catch(e){
-        res.status(500).send('some error happend')
-        console.log(req.route.toString()+'::'+e.message)
+        // res.status(500).send('some error happend')
+        console.log('kooora scrape'+'::'+e.message)
     }
 }
 
