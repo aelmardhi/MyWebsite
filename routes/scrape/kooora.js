@@ -25,12 +25,7 @@ async function tryLoad(timezone){
         // browser.close()
         let result = {...main, barca,baseUrl:'https://www.kooora.com/default.aspx',time:  Date()}
         cache = result;
-        for(let n of result.news ){
-            n.text = await updateNews(browser,timezone,n.url);
-        }
-        for(let n of result.barca.news ){
-            n.text = await updateNews(browser,timezone,n.url);
-        }
+        await LoadNews (browser,timezone);
 
         // result.news.forEach(async (n) => {
         //     n.text = await updateNews(browser,timezone,n.url);
@@ -45,10 +40,18 @@ async function tryLoad(timezone){
     }
 }
 
-
-
-async function updateNews(browser,timezone,urlQuery){
+async function LoadNews (browser,timezone){
     const page = await browser.newPage();
+    for(let n of cache?.news ){
+        n.text = await updateNews(page,timezone,n.url);
+    }
+    for(let n of cache?.barca?.news ){
+        n.text = await updateNews(page,timezone,n.url);
+    }
+}
+
+
+async function updateNews(page,timezone,urlQuery){
     page.emulateTimezone(timezone)
     await page.goto('https://www.kooora.com/default.aspx'+urlQuery,{timeout:300000, waitUntil:"domcontentloaded"});
     return await page.$eval('#content .articlePage .articleBody', el => {
