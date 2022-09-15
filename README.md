@@ -1,17 +1,22 @@
-# chato
-app and website I created to  build tools I occationaly use
-a pwa
+# Aelmardhi's Website
+My Website. Using nodejs and expressjs . Serves as a back end for some of my other apps. Have some usefull tools and services.
+
 
 > hosted on
-> https://chato.onrender.com/
-> https://dardasha.herokuapp.com/
+> * https://chato.onrender.com/  
+> * https://dardasha.herokuapp.com/
 
+## Features
+Some tools and Services on the website
+
+* my blog
 * video chat
 * file share
 * file uploader
 * http downloader
-* dip tasks and image editor
-* ytl
+* screen recorder
+* DIP tasks and image editor
+* ytdl
 * games
 
 this project uses Cloudinary for storing media and files and Mongo Atlas for NoSql database
@@ -41,13 +46,13 @@ this is the list of environmental variables used by the app. Their  values can b
 |  **DB_CONNECT**          | MongoDB URI                        |
 |  **TOKEN_SECRET**        | JWT secret                         |
 |  **CLOUD_NAME**          | Cloudenary cloud name              | 
-|  **API_KEY**             | Cloudenary API key.                |
-|  **API_SECRET**          | Cloudinary API secret.             |
-|  **TELEGRAM_TOKEN**      | Telegram bot api token.            |
-| **USE_LOCALHOST_HTTPS**  | a boolean if true will use local file certificate for https.                                     |
-| **VAPID_PUBLIC_KEY**     | WebPush public key.                |
-| **VAPID_PUBLIC_KEY**     | WebPush private Key.               |
-| **PORT**                 | http port number to use.           |
+|  **API_KEY**             | Cloudenary API key                 |
+|  **API_SECRET**          | Cloudinary API secret              |
+|  **TELEGRAM_TOKEN**      | Telegram bot api token             |
+| **USE_LOCALHOST_HTTPS**  | a boolean if true will use local file certificate for https                                      |
+| **VAPID_PUBLIC_KEY**     | WebPush public key                 |
+| **VAPID_PUBLIC_KEY**     | WebPush private Key                |
+| **PORT**                 | http port number to use            |
 
 
 
