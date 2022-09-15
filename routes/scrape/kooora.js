@@ -55,7 +55,8 @@ async function updateNews(page,timezone,urlQuery){
     page.emulateTimezone(timezone)
     await page.goto('https://www.kooora.com/default.aspx'+urlQuery,{timeout:300000, waitUntil:"domcontentloaded"});
     return await page.$eval('#content .articlePage .articleBody', el => {
-        return el.innerHTML;
+        el.querySelector('div').remove();
+        return el.innerHTML ;
     });
 }
 
