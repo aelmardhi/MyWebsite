@@ -54,7 +54,7 @@
             background-color: #0a0834;
             box-shadow: 0 0 5px #002;
             z-index: 1;
-            width: 350px;
+            width: 300px;
             padding: 1em;
         }
         section {
@@ -66,9 +66,10 @@
 
         main {
             background-color: #f8f8f8;
+            flex: 1 0;
         }
         h2{
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             padding: 1em 0em .5em 0;
         }
         aside h2{
@@ -76,7 +77,7 @@
         }
         .about p{
             color: #fff;
-            font-size: 1.2rem;
+            font-size: 1.05rem;
         }
         .links .label{
             display: block;
@@ -85,7 +86,7 @@
             margin-bottom: 1rem ;
         }
         .links h4{
-            font-size: 1rem;
+            font-size: .9rem;
             color: #d6e9db;
         }
         .links a, .links:any-link{
@@ -99,44 +100,51 @@
             padding: 1em 2em;
         }
         .header h1{
-            font-size: 3rem;
+            font-size: 2.5rem;
         }
         .header h3{
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: #183f52;
         }
         .header ul li{
             display: flex;
             flex-direction: row;
-            width: 250px;
+            /* width: 250px; */
             justify-content: flex-start;
-            padding: .5em ;
+            padding: .3em ;
         }
         .header ul li+li{
             border-top: 1px solid #ddd;
         }
 
         .header ul li svg{
-            width: 1.25em;
-            height: 1.25em;
+            width: 1em;
+            height: 1em;
             margin-right: 10px;
             fill: #1126a5;
         }
         .header a,
         .header a:any-link{
             color: #183f52;
-            font-size: 1.25rem;
+            font-size: .9rem;
             text-decoration: none;
         }
         .languages h4{
             color: #d6e9db;
-            font-size: 1rem;
+            font-size: .9rem;
         }
         .links li{
-            margin-bottom: 1rem;
+            margin-bottom: .9rem;
         }
         .education {
             padding: .5em;
+            width: 100%;
+        }
+        .education ul{
+            width: 100%;
+        }
+        .education li{
+            width: 100%;
         }
 
         .education li>div {
@@ -152,9 +160,15 @@
             color: #556299;
         }
 
+        .education .inistitute{
+            width: 185px;
+            
+        }
+
         .education .degree {
             border-left: 1px solid #1126a5;
             position: relative;
+            flex: 1 0;
         }
 
         .education .degree::after {
@@ -197,8 +211,8 @@
         <section class="about">
             <h2>ABOUT ME</h2>
             <p>
-                Motivated software engineer graduated recently from university of Khartoum with good practice in
-building web applications and web technologies and attitude to learn more
+                Hi, I am Abdalla a Full Stack Software Developer Who loves building amazing apps.
+				I recently developed a video chat app , a web scraper, and an accounting app using NodeJs and web APIs. I'd love to continue building more. 
             </p>
         </section>
         <section class="links">
@@ -249,7 +263,7 @@ building web applications and web technologies and attitude to learn more
                 </li>
                 <li>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M384 192c0 87.4-117 243-168.3 307.2c-12.3 15.3-35.1 15.3-47.4 0C117 435 0 279.4 0 192C0 86 86 0 192 0S384 86 384 192z"/></svg>
-                    <a class="item" href="mailto:aelmardhi@gmail.com">Khartoum, Sudan</a>
+                    <a class="item">Khartoum, Sudan</a>
                 </li>
             </ul>
 
@@ -269,6 +283,18 @@ building web applications and web technologies and attitude to learn more
                         <h4 class="extra">Graduated with Honors first class</h4>
                     </div>
                 </li>
+                <li class="row">
+                    <div class="inistitute">
+                        <h2 class="name">Udacity</h2>
+                        <h4 class="location"></h4>
+                        <h3 class="year">2022</h3>
+                    </div>
+                    <div class="degree">
+                        <h3 class="name">Completion</h3>
+                        <h2 class="major">C++ Nanodegree program</h2>
+                        <h4 class="extra"></h4>
+                    </div>
+                </li>
             </ul>
         </section>
         <section class="skills">
@@ -281,6 +307,10 @@ building web applications and web technologies and attitude to learn more
                 <li>
                     <h4>Python</h4>
                     <progress value=".5"></progress>
+                </li>
+                <li>
+                    <h4>C++</h4>
+                    <progress value=".75"></progress>
                 </li>
                 <li>
                     <h4>HTML, CSS, React</h4>
