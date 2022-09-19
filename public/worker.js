@@ -19,6 +19,10 @@ const foldersToCache = [
   '/screenRecorder',
 ];
 
+function validResponse(r){
+  return r.ok & r.status != 202;
+}
+
 /* Start the service worker and cache all of the app's content */
 self.addEventListener('install', function(e) {
   e.waitUntil(
@@ -35,7 +39,8 @@ self.addEventListener('fetch', function(e) {
     let cacheResponse = await cache.match(e.request);
     if(cacheResponse){
       fetch(e.request).then(function(networkResponse){
-        cache.put(e.request,networkResponse);
+        if( validResponse(networkResponse))
+          cache.put(e.request,networkResponse);
       })
       return cacheResponse;
     }
