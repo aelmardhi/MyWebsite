@@ -1,9 +1,9 @@
 const portNumber = (process.env.PORT || 5000);
 const router = require('express').Router();
-const { v4: uuidv4 } = require("uuid");
+const {randomUUID} = require('node:crypto')
 
 router.get("/", (req,res)=>{
-    res.redirect(`/webRTC?room-id=${uuidv4()}`);
+    res.redirect(`/webRTC?room-id=${randomUUID()}`);
     //res.redirect(`/webRTC?room-id=4&port=${portNumber}`);
 });
 
