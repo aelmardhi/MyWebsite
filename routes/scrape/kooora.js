@@ -36,7 +36,7 @@ async function tryLoad(timezone){
         
     }catch(e){
         // res.status(500).send('some error happend')
-        logError(e);
+        console.log('kooora scrape'+'::'+e.message)
     }
 }
 
@@ -53,15 +53,11 @@ async function LoadNews (browser,timezone){
 
 async function updateNews(page,timezone,urlQuery){
     page.emulateTimezone(timezone)
-    try{
-        await page.goto('https://www.kooora.com/default.aspx'+urlQuery,{timeout:300000, waitUntil:"domcontentloaded"});
-        return await page.$eval('#content .articlePage .articleBody', el => {
-            el.querySelector('div').remove();
-            return el.innerHTML ;
-        });
-    }catch(e){
-        logError(e);
-    }
+    await page.goto('https://www.kooora.com/default.aspx'+urlQuery,{timeout:300000, waitUntil:"domcontentloaded"});
+    return await page.$eval('#content .articlePage .articleBody', el => {
+        el.querySelector('div').remove();
+        return el.innerHTML ;
+    });
 }
 
 
@@ -103,11 +99,8 @@ async function getKooraHome(browser,timezone){
         
         return  r
     
-    })
-}catch(e){
-    logError(e);
-}
-try{
+    }).catch(logError('Home::Matches'))
+
     let featurednews = await page.$eval('#featuredNews > ul', el => {
         let news = []
         for (let i=0; i< el.childNodes.length; i++){
@@ -120,11 +113,8 @@ try{
             })
         }
         return news;
-    })
-}catch(e){
-    logError(e);
-}
-try{
+    }).catch(logError('Home::FeatueredNews'));
+
     let news = await page.$eval('.newsList > ul', el => {
         let news = []
         for (let i=0; i< el.childNodes.length && i< 8 ; i++){
@@ -137,12 +127,12 @@ try{
                 })
         }
         return news;
-    })
+    }).catch(logError('Home::News'));
     news.push(...featurednews)
     return {news, matches}
 
 }catch(e){
-    logError(e);
+    throw e;
 }
 }
 
@@ -151,67 +141,63 @@ async function getKooraTeamImportant (browser,timezone, team){
         const page = await browser.newPage()
         page.emulateTimezone(timezone)
         await page.goto('https://www.kooora.com/default.aspx?team='+team,{timeout:300000, waitUntil:"domcontentloaded"})
-        const matches = await page.$eval('.lastMatches > table', el => {
-            function parseTD(td){
-                const a= td.childNodes[0]
-                if(a.tagName == 'A')
-                return{
-                    name: a.textContent,
-                    href: a.getAttribute('href')
-                }
-                return a.textContent
-            }
-            function parseScoreRow (r){
-                return{
-                    competetion: parseTD(r.childNodes[0]),
-                    time: parseTD(r.childNodes[1]),
-                    home:  parseTD(r.childNodes[3]),
-                    score: parseTD(r.childNodes[4]),
-                    away: parseTD(r.childNodes[5]),
-                }
-             }
-    
-            let r = []
-            trs = el.querySelectorAll('tr')
-            let lastScoreIndex = 0;
-            for(let i=0;i< trs.length;i++){
-                if(trs[i].childNodes[4].textContent.match(/[0-9]:[0-9]/)){      // if the result in the form 1:5
-                    lastScoreIndex = i
-                }
-            }
-    
-            return  [parseScoreRow(trs[lastScoreIndex]),parseScoreRow(trs[lastScoreIndex+1])]
-
-        })
-    }catch(e){
-        logError(e);
+  const matches = await page.$eval('.lastMatches > table', el => {
+    function parseTD(td){
+        const a= td.childNodes[0]
+        if(a.tagName == 'A')
+        return{
+            name: a.textContent,
+            href: a.getAttribute('href')
+        }
+        return a.textContent
     }
+    function parseScoreRow (r){
+        return{
+            competetion: parseTD(r.childNodes[0]),
+            time: parseTD(r.childNodes[1]),
+            home:  parseTD(r.childNodes[3]),
+            score: parseTD(r.childNodes[4]),
+            away: parseTD(r.childNodes[5]),
+        }
+    }
+    
+    let r = []
+    trs = el.querySelectorAll('tr')
+    let lastScoreIndex = 0;
+    for(let i=0;i< trs.length;i++){
+        if(trs[i].childNodes[4].textContent.match(/[0-9]:[0-9]/)){      // if the result in the form 1:5
+            lastScoreIndex = i
+        }
+    }
+    
+    return  [parseScoreRow(trs[lastScoreIndex]),parseScoreRow(trs[lastScoreIndex+1])]
 
-    try{
-        let news = await page.$eval('#featuredNews > ul', el => {
-                let news = []
-                for (let i=0; i< el.childNodes.length; i++){
-                    let p = el.childNodes[i].querySelector('p');
-                    news.push({
-                        url: p.querySelector('a').getAttribute('href'),
-                        title: p.querySelector('a').textContent,
-                        img: el.childNodes[i].querySelector('img')?.getAttribute('src'),
-                        featured: true,
-                    })
-                }
-                return news;
+  }).catch(logError('Team::'+team+'::Matches'));
+
+
+  let news = await page.$eval('#featuredNews > ul', el => {
+        let news = []
+        for (let i=0; i< el.childNodes.length; i++){
+            let p = el.childNodes[i].querySelector('p');
+            news.push({
+                url: p.querySelector('a').getAttribute('href'),
+                title: p.querySelector('a').textContent,
+                img: el.childNodes[i].querySelector('img')?.getAttribute('src'),
+                featured: true,
             })
+        }
+        return news;
+    }).catch(logError('Team::'+team+'::FeaturedNews'));
 
-
-    }catch(e){
-        logError(e);
-    }
     return {news, matches, team}
+
+}catch(e){
+    throw e;
+}
 }
 
-
-function logError(e){
-    console.log('kooora scrape'+'::'+e.message)
+function logError(m=''){
+    return (e)=>console.log('kooora scrape::'+m+'::'+e.message);
 }
 
 module.exports = router
