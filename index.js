@@ -79,7 +79,7 @@ app.use((req,res,next) => {
     next();    
 });
 
-app.use('/blog/*',(req,res)=>{
+app.use('/blog/',(req,res)=>{
   res.sendFile(__dirname+'/public/blog/index.html')
 })
 
