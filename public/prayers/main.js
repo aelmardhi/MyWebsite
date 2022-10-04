@@ -31,7 +31,7 @@ function prayerTimes( Lng = 32.5486, Lat = 15.6569, TimeZone = 2){ //default to 
     const Sunrise = Dhuhr - T(0.833,Lat, D)
     const Sunset = Dhuhr + T(0.833, Lat ,D)
     const Fajr = Dhuhr - T(18,Lat,D) 
-    const Isha = Dhuhr + T(17, Lat,D)
+    const Isha = Dhuhr + T(17.5, Lat,D)
     const  Asr = Dhuhr + A(1, Lat, D)
     // const Maghrib = Dhuhr + T(4) // for sheea
     const Maghrib = Sunset
