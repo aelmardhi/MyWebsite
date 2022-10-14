@@ -577,7 +577,7 @@
         </div>
     </body>
     <script>
-        
+        ////LOAD DATA////////////////////////////////////////////////////
         document.addEventListener('DOMContentLoaded',function(){
             function randombetween(a,b){
                 return Math.floor(a + Math.random()*(b-a));
@@ -619,7 +619,7 @@
                     console.log('fetch'+err+err.data)
                 });
         })
-///////////////////*///////////////////////*////////////////////*/////////////////*/////////////////
+////SERVER WORKER////////////////////////////////////////*/////////////////
 
 	window.onload = () => {
  	 'use strict';
@@ -671,6 +671,11 @@ navigator.serviceWorker.ready
  	 }
 	}
 
+////////NAVIGATION////////////////////////////////////////////////////
+    if(!new URL(location).hash){
+        const main = document.querySelector('main');
+        main.scrollTo(main.scrollWidth * 2 /4,0)
+    }
 
     let articles = document.getElementsByTagName('article');
     let btns = document.querySelectorAll('.mobile_nav a');
@@ -690,24 +695,12 @@ navigator.serviceWorker.ready
         rootMargin: '0px',
         threshold: 1.0
         }) 
-    // articles.forEach(e=>observer.observe(e));
     for(let e=0;e<articles.length;e++){
         articles.item(e).index = e;
         observer.observe(articles.item(e));
     }
-    function mobileNavClick(i){
-        
-        let mobileNav = document.getElementById('mobileNav')
-        let btns = mobileNav.getElementsByTagName('button')
-        
-        mobileNav.getElementsByTagName('span').item(0).style.transform = 'translateX('+ 100*(-i*1)+ '%) scaleX(1) '
-        
-        for(let e=0;e<articles.length;e++){
-            articles.item(e).style.transform = 'translateX('+ i*100 +'%)'
-            btns.item(e).style.background = 'none'
-        }
-        btns.item(2-i).style.background = 'var(--clr-accent3)'
-    }
+
+////////LINKS ///////////////////////////////////////////////////////////
     let links = document.querySelectorAll('ul li a')
     links.forEach(l=> l.addEventListener('click',
     function linkKlick(e){
