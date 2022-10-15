@@ -29,10 +29,10 @@
             --clr-light: #fff;
             --clr-body : #fff;
             --clr-danger: #cf1b24;
-            --clr-main: none;
+            --clr-main: #39f3;
             --border1 :  2px solid #39f9;
-            --bs-main: none;
-            --bs-article: 2px 2px 10px #0003, 10px 10px 20px  #39f5;
+            --bs-main: 2px 2px 10px #0003, 10px 10px 20px  #39f5;
+            --bs-article: none;
             --bs-downloads: inset 0 0 8px #0003 , inset 0 0 15px #0001;
             --bs-downloads-hover: 0 0 6px #0005, 0 0 12px #0003;
             --bs-games:inset 0 0 8px #0005 , inset 0 0 15px #0003;
@@ -67,7 +67,8 @@
         body{
             width: 100vw;
             height: 100vh;
-            justify-content: space-around;
+            justify-content: center;
+            align-items: center;
             display: flex;
             flex-direction: column;
             background-color: var(--clr-body);
@@ -77,34 +78,31 @@
         main{
             display: flex;
             flex-direction: row;
-            width: 90%;
-            flex: 1 1 0;
-            height: 70vh;
-            max-width: 1200px;
-            margin: 1em auto 0 auto;
-            position: relative;
+            flex-wrap: wrap;
             box-shadow: var(--bs-main);
-            border-radius: 1em 1em 1em 0;
-            background-color: var(--clr-main);
+            border-radius: 1em;
+            /* background-color: var(--clr-main); */
+            max-width: 1200px;
+            max-height: calc(100vh - 4rem);
+            width: 100%;
         }
         .main{
             border-left: none;
-            border-top-left-radius:0 ;
-            border-bottom-left-radius: 0;
-            width: 20em;
+            border-radius: 0 1rem 0 0;
+            width: 20%;
+            min-width: 10rem;
         }
          article{
-             width: 90%;
              margin: 0 auto;
              border-radius: 1em;
              overflow: hidden;
              text-align: center;
              box-shadow: var(--bs-article);
             border: var(--border1);
-            height: max-content;
-            max-height: 100%;
             display: flex;
             flex-direction: column;
+            background-color: var(--clr-main);
+            max-height: calc(100% - 3rem);
         }
         h2{
             text-align: center;
@@ -160,7 +158,7 @@
         
         .downloads{
             border-radius: 0;
-            width: 100%;
+            flex: 1 1 0;
         }
         progress{
             width: 100%;
@@ -242,7 +240,7 @@
         }
         
         .posts{
-            --width: 30em;
+            --width: max( 25%, 14rem);
             width: var(--width);
             border-radius: 1em 0 0 0;
         }
@@ -312,8 +310,9 @@
             box-shadow: var(--bs-downloads);
         }
         .games{
-            max-width: 1200px;
+            width: 100%;
             border-top-left-radius: 0;
+            border-top-right-radius: 0;
             display: flex;
             flex-direction: row;
             min-height: calc(1.8rem + 20px);
@@ -363,26 +362,28 @@
             justify-content: space-evenly;
             background-color: var(--clr-accent4);
         }
-        .mobile_nav button{
+        .mobile_nav a{
             width: 100%;
             background: none;
             border: none;
+            display: inline-flex;
         }
         .mobile_nav svg{
             height: 1.5rem;
             width: 1.5rem;
+            margin: auto;
         }
         .mobile_nav svg path{
             fill: var(--clr-light);
         }
-        .mobile_nav button:active svg path{
+        .mobile_nav a:active svg path{
             opacity: .5;
         }
         .mobile_nav span{
             display: block;
             position: absolute;
             top: 0rem;
-            left: 50vw;
+            left: 0;
             height: .25rem;
             width: 25vw;
             transform: translateX(0);
@@ -395,27 +396,41 @@
             animation: active_link_animation 1s ease 0s infinite ;
         }
 
-
         /*************************************************************/
         @media(max-width:600px){
             article, main, .main, .downloads, .games, .posts{
-                position: fixed;	
-		        top: 0;
-                left: 0;
-                max-width: none;
+                
                 width: 100vw;
+                max-width: none;
                 height: calc(100vh - 6rem);
                 border-radius: 0;
                 box-shadow: none;
                 background-color: var(--clr-primary);
+                max-height: unset;
             }
             main{
+                width: 100vw;
                 margin: 0em;
+                flex-flow: row nowrap;
+                overscroll-behavior-x: contain;
+                scroll-snap-type: x mandatory;
+                overflow-x: auto;
+            }
+            body{
+                width: 100vw;
+                display: block;
+                overflow-y: hidden;
+                overflow-x: auto;
+            }
+            html{
+                width: 100vw;
+                height: 100vh;
+                overflow: hidden;
             }
             article{
                 transition: transform .3s cubic-bezier(0.61, 0.22, 0.27, 0.8);
-                
-                transform: translateX(0px);
+                flex-shrink: 0;
+                scroll-snap-align: center;
             }
             ul, .games_list{
                 overflow-y: auto;
@@ -435,10 +450,10 @@
             height: calc(100% - 2rem - 30px);
             } */
             .downloads{
-                left: -100vw;
+                flex: 0 0 100%;
             }
             .posts{
-                left: -200vw;
+                
             }
             .posts ul{
                 max-height: none;
@@ -466,7 +481,6 @@
             }
             .games, .games ul{
                 box-shadow: none;
-                left: 100vw;
                 flex-direction:column ;
             }
             .games h3{
@@ -513,7 +527,7 @@
                 <ul id="downloads-list"><progress></progress></ul>
             </div>
         </article>
-        <article class="main">
+        <article id="main" class="main">
             <div class="title">Main Routes</div>
             <div class="data">
                 <ul>
@@ -534,8 +548,7 @@
                     </ul>
             </div>
         </article>
-        </main>
-        <article class="games">
+        <article id="games" class="games">
             <h3>Games</h3>
             <ul class="games_list data">
                 <li><a href="games/brick-breaker/">Brick Breaker</a></li>
@@ -552,17 +565,19 @@
             </ul>
         </article>
         
+    </main>
+        
         <h2>aelmardhi © 2022</h2>
         <div id="mobileNav" class="mobile_nav">
             <span></span>
-            <button aria-label="show blog button" onclick="mobileNavClick(2)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M384 32C419.3 32 448 60.65 448 96V416C448 451.3 419.3 480 384 480H64C28.65 480 0 451.3 0 416V96C0 60.65 28.65 32 64 32H384zM325.8 139.7C310.1 124.1 284.8 124.1 269.2 139.7L247.8 161.1L318.7 232.1L340.1 210.7C355.8 195 355.8 169.7 340.1 154.1L325.8 139.7zM111.5 303.8L96.48 363.1C95.11 369.4 96.71 375.2 100.7 379.2C104.7 383.1 110.4 384.7 115.9 383.4L176 368.3C181.6 366.9 186.8 364 190.9 359.9L296.1 254.7L225.1 183.8L119.9 288.1C115.8 293.1 112.9 298.2 111.5 303.8z"/></svg></button>
-            <button aria-label="show downloads button" onclick="mobileNavClick(1)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M144 480C64.47 480 0 415.5 0 336C0 273.2 40.17 219.8 96.2 200.1C96.07 197.4 96 194.7 96 192C96 103.6 167.6 32 256 32C315.3 32 367 64.25 394.7 112.2C409.9 101.1 428.3 96 448 96C501 96 544 138.1 544 192C544 204.2 541.7 215.8 537.6 226.6C596 238.4 640 290.1 640 352C640 422.7 582.7 480 512 480H144zM303 392.1C312.4 402.3 327.6 402.3 336.1 392.1L416.1 312.1C426.3 303.6 426.3 288.4 416.1 279C407.6 269.7 392.4 269.7 383 279L344 318.1V184C344 170.7 333.3 160 320 160C306.7 160 296 170.7 296 184V318.1L256.1 279C247.6 269.7 232.4 269.7 223 279C213.7 288.4 213.7 303.6 223 312.1L303 392.1z"/></svg></button>
-            <button aria-label="show main routes button" style="background:var(--clr-accent3)" onclick="mobileNavClick(0)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M575.8 255.5C575.8 273.5 560.8 287.6 543.8 287.6H511.8L512.5 447.7C512.5 450.5 512.3 453.1 512 455.8V472C512 494.1 494.1 512 472 512H456C454.9 512 453.8 511.1 452.7 511.9C451.3 511.1 449.9 512 448.5 512H392C369.9 512 352 494.1 352 472V384C352 366.3 337.7 352 320 352H256C238.3 352 224 366.3 224 384V472C224 494.1 206.1 512 184 512H128.1C126.6 512 125.1 511.9 123.6 511.8C122.4 511.9 121.2 512 120 512H104C81.91 512 64 494.1 64 472V360C64 359.1 64.03 358.1 64.09 357.2V287.6H32.05C14.02 287.6 0 273.5 0 255.5C0 246.5 3.004 238.5 10.01 231.5L266.4 8.016C273.4 1.002 281.4 0 288.4 0C295.4 0 303.4 2.004 309.5 7.014L564.8 231.5C572.8 238.5 576.9 246.5 575.8 255.5L575.8 255.5z"/></svg></button>
-            <button aria-label="show games button" onclick="mobileNavClick(-1)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M448 64H192C85.96 64 0 149.1 0 256s85.96 192 192 192h256c106 0 192-85.96 192-192S554 64 448 64zM247.1 280h-32v32c0 13.2-10.78 24-23.98 24c-13.2 0-24.02-10.8-24.02-24v-32L136 279.1C122.8 279.1 111.1 269.2 111.1 256c0-13.2 10.85-24.01 24.05-24.01L167.1 232v-32c0-13.2 10.82-24 24.02-24c13.2 0 23.98 10.8 23.98 24v32h32c13.2 0 24.02 10.8 24.02 24C271.1 269.2 261.2 280 247.1 280zM431.1 344c-22.12 0-39.1-17.87-39.1-39.1s17.87-40 39.1-40s39.1 17.88 39.1 40S454.1 344 431.1 344zM495.1 248c-22.12 0-39.1-17.87-39.1-39.1s17.87-40 39.1-40c22.12 0 39.1 17.88 39.1 40S518.1 248 495.1 248z"/></svg></button>
+            <a aria-label="show blog button" href="#posts"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M384 32C419.3 32 448 60.65 448 96V416C448 451.3 419.3 480 384 480H64C28.65 480 0 451.3 0 416V96C0 60.65 28.65 32 64 32H384zM325.8 139.7C310.1 124.1 284.8 124.1 269.2 139.7L247.8 161.1L318.7 232.1L340.1 210.7C355.8 195 355.8 169.7 340.1 154.1L325.8 139.7zM111.5 303.8L96.48 363.1C95.11 369.4 96.71 375.2 100.7 379.2C104.7 383.1 110.4 384.7 115.9 383.4L176 368.3C181.6 366.9 186.8 364 190.9 359.9L296.1 254.7L225.1 183.8L119.9 288.1C115.8 293.1 112.9 298.2 111.5 303.8z"/></svg></a>
+            <a aria-label="show downloads button" href="#downloads"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M144 480C64.47 480 0 415.5 0 336C0 273.2 40.17 219.8 96.2 200.1C96.07 197.4 96 194.7 96 192C96 103.6 167.6 32 256 32C315.3 32 367 64.25 394.7 112.2C409.9 101.1 428.3 96 448 96C501 96 544 138.1 544 192C544 204.2 541.7 215.8 537.6 226.6C596 238.4 640 290.1 640 352C640 422.7 582.7 480 512 480H144zM303 392.1C312.4 402.3 327.6 402.3 336.1 392.1L416.1 312.1C426.3 303.6 426.3 288.4 416.1 279C407.6 269.7 392.4 269.7 383 279L344 318.1V184C344 170.7 333.3 160 320 160C306.7 160 296 170.7 296 184V318.1L256.1 279C247.6 269.7 232.4 269.7 223 279C213.7 288.4 213.7 303.6 223 312.1L303 392.1z"/></svg></a>
+            <a aria-label="show main routes button" style="background:var(--clr-accent3)" href="#main"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M575.8 255.5C575.8 273.5 560.8 287.6 543.8 287.6H511.8L512.5 447.7C512.5 450.5 512.3 453.1 512 455.8V472C512 494.1 494.1 512 472 512H456C454.9 512 453.8 511.1 452.7 511.9C451.3 511.1 449.9 512 448.5 512H392C369.9 512 352 494.1 352 472V384C352 366.3 337.7 352 320 352H256C238.3 352 224 366.3 224 384V472C224 494.1 206.1 512 184 512H128.1C126.6 512 125.1 511.9 123.6 511.8C122.4 511.9 121.2 512 120 512H104C81.91 512 64 494.1 64 472V360C64 359.1 64.03 358.1 64.09 357.2V287.6H32.05C14.02 287.6 0 273.5 0 255.5C0 246.5 3.004 238.5 10.01 231.5L266.4 8.016C273.4 1.002 281.4 0 288.4 0C295.4 0 303.4 2.004 309.5 7.014L564.8 231.5C572.8 238.5 576.9 246.5 575.8 255.5L575.8 255.5z"/></svg></a>
+            <a aria-label="show games button" href="#games"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M448 64H192C85.96 64 0 149.1 0 256s85.96 192 192 192h256c106 0 192-85.96 192-192S554 64 448 64zM247.1 280h-32v32c0 13.2-10.78 24-23.98 24c-13.2 0-24.02-10.8-24.02-24v-32L136 279.1C122.8 279.1 111.1 269.2 111.1 256c0-13.2 10.85-24.01 24.05-24.01L167.1 232v-32c0-13.2 10.82-24 24.02-24c13.2 0 23.98 10.8 23.98 24v32h32c13.2 0 24.02 10.8 24.02 24C271.1 269.2 261.2 280 247.1 280zM431.1 344c-22.12 0-39.1-17.87-39.1-39.1s17.87-40 39.1-40s39.1 17.88 39.1 40S454.1 344 431.1 344zM495.1 248c-22.12 0-39.1-17.87-39.1-39.1s17.87-40 39.1-40c22.12 0 39.1 17.88 39.1 40S518.1 248 495.1 248z"/></svg></a>
         </div>
     </body>
     <script>
-        
+        ////LOAD DATA////////////////////////////////////////////////////
         document.addEventListener('DOMContentLoaded',function(){
             function randombetween(a,b){
                 return Math.floor(a + Math.random()*(b-a));
@@ -604,7 +619,7 @@
                     console.log('fetch'+err+err.data)
                 });
         })
-///////////////////*///////////////////////*////////////////////*/////////////////*/////////////////
+////SERVER WORKER////////////////////////////////////////*/////////////////
 
 	window.onload = () => {
  	 'use strict';
@@ -656,19 +671,36 @@ navigator.serviceWorker.ready
  	 }
 	}
 
-    function mobileNavClick(i){
-        let articles = document.getElementsByTagName('article');
-        let mobileNav = document.getElementById('mobileNav')
-        let btns = mobileNav.getElementsByTagName('button')
-        
-        mobileNav.getElementsByTagName('span').item(0).style.transform = 'translateX('+ 100*(-i*1)+ '%) scaleX(1) '
-        
+////////NAVIGATION////////////////////////////////////////////////////
+    if(!new URL(location).hash){
+        const main = document.querySelector('main');
+        main.scrollTo(main.scrollWidth * 2 /4,0)
+    }
+
+    let articles = document.getElementsByTagName('article');
+    let btns = document.querySelectorAll('.mobile_nav a');
+    let mobileNavSpan = document.querySelector('.mobile_nav span');
+    let observer = new IntersectionObserver((entries)=>{
         for(let e=0;e<articles.length;e++){
-            articles.item(e).style.transform = 'translateX('+ i*100 +'%)'
             btns.item(e).style.background = 'none'
         }
-        btns.item(2-i).style.background = 'var(--clr-accent3)'
+        entries.forEach(entry => {
+            if(entry.isIntersecting ){
+                btns.item(entry.target.index).style.background = 'var(--clr-accent3)'
+                mobileNavSpan.style.transform = 'translateX('+ 100*(entry.target.index)+ '%) scaleX(1) '
+            }
+        });
+    },{
+        root: document.body,
+        rootMargin: '0px',
+        threshold: 1.0
+        }) 
+    for(let e=0;e<articles.length;e++){
+        articles.item(e).index = e;
+        observer.observe(articles.item(e));
     }
+
+////////LINKS ///////////////////////////////////////////////////////////
     let links = document.querySelectorAll('ul li a')
     links.forEach(l=> l.addEventListener('click',
     function linkKlick(e){
