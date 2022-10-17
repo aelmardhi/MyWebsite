@@ -415,11 +415,11 @@
                 overscroll-behavior-x: contain;
                 scroll-snap-type: x mandatory;
                 overflow-x: auto;
+                scroll-behavior: smooth;
             }
             body{
                 width: 100vw;
                 display: block;
-                overflow-y: hidden;
                 overflow-x: auto;
             }
             html{
@@ -672,9 +672,13 @@ navigator.serviceWorker.ready
 	}
 
 ////////NAVIGATION////////////////////////////////////////////////////
-    if(!new URL(location).hash){
+    
+const locationUrl =new URL(location);
+    if(!locationUrl.hash){
         const main = document.querySelector('main');
         main.scrollTo(main.scrollWidth * 2 /4,0)
+    }else{
+        
     }
 
     let articles = document.getElementsByTagName('article');
