@@ -704,6 +704,10 @@ navigator.serviceWorker.ready
             if(entry.isIntersecting ){
                 btns.item(entry.target.index).style.background = 'var(--clr-accent3)'
                 mobileNavSpan.style.transform = 'translateX('+ 100*(entry.target.index)+ '%) scaleX(1) '
+                const toLocation = new URL(location);
+                const a = entry.target.id
+                toLocation.hash = '#'+a;
+                location.replace(toLocation)
             }
         });
     },{
