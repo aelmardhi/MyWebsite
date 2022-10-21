@@ -204,6 +204,7 @@
             </section>
         </main>
         <script>
+            const storageName = 'feed-kooora'
             const currentMatches = document.getElementById('currentMatches')
             const featuredNews = document.getElementById('featuredNews')
             const lastTimeUpdated= document.getElementById('lastTimeUpdated')
@@ -222,6 +223,14 @@
                     }
                 }
             ).then(r=>r.json()).then(d=>{
+                localStorage.setItem(storageName, JSON.stringify(d))
+                parseData(d);
+            })
+
+            const d = localStorage.getItem(storageName);
+            if(d)
+                parseData(JSON.parse(d));
+            function parseData(d){
                 lastTimeUpdated.textContent = `Last update on ${(new Date(d.time)).toString()}`
                 currentMatches.innerHTML = d?.matches?.map(m =>{
                     return `<tr onclick=" location='${d.baseUrl+m?.url}';">
@@ -281,7 +290,7 @@
                         </li>`
                 }).join('') || 'لا يوجد';
 
-            })
+            }
         </script>
     </body>
     <script>

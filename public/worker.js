@@ -5,7 +5,6 @@ var filesToCache = [
   '/index.html',
   '/error_connect.html',
   /// APIs
-  '/api/scrape/kooora'
 ];
 
 const foldersToCache = [
