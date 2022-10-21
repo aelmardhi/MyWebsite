@@ -12,7 +12,13 @@ router.get('/',async (req, res)=>{
     if(cache && Object.keys(cache).length){
         return res.json(cache)
     }
-    return res.status(202).send("not ready yet")
+    const interval = setInterval(() => {
+        if(cache && Object.keys(cache).length){
+            clearInterval(interval);
+            return res.json(cache)
+        }
+    }, 500);
+    // return res.status(202).send("not ready yet")
 })
 
 async function tryLoad(timezone){
