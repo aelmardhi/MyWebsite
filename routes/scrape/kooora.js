@@ -42,7 +42,7 @@ async function tryLoad(timezone){
         
     }catch(e){
         // res.status(500).send('some error happend')
-        console.log('kooora scrape'+'::'+e.message)
+        logError()(e)
     }
 }
 
@@ -68,7 +68,7 @@ async function updateNews(page,timezone,urlQuery){
             return el.innerHTML ;
         });
     }catch(e){
-        logError('updateNews::'+urlQuery)()
+        logError('updateNews::'+urlQuery)(e)
         return null;
     }
     
