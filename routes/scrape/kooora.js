@@ -58,14 +58,20 @@ async function LoadNews (browser,timezone){
 
 
 async function updateNews(page,timezone,urlQuery){
-    page.emulateTimezone(timezone)
-    await page.goto('https://www.kooora.com/default.aspx'+urlQuery,{timeout:300000, waitUntil:"domcontentloaded"});
-    return await page.$eval('#content .articlePage .articleBody', el => {
-        el.querySelectorAll('div').forEach(element => {
-            element.remove();
+    try{
+        page.emulateTimezone(timezone)
+        await page.goto('https://www.kooora.com/default.aspx'+urlQuery,{timeout:300000, waitUntil:"domcontentloaded"});
+        return await page.$eval('#content .articlePage .articleBody', el => {
+            el.querySelectorAll('div').forEach(element => {
+                element.remove();
+            });
+            return el.innerHTML ;
         });
-        return el.innerHTML ;
-    });
+    }catch(e){
+        logError('updateNews::'+urlQuery)()
+        return null;
+    }
+    
 }
 
 
