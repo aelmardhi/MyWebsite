@@ -100,15 +100,15 @@ router.post('/post/:id/edit',verify,async (req, res)=>{
         if(post.author != req.user._id)
             return res.status(401).send('Error: you are not allowed to edit this')
         const u = await User.findById(post.author)
-        if(req.body.title)
+        if(title in req.body)
             post.title = req.body.title
-        if(req.body.public)
+        if(public in req.body.public)
             post.public = req.body.public
-        if(req.body.blocks)
+        if(blocks in req.body)
             post.blocks = JSON.stringify(req.body.blocks)
-        if(req.body.time)
+        if(time in req.body)
             post.time = req.body.time
-        if(req.body.project)
+        if(project in req.body)
             post.project = req.body.project
         await post.save();
         
