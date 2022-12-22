@@ -102,7 +102,7 @@ router.post('/post/:id/edit',verify,async (req, res)=>{
         const u = await User.findById(post.author)
         if(title in req.body)
             post.title = req.body.title
-        if(public in req.body.public)
+        if(public in req.body)
             post.public = req.body.public
         if(blocks in req.body)
             post.blocks = JSON.stringify(req.body.blocks)
