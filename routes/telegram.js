@@ -52,7 +52,7 @@ const download = async (req,res)=>{
         res.json({
             'method':'sendDocument',
             'chat_id':req.body.message.chat.id,
-            'document':'https://dardasha.herokuapp.com/'+encodeURI('downloads/'+fn)
+            'document':process.env.Host+encodeURI('/downloads/'+fn)
         });
     
     })
@@ -98,7 +98,7 @@ router.post('/update',async (req,res)=>{
                     res.json({
                         'method':'sendVideo',
                         'chat_id':req.body.message.chat.id,
-                        'video':'https://dardasha.herokuapp.com/'+encodeURI('downloads/'+fn)
+                        'video':process.env.Host+encodeURI('/downloads/'+fn)
                     });
                 })
                 .pipe(fs.createWriteStream(fl));
@@ -107,7 +107,7 @@ router.post('/update',async (req,res)=>{
                 res.json({
                     'method':'sendVideo',
                     'chat_id':req.body.message.chat.id,
-                    'video':'https://dardasha.herokuapp.com/'+encodeURI('downloads/'+fn)
+                    'video':process.env.Host+encodeURI('/downloads/'+fn)
                 });
             }
         })
