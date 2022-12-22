@@ -4,7 +4,6 @@ My Website. Using nodejs and expressjs . Serves as a back end for some of my oth
 
 > hosted on
 > * https://chato.onrender.com/  
-> * https://dardasha.herokuapp.com/
 
 ## Features
 Some tools and Services on the website
