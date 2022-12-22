@@ -89,7 +89,7 @@ app.use('/api/messages', messageRoute);
 app.use('/api/ytdl', ytdlRoute);
 app.use('/api/download', downloadRoute);
 app.use('/api/upload', uploadRoute);
-app.use('/api/telegram/'+process.env.TELEGRAM_TOKEN,telegramRoute);
+app.use('/api/telegram/',telegramRoute);
 app.use('/api/rtc',rtcRoute);
 app.use('/api/blog',blogRoute);
 app.use('/api/uploadImage',uploadImageRoute);
