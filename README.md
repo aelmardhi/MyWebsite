@@ -52,7 +52,7 @@ this is the list of environmental variables used by the app. Their  values can b
 | **VAPID_PUBLIC_KEY**     | WebPush public key                 |
 | **VAPID_PUBLIC_KEY**     | WebPush private Key                |
 | **PORT**                 | http port number to use            |
-
+| **HOST**                 | full host path                     |
 
 
 
