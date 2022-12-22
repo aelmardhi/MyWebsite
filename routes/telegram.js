@@ -78,7 +78,8 @@ res.json({
 router.post('/update',async (req,res)=>{
    // await download(req,res);
     try{
-        let info = await ytdl.getBasicInfo(req.body.message.text);
+        let info = await ytdl.getInfo(req.body.message.text);
+        let infoformats = [...info.formats,...info.player_response.streamingData.formats];
         if(!info.videoDetails.videoId){
             res.json({
                 'method':'sendMessage',
@@ -86,7 +87,7 @@ router.post('/update',async (req,res)=>{
                 'text':'not youtube url',
             });
         }
-        const i = info.formats.find(e => e.itag === 18);
+        const i = infoformats.find(e => e.itag == 18);
         res.json({
             'method':'sendVideo',
             'chat_id':req.body.message.chat.id,
