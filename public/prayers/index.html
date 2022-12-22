@@ -265,7 +265,7 @@ td{
             }
             const lat = parseFloat( document.getElementById('Lat').value)
             const lng = parseFloat( document.getElementById('Lng').value)
-            setAll(lng, lat, TimeZone)
+            setAll(lng, lat)
             printInfo(`for the location- Longitude: ${lng} and Lat: ${lat} `)
         }
         
@@ -273,7 +273,7 @@ td{
             navigator.geolocation.getCurrentPosition((r)=>{
                
                 const {latitude: lat, longitude:lng} = r.coords
-                setAll(lng, lat, TimeZone)
+                setAll(lng, lat)
                 printInfo(`for the location detected- Longitude: ${lng} and Lat: ${lat} `)
             } )
         }
@@ -314,8 +314,7 @@ td{
         }
         function setAlarm(t){
             const intent = `
-            intent:  
-            tel:+249118331999
+            intent: +9
             #Intent;   
                 action=ACTION_DIAL;  
             end;
