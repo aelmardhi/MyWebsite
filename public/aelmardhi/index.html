@@ -403,7 +403,7 @@
 		const loaderDiv = document.getElementById('loaderDiv');
 		loaderDiv.style.opacity = 0;
 		
-		const _Y = ims[0].getBoundingClientRect().y - document.body.getBoundingClientRect().y
+		const _Y = ims[0].getBoundingClientRect().y - document.body.getBoundingClientRect().y 
 		window.addEventListener('scroll',(e)=>{
 		let y = window.scrollY-_Y
 		if(y<0)y=0;
