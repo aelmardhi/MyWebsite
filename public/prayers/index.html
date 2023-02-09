@@ -66,7 +66,7 @@ body{
     overflow-x: hidden;
     font-family: system-ui ,sans-serif;
     color: var(--clr-accent3);
-    background: repeating-linear-gradient(45deg ,#0005 0em, #000 5em, #0000 5em, #0000 8em, #003 8em, #0035 13em, #0000 13em, #0000 16em),repeating-linear-gradient(139deg ,#100 0em, #1005 5em, #0000 5em, #0000 8em, #003 8em, #0035 13em, #0000 13em, #0000 16em), linear-gradient(180deg, #39f 1.25em, transparent);
+    background: repeating-linear-gradient(45deg ,#0005 0em, #000 5em, #0000 5em, #0000 8em, #003 8em, #0035 13em, #0000 13em, #0000 16em),repeating-linear-gradient(139deg ,#100 0em, #1005 5em, #0000 5em, #0000 8em, #003 8em, #0035 13em, #0000 13em, #0000 16em), linear-gradient(180deg, var(--clr-accent2) 1.25em, var(--clr-body));
 }
 main{
     margin: 2em auto;
@@ -215,6 +215,7 @@ td{
 @media screen and (max-width:800px){
     body{
         font-size: .75em;
+        background: var(--clr-body);
     }
     main{
         margin: 0;
