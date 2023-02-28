@@ -38,6 +38,25 @@
             --bs-games:inset 0 0 8px #0005 , inset 0 0 15px #0003;
             --lum: 60%;
         }
+        .theme1{   
+            --clr-primary: #861429;
+            --clr-secondary: darkred;
+            --clr-accent1: firebrick;
+            --clr-accent2: #dc2323;
+            --clr-accent3: palegoldenrod;
+            --clr-accent4: brown;
+            --clr-light: oldlace;
+            --clr-body: #ff2a52;
+            --clr-main: firebrick;
+            --clr-danger: crimson;
+            --border1: none;
+            --bs-main: 0 0 10px 2px gold;
+            --bs-article: none;
+            --bs-downloads: inset 0 0 8px #0003 , inset 0 0 15px #0001;
+            --bs-downloads-hover: 0 0 6px #0005, 0 0 12px #0003;
+            --bs-games: inset 0 0 8px #0005 , inset 0 0 15px #0003;
+            --lum: 60%;
+            }
         @media(prefers-color-scheme: dark){ 
             :root{   
             --clr-primary:#232834;
@@ -52,6 +71,25 @@
             --clr-danger: #8f0a10;
             --border1 :  none;
             --bs-main: inset 0 0 15px #5693, 0 0 10px #5696;
+            --bs-article: none;
+            --bs-downloads: inset 0 0 8px #0003 , inset 0 0 15px #0001;
+            --bs-downloads-hover: 0 0 6px #0005, 0 0 12px #0003;
+            --bs-games:inset 0 0 8px #0005 , inset 0 0 15px #0003;
+            --lum: 10%;
+            }
+            .theme1{   
+            --clr-primary: #320510;
+            --clr-secondary: #640000;
+            --clr-accent1: #460000;
+            --clr-accent2: #3f1810;
+            --clr-accent3: #ffbef7;
+            --clr-accent4: #4f180f;
+            --clr-light: oldlace;
+            --clr-body : crimson;
+            --clr-main: #86251420;
+            --clr-danger: #9b2323;
+            --border1 :  none;
+            --bs-main:  0 0 15px #e881, 0 0 5px #9323;
             --bs-article: none;
             --bs-downloads: inset 0 0 8px #0003 , inset 0 0 15px #0001;
             --bs-downloads-hover: 0 0 6px #0005, 0 0 12px #0003;
@@ -106,7 +144,7 @@
         }
         h2{
             text-align: center;
-            color: #09f9;
+            color: var(--clr-accent2);
             font-size: 1rem;
         }
         .title{
@@ -133,7 +171,7 @@
             list-style: none;
         }
         li  {
-            border-bottom: 1px solid #39f9;
+            border-bottom: 1px solid var(--clr-accent2);
         }
         .main ul li a,
         .downloads ul li a,
@@ -151,7 +189,7 @@
         .main ul li a:hover,
         .downloads ul li a:hover,
         .games ul li a:hover{
-            background: #3af;
+            background: var(--clr-accent4);
             color: var(--clr-light);
         }
     
@@ -235,7 +273,7 @@
                 font-weight: normal;
             }
         .downloads ul li a:hover span:nth-child(1){
-            background-color: #3af;
+            background-color: var(--clr-accent4);
             color: var(--clr-light);
         }
         
@@ -584,13 +622,17 @@
             </div>
     </body>
     <script>
-        ////LOAD DATA////////////////////////////////////////////////////
+        ////View ////////////////////////////////////////////////////
         document.addEventListener('DOMContentLoaded',function(){
             function randombetween(a,b){
                 return Math.floor(a + Math.random()*(b-a));
             }
             document.body.style.background = `linear-gradient(45deg, hsla(${randombetween(0,255)},30%,var(--lum),.6), hsla(${randombetween(0,255)},20%,var(--lum),.6)), linear-gradient(-45deg, hsla(${randombetween(0,255)},50%,var(--lum),.6), hsla(${randombetween(0,255)},20%,var(--lum),.6)), linear-gradient(0deg, hsla(${randombetween(0,255)},20%,var(--lum),.6), hsla(${randombetween(0,255)},20%,var(--lum),.6))`
-            const downloadsList = document.getElementById('downloads-list');
+            const themes = ['','theme1']
+            const random = Math.floor(2*Math.random())
+            document.body.classList.add(themes[[random]]);
+            ////LOAD DATA////////////////////////////////////////////////////
+             const downloadsList = document.getElementById('downloads-list');
             const postsList = document.getElementById('posts-list');
             const downloads = document.getElementById('downloads');
             fetch('/api/download/files').then(r => r.json()).then(res => {
