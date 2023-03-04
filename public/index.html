@@ -200,6 +200,7 @@
         }
         progress{
             width: 100%;
+            accent-color: var(--clr-accent1);
         }
         .downloads .title{
             background: linear-gradient(90deg,var(--clr-accent1) 20%, var(--clr-accent2) 70%, var(--clr-secondary) 100%);
@@ -245,7 +246,7 @@
         }
         
         .downloads ul li a:hover span{
-            background: linear-gradient(45deg ,#3af 50%, var(--clr-light) 70%);
+            background: linear-gradient(45deg ,var(--clr-accent4) 50%, var(--clr-light) 70%);
         }
         .downloads ul li .download_link{
             position: absolute;
@@ -429,7 +430,7 @@
             transition: transform .2s ease ;
         }
         .active_link, .active_link:focus, .active_link:active, .active_link:hover{
-            background: linear-gradient(60deg, #3df3 20%, #3ff 50%,  #3df3 80%);
+            background: linear-gradient(60deg, var(--clr-main) 20%,  var(--clr-accent4) 50%,  var(--clr-main) 80%);
             background-repeat: repeat-x;
             animation: active_link_animation 1s ease 0s infinite ;
         }
@@ -728,12 +729,12 @@ navigator.serviceWorker.ready
     let btns = document.querySelectorAll('.mobile_nav button');
     let mobileNavSpan = document.querySelector('.mobile_nav span');
 
-    if(!location.hash){
-        main.scrollTo(main.scrollWidth * 2 /4,0)
-    }else{
-        // history.back()
+    // if(!location.hash){
+    //     main.scrollTo(main.scrollWidth * 2 /4,0)
+    // }else{
+    //     // history.back()
         
-    }
+    // }
     
     btns.forEach(b=>{
         b.addEventListener('click',(e)=>{
