@@ -1,5 +1,5 @@
 # Aelmardhi's Website
-My Website. Using nodejs and expressjs . Serves as a back end for some of my other apps. Have some usefull tools and services.
+My Website, Uses nodejs and expressjs . It serves as a back end for some of my other apps, and has some usefull tools and services.
 
 
 > hosted on
