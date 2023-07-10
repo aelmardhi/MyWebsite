@@ -4,6 +4,7 @@ var filesToCache = [
   '/',
   '/index.html',
   '/error_connect.html',
+  '/share-target.html',
   /// APIs
 ];
 
