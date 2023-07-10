@@ -34,7 +34,7 @@
   "lang": "en-US",
   "start_url": "/index.html",
   "share_target": {
-  "action": "/share-target/",
+  "action": "/share-target.html",
   "method": "GET",
   "params": {
     "title": "title",
