@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const puppeteer = require('puppeteer');
 
+const baseURL ='https://www.kooora.com/';
 let cache = {};
 
 const timezone =  "Africa/Khartoum"
@@ -29,7 +30,7 @@ async function tryLoad(timezone){
         const [main,barca]=await Promise.all([getKooraHome(browser,timezone),getKooraTeamImportant(browser,timezone, 63)]);
         
         // browser.close()
-        let result = {...main, barca,baseUrl:'https://www.kooora.com/default.aspx',time:  Date()}
+        let result = {...main, barca,baseUrl:baseURL,time:  Date()}
         cache = result;
         await LoadNews (browser,timezone);
 
@@ -60,7 +61,7 @@ async function LoadNews (browser,timezone){
 async function updateNews(page,timezone,urlQuery){
     try{
         page.emulateTimezone(timezone)
-        await page.goto('https://www.kooora.com/default.aspx'+urlQuery,{timeout:300000, waitUntil:"domcontentloaded"});
+        await page.goto(baseURL+'?'+urlQuery,{timeout:300000, waitUntil:"domcontentloaded"});
         return await page.$eval('#content .articlePage .articleBody', el => {
             el.querySelectorAll('div').forEach(element => {
                 element.remove();
@@ -81,7 +82,7 @@ async function getKooraHome(browser,timezone){
     try{
         const page = await browser.newPage()
         page.emulateTimezone(timezone)
-        await page.goto('https://www.kooora.com/default.aspx',{timeout:300000, waitUntil:"domcontentloaded"})
+        await page.goto(baseURL,{timeout:300000, waitUntil:"domcontentloaded"})
     const matches = await page.$eval('.liveMatches > table', el => {
         function parseTD(td){
             if(td.classList.contains('liveTeam')){
@@ -154,7 +155,7 @@ async function getKooraTeamImportant (browser,timezone, team){
     try{
         const page = await browser.newPage()
         page.emulateTimezone(timezone)
-        await page.goto('https://www.kooora.com/default.aspx?team='+team,{timeout:300000, waitUntil:"domcontentloaded"})
+        await page.goto(baseURL+'?team='+team,{timeout:300000, waitUntil:"domcontentloaded"})
   const matches = await page.$eval('.lastMatches > table', el => {
     function parseTD(td){
         const a= td.childNodes[0]
