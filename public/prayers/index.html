@@ -385,14 +385,14 @@ td{
                 longitude = Lng;
             }else {
                 if(localStorage.getItem(LNG_KEY)){
-                  arguments.Lng = localStorage.getItem(LNG_KEY);  
+                  arguments.Lng = longitude = parseFloat ( localStorage.getItem(LNG_KEY));  
                 }
             }
             if(Lat){
                 latitude = Lat;
             }else {
                 if(localStorage.getItem(LAT_KEY)){
-                  arguments.Lat = localStorage.getItem(LAT_KEY);  
+                  arguments.Lat = latitude = parseFloat(localStorage.getItem(LAT_KEY));  
                 }
             }
             if(arguments.length)
