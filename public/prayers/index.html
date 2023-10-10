@@ -342,6 +342,7 @@ td{
             setAlarmLink.href = intent.replaceAll(' ','')
         }
         function setTime(){
+            
             let times
             if(arguments.length)
                 times = prayerTimes(...arguments)
@@ -379,19 +380,19 @@ td{
             }
         }
         
-        function setAll(lng , lat){
-            if(lng){
-                longitude = lng;
+        function setAll(Lng , Lat){
+            if(Lng){
+                longitude = Lng;
             }else {
                 if(localStorage.getItem(LNG_KEY)){
-                  lng = localStorage.getItem(LNG_KEY);  
+                  arguments.Lng = localStorage.getItem(LNG_KEY);  
                 }
             }
-            if(lat){
-                latitude = lat;
+            if(Lat){
+                latitude = Lat;
             }else {
                 if(localStorage.getItem(LAT_KEY)){
-                  lat = localStorage.getItem(LAT_KEY);  
+                  arguments.Lat = localStorage.getItem(LAT_KEY);  
                 }
             }
             if(arguments.length)
@@ -402,4 +403,4 @@ td{
         setAll()
     </script>
 </body>
-    </html>
+                    </html>
