@@ -261,6 +261,7 @@ td{
                     <input type="number" id="Lat">
                 </fieldset>
                 <button onclick="onAutoDetect()">Auto Detect Location</button>
+                <button onclick="saveSettings">Save Settings </button>
             </div>
             <!-- <a id="setAlarm">Set Alarm</a> -->
             <button class="changeLocation" onclick="changeLocation()">Change Location</button>
@@ -273,6 +274,9 @@ td{
         let changeLocationVisible = false
         let qiblaAngle = 0;
         let screenNorthOrientation = 0;
+        let longitude, latitude;
+        const LNG_KEY ="prayers__longitude";
+        const LAT_KEY = "prayers__latitude";
         function changeLocation(){
             if(!changeLocationVisible){
                 changeLocationVisible = true
@@ -365,7 +369,31 @@ td{
             document.getElementById('qiblaValue').innerText = angle+' °';
             document.querySelector('.qiblaCompass > div').style.transform = 'rotate('+angle +'deg)'
         }
-        function setAll(){
+        
+        function saveSettings(){
+            if(longitude){
+                localStorage.setItem(LNG_KEY, longitude);
+            }
+            if(latitude){
+                localStorage.setItem(LAT_KEY, latitude);
+            }
+        }
+        
+        function setAll(lng , lat){
+            if(lng){
+                longitude = lng;
+            }else {
+                if(localStorage.getItem(LNG_KEY)){
+                  lng = localStorage.getItem(LNG_KEY);  
+                }
+            }
+            if(lat){
+                latitude = lat;
+            }else {
+                if(localStorage.getItem(LAT_KEY)){
+                  lat = localStorage.getItem(LAT_KEY);  
+                }
+            }
             if(arguments.length)
                 arguments.TimeZone = (new Date().getTimezoneOffset())/-60
             setQibla(...arguments,)
@@ -374,4 +402,4 @@ td{
         setAll()
     </script>
 </body>
-</html>
+    </html>
