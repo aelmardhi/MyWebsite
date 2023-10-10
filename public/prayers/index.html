@@ -385,22 +385,23 @@ td{
                 longitude = Lng;
             }else {
                 if(localStorage.getItem(LNG_KEY)){
-                  arguments.Lng = longitude = parseFloat ( localStorage.getItem(LNG_KEY));  
+                  Lng = longitude = parseFloat ( localStorage.getItem(LNG_KEY));  
                 }
             }
             if(Lat){
                 latitude = Lat;
             }else {
                 if(localStorage.getItem(LAT_KEY)){
-                  arguments.Lat = latitude = parseFloat(localStorage.getItem(LAT_KEY));  
+                  Lat = latitude = parseFloat(localStorage.getItem(LAT_KEY));  
                 }
             }
-            if(arguments.length)
-                arguments.TimeZone = (new Date().getTimezoneOffset())/-60
-            setQibla(...arguments,)
-            setTime(...arguments,)
+            
+            
+                const TimeZone = (new Date().getTimezoneOffset())/-60
+            setQibla(Lng,Lat,TimeZone)
+            setTime(Lng, Lat, TimeZone)
         }
         setAll()
     </script>
 </body>
-                    </html>
+    </html>
