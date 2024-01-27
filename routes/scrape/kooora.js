@@ -106,7 +106,7 @@ async function getKooraHome(browser,timezone){
         }
         
         let r = []
-        trs = el.querySelectorAll('matchRow')
+        trs = el.querySelectorAll('.matchRow')
         let lastScoreIndex = 0;
         for(let i=0;i< trs.length;i++){
             r.push(parseScoreRow(trs[i]))
@@ -118,8 +118,9 @@ async function getKooraHome(browser,timezone){
 
     let featurednews = await page.$eval('.newsList.topNews', el => {
         let news = []
-        for (let i=0; i< el.childNodes.length; i++){
-            let p = el.childNodes[i].querySelector('.aCard');
+        let ps = el.querySelectorAll('.aCard');
+        for (let i=0; i< ps.length; i++){
+            let p = ps[i];
             news.push({
                 url: p.querySelector('a').getAttribute('href'),
                 title: p.querySelector('.aTitle').textContent,
