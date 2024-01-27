@@ -134,7 +134,7 @@ async function getKooraHome(browser,timezone){
     let news = await page.$eval('.newsList.longList', el => {
         let news = []
         let list = el.querySelectorAll('.aCard')
-        for (let i=0; i< list.length && i< 8 ; i++){
+        for (let i=0; i< list.length ; i++){
             let a = list[i].querySelector('.aTitle > a');
             if(a)
                 news.push({
