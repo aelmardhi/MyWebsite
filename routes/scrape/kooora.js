@@ -62,7 +62,7 @@ async function updateNews(page,timezone,urlQuery){
     try{
         page.emulateTimezone(timezone)
         await page.goto(baseURL+'?'+urlQuery,{timeout:300000, waitUntil:"domcontentloaded"});
-        return await page.$eval('#content .articlePage .articleBody', el => {
+        return await page.$eval('.content .articlePage .articleBody', el => {
             el.querySelectorAll('div').forEach(element => {
                 element.remove();
             });
