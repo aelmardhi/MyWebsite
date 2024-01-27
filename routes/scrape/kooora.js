@@ -83,7 +83,7 @@ async function getKooraHome(browser,timezone){
         const page = await browser.newPage()
         page.emulateTimezone(timezone)
         await page.goto(baseURL,{timeout:300000, waitUntil:"domcontentloaded"})
-    const matches = await page.$eval('.liveMatches > table', el => {
+    const matches = await page.$eval('.liveMatches flickity-slider', el => {
         function parseTD(td){
             if(td.classList.contains('liveTeam')){
                 return {
@@ -98,7 +98,7 @@ async function getKooraHome(browser,timezone){
         }
         function parseScoreRow (r){
             return{
-                url: /\?m=[0-9]+/.exec(r.onclick.toString())[0],
+                url: '/?m='+r.getAttribute('data-matchid'),
                 home:  parseTD(r.childNodes[0]),
                 score: parseTD(r.childNodes[1]),
                 away: parseTD(r.childNodes[2]),
@@ -106,7 +106,7 @@ async function getKooraHome(browser,timezone){
         }
         
         let r = []
-        trs = el.querySelectorAll('tr')
+        trs = el.querySelectorAll('matchRow')
         let lastScoreIndex = 0;
         for(let i=0;i< trs.length;i++){
             r.push(parseScoreRow(trs[i]))
@@ -116,24 +116,25 @@ async function getKooraHome(browser,timezone){
     
     }).catch(logError('Home::Matches'))
 
-    let featurednews = await page.$eval('#featuredNews > ul', el => {
+    let featurednews = await page.$eval('.newsList.topNews', el => {
         let news = []
         for (let i=0; i< el.childNodes.length; i++){
-            let p = el.childNodes[i].querySelector('p');
+            let p = el.childNodes[i].querySelector('.aCard');
             news.push({
                 url: p.querySelector('a').getAttribute('href'),
-                title: p.querySelector('a').textContent,
-                img: el.childNodes[i].querySelector('img')?.getAttribute('src'),
+                title: p.querySelector('.aTitle').textContent,
+                img: p.querySelector('img')?.getAttribute('src'),
                 featured: true,
             })
         }
         return news;
     }).catch(logError('Home::FeatueredNews'));
 
-    let news = await page.$eval('.newsList > ul', el => {
+    let news = await page.$eval('.newsList.longList', el => {
         let news = []
+        let list = el.querySelectorAll('.aCard')
         for (let i=0; i< el.childNodes.length && i< 8 ; i++){
-            let a = el.childNodes[i].querySelector('div > a');
+            let a = el.childNodes[i].querySelector('.aTitle > a');
             if(a)
                 news.push({
                     url: a.getAttribute('href'),
