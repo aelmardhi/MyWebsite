@@ -134,13 +134,13 @@ async function getKooraHome(browser,timezone){
     let news = await page.$eval('.newsList.longList', el => {
         let news = []
         let list = el.querySelectorAll('.aCard')
-        for (let i=0; i< el.childNodes.length && i< 8 ; i++){
-            let a = el.childNodes[i].querySelector('.aTitle > a');
+        for (let i=0; i< list.length && i< 8 ; i++){
+            let a = list[i].querySelector('.aTitle > a');
             if(a)
                 news.push({
                     url: a.getAttribute('href'),
                     title: a.textContent,
-                    img: el.childNodes[i].querySelector('img')?.getAttribute('src')
+                    img: list[i].querySelector('img')?.getAttribute('src')
                 })
         }
         return news;
