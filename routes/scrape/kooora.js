@@ -118,8 +118,9 @@ async function getKooraHome(browser,timezone){
         return  r
     
     }).catch(e=>{
-        const msg = await page.$eval('body', el=>{return el;});
-        console.log(msg);
+        page.$eval('body', el=>{return el;}).then(msg=>{
+            console.log(msg);
+        });
         logError('Home::Matches');
     })
 
