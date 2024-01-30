@@ -117,7 +117,11 @@ async function getKooraHome(browser,timezone){
         
         return  r
     
-    }).catch(logError('Home::Matches'))
+    }).catch(e=>{
+        const msg = await page.$eval('body', el=>{return el;});
+        console.log(msg);
+        logError('Home::Matches');
+    })
 
     await page.waitForSelector('.newsList.topNews');    
     let featurednews = await page.$eval('.newsList.topNews', el => {
