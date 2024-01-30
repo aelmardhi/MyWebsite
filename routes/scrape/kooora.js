@@ -118,10 +118,10 @@ async function getKooraHome(browser,timezone){
         return  r
     
     }).catch(e=>{
-        page.$eval('body', el=>{return el;}).then(msg=>{
+        page.$eval('body', el=> el.innerHTML).then(msg=>{
             console.log(msg);
         });
-        logError('Home::Matches');
+        logError('Home::Matches')();
     })
 
     await page.waitForSelector('.newsList.topNews');    
