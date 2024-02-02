@@ -85,7 +85,7 @@ async function getKooraHome(browser,timezone){
         const page = await browser.newPage()
         page.emulateTimezone(timezone)
         await page.goto(baseURL,{timeout:300000, waitUntil:"domcontentloaded"})
-        await page.$eval('body', el=> el.innerHTML).then(msg=>{
+        page.$eval('body', el=> el.innerHTML).then(msg=>{
             console.log(msg);
         });
         
