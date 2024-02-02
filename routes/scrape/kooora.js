@@ -85,6 +85,10 @@ async function getKooraHome(browser,timezone){
         const page = await browser.newPage()
         page.emulateTimezone(timezone)
         await page.goto(baseURL,{timeout:300000, waitUntil:"domcontentloaded"})
+        await page.$eval('body', el=> el.innerHTML).then(msg=>{
+            console.log(msg);
+        });
+        
         await page.waitForSelector('.liveMatches .flickity-slider');
     const matches = await page.$eval('.liveMatches .flickity-slider', el => {
         function parseTD(td){
@@ -118,9 +122,6 @@ async function getKooraHome(browser,timezone){
         return  r
     
     }).catch(e=>{
-        page.$eval('body', el=> el.innerHTML).then(msg=>{
-            console.log(msg);
-        });
         logError('Home::Matches')();
     })
 
