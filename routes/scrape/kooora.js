@@ -95,15 +95,15 @@ async function getKooraHome(browser,timezone){
             };
         }
         function parseTDScore(tr){
-            return tr.querySelector('score1')?.textContent
+            return tr.querySelector('.score1')?.textContent
                +':'
-               +tr.querySelector('score2')?.textContent;
+               +tr.querySelector('.score2')?.textContent;
         }
         function parseTDCompetition(td){
             td.querySelector('compName')?.textContent;
         }
         function parseTDTime(td){
-            td.querySelector('fperiod')?.textContent;
+            td.querySelector('.fperiod')?.textContent;
         }
         function parseScoreRow (r){
             return{
