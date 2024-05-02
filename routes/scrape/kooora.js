@@ -119,7 +119,9 @@ async function getKooraHome(browser,timezone){
         let r = []
         trs = el.querySelectorAll('.matchRow')
         let lastScoreIndex = 0;
-     console.log(trs[0].innerHtml);
+   logError('temp')({
+    msg:trs[0].innerHTML
+   })
         for(let i=0;i< trs.length;i++){
             r.push(parseScoreRow(trs[i]))
         }
