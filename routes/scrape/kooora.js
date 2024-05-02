@@ -88,10 +88,6 @@ async function getKooraHome(browser,timezone){
         
         await page.waitForSelector('.liveMatches .flickity-slider');
      
-    const matchrw = await page.$eval('.liveMatches .flickity-slider', el => {
- return el.querySelector('.matchRow').innerHTML
-});
-     console.log(matchrw)
     const matches = await page.$eval('.liveMatches .flickity-slider', el => {
         function parseTDTeam(td){
             return {
@@ -131,7 +127,7 @@ async function getKooraHome(browser,timezone){
         return  r
     
     }).catch(logError('Home::Matches'))
- console.log(matches)
+
     await page.waitForSelector('.newsList.topNews');    
     let featurednews = await page.$eval('.newsList.topNews', el => {
         let news = []
