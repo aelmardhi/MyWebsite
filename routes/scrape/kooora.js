@@ -1,4 +1,4 @@
-const router = require('express').Router()
+ router = require('express').Router()
 const puppeteer = require('puppeteer');
 
 const baseURL ='https://www.kooora.com/';
@@ -95,15 +95,15 @@ async function getKooraHome(browser,timezone){
             };
         }
         function parseTDScore(tr){
-            return r.querySelector('score1').textContent
+            return tr.querySelector('score1').textContent
                +':'
-               +r.querySelector('score2').textContent;
+               +tr.querySelector('score2').textContent;
         }
         function parseTDCompetition(td){
-            r.querySelector('compName').textContent;
+            td.querySelector('compName').textContent;
         }
         function parseTDTime(td){
-            r.querySelector('fperiod').textContent;
+            td.querySelector('fperiod').textContent;
         }
         function parseScoreRow (r){
             return{
