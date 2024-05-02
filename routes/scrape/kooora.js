@@ -100,7 +100,7 @@ async function getKooraHome(browser,timezone){
                +tr.querySelector('.score2')?.textContent;
         }
         function parseTDCompetition(td){
-            td.querySelector('compName')?.textContent;
+            td.querySelector('.compName')?.innerText;
         }
         function parseTDTime(td){
             td.querySelector('.fperiod')?.textContent;
