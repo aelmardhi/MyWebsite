@@ -120,6 +120,16 @@
         }
         .matches td{
             text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+        .matches small{
+            font-size: .7em;
+        }
+        .matches span{
+            font-size: .85em;
+            background: var(--clr-accent1);
+            color: var(--clr-light);
         }
         ul {
             list-style: none;
@@ -239,7 +249,11 @@
                                     `<img src="${m.home?.img}" alt="${m.home?.name}"></img>`
                                     : `<b>${m.home?.name}</b>`  }
                             </td>
-                            <td>${m.score}</td>
+                            <td>
+                               <small>${m.competition}</small>
+                               ${m.score}
+                               <span>${m.time}</span>
+                            </td>
                             <td>
                                 ${m.away.img?
                                     `<img src="${m.away?.img}" alt="${m.away?.name}"></img>`
