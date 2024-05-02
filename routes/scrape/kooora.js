@@ -1,4 +1,4 @@
- router = require('express').Router()
+router = require('express').Router()
 const puppeteer = require('puppeteer');
 
 const baseURL ='https://www.kooora.com/';
@@ -87,6 +87,11 @@ async function getKooraHome(browser,timezone){
         await page.goto(baseURL,{timeout:300000, waitUntil:"domcontentloaded"})
         
         await page.waitForSelector('.liveMatches .flickity-slider');
+     
+    const matchrw = await page.$eval('.liveMatches .flickity-slider', el => {
+ return el.querySelector('.matchRow').innerHTML
+});
+     console.log(matchrw)
     const matches = await page.$eval('.liveMatches .flickity-slider', el => {
         function parseTDTeam(td){
             return {
@@ -119,9 +124,6 @@ async function getKooraHome(browser,timezone){
         let r = []
         trs = el.querySelectorAll('.matchRow')
         let lastScoreIndex = 0;
-   logError('temp')({
-    msg:trs[0].innerHTML
-   })
         for(let i=0;i< trs.length;i++){
             r.push(parseScoreRow(trs[i]))
         }
