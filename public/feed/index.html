@@ -118,16 +118,17 @@
         td{
             padding:1em;
         }
-        .matches td{
+        .matches td div{
             text-align: center;
-            /*display: flex;
-            flex-direction: column;*/
+            display: flex;
+            flex-direction: column;
         }
         .matches small{
             font-size: .7em;
         }
         .matches span{
             font-size: .85em;
+            padding: 5px;
             background: var(--clr-accent1);
             color: var(--clr-light);
         }
@@ -250,9 +251,11 @@
                                     : `<b>${m.home?.name}</b>`  }
                             </td>
                             <td>
-                               <small>${m.competition}</small>
-                               ${m.score}
-                               <span>${m.time}</span>
+                               <div>
+                                  <small>${m.competition}</small>
+                                  ${m.score}
+                                  <span>${m.time}</span>
+                               </div>
                             </td>
                             <td>
                                 ${m.away.img?
