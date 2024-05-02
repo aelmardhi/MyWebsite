@@ -104,20 +104,20 @@ async function getKooraHome(browser,timezone){
                +':'
                +tr.querySelector('.score2')?.textContent;
         }
-        function parseTDCompetition(td){
-            td.querySelector('.compName')?.innerText;
+        function parseTDCompetition(tr){
+            tr.querySelector('.compName').innerText;
         }
-        function parseTDTime(td){
-            td.querySelector('.fperiod')?.textContent;
+        function parseTDTime(tr){
+            tr.querySelector('.fperiod').innerText;
         }
         function parseScoreRow (r){
             return{
                 url: r.getAttribute('onclick').replace("location='",'').replace("';",''),
                 home:  parseTDTeam(r.childNodes[1]),
-                competition: parseTDCompetition(r.childNodes[0]),
+                competition: parseTDCompetition(r),
                 away: parseTDTeam(r.childNodes[2]),
                 score: parseTDScore(r),
-                time: parseTDTime(r.childNodes[0]),
+                time: parseTDTime(r),
             }
         }
         
