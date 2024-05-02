@@ -127,7 +127,8 @@
             font-size: .7em;
         }
         .matches big{
-            font-size: 1.5em;
+            font-size: 3em;
+            font-weight: bold;
         }
         .matches span{
             font-size: .85em;
@@ -254,11 +255,20 @@
                                     : `<b>${m.home?.name}</b>`  }
                             </td>
                             <td>
+                               <big>
+                                  ${m.score[0]}    
+                               </big>
+                            </td>
+                            <td>
                                <div>
                                   <small>${m.competition}</small>
-                                  <big> ${m.score} </big>
                                   <span>${m.time}</span>
                                </div>
+                            </td>
+                            <td>
+                               <big>
+                                  ${m.score[1]}    
+                               </big>
                             </td>
                             <td>
                                 ${m.away.img?
