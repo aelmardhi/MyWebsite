@@ -91,24 +91,31 @@ async function getKooraHome(browser,timezone){
         
         await page.waitForSelector('.liveMatches .flickity-slider');
     const matches = await page.$eval('.liveMatches .flickity-slider', el => {
-        function parseTD(td){
-            if(td.classList.contains('liveTeam')){
-                return {
-                    img: td.querySelector('img')?.getAttribute('src'),
-                    name: td.querySelector('div').textContent,
-                }
-            }
-            else if(td.classList.contains('liveDet')){
-                return td.textContent 
-            }
-            return td.innerHTML
+        function parseTDTeam(td){
+            return {
+                img: td.querySelector('img')?.getAttribute('src'),
+                name: td.querySelector('span').textContent,
+            };
+        }
+        function parseTDScore(tr){
+            return r.querySelector('score1').textContent
+               +':'
+               +r.querySelector('score2').textContent;
+        }
+        function parseTDCompetition(td){
+            r.querySelector('compName').textContent;
+        }
+        function parseTDTime(td){
+            r.querySelector('fperiod').textContent;
         }
         function parseScoreRow (r){
             return{
-                url: '/?m='+r.getAttribute('data-matchid'),
-                home:  parseTD(r.childNodes[0]),
-                score: parseTD(r.childNodes[1]),
-                away: parseTD(r.childNodes[2]),
+                url: r.getAttribute('onclick').replace("location='",'').replace("';",''),
+                home:  parseTDTeam(r.childNodes[1]),
+                competition: parseTDCompetition(r.childNodes[0]),
+                away: parseTDTeam(r.childNodes[2]),
+                score: parseTDScore(r),
+                time: parseTDTime(r.childNodes[0]),
             }
         }
         
