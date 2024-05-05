@@ -88,7 +88,15 @@ async function getKooraHome(browser,timezone){
         
         await page.waitForSelector('.liveMatches .flickity-slider');
      const matchesr = await page.$eval('.liveMatches .flickity-slider', el => {
-     return el.querySelectorAll('.matchRow').forEach(a => a.innerHTML ).join('\n')
+     
+        let r = []
+        trs = el.querySelectorAll('.matchRow')
+        let lastScoreIndex = 0;
+        for(let i=0;i< trs.length;i++){
+            r.push(trs[i].innerHTML)
+        }
+        
+        return  r.join('\n')
      })
 console.log(matchesr)
     const matches = await page.$eval('.liveMatches .flickity-slider', el => {
