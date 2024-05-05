@@ -87,7 +87,10 @@ async function getKooraHome(browser,timezone){
         await page.goto(baseURL,{timeout:300000, waitUntil:"domcontentloaded"})
         
         await page.waitForSelector('.liveMatches .flickity-slider');
-     
+     const matchesr = await page.$eval('.liveMatches .flickity-slider', el => {
+     return el.querySelectorAll('.matchRow').forEach(a => a.innerHTML ).join('\n')
+     })
+console.log(matchesr)
     const matches = await page.$eval('.liveMatches .flickity-slider', el => {
         function parseTDTeam(td){
             return {
