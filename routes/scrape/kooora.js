@@ -114,7 +114,7 @@ console.log(matchesr)
             return tr.querySelector('.compName')?.textContent;
         }
         function parseTDTime(tr){
-            return tr.querySelector('.fperiod')?.innerText;
+            return tr.querySelector('.fperiod, .period')?.innerText;
         }
         function parseScoreRow (r){
             return{
