@@ -31,8 +31,9 @@
         username : username.value,
         password : password.value
       }),
-    }).then(r => r.json())
+    }).then(r => r.text())
     .then(j => {
+        alert('£££')
         alert(j)
     });   
     
