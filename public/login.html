@@ -33,8 +33,7 @@
       }),
     }).then(r => r.text())
     .then(j => {
-        alert('£££')
-        alert(j)
+        localStorage.set('a', j);
     });   
     
     })
