@@ -11,7 +11,7 @@
         <form id="form">
             <label for="username">username</label>
             <input type="text" id="username">
-            <label for="password ">Password </label>
+            <label for="password">Password </label>
             <input type="password" id="Password">
             <input type="submit" value="Send">
         </form>
@@ -21,7 +21,7 @@
         let username = form.querySelector('#username')
         let password = form.querySelector('#password')
     form.addEventListener('submit',(e)=>{
-     e.preventDefault()
+     e.preventDefault();
     fetch('/api/user/login', {
       method: 'post',
       headers: {
@@ -31,7 +31,7 @@
         username : username.value,
         password : password.value
       }),
-    }).then(,r => r.json())
+    }).then(r => r.json())
     .then(j => {
         alert(j)
     });   
