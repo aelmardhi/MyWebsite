@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification</title>
+</head>
+<body>
+    <main>
+        <form id="form">
+            <label for="username">username</label>
+            <input type="text" id="username">
+            <label for="password ">Password </label>
+            <input type="password" id="Password">
+            <input type="submit" value="Send">
+        </form>
+    </main>
+    <script>
+        let form = document.getElementById('form')
+        let username = form.querySelector('#username')
+        let password = form.querySelector('#password')
+    form.addEventListener('submit',(e)=>{
+     e.preventDefault()
+    fetch('/api/user/login', {
+      method: 'post',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        username : username.value,
+        password : password.value
+      }),
+    }).then(,r => r.json())
+    .then(j => {
+        alert(j)
+    });   
+    
+    })
+
+
+    </script>
+</body>
+</html>
