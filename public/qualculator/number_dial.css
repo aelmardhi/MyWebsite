@@ -1,0 +1,57 @@
+.number_dial{
+    --_bg: 2;
+    --_input_bg:  transparent;
+    --_end_bg:  #0001;
+    --_clr: white;
+    display: flex;
+    flex-direction: column;
+    width: 5em;
+    border-radius: .5rem;
+    overflow: hidden;
+    box-shadow: 0 0 8px #0005;
+    border: 1px solid white;
+    background-color: hsl(var(--_bg) 50% 50%);
+}
+
+.number_dial button{
+    border: none;
+    background: transparent;
+    color: var(--_clr);
+    font-size: 2em;
+    padding-block: .25em;
+    transition: color 150ms ease-out;
+}
+
+.number_dial button:active{
+    color: var(--_end_bg);
+}
+
+.number_dial button:first-of-type{
+    background: linear-gradient(to bottom, var(--_end_bg) 50%, var(--_input_bg));
+}
+.number_dial button:last-of-type{
+    background: linear-gradient(to top, var(--_end_bg) 50%, var(--_input_bg));
+}
+
+.number_dial input[type='number']{
+    text-align: center;
+    border: none;
+    background-color: var(--_input_bg);
+    color: var(--_clr);
+    font-size: 1.5em;
+    font-weight: bold;
+    letter-spacing: .02em;
+    padding-block: .35em;
+    /* border-block: 1px solid white; */
+}
+
+.number_dial input[type='number']:focus{
+    outline: none;
+    background-color: hsl(var(--_bg) 80% 60%);
+}
+
+.number_dial input[type='number']::-webkit-inner-spin-button{
+    background-color: azure;
+    -webkit-appearance: none;
+    appearance: none;
+}

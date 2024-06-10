@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qualculator</title>
+    <style>
+        .cube{
+    --_height: 20px;
+    --_width: 10px;
+    --_length: 40px;
+    --_bg_h: 320; 
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    transform-style: preserve-3d;
+    perspective: unset;
+    transform: rotateX(80deg) rotateZ(25deg) rotateY(0deg) ;
+}
+.cube div{
+    
+    border: 1px solid white;
+}
+.cube .top{
+    position: absolute;
+    background-color: hsl( var(--_bg_h) 100% 55%);
+    width: var(--_width);
+    height: var(--_length);
+    top: 50%;
+    left: 50%;
+    translate: calc(var(--_width) * -.5) calc(var(--_length) * -.5) calc(var(--_height) *.5);
+}
+.cube .right{
+    position: absolute;
+    background-color: hsl( var(--_bg_h) 100% 40%);
+    width: var(--_length);
+    height: var(--_height);
+    top: 50%;
+    left: 50%;
+    translate: calc(var(--_length) * -.5 + var(--_width) *.5) calc(var(--_height) * -.5 ) 0;
+    transform: rotateY(90deg)  rotateZ(90deg);
+}
+.cube .left{
+    position: absolute;
+    background-color: hsl( var(--_bg_h) 100% 50%);
+    width: var(--_width);
+    height: var(--_height);
+    top: 50%;
+    left: 50%;
+    translate: calc(var(--_width) * -.5) calc(var(--_height) * -.5 + var(--_length) *.5) 0;
+    transform: rotateX(90deg) rotateZ(0deg);
+}
+
+.number_dial{
+    --_bg: 2;
+    --_input_bg:  transparent;
+    --_end_bg:  #0001;
+    --_clr: white;
+    display: flex;
+    flex-direction: column;
+    width: 5em;
+    border-radius: .5rem;
+    overflow: hidden;
+    box-shadow: 0 0 8px #0005;
+    border: 1px solid white;
+    background-color: hsl(var(--_bg) 50% 50%);
+}
+
+.number_dial button{
+    border: none;
+    background: transparent;
+    color: var(--_clr);
+    font-size: 2em;
+    padding-block: .25em;
+    transition: color 150ms ease-out;
+}
+
+.number_dial button:active{
+    color: var(--_end_bg);
+}
+
+.number_dial button:first-of-type{
+    background: linear-gradient(to bottom, var(--_end_bg) 50%, var(--_input_bg));
+}
+.number_dial button:last-of-type{
+    background: linear-gradient(to top, var(--_end_bg) 50%, var(--_input_bg));
+}
+
+.number_dial input[type='number']{
+    text-align: center;
+    border: none;
+    background-color: var(--_input_bg);
+    color: var(--_clr);
+    font-size: 1.5em;
+    font-weight: bold;
+    letter-spacing: .02em;
+    padding-block: .35em;
+    /* border-block: 1px solid white; */
+}
+
+.number_dial input[type='number']:focus{
+    outline: none;
+    background-color: hsl(var(--_bg) 80% 60%);
+}
+
+.number_dial input[type='number']::-webkit-inner-spin-button{
+    background-color: azure;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.carrosel{
+    display: flex;
+    flex-direction: row;
+    margin: 1rem ;
+    align-items: center;
+    text-align: center;
+    background: #fff5;
+    box-shadow: 0 0 3px #0005;
+    padding: 1rem .5rem;
+    border-radius: .5rem;
+}
+
+.carrosel button{
+    border: 2px solid firebrick;
+    color: firebrick;
+    background: transparent;
+    font-size: 1.5em;
+    padding: .5em;
+    border-radius: 50%;
+}
+
+.carrosel .text{
+    color: firebrick;
+    font-size: 1.75em;
+    font-weight: bold;
+    margin: .5em;
+    flex-grow: 1;
+}
+
+*,
+*::before,
+*::after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --bg_h: 2;
+}
+body{
+    background: #fed;
+}
+.controls{
+    padding-block: 3rem;
+    background: radial-gradient(circle at 50% 20%, hsl(15 100% 60%) 40%, hsl(5 100% 40%));
+    border-radius: 0 0 1em 1em;
+    overflow: hidden;
+    /* border-bottom: 5px solid #ff0; */
+    /* box-shadow: inset 0 -5px 5px #0003; */
+}
+
+.numbersPanel{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    margin: 0 1rem;
+}
+.numbersPanel span{
+    font:  100 2rem monospace ;
+    color: white;
+
+}
+.numbersPanel .number_dial{
+    --_bg: var(--bg_h);
+    font-size: .75rem;
+}
+
+.cube{
+    --_bg_h: var(--bg_h,2);
+}
+
+.result{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: space-between;
+    margin: 1rem;
+    color: #920;
+}
+
+.result div{
+    display: flex;
+    flex-direction: column;
+    margin: 0 .5rem;
+}
+
+.result div span:nth-of-type(2){
+    font-size: 2.5rem;
+    color: #500;
+    font-weight: bold;
+}
+
+h3{
+    font-size: .65rem;
+    font-weight: 100;
+    margin-top: 1rem;
+    text-align: center;
+    color: #b52;
+}
+    </style>
+
+    <script>
+        const BrickType = {
+    HALF: 'HALF' ,
+    ONE:    'ONE',
+    ONE_AND_HALF: 'ONE_AND_HALF' ,
+    TWO:  'TWO'  ,
+    TWO_AND_HALF: 'TWO_AND_HALF' 
+}
+
+function getWallArea(length, width, height){
+    return 2 * (length + width) * height;
+}
+
+function briksQuantity( length, width, height, brickType){
+    const wallArea = getWallArea( length, width, height);
+    
+    switch(brickType){
+        case BrickType.HALF:
+            return 75 * wallArea;
+        case BrickType.ONE:
+            return 150 * wallArea;
+        case BrickType.ONE_AND_HALF:
+            return 225 * wallArea;
+        case BrickType.TWO:
+            return 300 * wallArea;
+        case BrickType.TWO_AND_HALF:
+            return 375 * wallArea;
+    }
+    
+    return Error('Brick type not recognized') ;
+
+}
+
+
+function sandQuantity(length, width, height, brickType){
+    const wallArea = getWallArea( length, width, height);
+    switch(brickType){
+        case BrickType.HALF:
+            return 0.045 * wallArea;
+        case BrickType.ONE:
+            return 0.08 * wallArea;
+        case BrickType.ONE_AND_HALF:
+            return 0.13 * wallArea;
+        case BrickType.TWO:
+            return 0.16 * wallArea;
+        case BrickType.TWO_AND_HALF:
+            return 0.2 * wallArea;
+    }
+    
+    return Error('Brick type not recognized') ;
+}
+
+function cementQuantity(length, width, height, brickType){
+    const wallArea = getWallArea( length, width, height);
+    switch(brickType){
+        case BrickType.HALF:
+            return 9 * wallArea;
+        case BrickType.ONE:
+            return 16 * wallArea;
+        case BrickType.ONE_AND_HALF:
+            return 26 * wallArea;
+        case BrickType.TWO:
+            return 32 * wallArea;
+        case BrickType.TWO_AND_HALF:
+            return 40 * wallArea;
+    }
+    
+    return Error('Brick type not recognized') ;
+}
+
+    </script>
+    <script>
+        function NumberDial(parent){
+    this.value = 1;
+    this.element = document.createElement('div');
+    this.topElement = document.createElement('button');
+    this.inputElement = document.createElement('input');
+    this.bottomElement = document.createElement('button');
+    this.element.classList.add('number_dial');
+    this.inputElement.type = 'number';
+    this.inputElement.value = this.value;
+    this.topElement.innerText = '▲';
+    this.bottomElement.innerText = '▼';
+
+    this.onchange = ()=>{};
+    this.topElement.onclick = ()=>{this.value++;this.inputElement.value = this.value; this.onchange(this.value);}
+    this.bottomElement.onclick = ()=>{this.value--;this.inputElement.value = this.value; this.onchange(this.value);}
+    this.inputElement.onchange = ()=> {this.value = this.inputElement.value; this.onchange(this.value);}
+
+    this.element.appendChild(this.topElement);
+    this.element.appendChild(this.inputElement);
+    this.element.appendChild(this.bottomElement);
+    parent.appendChild(this.element);
+}
+    </script>
+    <script>
+        function Carrosel(parent, children){
+    this.children = children;
+    this.index = 0;
+    this.onchange = ()=>{};
+    this.length = children.length;
+    this.element = document.createElement('div');
+    this.element.classList.add('carrosel');
+    this.previous = document.createElement('button');
+    this.previous.classList.add('previous');
+    this.next = document.createElement('button');
+    this.next.classList.add('next');
+    this.textElement = document.createElement('div');
+    this.textElement.classList.add('text');
+    this.textElement.textContent = this.children[this.index];
+    this.previous.textContent = '◄';
+    this.next.textContent = '►';
+    this.previous.onclick = ()=>{this.index = (this.length + this.index -1 )% this.length; this.textElement.textContent = this.children[this.index]; this.onchange(this.index);}
+    this.next.onclick = ()=>{this.index = ++this.index % this.length; this.textElement.textContent = this.children[this.index];  this.onchange(this.index);}
+
+    this.element.appendChild(this.previous);
+    this.element.appendChild(this.textElement);
+    this.element.appendChild(this.next);
+    parent.appendChild(this.element);
+}
+    </script>
+  </head>
+<body>
+    <main>
+        <div id="controls" class="controls">
+            <div class="cube">
+                <div class="top"></div>
+                <div class="right"></div>
+                <div class="left"></div>
+            </div>
+            <div class="numbersPanel" id="numbersPanel"></div>
+        </div>
+        <div id="carrosel_panel"></div>
+        <div class="result">
+            <div><span>BRIKS</span><span id="brick_result"></span><span></span></div>
+            <div><span>CEMENT</span><span id="cement_result"></span><span>KG</span></div>
+            <div><span>SAND</span><span id="sand_result"></span><span>M<sup>3</sup></span></div>
+        </div>
+    </main>
+    <h3>aelmardhi © 2023</h3>
+    
+    <script defer>
+        const panel = document.getElementById('numbersPanel');
+        const cube = document.querySelector('.cube');
+        const carroselPanel = document.getElementById('carrosel_panel');
+        
+        let length = 1, width = 1, height = 1, index=0;
+        
+        
+        function addSpan(parent, text){
+            const element = document.createElement('span');
+            element.innerText = text;
+            parent.appendChild(element);
+        }
+        
+        const lengthElement =new NumberDial(panel);
+        addSpan(panel,'X');
+        const widthElement =new NumberDial(panel);
+        addSpan(panel,'X');
+        const heightElement =new NumberDial(panel);
+        
+        const carrosel = new Carrosel(carroselPanel, Object.values(BrickType))
+        
+        function calculate(){
+            const brickType = Object.values(BrickType)[index];
+            const bricks = briksQuantity(length, width, height, brickType);
+            const cement = cementQuantity(length, width, height, brickType);
+            const sand = sandQuantity(length, width, height, brickType); 
+        
+            document.getElementById('brick_result').textContent = bricks;
+            document.getElementById('cement_result').textContent = cement;
+            document.getElementById('sand_result').textContent = sand;
+        
+        }
+        
+        lengthElement.onchange = (value)=>{length = value; cube.style.setProperty('--_length', 20*length+'px');calculate();}
+        widthElement.onchange = (value)=>{width = value; cube.style.setProperty('--_width', 20*width+'px');calculate();}
+        heightElement.onchange = (value)=>{height = value; cube.style.setProperty('--_height', 20*height+'px');calculate();}
+        carrosel.onchange = (value)=>{index=value;calculate();}
+        
+        calculate();
+            </script>
+        
+</body>
+</html>

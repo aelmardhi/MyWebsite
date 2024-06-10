@@ -1,0 +1,45 @@
+.cube{
+    --_height: 20px;
+    --_width: 10px;
+    --_length: 40px;
+    --_bg_h: 320; 
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    transform-style: preserve-3d;
+    perspective: unset;
+    transform: rotateX(80deg) rotateZ(25deg) rotateY(0deg) ;
+}
+.cube div{
+    
+    border: 1px solid white;
+}
+.cube .top{
+    position: absolute;
+    background-color: hsl( var(--_bg_h) 100% 55%);
+    width: var(--_width);
+    height: var(--_length);
+    top: 50%;
+    left: 50%;
+    translate: calc(var(--_width) * -.5) calc(var(--_length) * -.5) calc(var(--_height) *.5);
+}
+.cube .right{
+    position: absolute;
+    background-color: hsl( var(--_bg_h) 100% 40%);
+    width: var(--_length);
+    height: var(--_height);
+    top: 50%;
+    left: 50%;
+    translate: calc(var(--_length) * -.5 + var(--_width) *.5) calc(var(--_height) * -.5 ) 0;
+    transform: rotateY(90deg)  rotateZ(90deg);
+}
+.cube .left{
+    position: absolute;
+    background-color: hsl( var(--_bg_h) 100% 50%);
+    width: var(--_width);
+    height: var(--_height);
+    top: 50%;
+    left: 50%;
+    translate: calc(var(--_width) * -.5) calc(var(--_height) * -.5 + var(--_length) *.5) 0;
+    transform: rotateX(90deg) rotateZ(0deg);
+}

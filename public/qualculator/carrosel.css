@@ -1,0 +1,29 @@
+.carrosel{
+    display: flex;
+    flex-direction: row;
+    margin: 1rem ;
+    align-items: center;
+    text-align: center;
+    background: #fff5;
+    box-shadow: 0 0 3px #0005;
+    padding: 1rem .5rem;
+    border-radius: .5rem;
+}
+
+.carrosel button{
+    border: 2px solid firebrick;
+    color: firebrick;
+    background: transparent;
+    font-size: 1.5em;
+    padding: .5em;
+    border-radius: 50%;
+}
+
+.carrosel .text{
+    color: firebrick;
+    font-size: 1.75em;
+    font-weight: bold;
+    margin: .5em;
+    flex-grow: 1;
+}
+
