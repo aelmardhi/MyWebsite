@@ -2,6 +2,8 @@
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const cloudinary = require('cloudinary');
+const { ExpressPeerServer } = require("peer");
+
 
 const {deleteOld} = require('./models/subscribtion');
 const app = require('./app.js');
@@ -37,6 +39,9 @@ cloudinary.config({
 });
 
 addSockets(server);
+
+const peerServer = ExpressPeerServer(server, {debug: true,});
+app.use("/peerjs", peerServer);
 
 const portNumber = (process.env.PORT || 5000);
 

@@ -52,7 +52,6 @@ app.use('/api/rtc',rtcRoute);
 app.use('/api/blog',blogRoute);
 app.use('/api/uploadImage',uploadImageRoute);
 app.use('/api/scrape',scrapeRoute);
-app.use("/peerjs", peerServer);
 
 // if no page match
 app.get('*', (req,res) => {

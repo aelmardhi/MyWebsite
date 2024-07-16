@@ -1,9 +1,7 @@
-const { ExpressPeerServer } = require("peer");
 const SocketIo = require("socket.io");
 
 const addSocket = (server) => {
 const io = SocketIo(server);
-const peerServer = ExpressPeerServer(server, {debug: true,});
 
 io.on("connection", (socket) => {
   socket.on("join-room", (roomId, userId) => {
