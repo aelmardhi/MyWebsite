@@ -108,7 +108,7 @@ async function getKooraHome(browser,timezone){
         }
         function parseScoreRow (r){
             return{
-                url: '?m='+r.getAttribute('onclick'),
+                url: '?m='+r.getAttribute('data-matchid'),
                 home:  parseTDTeam(r.childNodes[1]),
                 competition: parseTDCompetition(r),
                 away: parseTDTeam(r.childNodes[2]),
