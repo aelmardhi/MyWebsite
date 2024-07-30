@@ -229,6 +229,7 @@
                 matches: document.querySelector('#barcelona #matches'),
 
             }
+            const fScore= s=> s.replace('(','<small>').replace(')','</small>');
             fetch('/api/scrape/kooora',
                 {
                     method: 'GET',
@@ -256,7 +257,7 @@
                             </td>
                             <td>
                                <big>
-                                  ${m.score[0]}    
+                                  ${fScore(m.score[0])}    
                                </big>
                             </td>
                             <td>
@@ -267,7 +268,7 @@
                             </td>
                             <td>
                                <big>
-                                  ${m.score[1]}    
+                                  ${fScore(m.score[1])}    
                                </big>
                             </td>
                             <td>
