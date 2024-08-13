@@ -1,5 +1,7 @@
 
 var cacheName = 'hello-pwa';
+const FEED_NOTIFICATION_TITLE = 'FEED_UPDATED':
+const KOOORA_STORAGE_NAME = 'feed-kooora'
 var filesToCache = [
   '/',
   '/index.html',
@@ -91,6 +93,19 @@ self.addEventListener('push', function(event) {
       //                         'click here to re-open it!';
       // }
 
+      if(payload.title = FEED_NOTIFICATION_TITLE){
+        fetch('/api/scrape/kooora',
+                {
+                    method: 'GET',
+                    headers: {
+                        accept:'Applicaion/json',
+                        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || ''
+                    }
+                }
+            ).then(r=>r.json()).then(d=>{
+                localStorage.setItem(KOOORA_STORAGE_NAME, JSON.stringify(d));
+            })
+      }
       
       return self.registration.showNotification('Dardasha', {
         body: payload.body,
