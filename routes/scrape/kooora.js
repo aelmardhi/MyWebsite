@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const puppeteer = require('puppeteer');
+const {notifyAll} = require('../../utils/notify');
 
 const baseURL ='https://www.kooora.com/';
 let cache = {};
@@ -55,6 +56,8 @@ async function LoadNews (browser,timezone){
     for(let n of cache?.barca?.news ){
         n.text = await updateNews(page,timezone,n.url);
     }
+    //TODO: use queues
+    await notifyAll({title:'FEED_UPDATED',body:'Feed has been updated.'});
 }
 
 
