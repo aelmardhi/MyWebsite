@@ -5,6 +5,7 @@
 const webPush = require('web-push');
 const router = require('express').Router();
 const {Subscribtion} = require('../models/subscribtion');
+const {notifyAll} = require('../utils/notify');
 
 if (!process.env.VAPID_PUBLIC_KEY || !process.env.VAPID_PRIVATE_KEY) {
   console.log("You must set the VAPID_PUBLIC_KEY and VAPID_PRIVATE_KEY "+
@@ -54,8 +55,7 @@ webPush.setVapidDetails(
 
   router.post( '/sendNotification',async function(req, res) {
     try{
-      let subscribtions =await Subscribtion.find();
-      Promise.all(subscribtions.map(subscription => webPush.sendNotification(JSON.parse(subscription.subscribtion),JSON.stringify( req.body.payload )|| '{title:"",body:""}')))
+      notifyAll(req.body.payload)
       .then(function() {
         res.sendStatus(201);
       })
