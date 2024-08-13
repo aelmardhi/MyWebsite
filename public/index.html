@@ -628,9 +628,9 @@
                 return Math.floor(a + Math.random()*(b-a));
             }
             document.body.style.background = `linear-gradient(45deg, hsla(${randombetween(0,255)},30%,var(--lum),.6), hsla(${randombetween(0,255)},20%,var(--lum),.6)), linear-gradient(-45deg, hsla(${randombetween(0,255)},50%,var(--lum),.6), hsla(${randombetween(0,255)},20%,var(--lum),.6)), linear-gradient(0deg, hsla(${randombetween(0,255)},20%,var(--lum),.6), hsla(${randombetween(0,255)},20%,var(--lum),.6))`
-            const themes = ['','theme1']
+            //const themes = ['','theme1']
             const random = Math.floor(2*Math.random())
-            document.body.classList.add(themes[random]);
+            if(random>.5)document.body.classList.add('theme1');
             ////LOAD DATA////////////////////////////////////////////////////
              const downloadsList = document.getElementById('downloads-list');
             const postsList = document.getElementById('posts-list');
