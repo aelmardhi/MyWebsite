@@ -3,7 +3,7 @@ const webPush = require('web-push');
 
 const notifyAll = (payload) => {
   return Subscribtion.find()
-    .then(subscriptions =>
+    .then( subscribtions =>
       Promise.all(subscribtions.map(subscription =>
         webPush.sendNotification(
           JSON.parse(subscription.subscribtion),
