@@ -8,6 +8,7 @@ var filesToCache = [
   '/error_connect.html',
   '/share-target.html',
   /// APIs
+  '/api/scrape/kooora',
 ];
 
 const foldersToCache = [
@@ -49,7 +50,7 @@ self.addEventListener('fetch', function(e) {
     try{
     let networkResponse = await fetch(e.request)
     const path = new URL(e.request.url).pathname
-    if(foldersToCache.some(l=> path.match(l))){
+    if( validResponse(networkResponse) && foldersToCache.some(l=> path.match(l))){
       cache.put(e.request,networkResponse);
     }
     return networkResponse
@@ -99,12 +100,13 @@ self.addEventListener('push', function(event) {
                     method: 'GET',
                     headers: {
                         accept:'Applicaion/json',
-                        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || ''
+                        timezone: Intl?.DateTimeFormat()?.resolvedOptions()?.timeZone || ''
                     }
                 }
-            ).then(r=>r.json()).then(d=>{
+            )
+          /*.then(r=>r.json()).then(d=>{
                 localStorage.setItem(KOOORA_STORAGE_NAME, JSON.stringify(d));
-            })
+            }) */
       }
       
       return self.registration.showNotification('Dardasha', {
