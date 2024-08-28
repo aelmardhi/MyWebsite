@@ -51,7 +51,7 @@ self.addEventListener('fetch', function(e) {
     let networkResponse = await fetch(e.request)
     const path = new URL(e.request.url).pathname
     if( validResponse(networkResponse) && foldersToCache.some(l=> path.match(l))){
-      cache.put(e.request,networkResponse.clone());
+      cache.put(e.request,networkResponse);
     }
     return networkResponse
     }catch (e){
