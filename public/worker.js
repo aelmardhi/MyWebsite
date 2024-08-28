@@ -8,7 +8,6 @@ var filesToCache = [
   '/error_connect.html',
   '/share-target.html',
   /// APIs
-  '/api/scrape/kooora',
 ];
 
 const foldersToCache = [
@@ -20,10 +19,11 @@ const foldersToCache = [
   '/jpeg',
   '/prayers',
   '/screenRecorder',
+  '/api/scrape',
 ];
 
 function validResponse(r){
-  return r.ok & r.status != 202;
+  return r.ok && r.status != 202;
 }
 
 /* Start the service worker and cache all of the app's content */
@@ -51,7 +51,7 @@ self.addEventListener('fetch', function(e) {
     let networkResponse = await fetch(e.request)
     const path = new URL(e.request.url).pathname
     if( validResponse(networkResponse) && foldersToCache.some(l=> path.match(l))){
-      cache.put(e.request,networkResponse);
+      cache.put(e.request,networkResponse.clone());
     }
     return networkResponse
     }catch (e){
