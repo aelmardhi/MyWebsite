@@ -281,7 +281,7 @@
 
                 featuredNews.innerHTML = d?.news?.map(r =>{
                     return `<li>
-                        <details>
+                        <details name="news_details">
                         <summary>
                             <img src="${r?.img}"></img>
                            <h3> ${r?.title}</h3>
@@ -310,7 +310,7 @@
 
                 barcelona.news.innerHTML = d?.barca?.news?.map(r =>{
                     return `<li>
-                        <details>
+                        <details name="team_details">
                         <summary>
                             <img src="${r?.img}"></img>
                            <h3> ${r?.title}</h3>
