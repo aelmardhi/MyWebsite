@@ -1,6 +1,6 @@
 
 var cacheName = 'hello-pwa';
-const FEED_NOTIFICATION_TITLE = 'FEED_UPDATED':
+const FEED_NOTIFICATION_TITLE = 'FEED_UPDATED';
 const KOOORA_STORAGE_NAME = 'feed-kooora'
 var filesToCache = [
   '/',
