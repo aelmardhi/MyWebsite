@@ -58,6 +58,11 @@ app.use((req,res) => {
   res.status(404).header({
     accept: 'text/html',
   }).send(html404?html404:'404:not Found');
-})
+});
+
+app.use((err, req, res, next) => {
+  console.error(`${err.name} : ${err.message} --- ${err.stack}`)
+  res.status(500).send('Something broke!')
+});
 
 module.exports = app;
