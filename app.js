@@ -54,7 +54,7 @@ app.use('/api/uploadImage',uploadImageRoute);
 app.use('/api/scrape',scrapeRoute);
 
 // if no page match
-app.get('*', (req,res) => {
+app.use((req,res) => {
   res.status(404).header({
     accept: 'text/html',
   }).send(html404?html404:'404:not Found');
