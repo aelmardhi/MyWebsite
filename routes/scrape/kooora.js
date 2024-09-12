@@ -66,7 +66,7 @@ async function updateNews(page,timezone,urlQuery){
         page.emulateTimezone(timezone)
         await page.goto(baseURL+urlQuery,{timeout:300000, waitUntil:"domcontentloaded"});
 
-        await page.waitForSelector('#content .articlePage .articleBody');
+        //await page.waitForSelector('#content .articlePage .articleBody');
         return await page.$eval('#content .articlePage .articleBody', el => {
             el.querySelectorAll('div').forEach(element => {
                 element.remove();
@@ -89,7 +89,7 @@ async function getKooraHome(browser,timezone){
         page.emulateTimezone(timezone)
         await page.goto(baseURL,{timeout:300000, waitUntil:"domcontentloaded"})
         
-        await page.waitForSelector('.liveMatches .flickity-slider');
+        //await page.waitForSelector('.liveMatches .flickity-slider');
      
     const matches = await page.$eval('.liveMatches .flickity-slider', el => {
         
@@ -131,7 +131,7 @@ async function getKooraHome(browser,timezone){
     
     }).catch(logError('Home::Matches'))
 
-    await page.waitForSelector('.newsList.topNews');    
+    //await page.waitForSelector('.newsList.topNews');    
     let featurednews = await page.$eval('.newsList.topNews', el => {
         let news = []
         let ps = el.querySelectorAll('.aCard');
@@ -147,7 +147,7 @@ async function getKooraHome(browser,timezone){
         return news;
     }).catch(logError('Home::FeatueredNews'));
         
-    await page.waitForSelector('.newsList.longList');
+    //await page.waitForSelector('.newsList.longList');
     let news = await page.$eval('.newsList.longList', el => {
         let news = []
         let list = el.querySelectorAll('.aCard')
@@ -176,7 +176,7 @@ async function getKooraTeamImportant (browser,timezone, team){
         page.emulateTimezone(timezone)
         await page.goto(baseURL+'?team='+team,{timeout:300000, waitUntil:"domcontentloaded"});
 
-        await page.waitForSelector('.lastMatches > table');
+        //await page.waitForSelector('.lastMatches > table');
   const matches = await page.$eval('.lastMatches > table', el => {
     function parseTD(td){
         const a= td.childNodes[0]
@@ -210,7 +210,7 @@ async function getKooraTeamImportant (browser,timezone, team){
 
   }).catch(logError('Team::'+team+'::Matches'));
 
-  await page.waitForSelector('#featuredNews > ul');
+  //await page.waitForSelector('#featuredNews > ul');
   let news = await page.$eval('#featuredNews > ul', el => {
         let news = []
         for (let i=0; i< el.childNodes.length; i++){
