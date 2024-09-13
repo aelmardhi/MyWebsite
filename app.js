@@ -23,7 +23,11 @@ const uploadImageRoute = require('./routes/uploadImage')
 const scrapeRoute = require('./routes/scrape')
 
 app.disable('x-powered-by');
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  }),
+);
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.static('public'));
