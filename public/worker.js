@@ -94,7 +94,7 @@ self.addEventListener('push', function(event) {
       //                         'click here to re-open it!';
       // }
 
-      if(payload.title = FEED_NOTIFICATION_TITLE){
+      if(payload.title === FEED_NOTIFICATION_TITLE){
         fetch('/api/scrape/kooora',
                 {
                     method: 'GET',
@@ -111,9 +111,11 @@ self.addEventListener('push', function(event) {
       
       return self.registration.showNotification('Dardasha', {
         body: payload.body,
-        title: payload.title,
+        tag: payload.title,
         icon:'/icons/icon144.png',
         badge:'/icons/icon192_maskable.png',
+        silent: false,
+        vibrate: [150, 100, 150, 100, 250],
       });
     })
   );
@@ -122,6 +124,10 @@ self.addEventListener('push', function(event) {
 // Register event listener for the 'notificationclick' event.
 self.addEventListener('notificationclick', function(event) {
   event.waitUntil(
+    if(event.notification.tag === FEED_NOTIFICATION_TITLE){
+       event.notification.close();
+       return self.clients.openWindow('/feed');
+    }
     // Retrieve a list of the clients of this service worker.
     self.clients.matchAll().then(function(clientList) {
       // If there is at least one client, focus it.
