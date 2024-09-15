@@ -294,7 +294,7 @@ td{
                
                 const {latitude: lat, longitude:lng} = r.coords
                 setAll(lng, lat)
-                printInfo(`for the location detected- Longitude: ${lng} and Lat: ${lat} `)
+                printInfo(`For the location detected- Longitude: ${lng} and Latitude: ${lat} `)
             } )
         }
         function setNorth(e){
@@ -397,9 +397,10 @@ td{
             }
             
             
-                const TimeZone = (new Date().getTimezoneOffset())/-60
-            setQibla(Lng,Lat,TimeZone)
-            setTime(Lng, Lat, TimeZone)
+            printInfo(`For the location detected- Longitude: ${Lng} and Latitude: ${Lat} `);
+            const TimeZone = (new Date().getTimezoneOffset())/-60
+            setQibla(Lng,Lat,TimeZone);
+            setTime(Lng, Lat, TimeZone);
         }
         setAll()
     </script>
