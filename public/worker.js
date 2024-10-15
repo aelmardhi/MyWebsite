@@ -124,12 +124,12 @@ self.addEventListener('push', function(event) {
 // Register event listener for the 'notificationclick' event.
 self.addEventListener('notificationclick', function(event) {
   event.waitUntil(
-    if(event.notification.tag === FEED_NOTIFICATION_TITLE){
-       event.notification.close();
-       return self.clients.openWindow('/feed');
-    }
     // Retrieve a list of the clients of this service worker.
     self.clients.matchAll().then(function(clientList) {
+      if(event.notification.tag === FEED_NOTIFICATION_TITLE){
+        event.notification.close();
+        return self.clients.openWindow('/feed');
+      }
       // If there is at least one client, focus it.
       if (clientList.length > 0) {
         return clientList[0].focus();
