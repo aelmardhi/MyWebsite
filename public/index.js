@@ -78,7 +78,7 @@ function elementFactory(name, classes, id, text, attributes){
     this.element = document.createElement(name);
     if(id) this.element.id = id;
     if(typeof classes === 'string') classes = classes.split(' ');
-    if(Array.isArray(classes)) this.element.classList.add(...classes);
+    if(Array.isArray(classes)) this.element.classList.add(...(classes.filter(item => item)));
     if(text) this.element.textContent = text;
     for( att in attributes){
         this.element.setAttribute(att, attributes[att]);
