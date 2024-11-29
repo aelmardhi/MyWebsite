@@ -1,0 +1,68 @@
+*,*::before, *::after{
+    box-sizing: border-box;
+}
+
+ul[class], ol[class], ul[role], ol[role]{
+    padding: 0;
+    list-style: none;
+}
+body, h1,h2, h3, h4, h5, h6, p, ul[class], ol[class], li, figure, figcaption, blockquote, d1, dd{
+    margin: 0;
+}
+
+body{
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:not([class]){
+    text-decoration-skip-ink: auto;
+}
+
+article > * + *{
+    margin-top: 1em;
+}
+
+input, button, textarea, select{
+    font: inherit
+}
+
+
+h1,h2, h3, h4, h5, h6{
+    text-wrap: balance;
+}
+
+p, li, figcaption{
+    max-width: 65ch;
+    text-wrap: pretty;
+}
+
+body > :is(header, footer), main, section, article{
+    container-type: inline-size;
+}
+
+img{
+    font-style: italic;
+    background-repeat: no-repeat;
+    background-size: cover;
+    shape-margin: .5rem;
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+
+}
+
+@media (prefers-reduced-motion: reduce){
+    *{
+        animation-duration: 0.1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.1ms !important;
+        scroll-behavior: auto !important;
+    }
+}

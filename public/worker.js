@@ -5,6 +5,12 @@ const KOOORA_STORAGE_NAME = 'feed-kooora'
 var filesToCache = [
   '/',
   '/index.html',
+  '/index-new.html',
+  '/index.js',
+  '/style.css',
+  '/icons/icon152.png',
+  '/favicon.ico',
+  '/icons/icon256.png',
   '/error_connect.html',
   '/share-target.html',
   /// APIs

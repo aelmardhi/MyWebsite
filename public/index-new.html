@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="manifest" href="/manifest.json">
+	<meta name="theme-color" content="#39f"/>
+	<link rel="icon" href="favicon.ico" type="favicon.ico" />  
+	<link rel="apple-touch-icon" href="icons/icon152.png">    
+	<meta name="apple-mobile-web-app-capable" content="yes">  
+	<meta name="apple-mobile-web-app-status-bar-style" content="#39f"> 
+	<meta name="apple-mobile-web-app-title" content="Dardasha"> 
+	<meta name="msapplication-TileImage" content="icons/icon152.png">  
+	<meta name="msapplication-TileColor" content="#666">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<meta name="description" content="This is aelmardhi's personal site, it is used to run small projects">
+    <title>Aelmardhi</title>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V95FG9MK9N"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="./index.js" defer></script>
+    <style>
+
+    </style>
+</head>
+<body>
+    <div class="theme__wrapper">
+        <div class="theme__backdrop"></div>
+        <div class="theme__panel">
+            <button class="theme__close__btn" id="theme__close__btn">Close</button>
+            <h2>Theme</h2>
+            <ul role="list" id="theme__preference__list">
+                <li><input type="radio" data-pref="light" name="theme__preference" id="theme__light__btn"><label for="theme__light__btn">light</label></li>
+                <li><input type="radio" data-pref="dark" name="theme__preference" id="theme__dark__btn"><label for="theme__dark__btn">dark</label></li>
+                <li><input type="radio" data-pref="default" name="theme__preference" id="theme__default__btn"><label for="theme__default__btn">default</label></li>
+            </ul>
+            <ul role="list" id="theme__pallete__list">
+                <li><input type="radio"  data-pallete="1" name="theme__pallete__btn" id="theme__pallete1__btn"><label for="theme__pallete1__btn">1</label></li>
+                <li><input type="radio" data-pallete="2" name="theme__pallete__btn" id="theme__pallete2__btn"><label for="theme__pallete2__btn">2</label></li>
+                <li><input type="radio" data-pallete="3" name="theme__pallete__btn" id="theme__pallete3__btn"><label for="theme__pallete3__btn">3</label></li>
+            </ul>
+        </div>
+    </div>
+    <div class="wrapper">
+        <header class="header">
+            <button class="theme__btn" id="theme__btn" aria-label="theme selector"><svg aria-label="pallete" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M512 256c0 .9 0 1.8 0 2.7c-.4 36.5-33.6 61.3-70.1 61.3L344 320c-26.5 0-48 21.5-48 48c0 3.4 .4 6.7 1 9.9c2.1 10.2 6.5 20 10.8 29.9c6.1 13.8 12.1 27.5 12.1 42c0 31.8-21.6 60.7-53.4 62c-3.5 .1-7 .2-10.6 .2C114.6 512 0 397.4 0 256S114.6 0 256 0S512 114.6 512 256zM128 288a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm0-96a32 32 0 1 0 0-64 32 32 0 1 0 0 64zM288 96a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm96 96a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"/></svg></button>
+                <div class="header__title">
+                    <div class="header__logo"><img src="./icons/icon256.png" alt="site logo"></div>
+                    <div class="column">
+                        <h1>Aelmardhi</h1>
+                        <nav>
+                            <ul class="header__list row" role="list">
+                                <li><a href="/aelmardhi">About Me</a></li>
+                                <li><a href="/blog">My Blog</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div id="routes" class="routes">
+                    <h2 class="visually_hidden">Main Routes</h2>
+                    <ul role="list">
+                        <li><a href="/download.html">Http Downloader</a></li>
+                        <li><a href="/upload.html">File Uploader</a></li>
+                        <li><a href="/ytdl/">Youtube Downloader</a></li>
+                        <li><a href="/feed/">Feed</a></li>
+                        <li><a href="/prayers/">Prayers time</a></li>
+                        <li><a href="/screenRecorder/">Screen Recorder</a></li>
+                        <li><a href="/share/">Share Files</a></li>
+                        <li><a href="/api/rtc/">videoChat</a>
+                        </li>
+                        <li><a href="/dithering/">Dithering Demo</a></li>
+                        <li><a href="/filter/">Filter Demo</a></li>
+                        <li><a href="/jpeg/">JPEG</a></li>
+                        <li><a href="/qualculator/">Qualculator</a></li>
+                    </ul>
+                </div>
+                
+        </header>
+        <main class="">
+        
+            <article id="posts" class="posts">
+                <h2 class="">Recent Posts</h2>
+                <a href="/blog" class="read_more">Read More</a>
+                <ul role="list" class="loading">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </article>
+            <article id="games" class="games">
+                <h2 class="">Games</h2>
+                <ul role="list" >
+                    <!--<li><a href="games/brick-breaker/">Brick Breaker</a></li> -->
+                    <li><a href="games/candy_crush/">Candy Crush</a></li>
+                    <li><a href="games/connect_four/">Connect Four</a></li>
+                    <li><a href="games/frogger/">Frogger</a></li>
+                    <li><a href="games/globe/">Globe</a></li>
+                    <li><a href="games/memory_game/">Memory Game</a></li>
+                    <li><a href="games/snake/">Snake</a></li>
+                    <li><a href="games/space-invader/">Space Invader</a></li>
+                    <li><a href="games/stack/">Stack</a></li>
+                    <li><a href="games/tetris/">Tetris</a></li>
+                    <li><a href="games/whack-a-mole/">Whack a Mole</a></li>
+                </ul>
+            </article>
+            <article class="downloads" id="downloads">
+                <h2>Downloads</h2>
+                <ul role="list" class="loading">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </article>
+        </main>
+    </div>
+</body>
+</html>
