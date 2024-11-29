@@ -119,7 +119,7 @@ async function Posts() {
             postInfo.appendChild(postImg);
             postInfo.appendChild(postTitle);
             postInfo.appendChild(postMeta);
-            const postContent = p.blocks[0].type === 'paragraph'?
+            const postContent = blocks[0].type === 'paragraph'?
                                      elementFactory('p', 'post__content', undefined, blocks[0].data.text)
                                      : blocks[0].type === 'image' ? 
                                         elementFactory('img', 'post__content', undefined, undefined, {'src': blocks[0].data.file.url})
