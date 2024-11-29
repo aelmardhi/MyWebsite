@@ -1,5 +1,6 @@
-
 const dotenv = require('dotenv');
+dotenv.config();
+
 const mongoose = require('mongoose');
 const cloudinary = require('cloudinary');
 const { ExpressPeerServer } = require("peer");
@@ -9,7 +10,6 @@ const {deleteOld} = require('./models/subscribtion');
 const app = require('./app.js');
 const addSockets = require('./sockets.js');
 
-dotenv.config();
 
 var server;
 if (process.env.USE_LOCALHOST_HTTPS == 'true'){
