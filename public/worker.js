@@ -8,6 +8,7 @@ var filesToCache = [
   '/index-new.html',
   '/index.js',
   '/style.css',
+  '/reset.css',
   '/icons/icon152.png',
   '/favicon.ico',
   '/icons/icon256.png',

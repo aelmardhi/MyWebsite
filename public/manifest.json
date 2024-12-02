@@ -1,6 +1,6 @@
 {
-  "name": "Dardasha",
-  "short_name": "Dardasha",
+  "name": "Aelmardhi",
+  "short_name": "Aelmardhi",
   "icons": [{
     "src": "icons/icon128.png",
       "sizes": "128x128",
@@ -44,5 +44,5 @@
   },
   "display": "standalone",
   "background_color": "white",
-  "theme_color": "#39f"
+  "theme_color": "#666"
 }
