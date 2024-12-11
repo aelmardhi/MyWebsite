@@ -83,3 +83,22 @@ function elementFactory(name, classes, id, text, attributes){
     }
     return this.element;
 }
+
+function Gtag(){
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-V95FG9MK9N');
+}
+
+async function Eruda(){
+    var src = '//cdn.jsdelivr.net/npm/eruda';
+    if (!/eruda=true/.test(window.location) && localStorage.getItem('active-eruda') != 'true') return;
+    await importScripts([src]);
+    eruda.init();
+}
+
+
+new Theme();
+Gtag();
+Eruda();
