@@ -1,9 +1,5 @@
 @import url(./main.css);
 
-main {
-    flex: 999 1 500px;
-    padding: 1rem;
-}
 
 main>article {
     margin-bottom: 1rem;

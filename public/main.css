@@ -245,6 +245,11 @@ body {
     color: var(--clr-neutral-100);
 }
 
+main {
+    flex: 999 1 500px;
+    padding: 1rem;
+}
+
 .header {
     display: flex;
     justify-content: space-around;
