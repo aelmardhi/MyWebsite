@@ -298,20 +298,22 @@ td{
             } )
         }
         function setNorth(e){
-            const options = { frequency: 60, referenceFrame: 'device' };
-            const sensor = new RelativeOrientationSensor(options);
-
-            sensor.addEventListener('reading', () => {
-            // model is a Three.js object instantiated elsewhere.
-            let angle = ToEulerAngles(sensor.quaternion).yaw;
-            angle += qiblaAngle;
-            angle = Math.round(angle)
-            console.log(angle)
-            document.querySelector('.qiblaCompass > div').style.transform = 'rotate('+angle +'deg)'
-            if((angle%90)==0)
-                document.querySelector('.qiblaCompass').classList.add('success')
-            else
-                document.querySelector('.qiblaCompass').classList.remove('success')
+                const options = { frequency: 60, referenceFrame: 'device' };
+                const sensor= window.s = new RelativeOrientationSensor(options);
+                console.log(sensor);
+                
+                sensor.addEventListener('reading', () => {
+                let angle = ToEulerAngles(sensor.quaternion).yaw;
+                console.log(angle);
+                
+                angle += qiblaAngle;
+                angle = Math.round(angle)
+                console.log(angle)
+                document.querySelector('.qiblaCompass > div').style.transform = 'rotate('+angle +'deg)'
+                if((angle%90)==0)
+                    document.querySelector('.qiblaCompass').classList.add('success')
+                else
+                    document.querySelector('.qiblaCompass').classList.remove('success')
             });
             sensor.addEventListener('error', error => {
             if (event.error.name == 'NotReadableError') {
