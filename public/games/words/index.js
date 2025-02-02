@@ -1,12 +1,17 @@
 let solution = undefined;
 let dashes = ['-','-','-','-','-']
+let curentWord = '';
 
 const main = document.querySelector('main');
 const question = document.getElementById('question');
 const empty = document.getElementById('empty');
+const partOfSpeech = document.getElementById('partOfSpeech');
 const input = document.getElementById('input');
 const hint = document.getElementById('hint');
 const counter = document.getElementById('counter');
+
+let defHolder = document.getElementById('defHolder');
+let currentWordHolder = document.getElementById('currentWordHolder');
 
 input.oninput=()=>{
     input.value = input.value.replaceAll(' ','').toLowerCase();
@@ -43,7 +48,7 @@ hint.onclick = ()=>{
 }
 
 function setCounter(){
-    let c = solution.length - input.value.length;
+    let c = input.value.length - solution.length;
     if(c>0) c = '+' + c;
     counter.textContent = c;
 }
@@ -65,14 +70,50 @@ function setEmpty() {
     empty.textContent = dashes.join('');
 }
 
+function setDefHolder(word){
+    const div = elementFactory('div','defHolder','defHolder');
+    word.def.forEach(d => {
+        const span = elementFactory('span','def',undefined,d);
+        div.appendChild(span);
+    });
+    const a = elementFactory('a',undefined,undefined,'More',{href:word.url});
+    div.appendChild(a);
+    defHolder.replaceWith(div);
+    defHolder = div;
+}
+
+function setCurrentWord(word){
+    const div = elementFactory('div', 'column currentWordHolder', 'currentWordHolder')
+    const h2 = elementFactory('h2', undefined, undefined, 'Solved!');
+    const h3 = elementFactory('h3',undefined, undefined, word.en);
+    const span = elementFactory('span',undefined, undefined, `- ${word.ar} -`);
+    const divDef = elementFactory('div');
+    word.def.forEach(d=>{
+        const s = elementFactory('span', undefined, undefined, d);
+        divDef.appendChild(s);
+    });
+    const a = elementFactory('a', undefined, undefined, 'More', {href: word.url});
+    div.appendChild(h2);
+    div.appendChild(h3);
+    div.appendChild(span);
+    div.appendChild(divDef);
+    div.appendChild(a);
+    currentWordHolder.replaceWith(div);
+    currentWordHolder = div;
+}
+
 function setWord(){
-    const word = getRandomFromList(data.words);
+    const word = getRandomFromList(data1.words);
     solution = word.en;
     console.log(solution);
     dashes = getDashes(word.en.length)
     question.textContent = word.ar;
+    partOfSpeech.textContent = `(${word.part})`;
     setEmpty();
     input.value = '';
     setCounter();
+    if(word.def) setDefHolder(word);
+    if(curentWord) setCurrentWord(curentWord);
+    curentWord = word;
 }
 setWord();

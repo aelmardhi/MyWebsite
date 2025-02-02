@@ -19,11 +19,20 @@ main{
     font-size: 1.5rem;
 }
 
+span.question{
+    font-size: 2rem;
+}
+
+.dashWrapper{
+    gap: 1rem;
+}
+
 .empty{
     letter-spacing: .5rem;
 }
 
 .input__area{
+    width: min(100%, 60ch);
     gap: 1rem;
     align-items: baseline;
 }
@@ -36,6 +45,8 @@ input {
     letter-spacing: .125rem;
     font-size: 1.5rem;
     text-align: center;
+    flex-grow: 1;
+    min-width: 7rem;
 }
 
 .error{
@@ -72,4 +83,75 @@ input {
     border: 1px solid var(--clr-neutral-300);
     min-width: 3rem;
     text-align: center;
+}
+
+.defHolder{
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+    max-width: 60ch;
+    margin: 1rem auto;
+}
+
+.def{
+    background-color: var(--clr-neutral-300);
+    color: var(--clr-neutral-900);
+    padding: .5rem ;
+    border-radius: .5rem;
+}
+
+.defHolder a{
+    background-color: var(--clr-accent);
+    color: var(--clr-neutral-900);
+    padding: .5rem 2rem;
+    border-radius: .5rem;
+}
+
+.defHolder a:hover,
+.defHolder a:focus-visible{
+    background-color: var(--clr-secondary);
+}
+
+.currentWordHolder{
+    gap:  .5rem;
+    max-width: 60ch;
+    margin: 8rem auto 2rem;
+    border-radius: 1rem;
+    padding: 2rem;
+    align-items: center;
+    /* border: 2rem solid var(--clr-accent); */
+    background: 
+                /* radial-gradient(circle at 100% 0, var(--clr-accent) 4rem, transparent 4rem), */
+                linear-gradient(300deg, var(--clr-bg2) 10%, var(--clr-bg3) 90%);
+    color: var(--clr-neutral-100);
+    box-shadow: 0 0 5px #0005;
+}
+
+.currentWordHolder h2{
+    font-size: 3rem;
+    align-self: start;
+    margin-left: 2rem;
+    margin-bottom: 2rem;
+    color: var(--clr-accent);
+}
+
+.currentWordHolder h3{
+    font-size: 2.5rem;
+}
+
+.currentWordHolder > span{
+    margin-bottom: 3rem;
+}
+
+.currentWordHolder > div{
+    margin: 1rem 2rem; 
+    text-align: center;
+}
+
+.currentWordHolder a{
+    color: var(--clr-accent);
+    padding: .5rem;
+    border-radius: .5rem;
 }

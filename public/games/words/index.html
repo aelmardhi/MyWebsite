@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Words</title>
     <link rel="stylesheet" href="style.css">
+    <script src="data-0.js"></script>
+    <script src="data-1.js"></script>
     <script src="/main.js" defer></script>
-    <script src="data.js"></script>
-    <script src="index.js" async defer></script>
+    <script src="index.js" defer async></script>
 </head>
 <body>
     <div class="wrapper">
@@ -15,13 +16,18 @@
             <button class="hint" id="hint">Hint</button>
             <h1>Words</h1>
             <div class="column word__panel">
-                <span id="question">question</span>
-                <span id="empty" class="empty">-----</span>
+                <span id="question" class="question">question</span>
+                <div class="row dashWrapper">
+                    <span id="empty" class="empty">-----</span>
+                    <span id="partOfSpeech">part</span>
+                </div>
                 <div class="row input__area">
                     <span class="counter" id="counter">0</span>
                     <input id="input" autofocus type="text">
                 </div>
             </div>
+            <div class="defHolder" id="defHolder"></div>
+            <div  id="currentWordHolder"></div>
         </main>
     </div>
 </body>
