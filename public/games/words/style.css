@@ -6,6 +6,74 @@ main{
     background-color: var(--clr-neutral-900);
 }
 
+.wordHeader{
+    justify-content: space-between;
+}
+
+.wordHeader > div{
+    gap: .5rem;
+}
+
+.optinsBtn{
+    background: none;
+    color: var(--clr-neutral-100);
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 50%;
+    width: 3rem;
+    font-weight: 900;
+    aspect-ratio: 1;
+
+    anchor-name: --options-btn;
+}
+
+.optinsBtn:hover,
+.optinsBtn:focus-visible{
+    background: var(--clr-neutral-800);
+    box-shadow: 0 0 2px #0005;
+}
+
+.optinsMenu{
+    position: absolute;
+    inset: auto;
+    min-width: 10rem;
+    top: anchor(bottom);
+    right: anchor(right);
+    overflow: hidden;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    margin-top: .5rem;
+    border: none;
+    border-radius: .5rem;
+    box-shadow: 0 0 3px #000a;
+    background-color: var(--clr-neutral-900);
+
+    position-anchor: --options-btn;
+}
+
+.optinsMenu:popover-open{
+    display: flex;
+}
+
+.optinsMenu h3{
+    padding: 1rem;
+    color: var(--clr-neutral-300);
+}
+
+.optinsMenu input{
+    display: none;
+}
+
+.optinsMenu label{
+    padding: .5rem 2rem;
+}
+
+.optinsMenu label:has(:checked){
+    background: linear-gradient(to right, var(--clr-bg2), var(--clr-bg3));
+    color: var(--clr-neutral-100);
+}
+
 .word__panel{
     margin-top: 3rem;
     gap: 1rem;

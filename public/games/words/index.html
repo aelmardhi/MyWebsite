@@ -13,13 +13,23 @@
 <body>
     <div class="wrapper">
         <main class="">
-            <button class="hint" id="hint">Hint</button>
-            <h1>Words</h1>
+            <div class="row wordHeader">
+                <h1>Words</h1>
+                <div class="row">
+                    <button class="hint" id="hint">Hint</button>
+                    <button class="optinsBtn" popovertarget="optinsMenu">⋮</button>
+                </div>
+            </div>
+            <div class="optinsMenu" popover id="optinsMenu">
+                <h3>Dataset</h3>
+                <label><input type="radio" name="dataSelect" id="" data-id="0"> data-0</label>
+                <label><input checked type="radio" name="dataSelect" id="" data-id="1"> data-1</label>
+            </div>
             <div class="column word__panel">
                 <span id="question" class="question">question</span>
                 <div class="row dashWrapper">
                     <span id="empty" class="empty">-----</span>
-                    <span id="partOfSpeech">part</span>
+                    <span id="partOfSpeech"></span>
                 </div>
                 <div class="row input__area">
                     <span class="counter" id="counter">0</span>

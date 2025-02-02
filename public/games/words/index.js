@@ -1,6 +1,10 @@
 let solution = undefined;
 let dashes = ['-','-','-','-','-']
 let curentWord = '';
+let dataSelector = 1;
+
+const LOCALSTORAGE_NAME = 'WORDS_DATASET_SELECTOR_INDEX';
+const datasets = [data0, data1];
 
 const main = document.querySelector('main');
 const question = document.getElementById('question');
@@ -9,9 +13,37 @@ const partOfSpeech = document.getElementById('partOfSpeech');
 const input = document.getElementById('input');
 const hint = document.getElementById('hint');
 const counter = document.getElementById('counter');
+const dataSelectRadios = document.querySelectorAll('input[name="dataSelect"]');
 
 let defHolder = document.getElementById('defHolder');
 let currentWordHolder = document.getElementById('currentWordHolder');
+
+function setDataset(dataset){
+    dataSelector = parseInt(dataset);
+    localStorage.setItem(LOCALSTORAGE_NAME, dataset)
+    setWord(false);
+}
+
+function getDataset() {
+    return datasets[dataSelector] || data1;
+}
+
+function Options(){
+    dataSelectRadios.forEach(radio=>{
+        radio.onchange = ()=>{
+            if(radio.checked)
+                setDataset(radio.dataset.id);
+        }
+    });
+    const value = localStorage.getItem(LOCALSTORAGE_NAME);
+    setDataset(value);
+    if(value){
+        dataSelectRadios.forEach(radio=>{
+            if(radio.dataset.id == value)
+                radio.setAttribute('checked', true);
+        });
+    }
+}
 
 input.oninput=()=>{
     input.value = input.value.replaceAll(' ','').toLowerCase();
@@ -31,7 +63,7 @@ input.onchange = ()=>{
     main.classList.add('success');
     setTimeout(()=>{
         main.classList.remove('success');
-        setWord();
+        setWord(true);
     }, 500);
 }
 
@@ -71,6 +103,12 @@ function setEmpty() {
 }
 
 function setDefHolder(word){
+    if(!word.def){
+        const div = elementFactory('div',undefined, 'defHolder')
+        defHolder.replaceWith(div);
+        defHolder = div;
+        return
+    }
     const div = elementFactory('div','defHolder','defHolder');
     word.def.forEach(d => {
         const span = elementFactory('span','def',undefined,d);
@@ -88,32 +126,36 @@ function setCurrentWord(word){
     const h3 = elementFactory('h3',undefined, undefined, word.en);
     const span = elementFactory('span',undefined, undefined, `- ${word.ar} -`);
     const divDef = elementFactory('div');
-    word.def.forEach(d=>{
-        const s = elementFactory('span', undefined, undefined, d);
-        divDef.appendChild(s);
-    });
-    const a = elementFactory('a', undefined, undefined, 'More', {href: word.url});
+    if(word.def)
+        word.def.forEach((d,i)=>{
+            const s = elementFactory('span', i>0? 'dot_before': undefined, undefined, d);
+            divDef.appendChild(s);
+        });
     div.appendChild(h2);
     div.appendChild(h3);
     div.appendChild(span);
     div.appendChild(divDef);
-    div.appendChild(a);
+    if(word.url) {
+        const a = elementFactory('a', undefined, undefined, 'More', {href: word.url});
+        div.appendChild(a);
+    }
     currentWordHolder.replaceWith(div);
     currentWordHolder = div;
 }
 
-function setWord(){
-    const word = getRandomFromList(data1.words);
+function setWord(solved){
+    const word = getRandomFromList(getDataset().words);
     solution = word.en;
     console.log(solution);
     dashes = getDashes(word.en.length)
     question.textContent = word.ar;
-    partOfSpeech.textContent = `(${word.part})`;
+    partOfSpeech.textContent = word.part?`(${word.part})` : '';
     setEmpty();
     input.value = '';
     setCounter();
-    if(word.def) setDefHolder(word);
-    if(curentWord) setCurrentWord(curentWord);
+    setDefHolder(word);
+    if(solved && curentWord) setCurrentWord(curentWord);
     curentWord = word;
 }
 setWord();
+Options();
