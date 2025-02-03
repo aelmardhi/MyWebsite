@@ -3,7 +3,7 @@ const router = require('express').Router();
 const urlModule = require('url');
 const http = require('http');
 const https = require('https');
-const ytdl = require('ytdl-core');
+const ytdl = require("@distube/ytdl-core");
 
 const download = async (req,res)=>{
     try{
