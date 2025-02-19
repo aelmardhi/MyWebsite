@@ -42,6 +42,7 @@ h1,h2, h3, h4, h5, h6{
 
 p, li, figcaption{
     max-width: 65ch;
+    margin: auto;
     text-wrap: pretty;
 }
 
@@ -203,7 +204,7 @@ img{
 }
 
 .wrapper {
-    width: min(850px, 100%);
+    width: min(1200px, 100%);
     margin-inline: auto;
     display: flex;
     flex-wrap: wrap;
@@ -257,7 +258,7 @@ main {
     flex-direction: column;
     gap: 2rem;
     background-color: var(--clr-neutral-900);
-    flex: 1 0 23ch;
+    flex: 1 0 250px;
     container: header / inline-size;
 }
 
@@ -274,6 +275,7 @@ main {
     flex-direction: column;
     background-color: var(--clr-neutral-900);
     padding-block: 1rem;
+    z-index: 200;
 }
 
 .header__logo {

@@ -1,0 +1,214 @@
+@import url(/main.css); 
+
+body{
+    text-align: right;
+    --height: calc( 100dvh - 2rem);
+}
+
+article{
+    /* max-height: calc( 100dvh - 2rem); */
+    overflow: auto;
+}
+
+.loading, .error{
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 5rem;
+}
+
+.error{
+    color: var(--clr-error);
+}
+
+.header{
+    height: 100dvh;
+    overflow: auto;
+}
+.details__list{
+    scroll-snap-type: mandatory;
+  scroll-snap-points-y: repeat(300px);
+  scroll-snap-type: y mandatory;
+  height: var(--height);
+  overflow: auto;
+  align-items: center;
+}
+
+.details__list> li{
+    scroll-snap-align: start;
+    height: auto;
+}
+
+.details__list article{
+    padding-block: 0rem 14rem;
+}
+
+.details__header{
+    background-color: var(--clr-neutral-900);
+    padding: 0rem;
+    margin: .5rem;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    border-radius: 1rem;
+    box-shadow: 0 0 5px #0003;
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+    grid-template-rows: 18rem auto;
+    grid-template-areas: 
+    "img img"
+    "more title"
+    ;
+}
+
+.details__header .img{
+    grid-area: img;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.details__header h2{
+    grid-area: title;
+    padding: 1rem;
+    color: var(--clr-neutral-100);
+}
+
+.details__header a{
+    grid-area: more;
+    place-self: center;
+    color: var(--clr-accent);
+}
+.details .content{
+    /* min-height: calc(100dvh - 2rem + 1px); */
+    min-height: 20rem;
+}
+ul.list{
+    align-items: center;
+    padding: .5rem;
+    gap: 1rem;
+    overflow: auto;
+}
+
+.list li{
+    position: relative;
+    width: 100%;
+    flex: 1 0 8rem;
+    overflow: hidden;
+    border-radius: 1rem;
+    box-shadow: 0 0 3px #0003;
+    z-index: 0;
+}
+
+.list span{
+    position: absolute;
+    inset: 0;
+    padding: 1rem;
+    background: linear-gradient(var(--clr-neutral-900), transparent);
+}
+
+.list img{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    object-position: 50%;
+    object-fit: cover;
+}
+
+.matches__bg{
+    /* background-color: green; */
+    background-image:
+    linear-gradient(transparent 49%, white 49%, white 50%, transparent 50%),
+    radial-gradient(transparent 49%, white 49%, white 50%, transparent 50%),
+    linear-gradient(80deg, #41af34, #4dc422)
+    ;
+    
+}
+
+.matches ul{
+    display: grid;
+    grid-template-columns: 4rem minmax(10rem, 1fr) 3rem minmax(4rem, 1fr);
+    row-gap: 1rem;
+}
+
+.matches li{
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: span 4;
+    box-shadow: 0 0 4px #0003;
+    margin-inline: .5rem;
+    padding: 1rem;
+    border-radius: .5rem;
+}
+
+/* .matches li:nth-child(odd){
+    background-color: var(--clr-bg1);
+}
+.matches li:nth-child(even){
+    background-color: var(--clr-bg2);
+} */
+
+.match{
+    color: var(--clr-neutral-100);
+    display: grid;
+    grid-template-rows: 2rem 2rem 1rem;
+    grid-template-columns: subgrid;
+    grid-column: span 4;
+    gap: .5rem;
+    place-items:  center;
+    grid-template-areas: 
+        "team1 team1 score1 time"
+        "team2 team2 score2 time"
+        "comp comp comp comp";
+}
+
+.match a{
+    color: var(--clr-accent);
+}
+
+.match .time{
+    grid-area: time;
+    color: var(--clr-neutral-300);
+}
+.match .score1{
+    grid-area: score1;
+}
+.match .score2{
+    grid-area: score2;
+}
+.match .competition{
+    color: var(--clr-neutral-300);
+    /* background-color: var(--clr-bg1); */
+    grid-area: comp;
+}
+.match .home{
+    grid-area: team1;
+}
+.match .away{
+    grid-area: team2;
+}
+.match>div:nth-of-type(1){
+    grid-area: team1;
+}
+.match>div:nth-of-type(2){
+    grid-area: team2;
+}
+.match>div{
+    display: grid;
+    grid-template-columns: subgrid;
+}
+.match>div img{
+    grid-column: 1;
+    height: 2rem;
+}
+.match>div>span{
+    grid-column: 2;
+}
+
+/* based on .wrapper gap (2rem) main flex-bassis (500px) and .header flex-basis (250px)*/
+@media (width < calc( 250px + 500px + 2rem)) {
+    .list, .details{
+        max-height: 50dvh;
+    }
+    .list img{
+        aspect-ratio: 16/9;
+    }
+}

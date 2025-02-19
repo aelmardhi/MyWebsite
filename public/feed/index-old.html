@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+    <style>
+        :root{
+            --clr-primary:#e1ecfc;
+            --clr-secondary: #39f;
+            --clr-accent1: #06e;
+            --clr-accent2: #5af;
+            --clr-accent3: #06299c;
+            --clr-accent4: #3af;
+            --clr-light: #fff;
+            --clr-body : #fff;
+            --clr-danger: #cf1b24;
+            --clr-main: none;
+            --border1 :  2px solid #39f9;
+            --bs-main: none;
+            --bs-article: 2px 2px 10px #0003, 10px 10px 20px  #39f5;
+            --bs-downloads: inset 0 0 8px #0003 , inset 0 0 15px #0001;
+            --bs-downloads-hover: 0 0 6px #0005, 0 0 12px #0003;
+            --bs-games:inset 0 0 8px #0005 , inset 0 0 15px #0003;
+        }
+        @media(prefers-color-scheme: dark){ 
+            :root{   
+            --clr-primary:#232834;
+            --clr-secondary: #126;
+            --clr-accent1: #025;
+            --clr-accent2: #128;
+            --clr-accent3: #92b3ff;
+            --clr-accent4: #126;
+            --clr-light: #fff;
+            --clr-body : #161009;
+            --clr-main: #111320;
+            --clr-danger: #8f0a10;
+            --border1 :  none;
+            --bs-main: inset 0 0 15px #5693, 0 0 10px #5696;
+            --bs-article: none;
+            --bs-downloads: inset 0 0 8px #0003 , inset 0 0 15px #0001;
+            --bs-downloads-hover: 0 0 6px #0005, 0 0 12px #0003;
+            --bs-games:inset 0 0 8px #0005 , inset 0 0 15px #0003;
+            }
+        }
+        *, *:after, *:before{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            width: 100vw;
+            height: 100%;
+            justify-content: space-around;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--clr-body);
+            overflow-x: hidden;
+            font-family: system-ui ,sans-serif;
+            font-size: .8rem;
+            color: var(--clr-accent3);
+        }
+        main{
+            max-width: 1000px;
+            margin: .5em auto;
+            width: 100%;
+        }
+        img{
+            height: 5em;
+        }
+        a:any-link{
+            color: currentColor;
+            font-weight: 900;
+            text-decoration: none;
+        }
+        section{
+            display: flex;
+            flex-direction:row;
+            align-items: start;
+            justify-content: stretch;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+        section > div{
+            display: flex;
+            flex-direction:column;
+            align-items:center;
+            width: 100%;
+            border: 2px solid var(--clr-accent1);
+            box-shadow: var(--bs-article);
+            border-radius: .5em;
+            overflow: hidden;
+        }
+        progress{
+            width: 100%;
+            padding: 1em;
+        }
+        h1,h2{
+            font-size: 2.5em;
+            padding: .5em 1em;
+            background: var(--clr-accent2);
+            color: var(--clr-light);
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+        }
+        h1{
+            background: var(--clr-accent1)
+        }
+        table{
+            width:100%;
+            border-collapse: collapse ;
+        }
+        tr,li{
+            background: var(--clr-primary)
+        }
+        tr:nth-child(even),
+        li:nth-child(even){
+            background: var(--clr-accent1);
+            color: var(--clr-light);
+        }
+        td{
+            padding:1em;
+        }
+        .matches td div{
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+        .matches small{
+            font-size: .7em;
+        }
+        .matches big{
+            font-size: 3em;
+            font-weight: bold;
+        }
+        .matches span{
+            font-size: .85em;
+            padding: 5px;
+            background: var(--clr-accent2);
+            color: var(--clr-light);
+        }
+        ul {
+            list-style: none;
+            width: 100%;
+        }
+        li{
+            padding: 1em;
+        }
+        summary{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        details a{
+            display: block;
+            font-weight: bold;
+            font-size: large;
+            padding: .5em 1em;
+            
+        }
+        details a:any-link{
+            color: var(--clr-accent2);
+        }
+        li:nth-child(even) details a:any-link{
+            color: var(--clr-accent3);
+        }
+        details h3{
+            margin: .5em 1em;
+        }
+        details p{
+            padding: .75em 0em;
+        }
+        details p img {
+            width: 100% !important;
+            height: auto !important;
+        }
+        details p span{
+            font-size: 1.5em;
+        }
+        .koLogo {
+            width: auto !important;
+            height: 1em !important;
+        }
+        @media screen and (max-width:800px){
+            section{
+                flex-direction: column;
+            }
+            section > div{
+                margin-bottom: 1em;
+            }
+        }
+
+    </style>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Feed</title>
+        
+    </head>
+    <body>
+        <main>
+            <p id="lastTimeUpdated"></p>
+            <section>
+                <div class="matches">
+                    <h2>المباريات الحالية</h2>
+                    <table><tbody id="currentMatches"><tr><td><progress></progress></td></tr></tbody></table>
+                </div>
+                <div class="news">
+                    <h2>اﻷخبار</h2>
+                    <ul id="featuredNews"><li><progress></progress></li></ul>
+                </div>
+            </section>
+            <h1>برشلونة</h1>
+            <section class="barcelona" id="barcelona">
+                <div  class="matches">
+                    <h2>مباريات</h2>
+                    <table><tbody id="matches"><tr><td><progress></progress></td></tr></tbody></table></div>
+                <div class="news">
+                    <h2>اخبار</h2>
+                    <ul id="news"><li><progress></progress></li></ul></div>
+            </section>
+        </main>
+        <script>
+            const storageName = 'feed-kooora'
+            const currentMatches = document.getElementById('currentMatches')
+            const featuredNews = document.getElementById('featuredNews')
+            const lastTimeUpdated= document.getElementById('lastTimeUpdated')
+            const barcelona = {
+                element: document.getElementById('barcelona'),  
+                news: document.querySelector('#barcelona #news'),
+                matches: document.querySelector('#barcelona #matches'),
+
+            }
+            const fScore= s=> s.replace('(','<small>').replace(')','</small>');
+            fetch('/api/scrape/kooora',
+                {
+                    method: 'GET',
+                    headers: {
+                        accept:'Applicaion/json',
+                        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || ''
+                    }
+                }
+            ).then(r=>r.json()).then(d=>{
+                localStorage.setItem(storageName, JSON.stringify(d))
+                parseData(d);
+            })
+
+            const d = localStorage.getItem(storageName);
+            if(d)
+                parseData(JSON.parse(d));
+            function parseData(d){
+                lastTimeUpdated.textContent = `Last update on ${(new Date(d.time)).toString()}`
+                currentMatches.innerHTML = d?.matches?.map(m =>{
+                    return `<tr onclick=" location='${d.baseUrl+m?.url}';">
+                            <td>
+                                ${m.home.img?
+                                    `<img src="${m.home?.img}" alt="${m.home?.name}"></img>`
+                                    : `<b>${m.home?.name}</b>`  }
+                            </td>
+                            <td>
+                               <big>
+                                  ${fScore(m.score[0])}    
+                               </big>
+                            </td>
+                            <td>
+                               <div>
+                                  <small>${m.competition}</small>
+                                  <span>${m.time}</span>
+                               </div>
+                            </td>
+                            <td>
+                               <big>
+                                  ${fScore(m.score[1])}    
+                               </big>
+                            </td>
+                            <td>
+                                ${m.away.img?
+                                    `<img src="${m.away?.img}" alt="${m.away?.name}"></img>`
+                                    : `<b>${m.away?.name}</b>`  }
+                            </td>
+                            </tr>`
+                }).join('') || 'لا يوجد';
+
+                featuredNews.innerHTML = d?.news?.map(r =>{
+                    return `<li>
+                        <details name="news_details">
+                        <summary>
+                            <img src="${r?.img}"></img>
+                           <h3> ${r?.title}</h3>
+                        </summary>
+                            <p>${r?.text}</p>
+                            <a href="${d.baseUrl+r?.url}"> المزيد </a>
+                        </details>
+                        </li>`
+                }).join('') || 'لا يوجد';
+
+                barcelona.matches.innerHTML = d?.barca?.matches?.map(m =>{
+                    return `<tr onclick=" location='${d.baseUrl+m?.url}';">
+                            <td>
+                                <a href="${d.baseUrl+m.home?.href}">${m.home?.name}</a>    
+                            </td>
+                            <td><a href="${d.baseUrl+m.score?.href}">${m.score?.name}</a> </td>
+                            <td>
+                                <a href="${d.baseUrl+m.away?.href}">${m.away?.name}</a> 
+                            </td>
+                            <td>${m.time}</td>
+                            <td>
+                                <a href="${d.baseUrl+m.competetion?.href}">${m.competetion?.name}</a> 
+                            </td>
+                        </tr>`
+                }).join('') || 'لا يوجد';
+
+                barcelona.news.innerHTML = d?.barca?.news?.map(r =>{
+                    return `<li>
+                        <details name="team_details">
+                        <summary>
+                            <img src="${r?.img}"></img>
+                           <h3> ${r?.title}</h3>
+                        </summary>
+                            <p>${r?.text}</p>
+                            <a href="${d.baseUrl+r?.url}"> المزيد </a>
+                        </details>
+                        </li>`
+                }).join('') || 'لا يوجد';
+
+            }
+        </script>
+    </body>
+    <script>
+
+    </script>
+</html>
