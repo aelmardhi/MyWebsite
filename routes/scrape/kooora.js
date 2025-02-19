@@ -189,7 +189,7 @@ async function getKooraTeamImportant (browser,timezone, team){
     }
     function parseScoreRow (r){
         return{
-            competetion: parseTD(r.childNodes[0]),
+            competition: parseTD(r.childNodes[0]),
             time: parseTD(r.childNodes[1]),
             home:  parseTD(r.childNodes[3]),
             score: parseTD(r.childNodes[4]),
