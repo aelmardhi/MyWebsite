@@ -1,10 +1,14 @@
 const storageName = 'feed-kooora'
 
 async function loadFeed(){
-    const data = localStorage.getItem(storageName);
-    if(data){
-        json = JSON.parse(data);
-        Feed(json);
+    try{
+        const data = localStorage.getItem(storageName);
+        if(data){
+            json = JSON.parse(data);
+            Feed(json);
+        }
+    } catch (error){
+        console.log(error);
     }
     try {
         const raw = await fetch('/api/scrape/kooora');
