@@ -3,11 +3,11 @@ const storageName = 'feed-kooora'
 async function loadFeed(){
     const data = localStorage.getItem(storageName);
     if(data){
-        json = JSON.parse(d);
+        json = JSON.parse(data);
         Feed(json);
     }
     try {
-        const raw = await fetch('https://chato.onrender.com/api/scrape/kooora');
+        const raw = await fetch('/api/scrape/kooora');
         const json = await raw.json();
         localStorage.setItem(storageName, JSON.stringify(json));
         Feed(json);
