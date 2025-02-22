@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<meta name="description" content="This is aelmardhi's personal site, it is used to run small projects">
+        <title>Home</title>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-V95FG9MK9N"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'G-V95FG9MK9N');
+        </script>
+    </head >
+    <style>
+        *, *:after, *:before{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            width: 100vw;
+            height: 100%;
+            justify-content: space-around;
+        }
+         article{
+             margin: 3em auto;
+             border-radius: 1em;
+             overflow: hidden;
+             text-align: center;
+             width: 80%;
+             max-width: 800px;
+             box-shadow: 2px 2px 10px #0003,
+                 15px 15px 30px  #39f5;
+            border: 2px solid #39f9;
+        }
+        h2{
+            text-align: center;
+            color: #09f9;
+            font-family: monospace;
+        }
+        .title{
+            color: white;
+            padding: 15px;
+            font-size: 1.5rem;
+            font-weight: bolder;
+            background: #39f
+        }
+        .data{
+            width: 100%;
+             background: #e1ecfc;
+             padding: 20px auto;
+            
+        }
+        ul li{
+            list-style: none;
+        }
+        li + li {
+            border-top: 1px solid #39f9;
+        }
+        ul li a,
+        .games h3{
+            color: #06e;
+            display: block;
+           font-size: .75rem;
+            font-weight: bold;
+            padding: 10px 15px;
+            width: 100%;
+            font-family: sans-serif;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: all .3s ease;
+        }
+        .downloads ul li a{
+             display: grid;
+            grid-template-columns: 3fr 1fr 1fr;
+            
+        }
+        ul li a:hover,
+        .games h3:hover,
+        .games:focus-within h3,
+        .games:hover h3{
+            background: #3af;
+            color: white;
+            font-size: 1rem;
+        }
+        ul li a:active,
+        ul li h3:active{
+            background: #3ff;
+            color: white;
+            font-size: 1rem;
+        }
+        .downloads{
+            display: none;
+        }
+        .showDownloads{
+            display: block;
+        }
+        span {
+            padding: 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        span + span{
+            border-left: 1px solid #09f9;
+        }
+        .downloads ul li a{
+                font-size: .8rem;
+            }
+        .downloads ul li a:hover{
+                font-size: 1.1rem;
+            }
+        .games{
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .games h3{
+            z-index: 200;
+        }
+        .games_list{
+            overflow: hidden;
+            z-index: -2;
+            position: relative;
+            top: -100px;
+            height: 0;
+            transition: all .5s ease-in-out;
+        }
+        .games_list li{
+            background-color: #00538e;
+            border: none;
+        }
+        .games_list li a{
+            color: #e3f4ff;
+            font-size: .6rem;
+        }
+        .games:focus-within .games_list,
+        .games:active .games_list,
+        .games:hover .games_list{
+           height:  calc(5.4rem + 160px);
+           top: 0;
+        }
+        @media(min-width:600px){
+            ul li a,
+            .games h3{
+                padding: 10px 15px;
+                font-size: 1rem;
+            }
+            ul li a:active{
+            font-size: 1.2rem;
+        }
+            ul li a:hover,
+            .games h3:hover,
+            .games:focus-within h3,
+            .games:hover h3{
+            font-size: 1.5rem;
+        }
+        
+        .games_list li a:hover{
+            font-size: .8rem;
+        }
+        .downloads ul li a{
+                font-size: .9rem;
+            }
+            
+        span {
+            margin: 3px;
+        }
+            h2{
+                font-size: 2rem;
+            }
+            article{
+                margin: 2em auto;
+            }
+        }
+        
+    </style>
+    <body>
+        <article class="main">
+            <div class="title">Main Routes</div>
+            <div class="data">
+                <ul>
+                    <li><a href="download.html">Http Downloader</a></li>
+                    <li><a href="upload.html">File Uploader</a></li>
+                    <li><a href="ytdl/">Youtube Downloader</a></li>
+                    <li><a href="dithering/">Dithering Demo</a></li>
+                    <li><a href="jpeg/">JPEG</a></li>
+                    <li><a href="screenRecorder/">Screen Recorder</a></li>
+                    <li><a href="api/rtc/">videoChat</a></li>
+                    <li class="games">
+                        <h3>Games</h3>
+                        <ul class="games_list">
+                            <li><a href="games/candy_crush/">Candy Crush</a></li>
+                            <li><a href="games/connect_four/">Connect Four</a></li>
+                            <li><a href="games/frogger/">Frogger</a></li>
+                            <li><a href="games/memory_game/">Memory Game</a></li>
+                            <li><a href="games/snake/">Snake</a></li>
+                            <li><a href="games/space-invader/">Space Invader</a></li>
+                            <li><a href="games/tetris/">Tetris</a></li>
+                            <li><a href="games/whack-a-mole/">Whack a Mole</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="chato_1.0.0.apk">chato apk</a></li>
+                    </ul>
+            </div>
+        </article>
+        <article class="downloads" id="downloads">
+            <div class="title">Downloads</div>
+            <div class="data">
+                <ul id="downloads-list"></ul>
+            </div>
+        </article>
+        <h2>aelmardhi © 2020</h2>
+    </body>
+    <script>
+        const host = 'https://dardasha.herokuapp.com';
+        document.addEventListener('DOMContentLoaded',function(){
+            const list = document.getElementById('downloads-list');
+            const downloads = document.getElementById('downloads');
+            fetch(host+'/api/download/files').then(r => r.json()).then(res => {
+                    downloads.classList.add('showDownloads');
+                    
+                    list.innerHTML = res.map(i =>{ 
+                        let t = i.modified;
+                        let s = (i.size > 1024)?((i.size > 1024 * 1024)? (i.size / 1024 /1024).toFixed(2) + ' MB' : (i.size / 1024).toFixed(2) + ' KB') : i.size + ' B'   ;
+                        
+                        return'<li><a href="./downloads/'+encodeURI(i.name)+'"><span>'+i.name+'</span><span>'+t+'</span><span>'+s+'</span></a></li>'}).join('');
+                 }).catch(err => console.log('fetch'+err+err.data));
+
+        })
+    </script>
+</html>
