@@ -6,7 +6,6 @@ body{
 }
 
 article{
-    /* max-height: calc( 100dvh - 2rem); */
     overflow: auto;
 }
 
@@ -78,7 +77,6 @@ article{
     color: var(--clr-accent);
 }
 .details .content{
-    /* min-height: calc(100dvh - 2rem + 1px); */
     min-height: 20rem;
 }
 ul.list{
@@ -114,7 +112,6 @@ ul.list{
 }
 
 .matches__bg{
-    /* background-color: green; */
     background-image:
     linear-gradient(transparent 49%, white 49%, white 50%, transparent 50%),
     radial-gradient(transparent 49%, white 49%, white 50%, transparent 50%),
@@ -138,13 +135,6 @@ ul.list{
     padding: 1rem;
     border-radius: .5rem;
 }
-
-/* .matches li:nth-child(odd){
-    background-color: var(--clr-bg1);
-}
-.matches li:nth-child(even){
-    background-color: var(--clr-bg2);
-} */
 
 .match{
     color: var(--clr-neutral-100);
@@ -176,7 +166,6 @@ ul.list{
 }
 .match .competition{
     color: var(--clr-neutral-300);
-    /* background-color: var(--clr-bg1); */
     grid-area: comp;
 }
 .match .home{
@@ -205,6 +194,9 @@ ul.list{
 
 /* based on .wrapper gap (2rem) main flex-bassis (500px) and .header flex-basis (250px)*/
 @media (width < calc( 250px + 500px + 2rem)) {
+    body{
+        --height: 50dvh;
+    }
     .list, .details{
         max-height: 50dvh;
     }
