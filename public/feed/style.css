@@ -106,13 +106,15 @@ ul.list{
 .list span{
     position: absolute;
     inset: 0;
-    padding: 1rem;
+    font-size: .8rem;
+    padding: .5rem;
     background: linear-gradient(var(--clr-neutral-900), transparent);
 }
 
 .list img{
     position: absolute;
     inset: 0;
+    height: 100%;
     width: 100%;
     object-position: 50%;
     object-fit: cover;
