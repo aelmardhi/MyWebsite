@@ -1,67 +1,81 @@
 <!DOCTYPE html>
-<html lang="">
-
-<style>
-    *,
-    *::after,
-    *::before {
-        box-sizing: border-box;
-        padding: 0;
-        margin: 0;
-    }
-    main{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        width: 100vw;
-        height: 100vh;
-    }
-    h1{
-        font-size: 20rem;
-        color: red;
-    }
-    h3{
-        font-size: 4.4rem;
-    }
-    a{
-        font-size: 5.5rem;
-        font-family: serif;
-        font-weight: bolder;
-    }
-    @media(max-width:600px){
-        h1{
-            font-size: 10rem;
-        }
-        h3{
-            font-size: 2.2rem;
-        }
-        a{
-            font-size: 2.75rem;
-        }
-    }
-</style>
-
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>404: not found</title>
-    <meta name="author" content="aelmardhi">
-    <meta name="description" content="Example description">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="">
-    <link rel="icon" type="image/x-icon" href="" />
+    <link rel="manifest" href="/manifest.json">
+	<meta name="theme-color" content="#666"/>
+	<link rel="icon" href="favicon.ico" type="favicon.ico" />  
+	<link rel="apple-touch-icon" href="icons/icon152.png">    
+	<meta name="apple-mobile-web-app-capable" content="yes">  
+	<meta name="apple-mobile-web-app-status-bar-style" content="#39f"> 
+	<meta name="apple-mobile-web-app-title" content="Aelmardhi"> 
+	<meta name="msapplication-TileImage" content="icons/icon152.png">  
+	<meta name="msapplication-TileColor" content="#666">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<meta name="description" content="This is aelmardhi's personal site, it is used to run small projects">
+    <title>Aelmardhi</title>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V95FG9MK9N"></script>
+    <link rel="stylesheet" href="/style.css">
+    <script src="/main.js" defer></script>
+    <style>
+
+    </style>
 </head>
-
 <body>
-    <header></header>
-    <main>
-        <h1>404</h1>
-        <h3>Page Not Found</h3>
-        <a href="/">go to HOME</a>
-    </main>
-    <footer></footer>
-    <script type="text/javascript" src=""></script>
+    <div class="theme__wrapper">
+        <div class="theme__backdrop"></div>
+        <div class="theme__panel">
+            <button class="theme__close__btn" id="theme__close__btn">Close</button>
+            <h2>Theme</h2>
+            <ul role="list" id="theme__preference__list">
+                <li><input type="radio" data-pref="light" name="theme__preference" id="theme__light__btn"><label for="theme__light__btn">light</label></li>
+                <li><input type="radio" data-pref="dark" name="theme__preference" id="theme__dark__btn"><label for="theme__dark__btn">dark</label></li>
+                <li><input type="radio" data-pref="default" name="theme__preference" id="theme__default__btn"><label for="theme__default__btn">default</label></li>
+            </ul>
+            <ul role="list" id="theme__pallete__list">
+                <li><input type="radio"  data-pallete="1" name="theme__pallete__btn" id="theme__pallete1__btn"><label for="theme__pallete1__btn">1</label></li>
+                <li><input type="radio" data-pallete="2" name="theme__pallete__btn" id="theme__pallete2__btn"><label for="theme__pallete2__btn">2</label></li>
+                <li><input type="radio" data-pallete="3" name="theme__pallete__btn" id="theme__pallete3__btn"><label for="theme__pallete3__btn">3</label></li>
+            </ul>
+        </div>
+    </div>
+    <div class="wrapper">
+        <header class="header">
+            <button class="theme__btn" id="theme__btn" aria-label="theme selector"><svg aria-label="pallete" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M512 256c0 .9 0 1.8 0 2.7c-.4 36.5-33.6 61.3-70.1 61.3L344 320c-26.5 0-48 21.5-48 48c0 3.4 .4 6.7 1 9.9c2.1 10.2 6.5 20 10.8 29.9c6.1 13.8 12.1 27.5 12.1 42c0 31.8-21.6 60.7-53.4 62c-3.5 .1-7 .2-10.6 .2C114.6 512 0 397.4 0 256S114.6 0 256 0S512 114.6 512 256zM128 288a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm0-96a32 32 0 1 0 0-64 32 32 0 1 0 0 64zM288 96a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm96 96a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"/></svg></button>
+                <div class="header__title">
+                    <div class="header__logo"><img src="./icons/icon256.png" alt="site logo"></div>
+                    <div class="column">
+                        <h1>Aelmardhi</h1>
+                        <nav>
+                            <ul class="header__list row" role="list">
+                                <li><a href="/aelmardhi">About Me</a></li>
+                                <li><a href="/blog">My Blog</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                      
+        </header>
+        <main class="not_found">
+            <h2 class="not_found404">404</h2>
+            <h1> Sorry, We couldn't find</h1>
+            <div id="path_place"></div>
+        </main>
+    </div>
+    <script type="module" defer>
+        
+        const div = document.getElementById('path_place');
+        let currentPath = ''
+        const crumbData = location.pathname.split('/').map(value =>{
+            return {
+                name: currentPath === ''? 'home': value,
+                href: currentPath += (currentPath === '/'? '' : '/') + value,
+            };
+        })
+        
+        div.appendChild(BreadCrumbs(crumbData));
+
+    </script>
 </body>
-
-
 </html>

@@ -407,6 +407,30 @@ main {
     background-color: var(--clr-secondary);
 }
 
+.breadCrumbs{
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    align-items: baseline;
+}
+
+.breadCrumb{
+    color: var(--clr-accent);
+    background-color: var(--clr-bg1);
+    box-shadow: 0 0 3px #0003;
+    border-radius: .5rem;
+    padding: 0 .5rem;
+}
+
+.not_found{
+    display: grid;
+    place-content: center;
+    min-height: 100dvh;
+}
+
+.not_found404{
+    font-size: 4rem;
+}
 
 @container header (width > 400px) {
     .header__title {

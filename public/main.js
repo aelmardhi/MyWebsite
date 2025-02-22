@@ -84,6 +84,17 @@ function elementFactory(name, classes, id, text, attributes){
     return this.element;
 }
 
+function BreadCrumbs(list){
+    const crumbs = elementFactory('div', 'breadCrumbs');
+    list.forEach(({name, href, disabled}) => {
+        const span = elementFactory('span', undefined, undefined, '/');
+        crumbs.appendChild(span);
+        const a = elementFactory('a','breadCrumb', undefined, name, {href,disabled});
+        crumbs.appendChild(a);
+    });
+    return crumbs;
+}
+
 function Gtag(){
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
