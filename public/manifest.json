@@ -1,6 +1,7 @@
 {
   "name": "Aelmardhi",
   "short_name": "Aelmardhi",
+  "version": "1.2.0",
   "icons": [{
     "src": "icons/icon128.png",
       "sizes": "128x128",
