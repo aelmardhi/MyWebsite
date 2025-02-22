@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Islamic Prayers Time</title>
     <script src="./main.js"></script>
+    <script src="./Hijri.js"></script>
     <!-- <script src="./degHelpers.js"></script>
     <script src="./prayers.js"></script>
     <script src="./qibla.js"></script> -->
@@ -352,6 +353,7 @@ td{
                 times = prayerTimes()
             
             list.innerHTML = `
+            <tr><td>Hijri </td><td>${HijriJS.today().toString()}</td></tr>
             <tr><td>Fajr </td><td>${times.Fajr}</td></tr>
             <tr><td>Sunrise </td><td>${times.Sunrise}</td></tr>
             <tr><td>Dhuhr </td><td>${times.Dhuhr}</td></tr>
@@ -372,7 +374,7 @@ td{
             document.getElementById('qiblaValue').innerText = angle+' °';
             document.querySelector('.qiblaCompass > div').style.transform = 'rotate('+angle +'deg)'
         }
-        
+
         function saveSettings(){
             if(longitude){
                 localStorage.setItem(LNG_KEY, longitude);
