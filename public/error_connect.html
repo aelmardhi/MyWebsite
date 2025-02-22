@@ -1,79 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="manifest" href="/manifest.json">
+	<meta name="theme-color" content="#666"/>
+	<link rel="icon" href="favicon.ico" type="favicon.ico" />  
+	<link rel="apple-touch-icon" href="icons/icon152.png">    
+	<meta name="apple-mobile-web-app-capable" content="yes">  
+	<meta name="apple-mobile-web-app-status-bar-style" content="#39f"> 
+	<meta name="apple-mobile-web-app-title" content="Aelmardhi"> 
+	<meta name="msapplication-TileImage" content="icons/icon152.png">  
+	<meta name="msapplication-TileColor" content="#666">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<meta name="description" content="This is aelmardhi's personal site, it is used to run small projects">
+    <title>Connection Error | Aelmardhi</title>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V95FG9MK9N"></script>
+    <link rel="stylesheet" href="/style.css">
+    <script src="/main.js" defer></script>
     <style>
-        
-        :root{
-            --clr-primary:#e1ecfc;
-            --clr-secondary: #39f;
-            --clr-accent1: #06e;
-            --clr-accent2: #5af;
-            --clr-accent3: #0061e3;
-            --clr-accent4: #3af;
-            --clr-light: #fff;
-            --clr-body : #fff;
-            --clr-danger: #cf1b24;
-            --clr-main: none;
-            --border1 :  2px solid #39f9;
-            --bs-main: none;
-            --bs-article: 2px 2px 10px #0003, 10px 10px 20px  #39f5;
-            --bs-downloads: inset 0 0 8px #0003 , inset 0 0 15px #0001;
-            --bs-downloads-hover: 0 0 6px #0005, 0 0 12px #0003;
-            --bs-games:inset 0 0 8px #0005 , inset 0 0 15px #0003;
-        }
-        @media(prefers-color-scheme: dark){ 
-            :root{   
-            --clr-primary:#232834;
-            --clr-secondary: #126;
-            --clr-accent1: #025;
-            --clr-accent2: #128;
-            --clr-accent3: #92b3ff;
-            --clr-accent4: #126;
-            --clr-light: #fff;
-            --clr-body : #161009;
-            --clr-main: #111320;
-            --clr-danger: #8f0a10;
-            --border1 :  none;
-            --bs-main: inset 0 0 15px #5693, 0 0 10px #5696;
-            --bs-article: none;
-            --bs-downloads: inset 0 0 8px #0003 , inset 0 0 15px #0001;
-            --bs-downloads-hover: 0 0 6px #0005, 0 0 12px #0003;
-            --bs-games:inset 0 0 8px #0005 , inset 0 0 15px #0003;
-            }
-        }
-        *, *:after, *:before{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100vw;
-            height: 100vh;
-            background-color: var(--clr-body);
-        }
-        .error{
-            background-color: var(--clr-danger);
-            color: var(--clr-light);
-            padding: 1em;
-            box-shadow: var(--bs-downloads-hover);
-            height: fit-content;
-        }
 
     </style>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Error Connect</title>
 </head>
 <body>
-    <h2 class="error">Sorry, Cannot Connect</h2>
-    <script>
+    <div class="theme__wrapper">
+        <div class="theme__backdrop"></div>
+        <div class="theme__panel">
+            <button class="theme__close__btn" id="theme__close__btn">Close</button>
+            <h2>Theme</h2>
+            <ul role="list" id="theme__preference__list">
+                <li><input type="radio" data-pref="light" name="theme__preference" id="theme__light__btn"><label for="theme__light__btn">light</label></li>
+                <li><input type="radio" data-pref="dark" name="theme__preference" id="theme__dark__btn"><label for="theme__dark__btn">dark</label></li>
+                <li><input type="radio" data-pref="default" name="theme__preference" id="theme__default__btn"><label for="theme__default__btn">default</label></li>
+            </ul>
+            <ul role="list" id="theme__pallete__list">
+                <li><input type="radio"  data-pallete="1" name="theme__pallete__btn" id="theme__pallete1__btn"><label for="theme__pallete1__btn">1</label></li>
+                <li><input type="radio" data-pallete="2" name="theme__pallete__btn" id="theme__pallete2__btn"><label for="theme__pallete2__btn">2</label></li>
+                <li><input type="radio" data-pallete="3" name="theme__pallete__btn" id="theme__pallete3__btn"><label for="theme__pallete3__btn">3</label></li>
+            </ul>
+        </div>
+    </div>
+    <div class="wrapper">
+        <header class="header">
+            <button class="theme__btn" id="theme__btn" aria-label="theme selector"><svg aria-label="pallete" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M512 256c0 .9 0 1.8 0 2.7c-.4 36.5-33.6 61.3-70.1 61.3L344 320c-26.5 0-48 21.5-48 48c0 3.4 .4 6.7 1 9.9c2.1 10.2 6.5 20 10.8 29.9c6.1 13.8 12.1 27.5 12.1 42c0 31.8-21.6 60.7-53.4 62c-3.5 .1-7 .2-10.6 .2C114.6 512 0 397.4 0 256S114.6 0 256 0S512 114.6 512 256zM128 288a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm0-96a32 32 0 1 0 0-64 32 32 0 1 0 0 64zM288 96a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm96 96a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"/></svg></button>
+                <div class="header__title">
+                    <div class="header__logo"><img src="/icons/icon256.png" alt="site logo"></div>
+                    <div class="column">
+                        <h2>Aelmardhi</h2>
+                        <nav>
+                            <ul class="header__list row" role="list">
+                                <li><a href="/aelmardhi">About Me</a></li>
+                                <li><a href="/blog">My Blog</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                      
+        </header>
+        <main class="error_connect">
+            <h1>sorry, couldn't connect</h1>
+        </main>
+    </div>
+    <script type="module" defer>
         document.addEventListener('DOMContentLoaded', (e)=>{
             setTimeout(()=>history.back(),1000);
-        })
+        });
     </script>
 </body>
 </html>

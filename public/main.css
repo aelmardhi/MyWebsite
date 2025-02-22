@@ -211,6 +211,7 @@ img{
     gap: 2rem;
     background: var(--clr-neutral-900);
     box-shadow: 0 0 2px #7777;
+    min-height: 100dvh;
 }
 
 .column {
@@ -430,6 +431,20 @@ main {
 
 .not_found404{
     font-size: 4rem;
+}
+
+.error_connect{
+    display: grid;
+    place-items: center;
+}
+
+.error_connect h1{
+    background-color: var(--clr-bg1);
+    padding: 1rem;
+    box-shadow: 0 0 5px #0003;
+    border-radius: .5rem;
+    color: var(--clr-error);
+    border: 1px solid var(--clr-error);
 }
 
 @container header (width > 400px) {
