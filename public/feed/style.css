@@ -204,13 +204,10 @@ ul.list{
     body{
         --height: 50dvh;
     }
-    .list, .details{
-        max-height: 50dvh;
+    .details{
+        max-height: 70dvh;
     }
     .list img{
         aspect-ratio: 16/9;
-    }
-    .wrapper{
-        gap: 1rem;
     }
 }
