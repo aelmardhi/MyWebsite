@@ -5,7 +5,7 @@ const KOOORA_STORAGE_NAME = 'feed-kooora'
 var filesToCache = [
   '/',
   '/index.html',
-  '/index-new.html',
+  '/index-old.html',
   '/main.js',
   '/index.js',
   '/style.css',
