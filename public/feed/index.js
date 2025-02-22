@@ -42,6 +42,7 @@ function Feed(data){
     document.getElementById('list').replaceWith(listElement);
     document.getElementById('details__list').replaceWith(detailsList);
 
+    detailsList.appendChild(LastEdited(data));
     list.forEach(([li,article],index)=>{
         listElement.appendChild(li);
         li.onclick = ()=>{
@@ -52,6 +53,12 @@ function Feed(data){
         li2.appendChild(article);
         detailsList.appendChild(li2);
     })
+}
+
+function LastEdited({time}){
+    const text = `Last edited on: ${time}`;
+    const li = elementFactory('li','last_edited',undefined,text);
+    return li;
 }
 
 function Matches({baseUrl, matches, barca}){

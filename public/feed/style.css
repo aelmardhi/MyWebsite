@@ -19,6 +19,11 @@ article{
     color: var(--clr-error);
 }
 
+.last_edited{
+    color: var(--clr-neutral-300);
+    font-size: .75rem;
+}
+
 .header{
     height: 100dvh;
     overflow: auto;
@@ -202,5 +207,8 @@ ul.list{
     }
     .list img{
         aspect-ratio: 16/9;
+    }
+    .wrapper{
+        gap: 1rem;
     }
 }
