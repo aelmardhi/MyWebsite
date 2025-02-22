@@ -22,6 +22,8 @@ article{
 .last_edited{
     color: var(--clr-neutral-300);
     font-size: .75rem;
+    max-width: unset;
+    padding: .5rem;
 }
 
 .header{

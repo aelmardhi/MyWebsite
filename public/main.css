@@ -253,7 +253,7 @@ main {
 
 .header {
     display: flex;
-    justify-content: space-around;
+    justify-content: start;
     align-items: stretch;
     flex-direction: column;
     gap: 2rem;
