@@ -205,7 +205,7 @@ ul.list{
         --height: 50dvh;
     }
     .details{
-        max-height: 70dvh;
+        max-height: 50dvh;
     }
     .list img{
         aspect-ratio: 16/9;

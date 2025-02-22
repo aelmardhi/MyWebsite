@@ -426,7 +426,7 @@ main {
 .not_found{
     display: grid;
     place-content: center;
-    min-height: 100dvh;
+    align-self: stretch;
 }
 
 .not_found404{
