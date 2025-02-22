@@ -71,6 +71,10 @@ async function updateNews(page,timezone,urlQuery){
             el.querySelectorAll('div').forEach(element => {
                 element.remove();
             });
+            el.querySelectorAll('img').forEach(img => {
+                img.removeAttribute('style');
+                img.setAttribute('loading', 'lazy');
+            })
             return el.innerHTML ;
         });
     }catch(e){
