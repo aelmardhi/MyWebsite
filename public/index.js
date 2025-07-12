@@ -19,7 +19,7 @@ async function Posts() {
         const json = await res.json();
         const ul = elementFactory('ul', undefined, undefined, undefined, { 'role': 'list' });
         originalUl.replaceWith(ul);
-        json.forEach(({ id, title, author:{name, profileImage}, time, project, blocks }) => {
+        json.forEach(({ id, title, author:{name, profileImage}, time, project, content }) => {
             const li = elementFactory('li');
             const postInfo = elementFactory('div', 'post__info');
             const postImg = elementFactory('img', 'post__img', undefined, undefined, {src:profileImage, alt:'Author\'s profile image'});
@@ -34,11 +34,12 @@ async function Posts() {
             postInfo.appendChild(postImg);
             postInfo.appendChild(postTitle);
             postInfo.appendChild(postMeta);
-            const postContent = blocks[0].type === 'paragraph'?
-                                     elementFactory('p', 'post__content', undefined, blocks[0].data.text)
-                                     : blocks[0].type === 'image' ? 
-                                        elementFactory('img', 'post__content', undefined, undefined, {'src': blocks[0].data.file.url})
-                                        : elementFactory('br');
+            const rawText = content
+                ?.replace(/!\[.*?\]\(.*?\)/g, '') // remove images
+                .replace(/\[.*?\]\(.*?\)/g, '') // remove links
+                .replace(/[#>*_`-]/g, '') // remove markdown symbols
+                .slice(0, 200);
+            const postContent = elementFactory('p', 'post__content', undefined, rawText+'...');
             li.appendChild(postInfo);
             li.appendChild(postContent);
             ul.appendChild(li);
