@@ -30,7 +30,7 @@ router.get('/', verify.lenientVerify,async (req,res)=>{
             public: p.public,
             id: p._id,
             project: p.project,
-            blocks: JSON.parse(p.blocks)
+            content: p.content
         }
             _posts.push(_p)
         }
@@ -68,7 +68,7 @@ router.get('/post/:id', verify.lenientVerify,async (req, res)=>{
             public: post.public,
             id: post._id,
             project: post.project,
-            blocks: JSON.parse(post.blocks)
+            content: post.content,
         })
     }catch(err){
         res.status(500).send('some issue happend')
@@ -78,12 +78,11 @@ router.get('/post/:id', verify.lenientVerify,async (req, res)=>{
 
 router.post('/new',verify, async (req, res)=>{
     // console.log(req.body)
-    const {title,project,public,time,blocks}= req.body
-    if(!title || !project  || !time || !blocks)
+    const {title,project,public,time,content}= req.body
+    if(!title || !project  || !content)
         return res.status(400).send('some fields are missimg')
     try{
-        let _blocks = JSON.stringify( blocks)
-        let post = new Post({title,project,author:req.user._id,public,time,blocks:_blocks})
+        let post = new Post({title,project,author:req.user._id,public,time: new Date(),content})
         const savedPost = await post.save()
         res.json({id: savedPost._id});
     }catch(e){
@@ -104,8 +103,8 @@ router.post('/post/:id/edit',verify,async (req, res)=>{
             post.title = req.body.title
         if('public' in req.body)
             post.public = req.body.public
-        if('blocks' in req.body)
-            post.blocks = JSON.stringify(req.body.blocks)
+        if('content' in req.body)
+            post.content = req.body.content
         if('time' in req.body)
             post.time = req.body.time
         if('project' in req.body)

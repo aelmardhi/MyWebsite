@@ -21,7 +21,7 @@ const mongoose = require('mongoose');
     time: {
         type: Date
     },
-    blocks: {
+    content: {
         type: String
     }
 });

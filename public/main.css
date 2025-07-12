@@ -79,6 +79,8 @@ img{
     --clr-neutral-800: hsl(210, 2%, 96%);
     --clr-neutral-900: hsl(210, 5%, 99%);
     --clr-neutral-transparent: hsl(210 5% 96% / .6);
+    --bs-300: 0 0 3px hsla(210, 5%, 33%, 0.3);
+    --bs-700: 0 0 5px hsla(210, 5%, 33%, 0.6);
     --clr-accent: oklch(45% 100% 210);
     --clr-secondary: oklch(65% 70% 210);
     --clr-error: oklch(50% 90% 10);
@@ -115,6 +117,8 @@ img{
         --clr-neutral-800: hsl(210, 1%, 6%);
         --clr-neutral-900: hsl(210, 5%, 3%);
         --clr-neutral-transparent: hsl(210 4% 3% / .8);
+        --bs-300: 0 0 3px hsla(210, 5%, 77%, 0.3);
+        --bs-700: 0 0 5px hsla(210, 5%, 95%, 0.6);
         --clr-border: var(--clr-neutral-700);
         --clr-bg1: oklch(15% 1% 210);
         --clr-bg2: oklch(15% 9% 210);
@@ -145,6 +149,8 @@ img{
     --clr-neutral-800: hsl(210, 2%, 96%);
     --clr-neutral-900: hsl(210, 5%, 99%);
     --clr-neutral-transparent: hsl(210 50% 96% / .6);
+    --bs-300: 0 0 3px hsla(210, 5%, 33%, 0.3);
+    --bs-700: 0 0 5px hsla(210, 5%, 33%, 0.6);
     --clr-accent: oklch(45% 100% 210);
     --clr-secondary: oklch(65% 70% 210);
     --clr-border: var(--clr-neutral-700);
@@ -181,6 +187,8 @@ img{
     --clr-neutral-800: hsl(210, 1%, 6%);
     --clr-neutral-900: hsl(210, 5%, 3%);
     --clr-neutral-transparent: hsl(210 4% 3% / .8);
+    --bs-300: 0 0 3px hsla(210, 5%, 77%, 0.3);
+    --bs-700: 0 0 5px hsla(210, 5%, 95%, 0.6);
     --clr-border: var(--clr-neutral-700);
     --clr-bg1: oklch(15% 1% 210);
     --clr-bg2: oklch(15% 9% 210);
@@ -210,7 +218,7 @@ img{
     align-items: stretch;
     gap: 2rem;
     background: var(--clr-neutral-900);
-    box-shadow: 0 0 2px #7777;
+    box-shadow: var(--bs-300);
     min-height: 100dvh;
 }
 
