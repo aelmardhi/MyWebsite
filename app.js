@@ -19,7 +19,7 @@ const telegramRoute = require('./routes/telegram');
 const rtcRoute = require('./routes/rtc');
 const webPushRoute = require('./routes/webPush')
 const blogRoute = require('./routes/blog')
-const uploadImageRoute = require('./routes/uploadImage')
+const ImagesRoute = require('./routes/images')
 
 app.disable('x-powered-by');
 app.use(
@@ -56,7 +56,7 @@ app.use('/api/upload', uploadRoute);
 app.use('/api/telegram/',telegramRoute);
 app.use('/api/rtc',rtcRoute);
 app.use('/api/blog',blogRoute);
-app.use('/api/uploadImage',uploadImageRoute);
+app.use('/api/images',ImagesRoute);
 if(process.env.SCRAPE !== 'false')
   app.use('/api/scrape',require('./routes/scrape'));
 

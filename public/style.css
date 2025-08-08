@@ -1,44 +1,6 @@
 @import url(./main.css);
 
 
-main>article {
-    margin-bottom: 1rem;
-}
-
-.routes {
-    flex: 1 0 auto;
-}
-
-.routes ul {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(18ch, 1fr));
-    gap: .5rem;
-}
-
-.routes li {
-    border: 1px solid var(--clr-border);
-    border-radius: .25rem;
-    background: var(--clr-neutral-900);
-}
-
-.routes li:hover,
-.routes li:focus-visible {
-    border-color: var(--clr-secondary);
-}
-
-.routes a {
-    display: block;
-    padding: .5rem .25rem;
-    text-align: center;
-    font-size: small;
-    color: var(--clr-neutral-100);
-}
-
-.routes a:hover,
-.routes a:focus-visible {
-    color: var(--clr-neutral-900);
-    background-color: var(--clr-secondary);
-}
 
 .posts {
     display: grid;
