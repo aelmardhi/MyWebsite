@@ -1,28 +1,47 @@
-const SocketIo = require("socket.io");
+const { Server } = require("socket.io");
 
 const addSocket = (server) => {
-const io = SocketIo(server);
-
-io.on("connection", (socket) => {
-  socket.on("join-room", (roomId, userId) => {
-    socket.join(roomId);
-    socket.to(roomId).emit("user-connected", userId);
-    socket.on("disconnect",()=>{
-	socket.to(roomId).emit("user-disconnected", userId);
-    })	
+  const io = new Server(server, {
+    cors: {
+      origin: "*", // ⚠️ replace "*" with your frontend URL in production
+      methods: ["GET", "POST"]
+    }
   });
-  socket.on('msg',(msg)=>{
 
-    socket.rooms.forEach(r => socket.to(r).emit('msg',msg));
-  })
-  socket.on('close-call',(msg)=>{
+  io.on("connection", (socket) => {
+    console.log("A user connected");
 
-    socket.rooms.forEach(r => socket.to(r).emit('close-call',msg));
+    socket.on("join-room", (roomId, userId) => {
+      socket.join(roomId);
+      socket.to(roomId).emit("user-connected", userId);
+
+      socket.on("disconnect", () => {
+        socket.to(roomId).emit("user-disconnected", userId);
+      });
+    });
+
+    socket.on("msg", (msg) => {
+      socket.rooms.forEach((room) => {
+        if (room !== socket.id) {
+          socket.to(room).emit("msg", msg);
+        }
+      });
+    });
+
+    socket.on("close-call", (msg) => {
+      socket.rooms.forEach((room) => {
+        if (room !== socket.id) {
+          socket.to(room).emit("close-call", msg);
+        }
+      });
+    });
+  });
+  
+  io.on('log',(id, msg)=>{
+    io.broadcast(msg);
   })
-});
-io.on('log',(id, msg)=>{
-  io.broadcast(msg);
-})
+
+  return io;
 };
 
 module.exports = addSocket;
