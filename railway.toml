@@ -1,0 +1,2 @@
+[nixpacks]
+processes.web = "node index.js"
