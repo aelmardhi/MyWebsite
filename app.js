@@ -1,15 +1,7 @@
 const express = require('express');
 const helmet = require('helmet');
-const fs = require('fs');
-const urlModule = require('url');
 const app = express();
 
-var html404;
-try{
-html404 = fs.readFileSync('404.html').toString();
-} catch(e){
-html404 = '404: not found';
-}
 const authRoute = require('./routes/auth');
 const messageRoute = require('./routes/messages');
 const ytdlRoute = require('./routes/ytdl');
@@ -60,16 +52,6 @@ app.use('/api/images',ImagesRoute);
 if(process.env.SCRAPE !== 'false')
   app.use('/api/scrape',require('./routes/scrape'));
 
-// if no page match
-app.use((req,res) => {
-  res.status(404).header({
-    accept: 'text/html',
-  }).send(html404?html404:'404:not Found');
-});
 
-app.use((err, req, res, next) => {
-  console.error(`${err.name} : ${err.message} --- ${err.stack}`)
-  res.status(500).send('Something broke!')
-});
 
 module.exports = app;

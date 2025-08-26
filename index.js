@@ -9,6 +9,7 @@ const { ExpressPeerServer } = require("peer");
 const {deleteOld} = require('./models/subscribtion');
 const app = require('./app.js');
 const addSockets = require('./sockets.js');
+const handleErrors = require('./handleErrors.js')
 
 
 var server;
@@ -42,6 +43,8 @@ addSockets(server);
 
 const peerServer = ExpressPeerServer(server, {debug: true,});
 app.use("/peerjs", peerServer);
+
+handleErrors(app)
 
 const portNumber = (process.env.PORT || 5000);
 
